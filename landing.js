@@ -1,124 +1,137 @@
 /**
  * Verachi Landing — Interaction Layer
- * Scroll reveals, header state, mobile menu
+ * Header state, reveal animations, mobile navigation, anchor scrolling
  */
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('[data-header]');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ===========================
-     Header Scroll State
-     =========================== */
-  let ticking = false;
-  const updateHeader = () => {
-    if (header) {
-      header.dataset.scrolled = String(window.scrollY > 30);
-    }
-  };
-
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        updateHeader();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
-  updateHeader();
-
-
-  /* ===========================
-     Scroll Reveal System
-     =========================== */
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px 0px -8% 0px',
-    threshold: 0.1
-  };
-
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  if (reduceMotion) {
-    document.querySelectorAll('[data-reveal], [data-observe]')
-      .forEach(el => el.classList.add('is-visible'));
-  } else {
-    // Hero elements: reveal immediately with stagger
-    setTimeout(() => {
-      document.querySelectorAll('[data-reveal]')
-        .forEach(el => el.classList.add('is-visible'));
-    }, 100);
-
-    // Scroll-triggered elements
-    document.querySelectorAll('[data-observe]')
-      .forEach(el => observer.observe(el));
-  }
-
-
-  /* ===========================
-     Mobile Menu
-     =========================== */
   const menuToggle = document.getElementById('mobileMenuToggle');
   const nav = document.getElementById('primaryNav');
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const mobileNavQuery = window.matchMedia('(max-width: 720px)');
 
-  if (menuToggle && nav) {
+  const setHeaderScrollState = () => {
+    if (header) {
+      header.dataset.scrolled = String(window.scrollY > 20);
+    }
+  };
+
+  const setMenuState = (open) => {
+    if (!header || !menuToggle) {
+      return;
+    }
+
+    const nextState = mobileNavQuery.matches ? open : false;
+
+    header.dataset.menuOpen = String(nextState);
+    menuToggle.setAttribute('aria-expanded', String(nextState));
+    document.body.dataset.menuOpen = String(nextState);
+  };
+
+  const syncMenuState = () => {
+    if (!mobileNavQuery.matches) {
+      setMenuState(false);
+    }
+  };
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) {
+      return;
+    }
+
+    ticking = true;
+    window.requestAnimationFrame(() => {
+      setHeaderScrollState();
+      ticking = false;
+    });
+  }, { passive: true });
+
+  setHeaderScrollState();
+  setMenuState(false);
+
+  if (menuToggle) {
     menuToggle.addEventListener('click', () => {
-      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
-      menuToggle.setAttribute('aria-expanded', String(!expanded));
-
-      if (!expanded) {
-        nav.style.display = 'flex';
-        nav.style.flexDirection = 'column';
-        nav.style.position = 'absolute';
-        nav.style.top = '100%';
-        nav.style.left = '16px';
-        nav.style.right = '16px';
-        nav.style.background = 'rgba(12, 13, 18, 0.95)';
-        nav.style.backdropFilter = 'blur(20px)';
-        nav.style.WebkitBackdropFilter = 'blur(20px)';
-        nav.style.padding = '20px';
-        nav.style.borderRadius = '10px';
-        nav.style.boxShadow = '0 16px 48px rgba(0,0,0,0.5)';
-        nav.style.border = '1px solid rgba(255,255,255,0.08)';
-        nav.style.gap = '14px';
-        nav.style.zIndex = '200';
-      } else {
-        Object.assign(nav.style, {
-          display: '', flexDirection: '', position: '', top: '',
-          left: '', right: '', background: '', backdropFilter: '',
-          WebkitBackdropFilter: '', padding: '', borderRadius: '',
-          boxShadow: '', border: '', gap: '', zIndex: ''
-        });
-      }
+      const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      setMenuState(!isExpanded);
     });
   }
 
+  if (nav) {
+    nav.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener('click', () => setMenuState(false));
+    });
+  }
 
-  /* ===========================
-     Smooth Scroll for Anchors
-     =========================== */
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', (e) => {
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      setMenuState(false);
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!mobileNavQuery.matches || !header || header.dataset.menuOpen !== 'true') {
+      return;
+    }
+
+    if (header.contains(event.target)) {
+      return;
+    }
+
+    setMenuState(false);
+  });
+
+  const syncOnQueryChange = () => syncMenuState();
+  if (typeof mobileNavQuery.addEventListener === 'function') {
+    mobileNavQuery.addEventListener('change', syncOnQueryChange);
+  } else {
+    mobileNavQuery.addListener(syncOnQueryChange);
+  }
+
+  const revealTargets = document.querySelectorAll('[data-reveal], [data-observe]');
+  if (reducedMotionQuery.matches) {
+    revealTargets.forEach((element) => element.classList.add('is-visible'));
+  } else {
+    window.requestAnimationFrame(() => {
+      document.querySelectorAll('[data-reveal]').forEach((element) => {
+        element.classList.add('is-visible');
+      });
+    });
+
+    const observer = new IntersectionObserver((entries, activeObserver) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add('is-visible');
+        activeObserver.unobserve(entry.target);
+      });
+    }, {
+      root: null,
+      rootMargin: '0px 0px -10% 0px',
+      threshold: 0.12
+    });
+
+    document.querySelectorAll('[data-observe]').forEach((element) => observer.observe(element));
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (event) => {
       const href = anchor.getAttribute('href');
-      if (href === '#') return;
+      if (!href || href === '#') {
+        return;
+      }
 
       const target = document.querySelector(href);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-        // Close mobile menu if open
-        if (menuToggle && menuToggle.getAttribute('aria-expanded') === 'true') {
-          menuToggle.click();
-        }
+      if (!target) {
+        return;
       }
+
+      event.preventDefault();
+      target.scrollIntoView({
+        behavior: reducedMotionQuery.matches ? 'auto' : 'smooth',
+        block: 'start'
+      });
     });
   });
 });

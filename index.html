@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="./landing.css" />
   <script src="./landing.js" defer></script>
@@ -32,6 +32,7 @@
       <a class="brand" href="index.html" aria-label="Verachi home">
         <div class="brand-mark">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            aria-hidden="true"
             stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2L2 7l10 5 10-5-10-5z" />
             <path d="M2 17l10 5 10-5" />
@@ -43,7 +44,8 @@
 
       <button class="menu-toggle" id="mobileMenuToggle" type="button" aria-expanded="false" aria-controls="primaryNav"
         aria-label="Toggle menu">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          aria-hidden="true">
           <line x1="3" y1="6" x2="21" y2="6" />
           <line x1="3" y1="12" x2="21" y2="12" />
           <line x1="3" y1="18" x2="21" y2="18" />
@@ -64,40 +66,62 @@
   </header>
 
 
-  <main id="main-content">
+  <main id="main-content" tabindex="-1">
 
     <!-- ========== HERO ========== -->
     <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-glow"></div>
+      <div class="hero-backdrop" aria-hidden="true">
+        <div class="hero-glow hero-glow-primary"></div>
+        <div class="hero-glow hero-glow-secondary"></div>
+        <div class="hero-grid"></div>
+      </div>
 
       <div class="container hero-layout">
         <div class="hero-content">
-          <p class="hero-eyebrow" data-reveal="fade-up">Cited memory for engineering teams</p>
+          <p class="hero-eyebrow" data-reveal="fade-up">Cited Memory for Engineering Teams</p>
 
           <h1 id="hero-title" class="display-title" data-reveal="fade-up" style="--delay: 1">
-            Your team decides things every day.<br />
-            <span class="title-emphasis">Verachi remembers them.</span>
+            Your team decides things every day. <span class="title-emphasis">Verachi remembers them.</span>
           </h1>
 
           <p class="hero-intro" data-reveal="fade-up" style="--delay: 2">
-            Decisions happen in Slack threads, Jira tickets, and PR comments. Verachi captures them automatically, links
-            them to source, and makes them queryable — so nobody has to ask "why did we do this?" ever again.
+            Decisions live in Slack threads, Jira tickets, and PR comments. Verachi turns those moments into a durable
+            memory layer with citations, confidence, and context built in, so nobody has to ask “why did we do this?”
+            twice.
           </p>
 
           <div class="hero-actions" data-reveal="fade-up" style="--delay: 3">
             <a class="button button-primary-hero" href="https://app.verachi.io/signup">
               Start Free Trial
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                aria-hidden="true"
                 stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
               </svg>
             </a>
           </div>
+
+          <div class="hero-proof" data-reveal="fade-up" style="--delay: 4">
+            <div class="hero-proof-card">
+              <span>5 min</span>
+              Setup for Slack, Jira, &amp; GitHub
+            </div>
+            <div class="hero-proof-card">
+              <span>Cited</span>
+              Answers with source and confidence
+            </div>
+            <div class="hero-proof-card">
+              <span>MCP</span>
+              Ready in Cursor, Copilot, &amp; your API
+            </div>
+          </div>
         </div>
 
         <!-- Hero Visual: Product Preview -->
         <div class="hero-visual" data-reveal="fade-in" style="--delay: 3">
+          <div class="preview-float preview-float-top">Slack thread -> cited record</div>
+          <div class="preview-float preview-float-bottom">Search from app, IDE, or API</div>
           <div class="product-preview">
             <div class="preview-chrome">
               <div class="chrome-dots">
@@ -107,7 +131,8 @@
             </div>
             <div class="preview-body">
               <div class="preview-search">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  aria-hidden="true">
                   <circle cx="11" cy="11" r="8" />
                   <line x1="21" y1="21" x2="16.65" y2="16.65" />
                 </svg>
@@ -139,7 +164,13 @@
     <!-- ========== HOW IT WORKS ========== -->
     <section class="section section-tight" id="how-it-works">
       <div class="container workflow-container">
-        <h2 class="section-title" data-observe="fade-up">How it works</h2>
+        <div class="section-head section-head-centered">
+          <p class="section-kicker" data-observe="fade-up">How Verachi Works</p>
+          <h2 class="section-title" data-observe="fade-up" style="--delay: 1">Capture a decision once. Retrieve it
+            everywhere.</h2>
+          <p class="section-subtitle" data-observe="fade-up" style="--delay: 2">Your team keeps working in chat,
+            tickets, and pull requests. Verachi handles normalization, citation, and recall.</p>
+        </div>
 
         <div class="workflow-steps">
           <!-- Step 1 -->
@@ -195,7 +226,13 @@
     <!-- ========== WHY VERACHI ========== -->
     <section class="section" id="why">
       <div class="container">
-        <h2 class="section-title" data-observe="fade-up">Why teams use Verachi</h2>
+        <div class="section-head">
+          <p class="section-kicker" data-observe="fade-up">Why Verachi</p>
+          <h2 class="section-title" data-observe="fade-up" style="--delay: 1">Lightweight in the workflow. Rigorous in
+            the answer.</h2>
+          <p class="section-subtitle" data-observe="fade-up" style="--delay: 2">The capture moment stays almost
+            invisible. The trust moment is unmistakable when someone needs the original source.</p>
+        </div>
 
         <div class="feature-layout">
           <!-- Primary feature — larger -->
@@ -236,13 +273,19 @@
     <!-- ========== TESTIMONIALS ========== -->
     <section class="section section-dark" id="testimonials">
       <div class="container">
-        <h2 class="section-title" data-observe="fade-up">What teams say</h2>
+        <div class="section-head">
+          <p class="section-kicker" data-observe="fade-up">Customer Stories</p>
+          <h2 class="section-title" data-observe="fade-up" style="--delay: 1">Teams stop re-litigating the same
+            decisions.</h2>
+          <p class="section-subtitle" data-observe="fade-up" style="--delay: 2">What changes is not just speed. It is
+            confidence in the answer and calm in the workflow.</p>
+        </div>
 
         <div class="testimonial-layout">
           <blockquote class="testimonial-card testimonial-featured" data-observe="slide-up">
             <p class="testimonial-quote">
               We onboarded four engineers last quarter. Before Verachi, each one spent their first two weeks asking
-              "why" questions in Slack. Now they search Verachi and get cited answers in seconds. Onboarding dropped
+              “why” questions in Slack. Now they search Verachi and get cited answers in seconds. Onboarding dropped
               from 15 days to 4.
             </p>
             <footer class="testimonial-person">
@@ -292,9 +335,13 @@
     <!-- ========== PRICING ========== -->
     <section class="section" id="plans">
       <div class="container">
-        <h2 class="section-title" data-observe="fade-up">Pricing</h2>
-        <p class="section-subtitle" data-observe="fade-up" style="--delay: 1">AI metered at the workspace level. Pick
-          the tier that fits.</p>
+        <div class="section-head">
+          <p class="section-kicker" data-observe="fade-up">Pricing</p>
+          <h2 class="section-title" data-observe="fade-up" style="--delay: 1">Pricing that grows with your workspace.
+          </h2>
+          <p class="section-subtitle" data-observe="fade-up" style="--delay: 2">AI is metered at the workspace level.
+            Start free, then scale when decision memory becomes a core advantage.</p>
+        </div>
 
         <div class="plans-grid">
           <!-- Starter -->
@@ -315,12 +362,12 @@
               <li class="is-excluded">Unlimited history</li>
               <li class="is-excluded">SSO / SCIM</li>
             </ul>
-            <a class="button button-outline" href="https://app.verachi.io/signup">Start free</a>
+            <a class="button button-outline" href="https://app.verachi.io/signup">Start Free</a>
           </article>
 
           <!-- Pro -->
           <article class="plan-card plan-featured" data-observe="slide-up" style="--delay: 1">
-            <div class="plan-badge">Most popular</div>
+            <div class="plan-badge">Most Popular</div>
             <div class="plan-card-head">
               <h3 class="plan-name">Pro</h3>
               <div class="plan-price">
@@ -337,7 +384,7 @@
               <li class="is-excluded">Bring your own AI key</li>
               <li class="is-excluded">SSO / SCIM</li>
             </ul>
-            <a class="button button-solid" href="https://app.verachi.io/signup">Start trial</a>
+            <a class="button button-solid" href="https://app.verachi.io/signup">Start Free Trial</a>
           </article>
 
           <!-- Enterprise -->
@@ -357,7 +404,7 @@
               <li>Bring your own AI key</li>
               <li>SSO / SCIM</li>
             </ul>
-            <a class="button button-outline" href="sales.html">Talk to sales</a>
+            <a class="button button-outline" href="sales.html">Talk to Sales</a>
           </article>
         </div>
       </div>
@@ -366,17 +413,19 @@
 
     <!-- ========== CTA ========== -->
     <section class="section section-cta">
-      <div class="container" data-observe="fade-up">
-        <h2 class="cta-title">Stop re-explaining decisions.</h2>
-        <p class="cta-sub">Setup takes 5 minutes. Connect Slack and start capturing.</p>
-        <a class="button button-primary-hero" href="https://app.verachi.io/signup">
-          Start Free Trial
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <polyline points="12 5 19 12 12 19" />
-          </svg>
-        </a>
+      <div class="container">
+        <div class="cta-panel" data-observe="fade-up">
+          <h2 class="cta-title">Stop re-explaining the same decisions.</h2>
+          <p class="cta-sub">Connect the tools your team already uses and let cited memory compound from day one.</p>
+          <a class="button button-primary-hero" href="https://app.verachi.io/signup">
+            Start Free Trial
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -387,9 +436,10 @@
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="index.html">
+        <a class="brand" href="index.html" aria-label="Verachi home">
           <div class="brand-mark">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              aria-hidden="true"
               stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 2L2 7l10 5 10-5-10-5z" />
               <path d="M2 17l10 5 10-5" />
@@ -398,14 +448,15 @@
           </div>
           <span class="brand-word">VERACHI</span>
         </a>
-        <p class="footer-blurb">Cited memory for engineering decisions.</p>
+        <p class="footer-blurb">Cited memory for engineering decisions, built for teams that move fast without losing
+          context.</p>
       </div>
       <div class="footer-col">
         <h4>Product</h4>
         <a href="#how-it-works">How It Works</a>
         <a href="#why">Why Verachi</a>
         <a href="#plans">Pricing</a>
-        <a href="#">Documentation</a>
+        <a href="testimonials.html">Customer Stories</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
