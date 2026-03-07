@@ -26,7 +26,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NHXTJ2NZMT"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-NHXTJ2NZMT');
@@ -41,8 +41,7 @@
       <a class="brand" href="index.html" aria-label="Verachi home">
         <div class="brand-mark">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-            aria-hidden="true"
-            stroke-linecap="round" stroke-linejoin="round">
+            aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2L2 7l10 5 10-5-10-5z" />
             <path d="M2 17l10 5 10-5" />
             <path d="M2 12l10 5 10-5" />
@@ -103,8 +102,7 @@
             <a class="button button-primary-hero" href="https://app.verachi.io/signup">
               Start Free Trial
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                aria-hidden="true"
-                stroke-linecap="round" stroke-linejoin="round">
+                aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
               </svg>
@@ -127,42 +125,193 @@
           </div>
         </div>
 
-        <!-- Hero Visual: Product Preview -->
+        <!-- Hero Visual: Animated Carousel -->
         <div class="hero-visual" data-reveal="fade-in" style="--delay: 3">
-          <div class="preview-float preview-float-top">Slack thread -> cited record</div>
-          <div class="preview-float preview-float-bottom">Search from app, IDE, or API</div>
-          <div class="product-preview">
-            <div class="preview-chrome">
-              <div class="chrome-dots">
-                <span></span><span></span><span></span>
+          <div class="hero-carousel" id="heroCarousel">
+            <div class="hero-slides">
+
+              <!-- Slide 1: Connect -->
+              <div class="hero-slide is-active" data-slide="0">
+                <div class="slide-connect">
+                  <svg class="connect-svg" viewBox="0 0 400 340" fill="none" aria-hidden="true">
+                    <!-- Connection lines (animated dash) -->
+                    <line class="connect-line cl-1" x1="72" y1="68" x2="200" y2="170" />
+                    <line class="connect-line cl-2" x1="328" y1="68" x2="200" y2="170" />
+                    <line class="connect-line cl-3" x1="72" y1="272" x2="200" y2="170" />
+                    <line class="connect-line cl-4" x1="328" y1="272" x2="200" y2="170" />
+
+                    <!-- Tool nodes -->
+                    <!-- Slack -->
+                    <g class="tool-node tn-1">
+                      <circle cx="72" cy="68" r="32" fill="rgba(11,20,35,0.92)" stroke="rgba(171,194,229,0.18)"
+                        stroke-width="1.5" />
+                      <text x="72" y="64" text-anchor="middle" fill="#E01E5A" font-size="20" font-weight="700">#</text>
+                      <text x="72" y="82" text-anchor="middle" fill="var(--ink-2)" font-size="9"
+                        font-weight="600">Slack</text>
+                    </g>
+                    <!-- Jira -->
+                    <g class="tool-node tn-2">
+                      <circle cx="328" cy="68" r="32" fill="rgba(11,20,35,0.92)" stroke="rgba(171,194,229,0.18)"
+                        stroke-width="1.5" />
+                      <text x="328" y="64" text-anchor="middle" fill="#2684FF" font-size="20" font-weight="700">◆</text>
+                      <text x="328" y="82" text-anchor="middle" fill="var(--ink-2)" font-size="9"
+                        font-weight="600">Jira</text>
+                    </g>
+                    <!-- GitHub -->
+                    <g class="tool-node tn-3">
+                      <circle cx="72" cy="272" r="32" fill="rgba(11,20,35,0.92)" stroke="rgba(171,194,229,0.18)"
+                        stroke-width="1.5" />
+                      <text x="72" y="268" text-anchor="middle" fill="var(--ink-0)" font-size="20"
+                        font-weight="700">⬡</text>
+                      <text x="72" y="286" text-anchor="middle" fill="var(--ink-2)" font-size="9"
+                        font-weight="600">GitHub</text>
+                    </g>
+                    <!-- Confluence -->
+                    <g class="tool-node tn-4">
+                      <circle cx="328" cy="272" r="32" fill="rgba(11,20,35,0.92)" stroke="rgba(171,194,229,0.18)"
+                        stroke-width="1.5" />
+                      <text x="328" y="268" text-anchor="middle" fill="#2684FF" font-size="18"
+                        font-weight="700">◈</text>
+                      <text x="328" y="286" text-anchor="middle" fill="var(--ink-2)" font-size="9"
+                        font-weight="600">Confluence</text>
+                    </g>
+
+                    <!-- Central Verachi node -->
+                    <circle class="center-glow" cx="200" cy="170" r="44" fill="rgba(143,217,255,0.06)" />
+                    <circle cx="200" cy="170" r="36" fill="rgba(11,20,35,0.96)" stroke="var(--accent)"
+                      stroke-width="2" />
+                    <g class="center-icon">
+                      <path d="M200 152L190 157l10 5 10-5-10-5z" stroke="var(--accent)" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                      <path d="M190 167l10 5 10-5" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" fill="none" />
+                      <path d="M190 162l10 5 10-5" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" fill="none" />
+                    </g>
+                    <text x="200" y="192" text-anchor="middle" fill="var(--accent)" font-size="9" font-weight="800"
+                      letter-spacing="0.12em">VERACHI</text>
+                  </svg>
+                  <div class="slide-label">Connects to your existing tools</div>
+                </div>
               </div>
-              <div class="chrome-bar">app.verachi.io</div>
+
+              <!-- Slide 2: Graph -->
+              <div class="hero-slide" data-slide="1">
+                <div class="slide-graph">
+                  <svg class="graph-svg" viewBox="0 0 400 340" fill="none" aria-hidden="true">
+                    <!-- Edges -->
+                    <line class="graph-edge ge-1" x1="200" y1="80" x2="120" y2="170" />
+                    <line class="graph-edge ge-2" x1="200" y1="80" x2="280" y2="150" />
+                    <line class="graph-edge ge-3" x1="120" y1="170" x2="160" y2="260" />
+                    <line class="graph-edge ge-4" x1="120" y1="170" x2="280" y2="150" />
+                    <line class="graph-edge ge-5" x1="280" y1="150" x2="310" y2="250" />
+                    <line class="graph-edge ge-6" x1="160" y1="260" x2="310" y2="250" />
+                    <line class="graph-edge ge-7" x1="200" y1="80" x2="160" y2="260" />
+
+                    <!-- Nodes -->
+                    <g class="graph-node gn-1">
+                      <circle cx="200" cy="80" r="28" fill="rgba(11,20,35,0.94)" stroke="var(--accent)"
+                        stroke-width="1.5" />
+                      <text x="200" y="76" text-anchor="middle" fill="var(--accent)" font-size="14"
+                        font-weight="700">DB</text>
+                      <text x="200" y="90" text-anchor="middle" fill="var(--ink-2)" font-size="8"
+                        font-weight="600">Decision</text>
+                    </g>
+                    <g class="graph-node gn-2">
+                      <circle cx="120" cy="170" r="24" fill="rgba(11,20,35,0.94)" stroke="var(--mint)"
+                        stroke-width="1.5" />
+                      <text x="120" y="166" text-anchor="middle" fill="var(--mint)" font-size="12"
+                        font-weight="700">API</text>
+                      <text x="120" y="180" text-anchor="middle" fill="var(--ink-2)" font-size="8"
+                        font-weight="600">Context</text>
+                    </g>
+                    <g class="graph-node gn-3">
+                      <circle cx="280" cy="150" r="24" fill="rgba(11,20,35,0.94)" stroke="var(--gold)"
+                        stroke-width="1.5" />
+                      <text x="280" y="146" text-anchor="middle" fill="var(--gold)" font-size="12"
+                        font-weight="700">Auth</text>
+                      <text x="280" y="160" text-anchor="middle" fill="var(--ink-2)" font-size="8"
+                        font-weight="600">Tool</text>
+                    </g>
+                    <g class="graph-node gn-4">
+                      <circle cx="160" cy="260" r="22" fill="rgba(11,20,35,0.94)" stroke="var(--accent)"
+                        stroke-width="1.5" />
+                      <text x="160" y="256" text-anchor="middle" fill="var(--accent)" font-size="11"
+                        font-weight="700">SQL</text>
+                      <text x="160" y="268" text-anchor="middle" fill="var(--ink-2)" font-size="8"
+                        font-weight="600">Decision</text>
+                    </g>
+                    <g class="graph-node gn-5">
+                      <circle cx="310" cy="250" r="22" fill="rgba(11,20,35,0.94)" stroke="var(--mint)"
+                        stroke-width="1.5" />
+                      <text x="310" y="246" text-anchor="middle" fill="var(--mint)" font-size="11"
+                        font-weight="700">CI</text>
+                      <text x="310" y="258" text-anchor="middle" fill="var(--ink-2)" font-size="8"
+                        font-weight="600">Pipeline</text>
+                    </g>
+                  </svg>
+                  <div class="slide-label">Builds a knowledge graph of decisions</div>
+                </div>
+              </div>
+
+              <!-- Slide 3: Query -->
+              <div class="hero-slide" data-slide="2">
+                <div class="slide-query">
+                  <div class="product-preview">
+                    <div class="preview-chrome">
+                      <div class="chrome-dots">
+                        <span></span><span></span><span></span>
+                      </div>
+                      <div class="chrome-bar">app.verachi.io</div>
+                    </div>
+                    <div class="preview-body">
+                      <div class="preview-search">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                          stroke-width="2" aria-hidden="true">
+                          <circle cx="11" cy="11" r="8" />
+                          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        </svg>
+                        <div class="preview-typing">
+                          <span class="typed-query">Why did we choose Postgres?</span><span
+                            class="cursor-blink">|</span>
+                        </div>
+                      </div>
+                      <div class="preview-result slide-result-1">
+                        <p>Postgres was chosen for the new microservice due to its <strong>JSONB support</strong>, which
+                          fits
+                          the multi-tenant schema better than MySQL.</p>
+                      </div>
+                      <div class="preview-citation slide-result-2">
+                        <div class="cite-badge">
+                          <span class="cite-dot"></span>
+                          Slack · #architecture-decisions · Sarah · Oct 14
+                        </div>
+                        <div class="cite-confidence">
+                          <span class="confidence-bar"><span class="confidence-fill"></span></span>
+                          <span>94% confidence</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slide-label">Query decisions from anywhere</div>
+                </div>
+              </div>
+
             </div>
-            <div class="preview-body">
-              <div class="preview-search">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  aria-hidden="true">
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                </svg>
-                <div class="preview-typing">
-                  <span class="typed-query">Why did we choose Postgres?</span><span class="cursor-blink">|</span>
-                </div>
-              </div>
-              <div class="preview-result result-delay-1">
-                <p>Postgres was chosen for the new microservice due to its <strong>JSONB support</strong>, which fits
-                  the multi-tenant schema better than MySQL.</p>
-              </div>
-              <div class="preview-citation result-delay-2">
-                <div class="cite-badge">
-                  <span class="cite-dot"></span>
-                  Slack · #architecture-decisions · Sarah · Oct 14
-                </div>
-                <div class="cite-confidence">
-                  <span class="confidence-bar"><span class="confidence-fill"></span></span>
-                  <span>94% confidence</span>
-                </div>
-              </div>
+
+            <!-- Carousel indicators -->
+            <div class="carousel-dots" role="tablist" aria-label="Hero carousel steps">
+              <button class="carousel-dot is-active" role="tab" aria-selected="true" aria-label="Step 1: Connect"
+                data-dot="0">
+                <span class="dot-label">Connect</span>
+              </button>
+              <button class="carousel-dot" role="tab" aria-selected="false" aria-label="Step 2: Build Graph"
+                data-dot="1">
+                <span class="dot-label">Graph</span>
+              </button>
+              <button class="carousel-dot" role="tab" aria-selected="false" aria-label="Step 3: Query" data-dot="2">
+                <span class="dot-label">Query</span>
+              </button>
             </div>
           </div>
         </div>
@@ -420,20 +569,145 @@
     </section>
 
 
-    <!-- ========== CTA ========== -->
-    <section class="section section-cta">
+    <!-- ========== ROI CALCULATOR ========== -->
+    <section id="roi" class="section roi-section" style="background: rgba(255, 255, 255, 0.02); border-top: 1px solid var(--line-0); border-bottom: 1px solid var(--line-0);">
       <div class="container">
-        <div class="cta-panel" data-observe="fade-up">
-          <h2 class="cta-title">Stop re-explaining the same decisions.</h2>
-          <p class="cta-sub">Connect the tools your team already uses and let cited memory compound from day one.</p>
-          <a class="button button-primary-hero" href="https://app.verachi.io/signup">
-            Start Free Trial
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </a>
+        <div class="section-head section-head-centered" data-observe="fade-up">
+          <p class="section-kicker">ROI Calculator</p>
+          <h2 class="section-title">See your potential savings</h2>
+          <p class="section-subtitle">Calculate how much time and money your team can save by eliminating decision archaeology and redundant discussions.</p>
+        </div>
+        
+        <div class="roi-grid">
+          <div class="roi-controls" data-observe="slide-up">
+            <div class="slider-group">
+              <div class="slider-header">
+                <label for="engineers">Engineering Team Size</label>
+                <div class="slider-val-container">
+                  <span id="engineers-val" class="slider-value">50</span>
+                  <input type="number" id="engineers-input" class="slider-input" min="10" value="50" style="display: none;">
+                </div>
+              </div>
+              <input type="range" id="engineers" name="engineers" min="10" max="500" value="50" step="10" class="roi-slider">
+            </div>
+            
+            <div class="slider-group">
+              <div class="slider-header">
+                <label for="hourly-rate">Avg. Hourly Rate ($)</label>
+                <div class="slider-val-container">
+                  <span id="rate-val" class="slider-value">$75</span>
+                  <input type="number" id="hourly-rate-input" class="slider-input" min="30" value="75" style="display: none;">
+                </div>
+              </div>
+              <input type="range" id="hourly-rate" name="hourly-rate" min="30" max="150" value="75" step="5" class="roi-slider">
+            </div>
+            
+            <div class="slider-group">
+              <div class="slider-header">
+                <label for="hours-lost">Hours lost per engineer / week</label>
+                <div class="slider-val-container">
+                  <span id="hours-val" class="slider-value">4 hrs</span>
+                  <input type="number" id="hours-lost-input" class="slider-input" min="1" value="4" style="display: none;">
+                </div>
+              </div>
+              <input type="range" id="hours-lost" name="hours-lost" min="1" max="10" value="4" step="1" class="roi-slider">
+              <p class="slider-hint" style="color: var(--ink-2); font-size: 0.85rem; margin-top: 0.5rem;">Time spent digging for context or re-discussing decisions.</p>
+            </div>
+          </div>
+          
+          <div class="roi-results" data-observe="slide-up" style="--delay: 1">
+            <div class="result-card">
+              <h3>Estimated Annual Savings</h3>
+              <div class="result-number" id="money-saved">$780,000</div>
+              <p class="result-label">Reclaimed productivity value</p>
+            </div>
+            <div class="result-card secondary-result">
+              <h3>Hours Reclaimed</h3>
+              <div class="result-number" id="time-saved">10,400</div>
+              <p class="result-label">Hours returned to engineering per year</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONTACT FORM ========== -->
+    <section id="demo" class="section contact-section">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-text" data-observe="fade-up">
+            <h2 class="section-title">Stop repeating mistakes.</h2>
+            <p class="section-subtitle" style="margin-bottom: 2rem;">Empower your team with a canonical, cited memory layer. Talk to our sales team to see how Verachi can scale across your organization.</p>
+            <ul class="contact-benefits">
+              <li>✓ Custom onboarding & data migration</li>
+              <li>✓ Enterprise SLA & dedicated support</li>
+              <li>✓ Unlimited integrations</li>
+            </ul>
+          </div>
+          <div class="contact-form-wrapper" data-observe="slide-up" style="--delay: 1">
+            <form class="contact-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Thanks for your request! Our team will contact you shortly.');">
+              <div class="form-row" style="display: flex; gap: 1.5rem;">
+                <div class="form-group" style="flex: 1;">
+                  <label for="name">Full Name</label>
+                  <input type="text" id="name" name="name" placeholder="Jane Doe" required />
+                </div>
+                <div class="form-group" style="flex: 1;">
+                  <label for="email">Work Email</label>
+                  <input type="email" id="email" name="email" placeholder="jane@company.com" required />
+                </div>
+              </div>
+              <div class="form-row" style="display: flex; gap: 1.5rem;">
+                <div class="form-group" style="flex: 1;">
+                  <label for="title">Job Title</label>
+                  <input type="text" id="title" name="title" placeholder="VP of Engineering" required />
+                </div>
+                <div class="form-group" style="flex: 1;">
+                  <label for="company">Company</label>
+                  <input type="text" id="company" name="company" placeholder="Acme Corp" required />
+                </div>
+              </div>
+              <div class="form-row" style="display: flex; gap: 1.5rem;">
+                <div class="form-group" style="flex: 1;">
+                  <label for="company_size">Company Size</label>
+                  <select id="company_size" name="company_size" required class="form-select">
+                    <option value="" disabled selected>Select size...</option>
+                    <option value="1-50">1 - 50</option>
+                    <option value="51-200">51 - 200</option>
+                    <option value="201-500">201 - 500</option>
+                    <option value="501-1000">501 - 1000</option>
+                    <option value="1000+">1000+</option>
+                  </select>
+                </div>
+                <div class="form-group" style="flex: 1;">
+                  <label for="industry">Industry</label>
+                  <select id="industry" name="industry" required class="form-select">
+                    <option value="" disabled selected>Select industry...</option>
+                    <option value="technology">Technology</option>
+                    <option value="finance">Finance</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="retail">Retail</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="country">Country/Region</label>
+                <select id="country" name="country" required class="form-select">
+                  <option value="" disabled selected>Select region...</option>
+                  <option value="north_america">North America</option>
+                  <option value="europe">Europe</option>
+                  <option value="asia_pacific">Asia Pacific</option>
+                  <option value="latin_america">Latin America</option>
+                  <option value="middle_east_africa">Middle East & Africa</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="needs">What kind of needs do you have?</label>
+                <textarea id="needs" name="needs" rows="3" placeholder="Tell us about your team and use case..." required></textarea>
+              </div>
+              <button type="submit" class="button button-solid form-submit" style="width: 100%; margin-top: 0.5rem; border: none;">Submit Request</button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
@@ -448,8 +722,7 @@
         <a class="brand" href="index.html" aria-label="Verachi home">
           <div class="brand-mark">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              aria-hidden="true"
-              stroke-linecap="round" stroke-linejoin="round">
+              aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 2L2 7l10 5 10-5-10-5z" />
               <path d="M2 17l10 5 10-5" />
               <path d="M2 12l10 5 10-5" />

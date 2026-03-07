@@ -574,3 +574,236 @@ a {
     transform: scale(0.9);
   }
 }
+
+/* Contact Form */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.contact-text {
+  text-align: left;
+}
+
+.contact-text h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.contact-text p {
+  color: var(--fg-muted);
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+}
+
+.contact-benefits {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.contact-benefits li {
+  color: var(--fg);
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.contact-form-wrapper {
+  background: rgba(24, 24, 27, 0.4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  text-align: left;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--fg);
+  text-align: left;
+}
+
+.form-group input,
+.form-group textarea {
+  background: rgba(9, 9, 11, 0.5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1rem;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  color: var(--fg);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(166, 38, 255, 0.2);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--fg-muted);
+  opacity: 0.5;
+}
+
+.form-submit {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+/* ROI Calculator */
+.roi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+@media (max-width: 900px) {
+  .roi-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.roi-controls {
+  background: rgba(24, 24, 27, 0.4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+}
+
+.slider-header label {
+  color: var(--fg);
+  font-size: 1rem;
+}
+
+.slider-value {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 1.125rem;
+  font-family: monospace;
+}
+
+.roi-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  outline: none;
+}
+
+.roi-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.roi-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.roi-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  border: none;
+  transition: transform 0.1s;
+}
+
+.roi-slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}
+
+.roi-results {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.result-card {
+  background: linear-gradient(135deg, rgba(166, 38, 255, 0.1) 0%, rgba(24, 24, 27, 0.8) 100%);
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(166, 38, 255, 0.1);
+}
+
+.result-card.secondary-result {
+  background: rgba(24, 24, 27, 0.4);
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+.result-card h3 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--fg-muted);
+  margin-bottom: 0.5rem;
+}
+
+.result-number {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  color: var(--fg);
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  font-family: monospace;
+}
+
+.result-label {
+  color: var(--fg-muted);
+  font-size: 0.95rem;
+}

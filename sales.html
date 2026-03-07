@@ -144,16 +144,135 @@
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="cta section-pad">
+    <!-- ROI Calculator Section -->
+    <section id="roi" class="roi-section section-pad" style="background: rgba(255, 255, 255, 0.02); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
       <div class="container">
-        <div class="cta-box reveal-up">
-          <div class="cta-content" style="text-align: center; max-width: 600px; margin: 0 auto;">
-            <h2>Stop repeating mistakes.</h2>
-            <p>Empower your team with a canonical, cited memory layer.</p>
-            <div class="hero-cta" style="margin-top: 2.5rem; justify-content: center;">
-              <a href="#demo" class="btn btn-primary btn-lg">Contact Sales</a>
+        <div class="section-header text-center reveal-up">
+          <div class="badge">ROI Calculator</div>
+          <h2>See your potential savings</h2>
+          <p class="section-subtitle">Calculate how much time and money your team can save by eliminating decision archaeology and redundant discussions.</p>
+        </div>
+        
+        <div class="roi-grid">
+          <div class="roi-controls reveal-up delay-1">
+            <div class="slider-group">
+              <div class="slider-header">
+                <label for="engineers">Engineering Team Size</label>
+                <span id="engineers-val" class="slider-value">50</span>
+              </div>
+              <input type="range" id="engineers" name="engineers" min="10" max="500" value="50" step="10" class="roi-slider">
             </div>
+            
+            <div class="slider-group">
+              <div class="slider-header">
+                <label for="hourly-rate">Avg. Hourly Rate ($)</label>
+                <span id="rate-val" class="slider-value">$75</span>
+              </div>
+              <input type="range" id="hourly-rate" name="hourly-rate" min="30" max="150" value="75" step="5" class="roi-slider">
+            </div>
+            
+            <div class="slider-group">
+              <div class="slider-header">
+                <label for="hours-lost">Hours lost per engineer / week</label>
+                <span id="hours-val" class="slider-value">4 hrs</span>
+              </div>
+              <input type="range" id="hours-lost" name="hours-lost" min="1" max="10" value="4" step="1" class="roi-slider">
+              <p class="slider-hint" style="color: var(--fg-muted); font-size: 0.85rem; margin-top: 0.5rem;">Time spent digging for context or re-discussing decisions.</p>
+            </div>
+          </div>
+          
+          <div class="roi-results reveal-up delay-2">
+            <div class="result-card">
+              <h3>Estimated Annual Savings</h3>
+              <div class="result-number" id="money-saved">$780,000</div>
+              <p class="result-label">Reclaimed productivity value</p>
+            </div>
+            <div class="result-card secondary-result">
+              <h3>Hours Reclaimed</h3>
+              <div class="result-number" id="time-saved">10,400</div>
+              <p class="result-label">Hours returned to engineering per year</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="demo" class="contact-section section-pad">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-text reveal-up">
+            <h2>Stop repeating mistakes.</h2>
+            <p>Empower your team with a canonical, cited memory layer. Talk to our sales team to see how Verachi can scale across your organization.</p>
+            <ul class="contact-benefits">
+              <li>✓ Custom onboarding & data migration</li>
+              <li>✓ Enterprise SLA & dedicated support</li>
+              <li>✓ Unlimited integrations</li>
+            </ul>
+          </div>
+          <div class="contact-form-wrapper reveal-up delay-1">
+            <form class="contact-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Thanks for your request! Our team will contact you shortly.');">
+              <div class="form-row" style="display: flex; gap: 1.5rem;">
+                <div class="form-group" style="flex: 1;">
+                  <label for="name">Full Name</label>
+                  <input type="text" id="name" name="name" placeholder="Jane Doe" required />
+                </div>
+                <div class="form-group" style="flex: 1;">
+                  <label for="email">Work Email</label>
+                  <input type="email" id="email" name="email" placeholder="jane@company.com" required />
+                </div>
+              </div>
+              <div class="form-row" style="display: flex; gap: 1.5rem;">
+                <div class="form-group" style="flex: 1;">
+                  <label for="title">Job Title</label>
+                  <input type="text" id="title" name="title" placeholder="VP of Engineering" required />
+                </div>
+                <div class="form-group" style="flex: 1;">
+                  <label for="company">Company</label>
+                  <input type="text" id="company" name="company" placeholder="Acme Corp" required />
+                </div>
+              </div>
+              <div class="form-row" style="display: flex; gap: 1.5rem;">
+                <div class="form-group" style="flex: 1;">
+                  <label for="company_size">Company Size</label>
+                  <select id="company_size" name="company_size" required style="background: rgba(9, 9, 11, 0.5); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.8rem 1rem; font-family: var(--font-main); font-size: 0.95rem; color: var(--fg);">
+                    <option value="" disabled selected>Select size...</option>
+                    <option value="1-50">1 - 50</option>
+                    <option value="51-200">51 - 200</option>
+                    <option value="201-500">201 - 500</option>
+                    <option value="501-1000">501 - 1000</option>
+                    <option value="1000+">1000+</option>
+                  </select>
+                </div>
+                <div class="form-group" style="flex: 1;">
+                  <label for="industry">Industry</label>
+                  <select id="industry" name="industry" required style="background: rgba(9, 9, 11, 0.5); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.8rem 1rem; font-family: var(--font-main); font-size: 0.95rem; color: var(--fg);">
+                    <option value="" disabled selected>Select industry...</option>
+                    <option value="technology">Technology</option>
+                    <option value="finance">Finance</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="retail">Retail</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="country">Country/Region</label>
+                <select id="country" name="country" required style="background: rgba(9, 9, 11, 0.5); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.8rem 1rem; font-family: var(--font-main); font-size: 0.95rem; color: var(--fg);">
+                  <option value="" disabled selected>Select region...</option>
+                  <option value="north_america">North America</option>
+                  <option value="europe">Europe</option>
+                  <option value="asia_pacific">Asia Pacific</option>
+                  <option value="latin_america">Latin America</option>
+                  <option value="middle_east_africa">Middle East & Africa</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="needs">What kind of needs do you have?</label>
+                <textarea id="needs" name="needs" rows="3" placeholder="Tell us about your team and use case..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg form-submit">Submit Request</button>
+            </form>
           </div>
         </div>
       </div>

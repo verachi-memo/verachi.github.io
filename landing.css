@@ -855,6 +855,346 @@ main {
   animation: previewReveal var(--dur-slow) var(--ease-standard) 560ms both;
 }
 
+/* ---- Hero Carousel ---- */
+
+.hero-carousel {
+  position: relative;
+  width: 100%;
+}
+
+.hero-slides {
+  position: relative;
+  min-height: 440px;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  pointer-events: none;
+  transition:
+    opacity 620ms var(--ease-standard),
+    transform 620ms var(--ease-standard);
+}
+
+.hero-slide.is-active {
+  position: relative;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Slide content wrappers */
+.slide-connect,
+.slide-graph,
+.slide-query {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.slide-query .product-preview {
+  width: min(100%, 480px);
+}
+
+.slide-label {
+  text-align: center;
+  color: var(--ink-2);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ---- Connect Slide SVG ---- */
+
+.connect-svg,
+.graph-svg {
+  width: min(100%, 420px);
+  height: auto;
+  font-family: var(--font-sans);
+}
+
+.connect-line {
+  stroke: rgba(143, 217, 255, 0.28);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 4;
+  stroke-linecap: round;
+}
+
+/* Animate lines when slide is active */
+.hero-slide.is-active .connect-line {
+  animation: dashFlow 2.4s linear infinite;
+}
+
+.hero-slide.is-active .cl-2 {
+  animation-delay: 0.3s;
+}
+
+.hero-slide.is-active .cl-3 {
+  animation-delay: 0.6s;
+}
+
+.hero-slide.is-active .cl-4 {
+  animation-delay: 0.9s;
+}
+
+.tool-node {
+  opacity: 0;
+  transform-origin: center;
+}
+
+.hero-slide.is-active .tool-node {
+  animation: nodeAppear 500ms var(--ease-standard) both;
+}
+
+.hero-slide.is-active .tn-1 {
+  animation-delay: 100ms;
+}
+
+.hero-slide.is-active .tn-2 {
+  animation-delay: 250ms;
+}
+
+.hero-slide.is-active .tn-3 {
+  animation-delay: 400ms;
+}
+
+.hero-slide.is-active .tn-4 {
+  animation-delay: 550ms;
+}
+
+.center-glow {
+  opacity: 0;
+}
+
+.hero-slide.is-active .center-glow {
+  animation: glowPulse 3s var(--ease-gentle) 600ms infinite alternate;
+}
+
+.center-icon {
+  opacity: 0;
+}
+
+.hero-slide.is-active .center-icon {
+  animation: nodeAppear 500ms var(--ease-standard) 500ms both;
+}
+
+/* ---- Graph Slide SVG ---- */
+
+.graph-edge {
+  stroke: rgba(171, 194, 229, 0.14);
+  stroke-width: 1;
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  stroke-linecap: round;
+}
+
+.hero-slide.is-active .graph-edge {
+  animation: edgeDraw 800ms var(--ease-standard) both;
+}
+
+.hero-slide.is-active .ge-1 {
+  animation-delay: 200ms;
+}
+
+.hero-slide.is-active .ge-2 {
+  animation-delay: 350ms;
+}
+
+.hero-slide.is-active .ge-3 {
+  animation-delay: 500ms;
+}
+
+.hero-slide.is-active .ge-4 {
+  animation-delay: 600ms;
+}
+
+.hero-slide.is-active .ge-5 {
+  animation-delay: 700ms;
+}
+
+.hero-slide.is-active .ge-6 {
+  animation-delay: 800ms;
+}
+
+.hero-slide.is-active .ge-7 {
+  animation-delay: 450ms;
+}
+
+.graph-node {
+  opacity: 0;
+}
+
+.hero-slide.is-active .graph-node {
+  animation: nodeAppear 500ms var(--ease-standard) both;
+}
+
+.hero-slide.is-active .gn-1 {
+  animation-delay: 100ms;
+}
+
+.hero-slide.is-active .gn-2 {
+  animation-delay: 400ms;
+}
+
+.hero-slide.is-active .gn-3 {
+  animation-delay: 550ms;
+}
+
+.hero-slide.is-active .gn-4 {
+  animation-delay: 700ms;
+}
+
+.hero-slide.is-active .gn-5 {
+  animation-delay: 850ms;
+}
+
+/* ---- Query Slide (overrides for carousel context) ---- */
+
+.slide-query .preview-result,
+.slide-query .preview-citation {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.hero-slide.is-active .slide-result-1 {
+  animation: previewReveal var(--dur-slow) var(--ease-standard) 380ms both;
+}
+
+.hero-slide.is-active .slide-result-2 {
+  animation: previewReveal var(--dur-slow) var(--ease-standard) 560ms both;
+}
+
+/* ---- Carousel Dots ---- */
+
+.carousel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 28px;
+}
+
+.carousel-dot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--ink-3);
+  cursor: pointer;
+  transition:
+    background-color var(--dur) var(--ease-standard),
+    color var(--dur) var(--ease-standard),
+    box-shadow var(--dur) var(--ease-standard);
+}
+
+.carousel-dot::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink-3);
+  transition:
+    background-color var(--dur) var(--ease-standard),
+    box-shadow var(--dur) var(--ease-standard);
+}
+
+.carousel-dot.is-active {
+  background: rgba(143, 217, 255, 0.1);
+  color: var(--accent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.carousel-dot.is-active::before {
+  background: var(--accent);
+  box-shadow: 0 0 12px rgba(143, 217, 255, 0.36);
+}
+
+.carousel-dot:hover:not(.is-active) {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--ink-1);
+}
+
+.dot-label {
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---- Carousel progress bar (inside active dot) ---- */
+
+.carousel-dot.is-active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 8px;
+  right: 8px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--accent);
+  transform-origin: left;
+  animation: dotProgress 4.5s linear both;
+}
+
+/* ---- Carousel keyframes ---- */
+
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+@keyframes nodeAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes glowPulse {
+  from {
+    opacity: 0.3;
+  }
+
+  to {
+    opacity: 0.8;
+  }
+}
+
+@keyframes edgeDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dotProgress {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+
 .section {
   position: relative;
   padding: 112px 0;
@@ -1397,7 +1737,7 @@ main {
   color: var(--ink-3);
 }
 
-.plan-card > .button {
+.plan-card>.button {
   width: 100%;
 }
 
@@ -1535,6 +1875,7 @@ main {
 }
 
 @keyframes blink {
+
   0%,
   100% {
     opacity: 1;
@@ -1630,6 +1971,7 @@ main {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -1647,6 +1989,7 @@ main {
 }
 
 @media (max-width: 1180px) {
+
   .feature-layout,
   .testimonial-layout {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1689,14 +2032,13 @@ main {
     padding-top: 10px;
   }
 
-  .preview-float-top {
-    top: 6px;
-    left: 18px;
+  .hero-slides {
+    min-height: 380px;
   }
 
-  .preview-float-bottom {
-    right: 18px;
-    bottom: 18px;
+  .connect-svg,
+  .graph-svg {
+    width: min(100%, 360px);
   }
 
   .workflow-steps,
@@ -1880,4 +2222,275 @@ main {
   .cta-title {
     max-width: 10ch;
   }
+}
+
+/* ============================================================
+   ROI Calculator
+   ============================================================ */
+.roi-section {
+  padding: 112px 0;
+}
+
+.roi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+@media (max-width: 900px) {
+  .roi-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.roi-controls {
+  background: linear-gradient(180deg, rgba(12, 22, 38, 0.82), rgba(9, 16, 29, 0.96));
+  border: 1px solid var(--line-0);
+  border-radius: 28px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+}
+
+.slider-header label {
+  color: var(--ink-0);
+  font-size: 1rem;
+}
+
+.slider-value {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.125rem;
+  font-family: var(--font-mono);
+}
+
+.slider-val-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 80px;
+}
+
+.slider-input {
+  background: rgba(6, 10, 18, 0.62);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  width: 80px;
+  text-align: right;
+  transition: box-shadow 0.2s ease;
+  outline: none;
+}
+
+.slider-input:focus {
+  box-shadow: 0 0 0 2px rgba(143, 217, 255, 0.2);
+}
+
+.slider-input::-webkit-outer-spin-button,
+.slider-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.slider-input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.roi-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  outline: none;
+}
+
+.roi-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  transition: transform 0.1s;
+  box-shadow: 0 0 12px rgba(143, 217, 255, 0.36);
+}
+
+.roi-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.roi-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: none;
+  transition: transform 0.1s;
+  box-shadow: 0 0 12px rgba(143, 217, 255, 0.36);
+}
+
+.roi-slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}
+
+.roi-results {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.result-card {
+  background:
+    radial-gradient(circle at top right, rgba(85, 196, 255, 0.14), transparent 36%),
+    linear-gradient(180deg, rgba(16, 29, 49, 0.96), rgba(11, 20, 35, 0.98));
+  border: 1px solid rgba(143, 217, 255, 0.42);
+  border-radius: 28px;
+  padding: 2.5rem;
+  text-align: center;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 24px 72px rgba(10, 54, 86, 0.2);
+}
+
+.result-card.secondary-result {
+  background: linear-gradient(180deg, rgba(12, 22, 38, 0.82), rgba(9, 16, 29, 0.96));
+  border-color: var(--line-0);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.result-card h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  margin-bottom: 0.5rem;
+}
+
+.result-number {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  color: var(--ink-0);
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-mono);
+  letter-spacing: -0.04em;
+}
+
+.result-label {
+  color: var(--ink-1);
+  font-size: 0.95rem;
+}
+
+/* ============================================================
+   Contact Form
+   ============================================================ */
+.contact-section {
+  padding: 112px 0;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.contact-benefits {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.contact-benefits li {
+  color: var(--ink-0);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.contact-form-wrapper {
+  background: linear-gradient(180deg, rgba(12, 22, 38, 0.82), rgba(9, 16, 29, 0.96));
+  border: 1px solid var(--line-0);
+  border-radius: 28px;
+  padding: 2.5rem;
+  text-align: left;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink-0);
+  text-align: left;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  background: rgba(6, 10, 18, 0.62);
+  border: 1px solid var(--line-1);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--ink-0);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(143, 217, 255, 0.2);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--ink-3);
 }
