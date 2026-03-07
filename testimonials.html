@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verachi — Testimonials</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000000;
+      font-family: 'Outfit', sans-serif;
+      color: #fff;
+    }
+    
+    /* Navbar styles reused from intro2.html for consistency */
+    .mt-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 4rem;
+      z-index: 100;
+    }
+    .mt-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+    .mt-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .mt-brand .kanji {
+      font-size: 1.8rem;
+    }
+    .mt-links {
+      display: flex;
+      gap: 2rem;
+    }
+    .mt-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .mt-links a:hover {
+      color: #fff;
+    }
+    .mt-nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .mt-login {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+    .mt-join {
+      background: #111;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      box-shadow: 0 0 20px rgba(164, 129, 237, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: box-shadow 0.2s;
+    }
+    .mt-join:hover {
+      box-shadow: 0 0 30px rgba(164, 129, 237, 0.5);
+    }
+
+    /* Testimonials Section */
+    .testimonials-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 4rem 4rem 8rem 4rem;
+    }
+    .page-title {
+      font-size: clamp(3rem, 5vw, 4rem);
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      text-align: center;
+      background: linear-gradient(to right, #fff, #a481ed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .page-subtitle {
+      text-align: center;
+      color: rgba(255,255,255,0.7);
+      font-size: 1.25rem;
+      margin-bottom: 4rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Video Grid */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    /* Video Card */
+    .video-card {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 16/10;
+      background: #1a1a1a;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .video-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(164, 129, 237, 0.4);
+    }
+
+    /* Mock video background gradients/images */
+    .v-bg-1 { background: linear-gradient(135deg, #2b1055 0%, #7597de 100%); }
+    .v-bg-2 { background: linear-gradient(135deg, #1f4037 0%, #99f2c8 100%); }
+    .v-bg-3 { background: linear-gradient(135deg, #3a1c71 0%, #d76d77 50%, #ffaf7b 100%); }
+    .v-bg-4 { background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); }
+
+    /* Play Button Overlay */
+    .play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .video-card:hover .play-btn {
+      transform: translate(-50%, -50%) scale(1.1);
+      background: rgba(164, 129, 237, 0.8);
+      border-color: rgba(255,255,255,0.5);
+    }
+    .play-btn svg {
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+      margin-left: 4px; /* optical alignment */
+    }
+
+    /* Content Overlay */
+    .video-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem 1.5rem 1.5rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .quote {
+      font-size: 1.1rem;
+      font-weight: 500;
+      line-height: 1.4;
+      margin: 0 0 0.5rem 0;
+    }
+    
+    .person {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    .details {
+      display: flex;
+      flex-direction: column;
+    }
+    .name {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .role {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    @media (max-width: 768px) {
+      .mt-nav { padding: 1.5rem 2rem; }
+      .mt-links { display: none; }
+      .testimonials-container { padding: 2rem 2rem 4rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="mt-nav">
+    <div class="mt-nav-left">
+      <a href="index.html" class="mt-brand">
+        <span class="kanji">知</span> Verachi
+      </a>
+      <div class="mt-links">
+        <a href="sales.html">Your Team</a>
+        <a href="story.html">Solutions</a>
+        <a href="testimonials.html" style="color: #fff;">Customers</a>
+        <a href="pricing.html">Pricing</a>
+      </div>
+    </div>
+    <div class="mt-nav-right">
+      <a href="#login" class="mt-login">Log In</a>
+      <a href="#demo" class="mt-join">Join Now</a>
+    </div>
+  </nav>
+
+  <div class="testimonials-container">
+    <h1 class="page-title">Don't just take our word for it</h1>
+    <p class="page-subtitle">See how engineering teams are ending decision archaeology and moving faster with Verachi.</p>
+
+    <div class="video-grid">
+      <!-- Video 1 -->
+      <div class="video-card v-bg-1">
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="video-info">
+          <p class="quote">"We used to spend hours digging through Slack. Now, the context is just there."</p>
+          <div class="person">
+            <div class="avatar">SJ</div>
+            <div class="details">
+              <span class="name">Sarah Jenkins</span>
+              <span class="role">VP of Engineering @ TechCorp</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video 2 -->
+      <div class="video-card v-bg-2">
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="video-info">
+          <p class="quote">"Verachi is the only tool that didn't ask us to change how we work."</p>
+          <div class="person">
+            <div class="avatar">MR</div>
+            <div class="details">
+              <span class="name">Marcus Rodriguez</span>
+              <span class="role">Lead Architect @ Innovate.io</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video 3 -->
+      <div class="video-card v-bg-3">
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="video-info">
+          <p class="quote">"Onboarding new devs dropped from 3 weeks to 3 days. The context is captured automatically."</p>
+          <div class="person">
+            <div class="avatar">EL</div>
+            <div class="details">
+              <span class="name">Emma Lin</span>
+              <span class="role">CTO @ BuildFast</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video 4 -->
+      <div class="video-card v-bg-4">
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="video-info">
+          <p class="quote">"Finally, our Jira tickets actually tell the whole story. Highly recommend."</p>
+          <div class="person">
+            <div class="avatar">DK</div>
+            <div class="details">
+              <span class="name">David Kim</span>
+              <span class="role">Sr. Product Manager @ FlowState</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
