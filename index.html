@@ -1,405 +1,409 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Verachi - Decide Once. Remember Everywhere.</title>
-  <meta name="description" content="Verachi is the cited memory layer for engineering and product decisions. Keep primary sources primary, show citations and confidence with every answer." />
-  <meta name="theme-color" content="#fafafa" />
+  <title>Verachi — Decide Once. Remember Everywhere.</title>
+  <meta name="description"
+    content="Verachi is the cited memory layer for engineering decisions. Keep primary sources primary, show citations and confidence with every answer." />
+  <meta name="theme-color" content="#0a0b10" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://verachi.io/" />
-  
+
   <link rel="icon" href="./favicon.ico" />
-  
+
   <script>document.documentElement.classList.replace('no-js', 'js');</script>
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="./landing.css" />
   <script src="./landing.js" defer></script>
 </head>
-<body class="light-theme">
+
+<body>
+
+  <!-- ========== HEADER ========== -->
   <header class="site-header" data-header>
     <div class="header-inner">
       <a class="brand" href="index.html" aria-label="Verachi home">
         <div class="brand-mark">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+            <path d="M2 17l10 5 10-5" />
+            <path d="M2 12l10 5 10-5" />
+          </svg>
         </div>
         <span class="brand-word">VERACHI</span>
       </a>
 
-      <button class="menu-toggle" id="mobileMenuToggle" type="button" aria-expanded="false" aria-controls="primaryNav">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      <button class="menu-toggle" id="mobileMenuToggle" type="button" aria-expanded="false" aria-controls="primaryNav"
+        aria-label="Toggle menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
       </button>
 
       <nav class="site-nav" id="primaryNav" aria-label="Primary">
-        <a href="#integration">Integration</a>
-        <a href="#philosophy">Philosophy</a>
-        <a href="#plans">Plans</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#why">Why Verachi</a>
+        <a href="#plans">Pricing</a>
       </nav>
 
       <div class="header-actions">
         <a class="header-link" href="https://app.verachi.io/login">Sign In</a>
-        <a class="button button-primary button-compact" href="https://app.verachi.io/signup">Get Started</a>
+        <a class="button button-compact" href="https://app.verachi.io/signup">Get Started</a>
       </div>
     </div>
   </header>
 
+
   <main id="main-content">
+
+    <!-- ========== HERO ========== -->
     <section class="hero" aria-labelledby="hero-title">
-      <div class="glow-bg"></div>
-      <div class="container hero-grid">
+      <div class="hero-glow"></div>
+
+      <div class="container hero-layout">
         <div class="hero-content">
-          <div class="badge" data-reveal="fade-up">
-            <span class="badge-dot"></span> The Cited Memory Layer
-          </div>
+          <p class="hero-eyebrow" data-reveal="fade-up">Cited memory for engineering teams</p>
+
           <h1 id="hero-title" class="display-title" data-reveal="fade-up" style="--delay: 1">
-            Decide Once.<br/>
-            <span class="gradient-text">Remember Everywhere.</span>
+            Your team decides things every day.<br />
+            <span class="title-emphasis">Verachi remembers them.</span>
           </h1>
+
           <p class="hero-intro" data-reveal="fade-up" style="--delay: 2">
-            Verachi continuously syncs your engineering decisions from Slack, Jira, and GitHub into a single, queryable, cited record. 
+            Decisions happen in Slack threads, Jira tickets, and PR comments. Verachi captures them automatically, links
+            them to source, and makes them queryable — so nobody has to ask "why did we do this?" ever again.
           </p>
+
           <div class="hero-actions" data-reveal="fade-up" style="--delay: 3">
-            <a class="button button-glow" href="https://app.verachi.io/signup">
+            <a class="button button-primary-hero" href="https://app.verachi.io/signup">
               Start Free Trial
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
             </a>
-            <div class="terminal-hint">
-              <span>$</span> npm install -g @verachi/cli
-            </div>
           </div>
         </div>
-        
-        <div class="hero-visual-area" data-reveal="fade-in" style="--delay: 4">
-          <div class="integration-canvas">
-            
-            <!-- Central Node -->
-            <div class="node-center pulse-glow">
-               <svg class="v-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-               <div class="node-rings">
-                  <div class="ring r1"></div>
-                  <div class="ring r2"></div>
-                  <div class="ring r3"></div>
-               </div>
+
+        <!-- Hero Visual: Product Preview -->
+        <div class="hero-visual" data-reveal="fade-in" style="--delay: 3">
+          <div class="product-preview">
+            <div class="preview-chrome">
+              <div class="chrome-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="chrome-bar">app.verachi.io</div>
             </div>
-
-            <!-- Path Lines -->
-            <svg class="connection-lines" viewBox="0 0 400 400">
-              <path id="path-slack" d="M 60 100 C 150 100, 150 200, 200 200" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2" />
-              <path id="path-github" d="M 60 300 C 150 300, 150 200, 200 200" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2" />
-              <path id="path-jira" d="M 340 100 C 250 100, 250 200, 200 200" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2" />
-              
-              <!-- Data Particles -->
-              <circle r="4" fill="#4A154B" filter="drop-shadow(0 0 4px #4A154B)">
-                <animateMotion dur="3s" repeatCount="indefinite" path="M 60 100 C 150 100, 150 200, 200 200" />
-              </circle>
-              <circle r="4" fill="#ffffff" filter="drop-shadow(0 0 4px #ffffff)">
-                <animateMotion dur="4s" begin="1s" repeatCount="indefinite" path="M 60 300 C 150 300, 150 200, 200 200" />
-              </circle>
-              <circle r="4" fill="#0052CC" filter="drop-shadow(0 0 4px #0052CC)">
-                <animateMotion dur="3.5s" begin="0.5s" repeatCount="indefinite" path="M 340 100 C 250 100, 250 200, 200 200" />
-              </circle>
-            </svg>
-
-            <!-- Slack Node -->
-            <div class="tool-node node-slack floating-1">
-              <div class="icon-wrap" style="background: #111;">
-                <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z" fill="#E01E5A"/>
+            <div class="preview-body">
+              <div class="preview-search">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
                 </svg>
+                <div class="preview-typing">
+                  <span class="typed-query">Why did we choose Postgres?</span><span class="cursor-blink">|</span>
+                </div>
               </div>
-              <div class="node-label">Slack</div>
-            </div>
-
-            <!-- GitHub Node -->
-            <div class="tool-node node-github floating-2">
-              <div class="icon-wrap" style="background: #111;">
-                 <svg viewBox="0 0 24 24" width="24" height="24" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              <div class="preview-result result-delay-1">
+                <p>Postgres was chosen for the new microservice due to its <strong>JSONB support</strong>, which fits
+                  the multi-tenant schema better than MySQL.</p>
               </div>
-              <div class="node-label">GitHub</div>
-            </div>
-
-            <!-- Jira Node -->
-            <div class="tool-node node-jira floating-3">
-              <div class="icon-wrap" style="background: #111;">
-                <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M11.53 12.872a3.86 3.86 0 0 1-3.86-3.861V3.861a3.86 3.86 0 0 1 3.86-3.861 3.86 3.86 0 0 1 3.86 3.861v5.15h-5.15z" fill="#2684FF"/><path d="M20.106 21.448a3.86 3.86 0 0 1-3.861-3.861v-5.15h5.15a3.86 3.86 0 0 1 3.861 3.861 3.86 3.86 0 0 1-3.861 3.861h-1.289z" fill="#0052CC"/><path d="M11.53 21.448a3.86 3.86 0 0 1-3.86-3.861v-5.15h5.15a3.86 3.86 0 0 1 3.861 3.861 3.86 3.86 0 0 1-3.861 3.861h-1.29z" fill="#2684FF"/><path d="M2.955 12.872a3.86 3.86 0 0 1-2.955-3.861 3.86 3.86 0 0 1 3.86-3.861h5.15v5.15a3.86 3.86 0 0 1-3.86 3.861h-2.195z" fill="#2684FF"/></svg>
+              <div class="preview-citation result-delay-2">
+                <div class="cite-badge">
+                  <span class="cite-dot"></span>
+                  Slack · #architecture-decisions · Sarah · Oct 14
+                </div>
+                <div class="cite-confidence">
+                  <span class="confidence-bar"><span class="confidence-fill"></span></span>
+                  <span>94% confidence</span>
+                </div>
               </div>
-              <div class="node-label">Jira</div>
             </div>
-            
-            <!-- Floating Code Snippets -->
-            <div class="code-snippet snippet-1">
-              <pre><code><span class="c-keyword">import</span> { queryRecord } <span class="c-keyword">from</span> <span class="c-string">'@verachi/client'</span>;</code></pre>
-            </div>
-            <div class="code-snippet snippet-2">
-              <pre><code><span class="c-comment">// Decision: ADR-042</span><br><span class="c-function">await</span> queryRecord(<span class="c-string">"arch-auth"</span>);</code></pre>
-            </div>
-
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Interactive Slack to Verachi sequence -->
-    <section class="section" id="integration">
-      <div class="container integration-container">
-        <div class="integration-header text-center" data-observe="fade-up">
-          <h2 class="section-title">Capture in Slack. Recall anywhere.</h2>
-          <p class="section-intro">When your team makes a decision in chat, just react to save it. Verachi builds a knowledge graph from your everyday conversations.</p>
-        </div>
 
-        <div class="workflow-sequence">
-          <!-- Step 1: Slack -->
-          <div class="slack-mockup workflow-step" data-observe="slide-up" style="--delay: 1">
-            <div class="slack-header">
-              <div class="slack-title"># architecture-decisions</div>
+    <!-- ========== HOW IT WORKS ========== -->
+    <section class="section section-tight" id="how-it-works">
+      <div class="container workflow-container">
+        <h2 class="section-title" data-observe="fade-up">How it works</h2>
+
+        <div class="workflow-steps">
+          <!-- Step 1 -->
+          <div class="workflow-card" data-observe="slide-up">
+            <div class="step-number">1</div>
+            <div class="workflow-card-content">
+              <h3>Your team makes a decision in Slack</h3>
+              <p>React with 🧠 to any message. Verachi ingests the thread, identifies the decision, and extracts context
+                automatically.</p>
             </div>
-            <div class="slack-body">
-              <div class="slack-message">
-                <div class="slack-avatar"></div>
-                <div class="slack-content">
-                  <div class="slack-user">Sarah <span class="slack-time">10:42 AM</span></div>
-                  <div class="slack-text">Let's go with Postgres instead of MySQL for the new microservice. The JSONB support fits our multi-tenant schema much better.</div>
-                  <div class="slack-reaction">
-                    <span class="reaction-emoji">🧠</span>
-                    <span class="reaction-count">1</span>
+            <div class="workflow-demo">
+              <div class="slack-mockup-mini">
+                <div class="slack-msg-mini">
+                  <div class="slack-avatar-mini"></div>
+                  <div>
+                    <div class="slack-user-mini">Sarah <span>10:42 AM</span></div>
+                    <div class="slack-text-mini">Let's go with Postgres. JSONB fits the multi-tenant schema much better.
+                    </div>
+                    <div class="slack-reaction-mini">
+                      <span>🧠</span>
+                      <span class="reaction-count-mini">1</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="workflow-connector" data-observe="fade-in" style="--delay: 3">
-            <div class="connector-line"></div>
-            <div class="connector-icon">
-               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+          <!-- Step 2 -->
+          <div class="workflow-card" data-observe="slide-up" style="--delay: 1">
+            <div class="step-number">2</div>
+            <div class="workflow-card-content">
+              <h3>Verachi builds a cited record</h3>
+              <p>The decision is normalized, classified, and linked back to the original source. Every record carries
+                its full citation chain — no hallucinated context.</p>
             </div>
           </div>
 
-          <!-- Step 2: Verachi Query -->
-          <div class="verachi-mockup workflow-step" data-observe="slide-up" style="--delay: 4">
-            <div class="verachi-header">
-              <div class="verachi-search-bar">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <div class="typing-text-wrapper">
-                  <span class="typing-text">Why did we choose Postgres?</span><span class="cursor-blink">|</span>
-                </div>
-              </div>
-            </div>
-            <div class="verachi-body">
-              <div class="result-text t-delay-appear">
-                <p>Postgres was chosen for the new microservice primarily due to its <strong>JSONB support</strong>, which fits the multi-tenant schema.</p>
-              </div>
-              <div class="result-citations t-delay-appear-2">
-                <div class="citation-badge">
-                  <svg viewBox="0 0 24 24" width="12" height="12"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z" fill="#E01E5A"/></svg>
-                  <span>Slack • #architecture-decisions</span>
-                </div>
-              </div>
+          <!-- Step 3 -->
+          <div class="workflow-card" data-observe="slide-up" style="--delay: 2">
+            <div class="step-number">3</div>
+            <div class="workflow-card-content">
+              <h3>Anyone can query it — forever</h3>
+              <p>Search from the web app, your IDE via MCP, or the API. Answers come back with source links, confidence
+                scores, and relationship context.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="philosophy">
+
+    <!-- ========== WHY VERACHI ========== -->
+    <section class="section" id="why">
       <div class="container">
-        <div class="section-header text-center" data-observe="fade-up">
-          <h2 class="section-title">The memory layer for modern teams.</h2>
-          <p class="section-intro">
-            Stop losing the "why". Verachi automatically turns scattered conversations, tickets, and PRs into a unified, queryable knowledge graph.
-          </p>
-        </div>
+        <h2 class="section-title" data-observe="fade-up">Why teams use Verachi</h2>
 
-        <div class="feature-grid">
-          <!-- Feature 1 -->
-          <div class="feature-card" data-observe="slide-up" style="--delay: 1">
-            <div class="feat-anim sync-anim">
-               <svg viewBox="0 0 100 100" class="feat-svg">
-                  <path d="M 20 50 C 40 20, 60 80, 80 50" fill="none" stroke="var(--accent-color)" stroke-width="3" stroke-linecap="round" stroke-dasharray="100" class="anim-wave" />
-                  <circle cx="20" cy="50" r="6" fill="#fff" />
-                  <circle cx="80" cy="50" r="6" fill="#fff" />
-               </svg>
-            </div>
-            <h3>Real-time Sync</h3>
-            <p>Connect your tools once. Verachi listens to Slack threads, Jira state changes, and GitHub merges, building relationships automatically.</p>
-          </div>
-
-          <!-- Feature 2 -->
-          <div class="feature-card" data-observe="slide-up" style="--delay: 2">
-            <div class="feat-anim citation-anim">
-               <div class="mock-doc">
-                  <div class="m-line w-full"></div>
-                  <div class="m-line w-3/4"></div>
-                  <div class="m-highlight">
-                    <div class="m-line w-1/2"></div>
-                    <div class="m-tooltip">Source: PR #402</div>
-                  </div>
-                  <div class="m-line w-full"></div>
-               </div>
-            </div>
-            <h3>Cited Answers</h3>
-            <p>Every response generated by Verachi includes exact links back to the primary source. We do not hallucinate context.</p>
-          </div>
-
-          <!-- Feature 3 -->
-          <div class="feature-card" data-observe="slide-up" style="--delay: 3">
-            <div class="feat-anim ide-anim">
-              <div class="mock-ide">
-                <div class="ide-sidebar"></div>
-                <div class="ide-main">
-                  <div class="ide-code"></div>
-                  <div class="ide-code"></div>
-                  <div class="ide-popup">Ask Verachi...</div>
+        <div class="feature-layout">
+          <!-- Primary feature — larger -->
+          <div class="feature-card feature-primary" data-observe="slide-up">
+            <div class="feat-visual">
+              <div class="mock-doc">
+                <div class="m-line w-full"></div>
+                <div class="m-line w-3/4"></div>
+                <div class="m-highlight">
+                  <div class="m-line w-1/2"></div>
+                  <div class="m-tooltip">Source: PR #402</div>
                 </div>
+                <div class="m-line w-full"></div>
               </div>
             </div>
-            <h3>IDE Integration</h3>
-            <p>With our MCP server, tools like Cursor and Copilot can instantly query your team's historical decision ledger while you code.</p>
+            <h3>Every answer is cited</h3>
+            <p>Verachi links every claim to its original source — a Slack thread, a Jira ticket, a PR comment. You
+              verify the answer, not the tool.</p>
+          </div>
+
+          <!-- Secondary features — smaller, side by side -->
+          <div class="feature-card feature-secondary" data-observe="slide-up" style="--delay: 1">
+            <h3>Zero workflow change</h3>
+            <p>Connect Slack, Jira, and GitHub. React to a message to capture it. There's no new tool to learn, no forms
+              to fill out, no tickets to update.</p>
+          </div>
+
+          <div class="feature-card feature-secondary" data-observe="slide-up" style="--delay: 2">
+            <h3>Works in your IDE</h3>
+            <p>Our MCP server lets Cursor, Copilot, and other tools query your team's decision history while you code.
+              Context arrives where you need it.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="plans">
-      <div class="container plans-container">
-        <div class="plans-header" data-observe="fade-up">
-          <p class="section-label">Plans</p>
-          <h2 class="section-title">Three plans. Clear AI boundaries.</h2>
-          <p class="section-intro">
-            Verachi meters AI at the workspace level. Each plan sets a model tier, a default AI budget, and how much control the workspace gets over advanced settings.
-          </p>
+
+    <!-- ========== TESTIMONIALS ========== -->
+    <section class="section section-dark" id="testimonials">
+      <div class="container">
+        <h2 class="section-title" data-observe="fade-up">What teams say</h2>
+
+        <div class="testimonial-layout">
+          <blockquote class="testimonial-card testimonial-featured" data-observe="slide-up">
+            <p class="testimonial-quote">
+              We onboarded four engineers last quarter. Before Verachi, each one spent their first two weeks asking
+              "why" questions in Slack. Now they search Verachi and get cited answers in seconds. Onboarding dropped
+              from 15 days to 4.
+            </p>
+            <footer class="testimonial-person">
+              <img class="testimonial-avatar" src="./avatars/sarah.png" alt="Sarah Jenkins" width="48" height="48"
+                loading="lazy" />
+              <div>
+                <div class="testimonial-name">Sarah Jenkins</div>
+                <div class="testimonial-role">VP of Engineering, TechCorp</div>
+              </div>
+            </footer>
+          </blockquote>
+
+          <blockquote class="testimonial-card" data-observe="slide-up" style="--delay: 1">
+            <p class="testimonial-quote">
+              The thing I trust about Verachi is that it shows me where the answer came from. I click the citation, I
+              see the original Slack thread. No black box.
+            </p>
+            <footer class="testimonial-person">
+              <img class="testimonial-avatar" src="./avatars/marcus.png" alt="Marcus Rodriguez" width="48" height="48"
+                loading="lazy" />
+              <div>
+                <div class="testimonial-name">Marcus Rodriguez</div>
+                <div class="testimonial-role">Lead Architect, Innovate.io</div>
+              </div>
+            </footer>
+          </blockquote>
+
+          <blockquote class="testimonial-card" data-observe="slide-up" style="--delay: 2">
+            <p class="testimonial-quote">
+              We used to re-litigate the same database decision every six months. Verachi ended that loop — the decision
+              is recorded, cited, and findable. Done.
+            </p>
+            <footer class="testimonial-person">
+              <img class="testimonial-avatar" src="./avatars/emma.png" alt="Emma Lin" width="48" height="48"
+                loading="lazy" />
+              <div>
+                <div class="testimonial-name">Emma Lin</div>
+                <div class="testimonial-role">CTO, BuildFast</div>
+              </div>
+            </footer>
+          </blockquote>
         </div>
+      </div>
+    </section>
+
+
+    <!-- ========== PRICING ========== -->
+    <section class="section" id="plans">
+      <div class="container">
+        <h2 class="section-title" data-observe="fade-up">Pricing</h2>
+        <p class="section-subtitle" data-observe="fade-up" style="--delay: 1">AI metered at the workspace level. Pick
+          the tier that fits.</p>
 
         <div class="plans-grid">
+          <!-- Starter -->
           <article class="plan-card" data-observe="slide-up">
             <div class="plan-card-head">
-              <div class="plan-card-meta">
-                <span class="plan-tier-label">Smart</span>
-              </div>
-              <div class="pricing-info">
-                <h3 class="pricing-name">Starter</h3>
-                <p class="pricing-desc">
-                  For small teams that need reliable capture, recall, and citations without extra admin overhead.
-                </p>
-              </div>
-              <div class="pricing-cost">
+              <h3 class="plan-name">Starter</h3>
+              <div class="plan-price">
                 <span class="amount">$0</span>
                 <span class="period">/ mo</span>
               </div>
+              <p class="plan-desc">For small teams getting started with decision capture.</p>
             </div>
-            <ul class="plan-feature-list" aria-label="Starter plan details">
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>Smart model tier</span></li>
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>100k AI tokens / workspace / month</span></li>
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>5 extraction jobs / hour</span></li>
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>Slack integration</span></li>
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>Jira integration</span></li>
-              <li class="plan-feature is-muted"><span class="plan-feature-icon">−</span><span>GitHub integration</span></li>
-              <li class="plan-feature is-muted"><span class="plan-feature-icon">−</span><span>Unlimited history</span></li>
-              <li class="plan-feature is-muted"><span class="plan-feature-icon">−</span><span>Bring your own AI key</span></li>
-              <li class="plan-feature is-muted"><span class="plan-feature-icon">−</span><span>SSO and SCIM</span></li>
+            <ul class="plan-features" aria-label="Starter features">
+              <li>100k AI tokens / month</li>
+              <li>5 extraction jobs / hour</li>
+              <li>Slack + Jira integrations</li>
+              <li class="is-excluded">GitHub integration</li>
+              <li class="is-excluded">Unlimited history</li>
+              <li class="is-excluded">SSO / SCIM</li>
             </ul>
-            <div class="pricing-action">
-              <a class="button button-secondary" href="https://app.verachi.io/signup">Start free</a>
-            </div>
+            <a class="button button-outline" href="https://app.verachi.io/signup">Start free</a>
           </article>
 
-          <article class="plan-card featured" data-observe="slide-up" style="--delay: 1">
-            <div class="featured-tag">Most Popular</div>
+          <!-- Pro -->
+          <article class="plan-card plan-featured" data-observe="slide-up" style="--delay: 1">
+            <div class="plan-badge">Most popular</div>
             <div class="plan-card-head">
-              <div class="plan-card-meta">
-                <span class="plan-tier-label">Smarter</span>
-              </div>
-              <div class="pricing-info">
-                <h3 class="pricing-name">Pro</h3>
-                <p class="pricing-desc">
-                  For growing teams that need deeper reasoning, more monthly headroom, and full engineering context.
-                </p>
-              </div>
-              <div class="pricing-cost">
+              <h3 class="plan-name">Pro</h3>
+              <div class="plan-price">
                 <span class="amount">$49</span>
                 <span class="period">/ user / mo</span>
               </div>
+              <p class="plan-desc">Full context for growing engineering teams.</p>
             </div>
-            <ul class="plan-feature-list" aria-label="Pro plan details">
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>Smarter model tier</span></li>
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>1M AI tokens / workspace / month</span></li>
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>20 extraction jobs / hour</span></li>
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>Slack integration</span></li>
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>Jira integration</span></li>
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>GitHub integration</span></li>
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>Unlimited history</span></li>
-              <li class="plan-feature is-muted"><span class="plan-feature-icon">−</span><span>Bring your own AI key</span></li>
-              <li class="plan-feature is-muted"><span class="plan-feature-icon">−</span><span>SSO and SCIM</span></li>
+            <ul class="plan-features" aria-label="Pro features">
+              <li>1M AI tokens / month</li>
+              <li>20 extraction jobs / hour</li>
+              <li>Slack + Jira + GitHub</li>
+              <li>Unlimited history</li>
+              <li class="is-excluded">Bring your own AI key</li>
+              <li class="is-excluded">SSO / SCIM</li>
             </ul>
-            <div class="pricing-action">
-              <a class="button button-primary" href="https://app.verachi.io/signup">Start trial</a>
-            </div>
+            <a class="button button-solid" href="https://app.verachi.io/signup">Start trial</a>
           </article>
 
+          <!-- Enterprise -->
           <article class="plan-card" data-observe="slide-up" style="--delay: 2">
             <div class="plan-card-head">
-              <div class="plan-card-meta">
-                <span class="plan-tier-label">Frontier</span>
-              </div>
-              <div class="pricing-info">
-                <h3 class="pricing-name">Enterprise</h3>
-                <p class="pricing-desc">
-                  For large workspaces that need advanced controls, custom keys, and room to experiment at the frontier.
-                </p>
-              </div>
-              <div class="pricing-cost">
+              <h3 class="plan-name">Enterprise</h3>
+              <div class="plan-price">
                 <span class="amount">Custom</span>
               </div>
+              <p class="plan-desc">Advanced controls, custom keys, frontier models.</p>
             </div>
-            <ul class="plan-feature-list" aria-label="Enterprise plan details">
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>Frontier model tier</span></li>
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>Unlimited AI budget</span></li>
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>100 extraction jobs / hour</span></li>
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>Slack integration</span></li>
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>Jira integration</span></li>
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>GitHub integration</span></li>
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>Unlimited history</span></li>
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>Bring your own AI key</span></li>
-              <li class="plan-feature"><span class="plan-feature-icon">✓</span><span>SSO and SCIM</span></li>
+            <ul class="plan-features" aria-label="Enterprise features">
+              <li>Unlimited AI budget</li>
+              <li>100 extraction jobs / hour</li>
+              <li>All integrations</li>
+              <li>Unlimited history</li>
+              <li>Bring your own AI key</li>
+              <li>SSO / SCIM</li>
             </ul>
-            <div class="pricing-action">
-              <a class="button button-secondary" href="sales.html">Talk to sales</a>
-            </div>
+            <a class="button button-outline" href="sales.html">Talk to sales</a>
           </article>
         </div>
       </div>
     </section>
 
+
+    <!-- ========== CTA ========== -->
     <section class="section section-cta">
-      <div class="glow-bg-bottom"></div>
-      <div class="container text-center" data-observe="scale-in">
-        <h2 class="display-title">Ready to stop losing context?</h2>
-        <p class="section-intro" style="margin-inline: auto;">Start capturing your engineering decisions today. Setup takes 5 minutes.</p>
-        <div class="hero-actions" style="justify-content: center; margin-top: 40px;">
-          <a class="button button-glow" href="https://app.verachi.io/signup">Start Free Trial</a>
-        </div>
+      <div class="container" data-observe="fade-up">
+        <h2 class="cta-title">Stop re-explaining decisions.</h2>
+        <p class="cta-sub">Setup takes 5 minutes. Connect Slack and start capturing.</p>
+        <a class="button button-primary-hero" href="https://app.verachi.io/signup">
+          Start Free Trial
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </a>
       </div>
     </section>
+
   </main>
 
+
+  <!-- ========== FOOTER ========== -->
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-brand">
         <a class="brand" href="index.html">
           <div class="brand-mark">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5z" />
+              <path d="M2 17l10 5 10-5" />
+              <path d="M2 12l10 5 10-5" />
+            </svg>
           </div>
           <span class="brand-word">VERACHI</span>
         </a>
-        <p class="footer-blurb">The cited memory layer for engineering teams.</p>
+        <p class="footer-blurb">Cited memory for engineering decisions.</p>
       </div>
       <div class="footer-col">
         <h4>Product</h4>
-        <a href="#integration">Integrations</a>
-        <a href="#philosophy">Philosophy</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#why">Why Verachi</a>
         <a href="#plans">Pricing</a>
         <a href="#">Documentation</a>
       </div>
@@ -415,5 +419,8 @@
       <p>&copy; 2026 Verachi. All rights reserved.</p>
     </div>
   </footer>
+
+
 </body>
+
 </html>

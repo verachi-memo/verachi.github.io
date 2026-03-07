@@ -2,6 +2,8 @@
 
 This repository serves the Verachi GitHub Pages landing site.
 
+Main app lives in ../mooomooo
+
 ## Pushing Changes
 
 When you make changes to this repository and need to push them, you must use the dedicated SSH key for the `verachi` identity to authenticate with GitHub.
