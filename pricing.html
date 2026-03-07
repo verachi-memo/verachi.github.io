@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verachi — Pricing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="./styles.css" rel="stylesheet" />
+  <style>
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 4rem;
+      align-items: stretch;
+    }
+    @media (max-width: 900px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .pricing-card {
+      background: rgba(24, 24, 27, 0.4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .pricing-card:hover {
+      background: rgba(24, 24, 27, 0.8);
+      border-color: var(--border-hover);
+    }
+    .pricing-card.enterprise {
+      background: rgba(24, 24, 27, 0.55);
+      border-color: var(--primary);
+    }
+    .pricing-top {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .pricing-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .pricing-label {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--fg-muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .pricing-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(139, 92, 246, 0.16);
+      color: var(--fg);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .pricing-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .pricing-price {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--fg);
+      margin-bottom: 0.5rem;
+    }
+    .pricing-price span {
+      font-size: 1rem;
+      color: var(--fg-muted);
+      font-weight: 400;
+    }
+    .pricing-desc {
+      color: var(--fg-muted);
+      font-size: 0.95rem;
+    }
+    .feature-list {
+      list-style: none;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.85rem 0.95rem;
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid transparent;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+    .feature-item.disabled {
+      background: transparent;
+      border-color: rgba(255, 255, 255, 0.08);
+      color: #71717a;
+    }
+    .icon-check {
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(139, 92, 246, 0.16);
+      color: #e4d8ff;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .icon-cross {
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
+      color: #71717a;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-effects">
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+  </div>
+
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand"><span class="kanji">知</span> verachi</a>
+      <div class="nav-links">
+        <a href="sales.html" class="nav-link">Sales Deck</a>
+        <a href="story.html" class="nav-link">Product Story</a>
+        <a href="pricing.html" class="nav-link">Pricing</a>
+      </div>
+      <div class="nav-actions">
+        <a href="#login" class="nav-link">Log in</a>
+        <a href="#demo" class="btn btn-primary">Start for free</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" style="padding-bottom: 2rem;">
+      <div class="container">
+        <div class="hero-content" style="max-width: 800px; margin: 0 auto; text-align: center;">
+          <h1 class="reveal-up">
+            Simple, transparent pricing.<br/>
+            <span class="text-gradient">Scale your memory.</span>
+          </h1>
+          <p class="hero-subtitle reveal-up delay-1">
+            Choose the plan that fits your team. Each tier sets a model class, a default workspace AI budget, and how much admin control you get.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad" style="padding-top: 0;">
+      <div class="container">
+        <div class="pricing-grid">
+          
+          <!-- Starter Plan -->
+          <div class="pricing-card reveal-up">
+            <div class="pricing-top">
+              <div class="pricing-meta">
+                <span class="pricing-label">Smart</span>
+              </div>
+              <div>
+                <h3 class="pricing-title">Starter</h3>
+                <p class="pricing-desc">Reliable capture and recall for smaller teams that need cited answers without extra admin complexity.</p>
+              </div>
+              <div class="pricing-price">$0 <span>/ mo</span></div>
+            </div>
+            <ul class="feature-list">
+              <li class="feature-item"><span class="icon-check">✓</span> Smart model tier</li>
+              <li class="feature-item"><span class="icon-check">✓</span> 100k AI tokens per workspace / month</li>
+              <li class="feature-item"><span class="icon-check">✓</span> 5 extraction jobs / hour</li>
+              <li class="feature-item"><span class="icon-check">✓</span> Slack integration</li>
+              <li class="feature-item"><span class="icon-check">✓</span> Jira integration</li>
+              <li class="feature-item disabled"><span class="icon-cross">−</span> GitHub integration</li>
+              <li class="feature-item disabled"><span class="icon-cross">−</span> Unlimited history</li>
+              <li class="feature-item disabled"><span class="icon-cross">−</span> Bring your own AI key</li>
+              <li class="feature-item disabled"><span class="icon-cross">−</span> SSO &amp; SCIM</li>
+            </ul>
+            <a href="#demo" class="btn btn-secondary" style="width: 100%;">Get Started</a>
+          </div>
+
+          <!-- Pro Plan -->
+          <div class="pricing-card reveal-up delay-1">
+            <div class="pricing-top">
+              <div class="pricing-meta">
+                <span class="pricing-label">Smarter</span>
+                <span class="pricing-pill">Most Popular</span>
+              </div>
+              <div>
+                <h3 class="pricing-title">Pro</h3>
+                <p class="pricing-desc">Deeper reasoning, more throughput, and complete engineering context for growing product teams.</p>
+              </div>
+              <div class="pricing-price">$49 <span>/ user / mo</span></div>
+            </div>
+            <ul class="feature-list">
+              <li class="feature-item"><span class="icon-check">✓</span> Smarter model tier</li>
+              <li class="feature-item"><span class="icon-check">✓</span> 1M AI tokens per workspace / month</li>
+              <li class="feature-item"><span class="icon-check">✓</span> 20 extraction jobs / hour</li>
+              <li class="feature-item"><span class="icon-check">✓</span> Slack integration</li>
+              <li class="feature-item"><span class="icon-check">✓</span> Jira integration</li>
+              <li class="feature-item"><span class="icon-check">✓</span> GitHub integration</li>
+              <li class="feature-item"><span class="icon-check">✓</span> Unlimited history</li>
+              <li class="feature-item disabled"><span class="icon-cross">−</span> Bring your own AI key</li>
+              <li class="feature-item disabled"><span class="icon-cross">−</span> SSO &amp; SCIM</li>
+            </ul>
+            <a href="#demo" class="btn btn-primary" style="width: 100%;">Start Free Trial</a>
+          </div>
+
+          <!-- Enterprise Plan -->
+          <div class="pricing-card enterprise reveal-up delay-2">
+            <div class="pricing-top">
+              <div class="pricing-meta">
+                <span class="pricing-label">Frontier</span>
+              </div>
+              <div>
+                <h3 class="pricing-title">Enterprise</h3>
+                <p class="pricing-desc">Advanced controls, custom keys, and frontier access for large workspaces with security requirements.</p>
+              </div>
+              <div class="pricing-price">Custom</div>
+            </div>
+            <ul class="feature-list">
+              <li class="feature-item"><span class="icon-check">✓</span> Frontier model tier</li>
+              <li class="feature-item"><span class="icon-check">✓</span> Unlimited AI budget</li>
+              <li class="feature-item"><span class="icon-check">✓</span> 100 extraction jobs / hour</li>
+              <li class="feature-item"><span class="icon-check">✓</span> Slack integration</li>
+              <li class="feature-item"><span class="icon-check">✓</span> Jira integration</li>
+              <li class="feature-item"><span class="icon-check">✓</span> GitHub integration</li>
+              <li class="feature-item"><span class="icon-check">✓</span> Unlimited history</li>
+              <li class="feature-item"><span class="icon-check">✓</span> Bring your own AI key</li>
+              <li class="feature-item"><span class="icon-check">✓</span> SSO &amp; SCIM</li>
+              <li class="feature-item"><span class="icon-check">✓</span> Dedicated support</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary" style="width: 100%;">Contact Sales</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none; text-align: center;">
+        <p>&copy; 2026 verachi. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>
