@@ -1235,6 +1235,341 @@ main {
   gap: 20px;
 }
 
+/* ---- Triptych: 3 sliced panels ---- */
+
+.triptych-strip {
+  display: flex;
+  gap: 3px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: rgba(143, 217, 255, 0.06);
+  box-shadow:
+    0 0 0 1px var(--line-0),
+    0 32px 80px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.triptych-panel {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 28px;
+  background: linear-gradient(180deg, rgba(8, 14, 26, 0.92), rgba(5, 10, 20, 0.98));
+  overflow: hidden;
+  transition:
+    transform var(--dur) var(--ease-standard),
+    background-color var(--dur) var(--ease-standard),
+    box-shadow var(--dur) var(--ease-standard);
+}
+
+.triptych-panel:hover {
+  background: linear-gradient(180deg, rgba(12, 20, 36, 0.96), rgba(8, 14, 28, 0.99));
+  box-shadow: inset 0 0 60px rgba(143, 217, 255, 0.04);
+  z-index: 1;
+}
+
+/* Shared top accent line across all panels */
+.triptych-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(143, 217, 255, 0.3), transparent);
+}
+
+/* Badge overlay */
+.triptych-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: rgba(143, 217, 255, 0.1);
+  border: 1px solid rgba(143, 217, 255, 0.16);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  backdrop-filter: blur(8px);
+}
+
+/* Scene area for SVG illustration */
+.triptych-scene {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 12px 8px;
+  min-height: 260px;
+}
+
+.triptych-svg {
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  font-family: var(--font-sans);
+}
+
+/* Label area below scene */
+.triptych-label {
+  padding: 0 24px;
+}
+
+.triptych-label h3 {
+  margin-bottom: 6px;
+  color: var(--ink-0);
+  font-size: 1.14rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.triptych-label p {
+  color: var(--ink-2);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+/* ---- Panel 1: Connection lines ---- */
+
+.tp-line {
+  stroke: rgba(143, 217, 255, 0.22);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 4;
+  stroke-linecap: round;
+  animation: dashFlow 2.4s linear infinite;
+}
+
+.tpl-2 {
+  animation-delay: 0.3s;
+}
+
+.tpl-3 {
+  animation-delay: 0.6s;
+}
+
+.tpl-4 {
+  animation-delay: 0.9s;
+}
+
+.tp-node {
+  opacity: 0;
+  animation: nodeAppear 600ms var(--ease-standard) both;
+}
+
+.tp-n1 {
+  animation-delay: 200ms;
+}
+
+.tp-n2 {
+  animation-delay: 400ms;
+}
+
+.tp-n3 {
+  animation-delay: 600ms;
+}
+
+.tp-n4 {
+  animation-delay: 800ms;
+}
+
+.tp-glow {
+  animation: glowPulse 3s var(--ease-gentle) 600ms infinite alternate;
+}
+
+.tp-center-icon {
+  opacity: 0;
+  animation: nodeAppear 500ms var(--ease-standard) 700ms both;
+}
+
+/* ---- Panel 2: Pipeline + particles ---- */
+
+.tp-pipe {
+  fill: rgba(143, 217, 255, 0.04);
+  stroke: rgba(143, 217, 255, 0.1);
+  stroke-width: 1;
+}
+
+.tp-particle {
+  animation: particleFlow 3s linear infinite;
+}
+
+.tp-p1 {
+  animation-delay: 0s;
+}
+
+.tp-p2 {
+  animation-delay: 0.6s;
+}
+
+.tp-p3 {
+  animation-delay: 1.2s;
+}
+
+.tp-p4 {
+  animation-delay: 1.8s;
+}
+
+.tp-p5 {
+  animation-delay: 2.4s;
+}
+
+.tp-stage {
+  opacity: 0;
+  animation: nodeAppear 500ms var(--ease-standard) both;
+}
+
+.tp-s1 {
+  animation-delay: 300ms;
+}
+
+.tp-s2 {
+  animation-delay: 500ms;
+}
+
+.tp-s3 {
+  animation-delay: 700ms;
+}
+
+.tp-s4 {
+  animation-delay: 900ms;
+}
+
+.tp-s5 {
+  animation-delay: 1100ms;
+}
+
+/* ---- Panel 3: Mind map web ---- */
+
+.tp-web {
+  stroke: rgba(171, 194, 229, 0.12);
+  stroke-width: 1;
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: edgeDraw 1s var(--ease-standard) both;
+}
+
+.tw-1 {
+  animation-delay: 200ms;
+}
+
+.tw-2 {
+  animation-delay: 300ms;
+}
+
+.tw-3 {
+  animation-delay: 400ms;
+}
+
+.tw-4 {
+  animation-delay: 500ms;
+}
+
+.tw-5 {
+  animation-delay: 600ms;
+}
+
+.tw-6 {
+  animation-delay: 700ms;
+}
+
+.tw-7 {
+  animation-delay: 350ms;
+}
+
+.tw-8 {
+  animation-delay: 550ms;
+}
+
+.tw-9 {
+  animation-delay: 750ms;
+}
+
+.tw-10 {
+  animation-delay: 450ms;
+}
+
+.tp-mind {
+  opacity: 0;
+  animation: nodeAppear 500ms var(--ease-standard) both;
+}
+
+.tp-m1 {
+  animation-delay: 100ms;
+}
+
+.tp-m2 {
+  animation-delay: 400ms;
+}
+
+.tp-m3 {
+  animation-delay: 600ms;
+}
+
+.tp-m4 {
+  animation-delay: 800ms;
+}
+
+.tp-m5 {
+  animation-delay: 1000ms;
+}
+
+/* ---- Particle animation ---- */
+
+@keyframes particleFlow {
+  0% {
+    transform: translateX(-60px);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.8;
+  }
+
+  90% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateX(60px);
+    opacity: 0;
+  }
+}
+
+/* ---- Reduced motion ---- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .tp-line,
+  .tp-particle,
+  .tp-glow,
+  .tp-web {
+    animation: none;
+  }
+
+  .tp-node,
+  .tp-center-icon,
+  .tp-stage,
+  .tp-mind {
+    opacity: 1;
+    animation: none;
+  }
+
+  .tp-web {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+
 .workflow-card {
   position: relative;
   display: flex;
@@ -2051,12 +2386,36 @@ main {
     grid-column: span 2;
   }
 
+  .triptych-scene {
+    min-height: 220px;
+  }
+
   .footer-grid {
     gap: 28px;
   }
 }
 
 @media (max-width: 720px) {
+
+  .triptych-strip {
+    flex-direction: column;
+    gap: 2px;
+    border-radius: var(--radius-md);
+  }
+
+  .triptych-panel {
+    padding-bottom: 24px;
+  }
+
+  .triptych-scene {
+    min-height: 200px;
+    padding: 16px 8px 4px;
+  }
+
+  .triptych-svg {
+    max-height: 220px;
+  }
+
   .container {
     width: min(var(--max-w), calc(100% - 32px));
   }
