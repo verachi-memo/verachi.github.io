@@ -1647,10 +1647,6 @@ main {
 }
 
 @media (max-width: 1180px) {
-  .hero-proof {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .feature-layout,
   .testimonial-layout {
     grid-template-columns: repeat(2, minmax(0, 1fr));
