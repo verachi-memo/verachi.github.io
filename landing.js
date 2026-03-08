@@ -90,6 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const revealTargets = document.querySelectorAll('[data-reveal], [data-observe]');
   if (reducedMotionQuery.matches) {
     revealTargets.forEach((element) => element.classList.add('is-visible'));
+  } else if (!('IntersectionObserver' in window)) {
+    revealTargets.forEach((element) => element.classList.add('is-visible'));
   } else {
     window.requestAnimationFrame(() => {
       document.querySelectorAll('[data-reveal]').forEach((element) => {
