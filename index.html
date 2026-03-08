@@ -60,9 +60,9 @@
       </button>
 
       <nav class="site-nav" id="primaryNav" aria-label="Primary">
+        <a href="#proof">See A Record</a>
         <a href="#how-it-works">How It Works</a>
-        <a href="#why">Why Verachi</a>
-        <a href="#plans">Pricing</a>
+        <a href="trust.html">Trust</a>
       </nav>
 
       <div class="header-actions">
@@ -85,16 +85,15 @@
 
       <div class="container hero-layout">
         <div class="hero-content">
-          <p class="hero-eyebrow" data-reveal="fade-up">Decision Memory for Delivery Teams</p>
+          <p class="hero-eyebrow" data-reveal="fade-up">For delivery leads and engineering teams</p>
 
           <h1 id="hero-title" class="display-title" data-reveal="fade-up" style="--delay: 1">
-            Your team decides things every day. <span class="title-emphasis">Verachi remembers them.</span>
+            Cited decision memory <span class="title-emphasis">for teams that need the why to stay attached.</span>
           </h1>
 
           <p class="hero-intro" data-reveal="fade-up" style="--delay: 2">
-            Decisions live in Slack threads, Jira tickets, PR comments, and supporting documents. Verachi turns those
-            moments into a durable memory layer with citations, confidence, and context built in, so nobody has to ask
-            “why did we do this?” twice.
+            Verachi sits on top of Slack, Jira, GitHub, and uploaded documents to turn scattered conversations into
+            durable decision records with citations, confidence, and audit history. Primary systems stay primary.
           </p>
 
           <div class="hero-actions" data-reveal="fade-up" style="--delay: 3">
@@ -106,20 +105,25 @@
                 <polyline points="12 5 19 12 12 19" />
               </svg>
             </a>
+            <a class="button button-outline" href="#proof">See a cited record</a>
           </div>
 
-          <div class="hero-proof" data-reveal="fade-up" style="--delay: 4">
+          <p class="hero-note" data-reveal="fade-up" style="--delay: 4">
+            Review the public <a href="trust.html">trust and data boundaries page</a> before you log in.
+          </p>
+
+          <div class="hero-proof" data-reveal="fade-up" style="--delay: 5">
             <div class="hero-proof-card">
-              <span>5 min</span>
-              Setup for Slack, Jira, &amp; GitHub
+              <span>Read-first</span>
+              Slack, Jira, GitHub, and uploaded documents stay linked to the answer
             </div>
             <div class="hero-proof-card">
               <span>Cited</span>
-              Answers with source and confidence
+              Every answer points back to source evidence with confidence
             </div>
             <div class="hero-proof-card">
-              <span>MCP</span>
-              Ready in Cursor, Copilot, &amp; your API
+              <span>Auditable</span>
+              Capture, review, and trust posture stay visible in-product and in public docs
             </div>
           </div>
         </div>
@@ -312,6 +316,84 @@
                 <span class="dot-label">Query</span>
               </button>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== PROOF ========== -->
+    <section class="section" id="proof">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-kicker" data-observe="fade-up">Proof, Not Promise</p>
+          <h2 class="section-title" data-observe="fade-up" style="--delay: 1">A trusted record shows the answer, the
+            source, and the boundary.</h2>
+          <p class="section-subtitle" data-observe="fade-up" style="--delay: 2">This is the standard Verachi is aiming
+            for in every decision surface: source-backed summary, visible confidence, and a clear path back to the
+            primary system.</p>
+        </div>
+
+        <div class="proof-grid">
+          <article class="proof-record" data-observe="slide-up">
+            <div class="proof-record-top">
+              <span class="proof-chip">DEC-044</span>
+              <span class="proof-chip proof-chip-muted">Captured from Slack</span>
+              <span class="proof-chip proof-chip-accent">94% confidence</span>
+            </div>
+            <h3>Use PostgreSQL with JSONB for the multi-tenant event service.</h3>
+            <p class="proof-summary">
+              Chosen after comparing MySQL and PostgreSQL during the payments rewrite. JSONB and row-level security fit
+              the tenant model better, and the team accepted the migration cost for query flexibility and long-term
+              auditability.
+            </p>
+
+            <div class="proof-columns">
+              <div class="proof-block">
+                <h4>Why this answer is trustworthy</h4>
+                <ul class="proof-list">
+                  <li>The summary is grounded in linked source artifacts.</li>
+                  <li>Confidence reflects how much direct evidence supports the record.</li>
+                  <li>The capture path and update history are part of the audit trail.</li>
+                </ul>
+              </div>
+              <div class="proof-block">
+                <h4>Linked evidence</h4>
+                <ul class="proof-links">
+                  <li>Slack: <span>#architecture-decisions</span> with the original discussion thread</li>
+                  <li>Jira: <span>PAY-218</span> for the database selection work item</li>
+                  <li>GitHub: <span>PR #402</span> for the migration spike and implementation notes</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="proof-footer">
+              <span>Audit trail: captured from Slack reaction, reviewed in Verachi, still linked to the primary sources.</span>
+              <a href="trust.html">Review trust details</a>
+            </div>
+          </article>
+
+          <div class="proof-aside">
+            <article class="proof-note" data-observe="slide-up" style="--delay: 1">
+              <span class="proof-note-eyebrow">What Verachi reads</span>
+              <h3>Decision context from the systems your team already uses.</h3>
+              <p>Launch posture focuses on Slack, Jira, GitHub, and uploaded documents. The goal is evidence capture,
+                not replacing the systems where work already lives.</p>
+            </article>
+
+            <article class="proof-note" data-observe="slide-up" style="--delay: 2">
+              <span class="proof-note-eyebrow">What Verachi stores</span>
+              <h3>Cited summaries, relationship edges, metadata, and audit history.</h3>
+              <p>Primary sources remain primary. Verachi stores the memory layer that makes those sources reusable and
+                explainable across the workspace.</p>
+            </article>
+
+            <article class="proof-note" data-observe="slide-up" style="--delay: 3">
+              <span class="proof-note-eyebrow">What prospects can verify now</span>
+              <h3>A public trust path exists before login.</h3>
+              <p>Review data boundaries, citations, confidence posture, privacy, and terms directly from the public
+                site instead of hitting an auth wall.</p>
+            </article>
           </div>
         </div>
       </div>
@@ -654,80 +736,64 @@
     </section>
 
 
-    <!-- ========== PRICING ========== -->
+    <!-- ========== LAUNCH PATHS ========== -->
     <section class="section" id="plans">
       <div class="container">
         <div class="section-head">
-          <p class="section-kicker" data-observe="fade-up">Pricing</p>
-          <h2 class="section-title" data-observe="fade-up" style="--delay: 1">Pricing that grows with your workspace.
-          </h2>
-          <p class="section-subtitle" data-observe="fade-up" style="--delay: 2">AI is metered at the workspace level.
-            Start free, then scale when decision memory becomes a core advantage.</p>
+          <p class="section-kicker" data-observe="fade-up">Launch Paths</p>
+          <h2 class="section-title" data-observe="fade-up" style="--delay: 1">Evaluate first. Roll out once trust is
+            earned.</h2>
+          <p class="section-subtitle" data-observe="fade-up" style="--delay: 2">The current launch posture is
+            read-first and wedge-first: prove the decision memory layer, then expand the rollout around the teams who
+            rely on it daily.</p>
         </div>
 
-        <div class="plans-grid">
-          <!-- Starter -->
-          <article class="plan-card" data-observe="slide-up">
-            <div class="plan-card-head">
-              <h3 class="plan-name">Starter</h3>
-              <div class="plan-price">
-                <span class="amount">$0</span>
-                <span class="period">/ mo</span>
-              </div>
-              <p class="plan-desc">For small teams getting started with decision capture.</p>
-            </div>
-            <ul class="plan-features" aria-label="Starter features">
-              <li>100k AI tokens / month</li>
-              <li>5 extraction jobs / hour</li>
-              <li>Slack + Jira integrations</li>
-              <li class="is-excluded">GitHub integration</li>
-              <li class="is-excluded">Unlimited history</li>
-              <li class="is-excluded">SSO / SCIM</li>
+        <div class="launch-grid">
+          <article class="launch-card" data-observe="slide-up">
+            <span class="launch-card-eyebrow">Self-serve</span>
+            <h3>Start with one workspace.</h3>
+            <p>Best for teams that want to connect the wedge quickly and evaluate cited decision records in the live
+              product.</p>
+            <ul class="launch-list" aria-label="Self-serve launch path">
+              <li>Connect Slack, Jira, GitHub, and uploaded documents</li>
+              <li>Use the app first, then extend into API or MCP workflows</li>
+              <li>Keep primary systems primary while Verachi builds the memory layer</li>
             </ul>
-            <a class="button button-outline" href="https://app.verachi.io/signup">Start Free</a>
+            <a class="button button-outline" href="https://app.verachi.io/signup">Create a workspace</a>
           </article>
 
-          <!-- Pro -->
-          <article class="plan-card plan-featured" data-observe="slide-up" style="--delay: 1">
-            <div class="plan-badge">Most Popular</div>
-            <div class="plan-card-head">
-              <h3 class="plan-name">Pro</h3>
-              <div class="plan-price">
-                <span class="amount">$49</span>
-                <span class="period">/ user / mo</span>
-              </div>
-              <p class="plan-desc">Full context for growing engineering teams.</p>
-            </div>
-            <ul class="plan-features" aria-label="Pro features">
-              <li>1M AI tokens / month</li>
-              <li>20 extraction jobs / hour</li>
-              <li>Slack + Jira + GitHub</li>
-              <li>Unlimited history</li>
-              <li class="is-excluded">Bring your own AI key</li>
-              <li class="is-excluded">SSO / SCIM</li>
+          <article class="launch-card launch-card-featured" data-observe="slide-up" style="--delay: 1">
+            <span class="launch-card-eyebrow">Guided pilot</span>
+            <h3>Prove the wedge with delivery leadership and engineering together.</h3>
+            <p>Best for teams that need activation help, rollout shape, and a concrete trust review before expanding
+              usage.</p>
+            <ul class="launch-list" aria-label="Guided pilot launch path">
+              <li>Align on one buyer story: fewer repeated decisions and less context archaeology</li>
+              <li>Define the first capture path and first visible decision value</li>
+              <li>Review sources, boundaries, and operator expectations up front</li>
             </ul>
-            <a class="button button-solid" href="https://app.verachi.io/signup">Start Free Trial</a>
+            <a class="button button-solid" href="sales.html">Talk to sales</a>
           </article>
 
-          <!-- Enterprise -->
-          <article class="plan-card" data-observe="slide-up" style="--delay: 2">
-            <div class="plan-card-head">
-              <h3 class="plan-name">Enterprise</h3>
-              <div class="plan-price">
-                <span class="amount">Custom</span>
-              </div>
-              <p class="plan-desc">Advanced controls, custom keys, frontier models.</p>
-            </div>
-            <ul class="plan-features" aria-label="Enterprise features">
-              <li>Unlimited AI budget</li>
-              <li>100 extraction jobs / hour</li>
-              <li>All integrations</li>
-              <li>Unlimited history</li>
-              <li>Bring your own AI key</li>
-              <li>SSO / SCIM</li>
+          <article class="launch-card" data-observe="slide-up" style="--delay: 2">
+            <span class="launch-card-eyebrow">Trust review</span>
+            <h3>Do due diligence without logging in.</h3>
+            <p>Use the public trust path to verify what Verachi reads, what it stores, and how evidence remains
+              traceable before procurement or security review begins.</p>
+            <ul class="launch-list" aria-label="Trust review launch path">
+              <li>Read the public data-boundaries and trust page</li>
+              <li>Review privacy and terms alongside the product story</li>
+              <li>Use the same trust language your future users will see in-product</li>
             </ul>
-            <a class="button button-outline" href="sales.html">Talk to Sales</a>
+            <a class="button button-outline" href="trust.html">Review trust</a>
           </article>
+        </div>
+
+        <div class="evaluation-links" data-observe="fade-up" style="--delay: 3">
+          <a class="evaluation-link" href="trust.html">Trust &amp; data boundaries</a>
+          <a class="evaluation-link" href="sales.html">Product story &amp; demo path</a>
+          <a class="evaluation-link" href="privacy.html">Privacy</a>
+          <a class="evaluation-link" href="terms.html">Terms</a>
         </div>
       </div>
     </section>
@@ -912,15 +978,17 @@
       </div>
       <div class="footer-col">
         <h4>Product</h4>
+        <a href="#proof">See A Record</a>
         <a href="#how-it-works">How It Works</a>
         <a href="#why">Why Verachi</a>
-        <a href="#plans">Pricing</a>
+        <a href="trust.html">Trust &amp; Data Boundaries</a>
         <a href="testimonials.html">Customer Stories</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
         <a href="https://app.verachi.io/login">Sign In</a>
         <a href="sales.html">Contact Sales</a>
+        <a href="trust.html">Trust</a>
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
       </div>
