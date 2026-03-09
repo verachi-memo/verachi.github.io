@@ -9,18 +9,18 @@
   --bg-2: #0c1628;
   --bg-3: #101d31;
 
-  --surface-0: rgba(9, 16, 28, 0.76);
-  --surface-1: rgba(11, 20, 35, 0.9);
-  --surface-2: rgba(16, 29, 49, 0.98);
+  --surface-0: rgba(9, 16, 28, 0.84);
+  --surface-1: rgba(11, 20, 35, 0.94);
+  --surface-2: rgba(16, 29, 49, 0.99);
 
   --ink-0: #f5f7fb;
-  --ink-1: #c9d3e4;
-  --ink-2: #aab7cb;
-  --ink-3: #75839c;
+  --ink-1: #d5deec;
+  --ink-2: #bcc8d9;
+  --ink-3: #8d9bb3;
 
-  --line-0: rgba(171, 194, 229, 0.14);
-  --line-1: rgba(171, 194, 229, 0.22);
-  --line-2: rgba(171, 194, 229, 0.3);
+  --line-0: rgba(171, 194, 229, 0.2);
+  --line-1: rgba(171, 194, 229, 0.3);
+  --line-2: rgba(171, 194, 229, 0.42);
 
   --accent: #8fd9ff;
   --accent-strong: #55c4ff;
@@ -605,10 +605,10 @@ main {
 .hero-proof-card {
   padding: 16px 18px;
   border-radius: 22px;
-  background: linear-gradient(180deg, rgba(12, 21, 36, 0.76), rgba(9, 16, 29, 0.94));
-  border: 1px solid var(--line-0);
+  background: linear-gradient(180deg, rgba(14, 24, 40, 0.9), rgba(10, 18, 31, 0.98));
+  border: 1px solid var(--line-1);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  color: var(--ink-2);
+  color: var(--ink-1);
   font-size: 0.84rem;
   line-height: 1.55;
 }
@@ -1105,8 +1105,8 @@ main {
   padding: 10px 18px;
   border: none;
   border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--ink-3);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--ink-2);
   cursor: pointer;
   transition:
     background-color var(--dur) var(--ease-standard),
@@ -1137,8 +1137,8 @@ main {
 }
 
 .carousel-dot:hover:not(.is-active) {
-  background: rgba(255, 255, 255, 0.07);
-  color: var(--ink-1);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--ink-0);
 }
 
 .dot-label {
@@ -1258,8 +1258,8 @@ main {
 .trust-card,
 .trust-callout {
   border-radius: 28px;
-  background: linear-gradient(180deg, rgba(12, 22, 38, 0.82), rgba(9, 16, 29, 0.96));
-  border: 1px solid var(--line-0);
+  background: linear-gradient(180deg, rgba(13, 24, 42, 0.92), rgba(9, 17, 31, 0.99));
+  border: 1px solid var(--line-1);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
   transition:
     transform var(--dur) var(--ease-standard),
@@ -1353,8 +1353,8 @@ main {
 .proof-block {
   padding: 20px 22px;
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--line-0);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line-1);
 }
 
 .proof-block h4 {
@@ -1503,8 +1503,8 @@ main {
   min-height: 44px;
   padding: 0 16px;
   border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--line-0);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line-1);
   color: var(--ink-1);
   font-size: 0.84rem;
   font-weight: 700;
@@ -1536,7 +1536,7 @@ main {
   flex-wrap: wrap;
   gap: 12px 22px;
   margin-top: 22px;
-  color: var(--ink-2);
+  color: var(--ink-1);
   font-size: 0.84rem;
 }
 
@@ -1602,9 +1602,9 @@ main {
   gap: 3px;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: rgba(143, 217, 255, 0.06);
+  background: rgba(143, 217, 255, 0.08);
   box-shadow:
-    0 0 0 1px var(--line-0),
+    0 0 0 1px var(--line-1),
     0 32px 80px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
@@ -1615,7 +1615,7 @@ main {
   display: flex;
   flex-direction: column;
   padding: 0 0 28px;
-  background: linear-gradient(180deg, rgba(8, 14, 26, 0.92), rgba(5, 10, 20, 0.98));
+  background: linear-gradient(180deg, rgba(10, 17, 31, 0.96), rgba(7, 13, 24, 0.99));
   overflow: hidden;
   transition:
     transform var(--dur) var(--ease-standard),
@@ -1624,7 +1624,7 @@ main {
 }
 
 .triptych-panel:hover {
-  background: linear-gradient(180deg, rgba(12, 20, 36, 0.96), rgba(8, 14, 28, 0.99));
+  background: linear-gradient(180deg, rgba(15, 24, 42, 0.98), rgba(9, 16, 29, 1));
   box-shadow: inset 0 0 60px rgba(143, 217, 255, 0.04);
   z-index: 1;
 }
@@ -1692,7 +1692,7 @@ main {
 }
 
 .triptych-label p {
-  color: var(--ink-2);
+  color: var(--ink-1);
   font-size: 0.88rem;
   line-height: 1.6;
   text-wrap: pretty;
@@ -1937,8 +1937,8 @@ main {
   gap: 18px;
   padding: 32px;
   border-radius: 28px;
-  background: linear-gradient(180deg, rgba(11, 20, 35, 0.78), rgba(9, 16, 28, 0.94));
-  border: 1px solid var(--line-0);
+  background: linear-gradient(180deg, rgba(12, 22, 38, 0.88), rgba(9, 16, 28, 0.98));
+  border: 1px solid var(--line-1);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
   transition:
     transform var(--dur) var(--ease-standard),
@@ -2000,8 +2000,8 @@ main {
   max-width: 100%;
   padding: 18px;
   border-radius: 22px;
-  background: rgba(12, 21, 35, 0.82);
-  border: 1px solid var(--line-0);
+  background: rgba(12, 21, 35, 0.9);
+  border: 1px solid var(--line-1);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
