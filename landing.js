@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const setMenuState = (open) => {
-    if (!header || !menuToggle) {
+    if (!header || !menuToggle || !nav) {
       return;
     }
 
@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     header.dataset.menuOpen = String(nextState);
     menuToggle.setAttribute('aria-expanded', String(nextState));
+    nav.hidden = mobileNavQuery.matches ? !nextState : false;
     document.body.dataset.menuOpen = String(nextState);
   };
 
