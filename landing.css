@@ -15,8 +15,8 @@
 
   --ink-0: #f5f7fb;
   --ink-1: #d5deec;
-  --ink-2: #bcc8d9;
-  --ink-3: #8d9bb3;
+  --ink-2: #cdd7e5;
+  --ink-3: #a3b1c8;
 
   --line-0: rgba(171, 194, 229, 0.2);
   --line-1: rgba(171, 194, 229, 0.3);
@@ -1348,6 +1348,45 @@ main {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
   margin-top: 24px;
+}
+
+.proof-relationship-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.proof-relation-card {
+  padding: 18px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line-0);
+}
+
+.proof-relation-card span {
+  display: inline-flex;
+  margin-bottom: 10px;
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.proof-relation-card strong {
+  display: block;
+  color: var(--ink-0);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.proof-relation-card p {
+  margin-top: 10px;
+  color: var(--ink-2);
+  font-size: 0.84rem;
+  line-height: 1.7;
 }
 
 .proof-block {
@@ -2744,6 +2783,10 @@ main {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .proof-relationship-strip {
+    grid-template-columns: 1fr;
+  }
+
   .workflow-card:first-child,
   .plan-featured {
     grid-column: span 2;
@@ -2857,6 +2900,8 @@ main {
   .footer-grid,
   .proof-grid,
   .launch-grid,
+  .proof-columns,
+  .proof-relationship-strip,
   .trust-grid {
     grid-template-columns: 1fr;
   }
@@ -2990,6 +3035,32 @@ main {
   }
 }
 
+/* Mobile form row stacking (override inline styles) */
+@media (max-width: 720px) {
+  .form-row {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  .contact-form-wrapper {
+    padding: 1.5rem;
+  }
+
+  .roi-controls {
+    padding: 1.5rem;
+  }
+
+  .roi-slider::-webkit-slider-thumb {
+    width: 44px;
+    height: 44px;
+  }
+
+  .roi-slider::-moz-range-thumb {
+    width: 44px;
+    height: 44px;
+  }
+}
+
 /* ============================================================
    ROI Calculator
    ============================================================ */
@@ -3096,8 +3167,8 @@ main {
 .roi-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: var(--accent);
   cursor: pointer;
@@ -3110,8 +3181,8 @@ main {
 }
 
 .roi-slider::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: var(--accent);
   cursor: pointer;

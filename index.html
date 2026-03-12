@@ -94,37 +94,39 @@
 
           <p class="hero-intro" data-reveal="fade-up" style="--delay: 2">
             Verachi sits on top of Slack, Jira, GitHub, and uploaded documents to turn scattered conversations into
-            durable decision records with citations, confidence, and audit history. Primary systems stay primary.
+            durable decision records with citations, confidence, audit history, and visible lineage. See what changed,
+            what a decision superseded, and which projects now depend on it. Primary systems stay primary.
           </p>
 
           <div class="hero-actions" data-reveal="fade-up" style="--delay: 3">
-            <a class="button button-primary-hero" href="https://app.verachi.io/signup">
-              Start free
+            <a class="button button-primary-hero" href="#proof">
+              See a cited record
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
               </svg>
             </a>
-            <a class="button button-outline" href="#proof">See a cited record</a>
+            <a class="button button-outline" href="trust.html">Review trust</a>
           </div>
 
           <p class="hero-note" data-reveal="fade-up" style="--delay: 4">
-            Review the public <a href="trust.html">trust and data boundaries page</a> before you log in.
+            Ready to test the live product? <a href="https://app.verachi.io/signup">Create a workspace</a> when you
+            want to evaluate the wedge hands-on.
           </p>
 
           <div class="hero-proof" data-reveal="fade-up" style="--delay: 5">
             <div class="hero-proof-card">
-              <span>Read-first</span>
-              Slack, Jira, GitHub, and uploaded documents stay linked to the answer
+              <span>Linked lineage</span>
+              See which older decision was superseded, what supporting context still matters, and where the source came from
             </div>
             <div class="hero-proof-card">
-              <span>Cited</span>
-              Every answer points back to source evidence with confidence
+              <span>Downstream impact</span>
+              Keep dependent projects, pull requests, and operational follow-through attached to the same decision
             </div>
             <div class="hero-proof-card">
-              <span>Auditable</span>
-              Capture, review, and trust posture stay visible in-product and in public docs
+              <span>Trust-first</span>
+              Citations, confidence, and audit posture stay visible before login and inside the product
             </div>
           </div>
         </div>
@@ -254,7 +256,7 @@
                         font-weight="600">Pipeline</text>
                     </g>
                   </svg>
-                  <div class="slide-label">Builds a knowledge graph of decisions</div>
+                  <div class="slide-label">Keeps lineage and downstream work attached</div>
                 </div>
               </div>
 
@@ -297,7 +299,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="slide-label">Query decisions from anywhere</div>
+                  <div class="slide-label">Explains what changed and why</div>
                 </div>
               </div>
 
@@ -328,26 +330,44 @@
       <div class="container">
         <div class="section-head">
           <p class="section-kicker" data-observe="fade-up">Proof, Not Promise</p>
-          <h2 class="section-title" data-observe="fade-up" style="--delay: 1">A trusted record shows the answer, the
-            source, and the boundary.</h2>
-          <p class="section-subtitle" data-observe="fade-up" style="--delay: 2">This is the standard Verachi is aiming
-            for in every decision surface: source-backed summary, visible confidence, and a clear path back to the
-            primary system.</p>
+          <h2 class="section-title" data-observe="fade-up" style="--delay: 1">A trusted record should show what changed
+            and who it affects.</h2>
+          <p class="section-subtitle" data-observe="fade-up" style="--delay: 2">The record is not just the answer. It
+            shows what was replaced, what active work now depends on it, and where the supporting evidence lives.</p>
         </div>
 
         <div class="proof-grid">
           <article class="proof-record" data-observe="slide-up">
             <div class="proof-record-top">
               <span class="proof-chip">DEC-044</span>
-              <span class="proof-chip proof-chip-muted">Captured from Slack</span>
+              <span class="proof-chip proof-chip-muted">Supersedes DEC-031</span>
+              <span class="proof-chip proof-chip-muted">3 downstream projects</span>
               <span class="proof-chip proof-chip-accent">94% confidence</span>
             </div>
-            <h3>Use PostgreSQL with JSONB for the multi-tenant event service.</h3>
+            <h3>Adopt PostgreSQL with JSONB for the multi-tenant event service.</h3>
             <p class="proof-summary">
-              Chosen after comparing MySQL and PostgreSQL during the payments rewrite. JSONB and row-level security fit
-              the tenant model better, and the team accepted the migration cost for query flexibility and long-term
-              auditability.
+              Chosen after comparing MySQL and PostgreSQL during the payments rewrite. This record replaces the earlier
+              MySQL shard plan after the migration spike showed that JSONB and row-level security fit the tenant model
+              better without losing auditability.
             </p>
+
+            <div class="proof-relationship-strip" aria-label="Decision lineage and downstream impact">
+              <article class="proof-relation-card">
+                <span>Supersedes</span>
+                <strong>DEC-031 — MySQL shard plan</strong>
+                <p>Replaced once the spike proved that the newer tenant model needed JSONB flexibility and stronger audit controls.</p>
+              </article>
+              <article class="proof-relation-card">
+                <span>Depends on</span>
+                <strong>Platform auth unification</strong>
+                <p>The schema and access model assume the shared auth/session work lands first across the services in scope.</p>
+              </article>
+              <article class="proof-relation-card">
+                <span>Downstream work</span>
+                <strong>Checkout rewrite, tenant reporting, event replay</strong>
+                <p>Three active projects inherit this choice, so the affected delivery work stays visible from the same record.</p>
+              </article>
+            </div>
 
             <div class="proof-columns">
               <div class="proof-block">
@@ -355,7 +375,7 @@
                 <ul class="proof-list">
                   <li>The summary is grounded in linked source artifacts.</li>
                   <li>Confidence reflects how much direct evidence supports the record.</li>
-                  <li>The capture path and update history are part of the audit trail.</li>
+                  <li>The superseded path, dependency context, and update history are part of the audit trail.</li>
                 </ul>
               </div>
               <div class="proof-block">
@@ -369,7 +389,7 @@
             </div>
 
             <div class="proof-footer">
-              <span>Audit trail: captured from Slack reaction, reviewed in Verachi, still linked to the primary sources.</span>
+              <span>Audit trail: captured from Slack reaction, reviewed in Verachi, linked to DEC-031, and still tied to the primary sources and downstream delivery work.</span>
               <a href="trust.html">Review trust details</a>
             </div>
           </article>
@@ -406,9 +426,9 @@
       <div class="container workflow-container">
         <div class="section-head section-head-centered">
           <p class="section-kicker" data-observe="fade-up">How Verachi Works</p>
-          <h2 class="section-title" data-observe="fade-up" style="--delay: 1">Three steps. One connected picture.</h2>
-          <p class="section-subtitle" data-observe="fade-up" style="--delay: 2">Connect your tools, let Verachi
-            process the data, then explore every connection in your mind map.</p>
+          <h2 class="section-title" data-observe="fade-up" style="--delay: 1">Capture once. Keep the downstream picture.</h2>
+          <p class="section-subtitle" data-observe="fade-up" style="--delay: 2">Start from the tools your team already
+            uses, keep the lineage attached, and see which active work depends on the decision.</p>
         </div>
 
         <div class="triptych-strip" data-observe="fade-up" style="--delay: 3">
@@ -472,8 +492,8 @@
               </svg>
             </div>
             <div class="triptych-label">
-              <h3>Connect your tools</h3>
-              <p>Slack, Jira, GitHub, and uploaded documents — plug in and go.</p>
+              <h3>Capture where work already happens</h3>
+              <p>Slack threads, Jira issues, GitHub pull requests, and uploaded documents become cited inputs instead of duplicate forms.</p>
             </div>
           </div>
 
@@ -554,8 +574,8 @@
               </svg>
             </div>
             <div class="triptych-label">
-              <h3>Verachi processes it</h3>
-              <p>Normalizes, classifies, and cites every data point.</p>
+              <h3>Attach citations and lineage</h3>
+              <p>Verachi links source evidence, superseded records, and adjacent work into one durable decision surface.</p>
             </div>
           </div>
 
@@ -618,8 +638,8 @@
               </svg>
             </div>
             <div class="triptych-label">
-              <h3>Explore your mind map</h3>
-              <p>See every connection between ideas, risks, progress, and decisions.</p>
+              <h3>See downstream impact</h3>
+              <p>Open the graph to review dependent projects, conflicting work, and gaps where active delivery still lacks a decision.</p>
             </div>
           </div>
 
