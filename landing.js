@@ -147,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const isActive = tab.dataset.usecaseTab === panelId;
       tab.classList.toggle('is-active', isActive);
       tab.setAttribute('aria-selected', String(isActive));
+      tab.tabIndex = isActive ? 0 : -1;
     });
 
     usecasePanels.forEach((panel) => {

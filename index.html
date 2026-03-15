@@ -417,24 +417,23 @@
 
         <div class="usecase-showcase" data-observe="fade-up" style="--delay: 1">
           <div class="usecase-nav" role="tablist" aria-label="Verachi product workflows">
-            <button class="usecase-tab is-active" type="button" role="tab" aria-selected="true" data-usecase-tab="ide">
+            <button class="usecase-tab is-active" type="button" role="tab" id="usecase-tab-ide" aria-selected="true" aria-controls="usecase-panel-ide" data-usecase-tab="ide">
               <span class="usecase-tab-title">Inside the IDE</span>
               <span class="usecase-tab-copy">Answer architecture questions while code is still open.</span>
             </button>
-            <button class="usecase-tab" type="button" role="tab" aria-selected="false" data-usecase-tab="slack">
+            <button class="usecase-tab" type="button" role="tab" id="usecase-tab-slack" aria-selected="false" aria-controls="usecase-panel-slack" data-usecase-tab="slack">
               <span class="usecase-tab-title">Inside Slack</span>
               <span class="usecase-tab-copy">Deflect repeat questions with cited answers in channel.</span>
             </button>
-            <button class="usecase-tab" type="button" role="tab" aria-selected="false" data-usecase-tab="github">
+            <button class="usecase-tab" type="button" role="tab" id="usecase-tab-github" aria-selected="false" aria-controls="usecase-panel-github" data-usecase-tab="github">
               <span class="usecase-tab-title">Inside PR review</span>
               <span class="usecase-tab-copy">Catch architectural drift before the wrong pattern ships.</span>
             </button>
           </div>
 
           <div class="usecase-stage">
-            <article class="usecase-panel is-active" data-usecase-panel="ide" role="tabpanel">
+            <article class="usecase-panel is-active" id="usecase-panel-ide" data-usecase-panel="ide" role="tabpanel" aria-labelledby="usecase-tab-ide">
               <div class="usecase-panel-copy">
-                <span class="usecase-eyebrow">IDE Copilot</span>
                 <h3 class="usecase-panel-title">Explain the decision behind code without leaving the editor.</h3>
                 <p class="usecase-panel-desc">An engineer can ask why a schema, service boundary, or metadata shape exists and get a direct answer with citations back to the original discussion.</p>
                 <ul class="usecase-panel-list">
@@ -444,41 +443,61 @@
                 </ul>
               </div>
 
-              <div class="usecase-visual usecase-visual-ide" aria-hidden="true">
-                <div class="mock-window">
-                  <div class="mock-topbar">
-                    <span class="mock-dots"><i></i><i></i><i></i></span>
-                    <span class="mock-title">schema.sql + Verachi AI</span>
+                            <div class="usecase-visual usecase-visual-ide" aria-hidden="true">
+                <div class="mock-window app-vscode">
+                  <div class="vscode-topbar">
+                    <div class="vscode-mac-dots"><span class="mock-dots"><i></i><i></i><i></i></span></div>
+                    <div class="vscode-title">schema.sql - verachi - Visual Studio Code</div>
+                    <div class="vscode-spacer"></div>
                   </div>
-                  <div class="ide-layout">
-                    <div class="ide-code">
-                      <span class="code-line"><em>20</em> CREATE TABLE projects (</span>
-                      <span class="code-line"><em>21</em> &nbsp;&nbsp;id UUID PRIMARY KEY,</span>
-                      <span class="code-line"><em>22</em> &nbsp;&nbsp;name VARCHAR(255) NOT NULL,</span>
-                      <span class="code-line"><em>23</em> &nbsp;&nbsp;created_at TIMESTAMP,</span>
-                      <span class="code-line is-highlight"><em>24</em> &nbsp;&nbsp;metadata JSONB,</span>
-                      <span class="code-line"><em>25</em> &nbsp;&nbsp;CONSTRAINT name_unique UNIQUE(name)</span>
-                      <span class="code-line"><em>26</em> );</span>
+                  <div class="vscode-layout">
+                    <div class="vscode-activity-bar">
+                      <div class="vscode-icon active"></div>
+                      <div class="vscode-icon"></div>
+                      <div class="vscode-icon"></div>
                     </div>
-                    <div class="ide-chat">
-                      <div class="mock-chip">Verachi AI Chat</div>
-                      <div class="ide-bubble ide-bubble-user">Why is the metadata column JSONB instead of a structured relation?</div>
-                      <div class="ide-bubble ide-bubble-bot">
-                        Decision #45 chose JSONB to move faster during early modeling. The structured relation was deferred until the access patterns stabilized.
+                    <div class="vscode-sidebar">
+                      <div class="vscode-sidebar-title">EXPLORER</div>
+                      <div class="vscode-file active"><span class="vscode-chevron"></span>schema.sql</div>
+                    </div>
+                    <div class="ide-code vscode-editor">
+                      <div class="vscode-tabs">
+                        <div class="vscode-tab active">schema.sql</div>
                       </div>
-                      <div class="ide-sources">
-                        <span class="source-pill">Slack thread • Jan 15</span>
-                        <span class="source-pill">Jira • ARCH-201</span>
+                      <div class="vscode-editor-content">
+                        <span class="code-line"><em>20</em> <span class="syntax-keyword">CREATE TABLE</span> <span class="syntax-entity">projects</span> (</span>
+                        <span class="code-line"><em>21</em> &nbsp;&nbsp;id <span class="syntax-type">UUID</span> <span class="syntax-keyword">PRIMARY KEY</span>,</span>
+                        <span class="code-line"><em>22</em> &nbsp;&nbsp;name <span class="syntax-type">VARCHAR</span>(255) <span class="syntax-keyword">NOT NULL</span>,</span>
+                        <span class="code-line"><em>23</em> &nbsp;&nbsp;created_at <span class="syntax-type">TIMESTAMP</span>,</span>
+                        <span class="code-line is-highlight"><em>24</em> &nbsp;&nbsp;metadata <span class="syntax-type">JSONB</span>,</span>
+                        <span class="code-line"><em>25</em> &nbsp;&nbsp;<span class="syntax-keyword">CONSTRAINT</span> name_unique <span class="syntax-keyword">UNIQUE</span>(name)</span>
+                        <span class="code-line"><em>26</em> );</span>
                       </div>
                     </div>
+                    <div class="ide-chat vscode-panel">
+                      <div class="vscode-panel-header">Verachi AI Chat</div>
+                      <div class="vscode-panel-content">
+                        <div class="ide-bubble ide-bubble-user">Why is the metadata column JSONB instead of a structured relation?</div>
+                        <div class="ide-bubble ide-bubble-bot">
+                          Decision #45 chose JSONB to move faster during early modeling. The structured relation was deferred until the access patterns stabilized.
+                        </div>
+                        <div class="ide-sources">
+                          <span class="source-pill">Slack thread • Jan 15</span>
+                          <span class="source-pill">Jira • ARCH-201</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="vscode-statusbar">
+                    <div class="vscode-status-item">main*</div>
+                    <div class="vscode-status-item">schema.sql</div>
                   </div>
                 </div>
               </div>
             </article>
 
-            <article class="usecase-panel" data-usecase-panel="slack" role="tabpanel" hidden>
+            <article class="usecase-panel" id="usecase-panel-slack" data-usecase-panel="slack" role="tabpanel" aria-labelledby="usecase-tab-slack" hidden>
               <div class="usecase-panel-copy">
-                <span class="usecase-eyebrow">Slack Assistant</span>
                 <h3 class="usecase-panel-title">Answer packaging and policy questions where the question already happens.</h3>
                 <p class="usecase-panel-desc">Support, product, and engineering can ask in channel and get a response grounded in ADRs, Jira, and prior delivery decisions instead of guesswork.</p>
                 <ul class="usecase-panel-list">
@@ -488,34 +507,47 @@
                 </ul>
               </div>
 
-              <div class="usecase-visual usecase-visual-slack" aria-hidden="true">
-                <div class="mock-window">
-                  <div class="mock-topbar">
-                    <span class="mock-dots"><i></i><i></i><i></i></span>
-                    <span class="mock-title">#product-eng-qa</span>
+                            <div class="usecase-visual usecase-visual-slack" aria-hidden="true">
+                <div class="mock-window app-slack">
+                  <div class="slack-topbar">
+                    <div class="slack-mac-dots"><span class="mock-dots"><i></i><i></i><i></i></span></div>
+                    <div class="slack-search-bar"><span class="slack-search-icon"></span> Search Verachi</div>
+                    <div class="slack-profile"></div>
                   </div>
-                  <div class="slack-shell">
+                  <div class="slack-layout">
                     <aside class="slack-sidebar">
-                      <span class="slack-workspace">Verachi</span>
-                      <span class="slack-channel is-active"># product-eng-qa</span>
-                      <span class="slack-channel"># announcements</span>
-                      <span class="slack-channel"># release-notes</span>
+                      <div class="slack-workspace">Verachi <span class="slack-chevron"></span></div>
+                      <div class="slack-section">Channels</div>
+                      <span class="slack-channel is-active"><span class="slack-hash">#</span> product-eng-qa</span>
+                      <span class="slack-channel"><span class="slack-hash">#</span> announcements</span>
+                      <span class="slack-channel"><span class="slack-hash">#</span> release-notes</span>
                     </aside>
-                    <div class="slack-thread">
-                      <div class="slack-message">
-                        <span class="slack-author">Sarah Chen</span>
-                        <p>Why do free tier users not have access to advanced reporting?</p>
+                    <div class="slack-main">
+                      <div class="slack-header">
+                        <div class="slack-header-title"><span class="slack-hash">#</span> product-eng-qa</div>
                       </div>
-                      <div class="slack-message slack-message-bot">
-                        <span class="slack-author">Verachi</span>
-                        <p>Advanced Reporting is reserved for paid tiers because the underlying processing and review flows are designed for enterprise-grade usage.</p>
-                        <div class="slack-sources">
-                          <span class="source-pill">ADR-042</span>
-                          <span class="source-pill">Jira PROD-119</span>
+                      <div class="slack-thread">
+                        <div class="slack-message">
+                          <div class="slack-avatar">SC</div>
+                          <div class="slack-message-content">
+                            <div class="slack-message-meta"><span class="slack-author">Sarah Chen</span> <span class="slack-time">10:14 AM</span></div>
+                            <p>Why do free tier users not have access to advanced reporting?</p>
+                          </div>
                         </div>
-                        <div class="slack-confidence">
-                          <span class="confidence-dot"></span>
-                          High 98%
+                        <div class="slack-message slack-message-bot">
+                          <div class="slack-avatar bot">V</div>
+                          <div class="slack-message-content">
+                            <div class="slack-message-meta"><span class="slack-author">Verachi</span> <span class="slack-app-tag">APP</span> <span class="slack-time">10:14 AM</span></div>
+                            <p>Advanced Reporting is reserved for paid tiers because the underlying processing and review flows are designed for enterprise-grade usage.</p>
+                            <div class="slack-sources">
+                              <span class="source-pill">ADR-042</span>
+                              <span class="source-pill">Jira PROD-119</span>
+                            </div>
+                            <div class="slack-confidence">
+                              <span class="confidence-dot"></span>
+                              High 98%
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -524,9 +556,8 @@
               </div>
             </article>
 
-            <article class="usecase-panel" data-usecase-panel="github" role="tabpanel" hidden>
+            <article class="usecase-panel" id="usecase-panel-github" data-usecase-panel="github" role="tabpanel" aria-labelledby="usecase-tab-github" hidden>
               <div class="usecase-panel-copy">
-                <span class="usecase-eyebrow">PR Guardrails</span>
                 <h3 class="usecase-panel-title">Flag pull requests that contradict prior architectural decisions.</h3>
                 <p class="usecase-panel-desc">When a change drifts away from an established pattern, Verachi can surface the relevant decision in review before the inconsistency lands in production.</p>
                 <ul class="usecase-panel-list">
@@ -536,27 +567,51 @@
                 </ul>
               </div>
 
-              <div class="usecase-visual usecase-visual-github" aria-hidden="true">
-                <div class="mock-window">
-                  <div class="mock-topbar">
-                    <span class="mock-dots"><i></i><i></i><i></i></span>
-                    <span class="mock-title">Pull request #124</span>
-                  </div>
-                  <div class="github-shell">
-                    <div class="github-header">
-                      <span class="github-repo">OctoCorp / web-app</span>
-                      <span class="github-status">Merged</span>
+                            <div class="usecase-visual usecase-visual-github" aria-hidden="true">
+                <div class="mock-window app-github">
+                  <div class="github-browser-topbar">
+                    <div class="github-mac-dots"><span class="mock-dots"><i></i><i></i><i></i></span></div>
+                    <div class="github-browser-tab">
+                      <div class="github-tab-icon"></div>
+                      <div class="github-tab-title">Add axios for data fetching &middot; Pull Request #124 &middot; OctoCorp/web-app &middot; GitHub</div>
                     </div>
-                    <div class="github-pr-title">Add axios for data fetching</div>
-                    <div class="github-comment">
-                      <div class="github-badge-row">
-                        <span class="github-bot">Verachi Bot</span>
-                        <span class="github-severity">Architectural Alignment</span>
+                  </div>
+                  <div class="github-navbar">
+                    <div class="github-logo"></div>
+                    <div class="github-nav-search">Search or jump to...</div>
+                  </div>
+                  <div class="github-layout">
+                    <div class="github-header">
+                      <div class="github-header-title">Add axios for data fetching <span class="github-pr-number">#124</span></div>
+                      <div class="github-header-meta">
+                        <span class="github-status-badge merged"><span class="github-status-icon"></span>Merged</span>
+                        <span class="github-meta-text"><strong>alexdev</strong> merged 3 commits into <code>main</code> from <code>feature/axios</code></span>
                       </div>
-                      <p>This PR introduces <strong>axios</strong> in <strong>src/api/userService.js</strong>, but ADR-87 standardized on the native fetch API.</p>
-                      <div class="github-links">
-                        <span class="source-pill">ADR-87 Native Fetch</span>
-                        <span class="source-pill">Confidence 98.2%</span>
+                    </div>
+                    
+                    <div class="github-tabs">
+                      <div class="github-tab active">Conversation <span class="github-count">1</span></div>
+                      <div class="github-tab">Commits <span class="github-count">3</span></div>
+                      <div class="github-tab">Checks <span class="github-count">0</span></div>
+                      <div class="github-tab">Files changed <span class="github-count">4</span></div>
+                    </div>
+
+                    <div class="github-timeline">
+                      <div class="github-comment-box">
+                        <div class="github-comment-header">
+                          <div class="github-avatar">V</div>
+                          <strong>Verachi Bot</strong> commented
+                          <div class="github-badge-row">
+                            <span class="github-severity">Architectural Alignment</span>
+                          </div>
+                        </div>
+                        <div class="github-comment-body">
+                          <p>This PR introduces <strong>axios</strong> in <strong>src/api/userService.js</strong>, but ADR-87 standardized on the native fetch API.</p>
+                          <div class="github-links">
+                            <span class="source-pill">ADR-87 Native Fetch</span>
+                            <span class="source-pill">Confidence 98.2%</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

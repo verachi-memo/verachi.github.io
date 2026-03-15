@@ -977,15 +977,14 @@ main {
    ============================================================ */
 
 .usecase-showcase {
-  display: grid;
-  grid-template-columns: 320px minmax(0, 1fr);
-  gap: 24px;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .usecase-nav {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -1053,9 +1052,9 @@ main {
 }
 
 .usecase-panel {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
   padding: clamp(24px, 3vw, 34px);
   border-radius: 24px;
   background:
@@ -1067,10 +1066,14 @@ main {
     0 28px 80px rgba(3, 8, 17, 0.34);
 }
 
+.usecase-panel[hidden] {
+  display: none !important;
+}
+
 .usecase-panel-copy {
   display: flex;
   flex-direction: column;
-  align-self: center;
+  max-width: 72ch;
 }
 
 .usecase-eyebrow {
@@ -1214,18 +1217,9 @@ main {
   font-weight: 700;
 }
 
-.ide-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
-  min-height: 460px;
-}
 
-.ide-code {
-  padding: 22px 20px 22px 24px;
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
-  background:
-    linear-gradient(180deg, rgba(13, 17, 27, 0.96), rgba(9, 12, 19, 0.98));
-}
+
+
 
 .code-line {
   display: block;
@@ -1290,20 +1284,9 @@ main {
   margin-top: 16px;
 }
 
-.slack-shell {
-  display: grid;
-  grid-template-columns: 180px minmax(0, 1fr);
-  min-height: 430px;
-}
 
-.slack-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 20px 16px;
-  background: linear-gradient(180deg, rgba(34, 20, 44, 0.98), rgba(25, 14, 30, 0.98));
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-}
+
+
 
 .slack-workspace {
   color: #f4efff;
@@ -1353,7 +1336,7 @@ main {
 .slack-message-bot {
   padding: 18px;
   border-left: 3px solid #9b6dff;
-  border-radius: 0 18px 18px 18px;
+  border-radius: 18px;
   background: rgba(155, 109, 255, 0.08);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
@@ -1386,21 +1369,9 @@ main {
   box-shadow: 0 0 18px rgba(65, 197, 128, 0.4);
 }
 
-.github-shell {
-  padding: 20px 22px 24px;
-  background:
-    radial-gradient(circle at top right, rgba(122, 92, 255, 0.1), transparent 30%),
-    linear-gradient(180deg, rgba(14, 18, 25, 0.98), rgba(9, 11, 17, 0.98));
-  min-height: 430px;
-}
 
-.github-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 16px;
-}
+
+
 
 .github-repo {
   color: var(--ink-1);
@@ -1963,30 +1934,16 @@ main {
     gap: 16px;
   }
 
-  .usecase-showcase,
-  .usecase-panel {
-    grid-template-columns: 1fr;
-  }
-
   .usecase-nav {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .usecase-panel-copy {
-    max-width: 64ch;
-  }
-
   .ide-layout,
-  .slack-shell {
-    grid-template-columns: 1fr;
-  }
+  
 
   .ide-code,
-  .slack-sidebar {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  }
+  
 
   .savings-grid {
     grid-template-columns: 1fr;
@@ -2129,9 +2086,7 @@ main {
   .ide-code,
   .ide-chat,
   .slack-thread,
-  .github-shell {
-    padding: 18px;
-  }
+  
 
   .brand-word {
     font-size: 0.78rem;
@@ -3256,4 +3211,426 @@ main {
   .pricing-card-inner {
     padding: 28px 24px;
   }
+}
+
+
+/* VS Code App Styles */
+.app-vscode {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+}
+.vscode-topbar {
+  display: flex;
+  align-items: center;
+  background: #323233;
+  padding: 8px 16px;
+  border-bottom: 1px solid #252526;
+  position: relative;
+}
+.vscode-mac-dots {
+  flex: 0 0 auto;
+}
+.vscode-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #cccccc;
+  font-size: 0.75rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.vscode-layout {
+  display: flex;
+  flex: 1;
+  min-height: 460px;
+}
+.vscode-activity-bar {
+  width: 48px;
+  background: #333333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  gap: 15px;
+}
+.vscode-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background: #858585;
+  opacity: 0.4;
+}
+.vscode-icon.active {
+  opacity: 1;
+  background: #ffffff;
+}
+.vscode-sidebar {
+  width: 200px;
+  background: #252526;
+  color: #cccccc;
+  padding: 10px 0;
+  border-right: 1px solid #333;
+}
+.vscode-sidebar-title {
+  font-size: 0.7rem;
+  padding: 0 20px;
+  margin-bottom: 10px;
+  letter-spacing: 0.05em;
+}
+.vscode-file {
+  padding: 4px 20px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.vscode-file.active {
+  background: #37373d;
+  color: #ffffff;
+}
+.vscode-chevron {
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 4px solid #cccccc;
+}
+.vscode-editor {
+  flex: 1;
+  background: #1e1e1e;
+  display: flex;
+  flex-direction: column;
+}
+.vscode-tabs {
+  display: flex;
+  background: #252526;
+}
+.vscode-tab {
+  padding: 8px 16px;
+  background: #1e1e1e;
+  color: #ffffff;
+  font-size: 0.8rem;
+  border-top: 1px solid #007acc;
+}
+.vscode-editor-content {
+  padding: 16px;
+}
+.syntax-keyword { color: #569cd6; }
+.syntax-entity { color: #4ec9b0; }
+.syntax-type { color: #4ec9b0; }
+
+.vscode-panel {
+  width: 280px;
+  background: #1e1e1e;
+  border-left: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+}
+.vscode-panel-header {
+  padding: 10px 16px;
+  color: #cccccc;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  border-bottom: 1px solid #333;
+}
+.vscode-panel-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.vscode-statusbar {
+  background: #007acc;
+  color: white;
+  display: flex;
+  padding: 2px 10px;
+  font-size: 0.7rem;
+  gap: 15px;
+}
+
+/* Slack App Styles */
+.app-slack {
+  background: #1A1D21;
+  border: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+}
+.slack-topbar {
+  display: flex;
+  align-items: center;
+  background: #121016;
+  padding: 8px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  justify-content: space-between;
+}
+.slack-search-bar {
+  flex: 1;
+  max-width: 400px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 4px 12px;
+  color: #ababad;
+  font-size: 0.8rem;
+  text-align: center;
+  margin: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slack-profile {
+  width: 24px;
+  height: 24px;
+  background: #4A154B;
+  border-radius: 4px;
+}
+.slack-layout {
+  display: flex;
+  flex: 1;
+  min-height: 460px;
+}
+.slack-sidebar {
+  width: 220px;
+  background: #19171D;
+  color: #ababad;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(255,255,255,0.05);
+}
+.slack-workspace {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.slack-section {
+  padding: 12px 16px 4px;
+  font-size: 0.75rem;
+}
+.slack-channel {
+  padding: 4px 16px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.slack-channel.is-active {
+  background: #1164A3;
+  color: #ffffff;
+}
+.slack-hash { opacity: 0.5; }
+.slack-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #1A1D21;
+}
+.slack-header {
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  color: #ffffff;
+  font-weight: 700;
+}
+.slack-thread {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.slack-message {
+  display: flex;
+  gap: 12px;
+}
+.slack-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  background: #E8912D;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+.slack-avatar.bot { background: #4A154B; }
+.slack-message-meta { margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+.slack-author { font-weight: 800; color: #ffffff; font-size: 0.95rem; }
+.slack-time { color: #ababad; font-size: 0.75rem; }
+.slack-app-tag { background: rgba(255,255,255,0.1); color: #ababad; font-size: 0.65rem; padding: 2px 4px; border-radius: 3px; }
+.slack-message-content p { color: #D1D2D3; margin: 0; font-size: 0.95rem; line-height: 1.4; }
+
+/* GitHub App Styles */
+.app-github {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif;
+}
+.github-browser-topbar {
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 12px;
+}
+.github-browser-tab {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: -9px;
+  color: #c9d1d9;
+  font-size: 0.75rem;
+}
+.github-tab-icon { width: 14px; height: 14px; background: #c9d1d9; border-radius: 50%; }
+.github-navbar {
+  background: #161b22;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid #30363d;
+}
+.github-logo { width: 28px; height: 28px; background: #c9d1d9; border-radius: 50%; }
+.github-nav-search {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 4px 12px;
+  color: #8b949e;
+  font-size: 0.8rem;
+  width: 250px;
+}
+.github-layout {
+  padding: 24px;
+  min-height: 400px;
+}
+.github-header-title {
+  color: #c9d1d9;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+.github-pr-number { color: #8b949e; font-weight: 300; }
+.github-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  font-size: 0.85rem;
+  color: #8b949e;
+}
+.github-status-badge.merged {
+  background: #8250df;
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.github-meta-text strong { color: #c9d1d9; }
+.github-meta-text code { background: rgba(240,246,252,0.1); padding: 2px 4px; border-radius: 4px; }
+.github-tabs {
+  display: flex;
+  gap: 16px;
+  border-bottom: 1px solid #30363d;
+  margin-bottom: 24px;
+}
+.github-tab {
+  padding: 8px 0;
+  color: #8b949e;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.github-tab.active {
+  color: #c9d1d9;
+  border-bottom: 2px solid #f78166;
+  font-weight: 600;
+}
+.github-count {
+  background: rgba(240,246,252,0.1);
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+}
+.github-timeline {
+  padding-left: 20px;
+  border-left: 2px solid #30363d;
+  position: relative;
+}
+.github-comment-box {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  position: relative;
+  margin-left: 16px;
+}
+.github-comment-box::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: -6px;
+  width: 10px;
+  height: 10px;
+  background: #161b22;
+  border-left: 1px solid #30363d;
+  border-bottom: 1px solid #30363d;
+  transform: rotate(45deg);
+}
+.github-avatar {
+  position: absolute;
+  left: -48px;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  background: #4A154B;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+.github-comment-header {
+  background: #161b22;
+  padding: 8px 16px;
+  border-bottom: 1px solid #30363d;
+  border-radius: 6px 6px 0 0;
+  color: #8b949e;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.github-comment-header strong { color: #c9d1d9; }
+.github-comment-body {
+  padding: 16px;
+  color: #c9d1d9;
+  font-size: 0.9rem;
+}
+.github-badge-row { margin-left: auto; }
+.github-severity {
+  background: rgba(248,81,73,0.1);
+  color: #ff7b72;
+  border: 1px solid rgba(248,81,73,0.4);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
 }
