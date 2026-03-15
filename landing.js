@@ -222,34 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
       rate: getVal(sliderPairs[2])
     });
 
-    const getNiceNumber = (value, round = false) => {
-      if (value <= 0) return 1000;
-      const exponent = Math.floor(Math.log10(value));
-      const magnitude = 10 ** exponent;
-      const normalized = value / magnitude;
-
-      let niceNormalized;
-      if (round) {
-        if (normalized < 1.5) niceNormalized = 1;
-        else if (normalized < 3) niceNormalized = 2;
-        else if (normalized < 7) niceNormalized = 5;
-        else niceNormalized = 10;
-      } else {
-        if (normalized <= 1) niceNormalized = 1;
-        else if (normalized <= 2) niceNormalized = 2;
-        else if (normalized <= 5) niceNormalized = 5;
-        else niceNormalized = 10;
-      }
-
-      return niceNormalized * magnitude;
-    };
-
-    const getNiceAxisMax = (value) => {
-      if (value <= 0) return 1000;
-      const tickSpacing = getNiceNumber(value / GRID_STEPS, true);
-      return tickSpacing * GRID_STEPS;
-    };
-
     const getSavingsMetrics = (team, hours, rate) => {
       const loadedHourlyRate = (rate * BURDEN_MULTIPLIER) / HOURS_PER_YEAR;
       const annualHoursLost = team * hours * WEEKS_PER_YEAR;
@@ -277,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const getAxisMaxForValues = (team, hours, rate) => {
       const metrics = getSavingsMetrics(team, hours, rate);
-      return getNiceAxisMax(Math.max(metrics.projectedWithout, metrics.projectedWith) * AXIS_HEADROOM);
+      return Math.max(metrics.projectedWithout, metrics.projectedWith) * AXIS_HEADROOM;
     };
 
     const stepTowards = (current, target, deltaMs, smoothingMs) => {
@@ -364,6 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const dpr = window.devicePixelRatio || 1;
       const W = savingsCanvas.width / dpr || 600;
       const H = savingsCanvas.height / dpr || 340;
+      const maxCost = Math.max(axisMax, 1);
 
       // Margins
       const ml = 64, mr = 24, mt = 32, mb = 44;
@@ -378,10 +351,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Monthly cost data
       const months = 12;
-      const maxCost = axisMax;
 
       const xForMonth = (m) => ml + (m / months) * gw;
       const yForCost = (c) => mt + (maxCost > 0 ? gh - (c / maxCost) * gh : gh);
+      const formatAxisCurrency = (value) => {
+        if (value >= 1000000) {
+          return `$${(value / 1000000).toFixed(value >= 10000000 ? 0 : 1)}m`;
+        }
+
+        if (value >= 1000) {
+          return `$${Math.round(value / 1000)}k`;
+        }
+
+        return `$${Math.round(value)}`;
+      };
+
+      const traceSmoothPath = (target, points, moveToStart = true) => {
+        if (!points.length) return;
+
+        if (moveToStart) {
+          target.moveTo(points[0].x, points[0].y);
+        }
+
+        if (points.length === 1) return;
+        if (points.length === 2) {
+          target.lineTo(points[1].x, points[1].y);
+          return;
+        }
+
+        for (let i = 1; i < points.length - 1; i++) {
+          const midX = (points[i].x + points[i + 1].x) / 2;
+          const midY = (points[i].y + points[i + 1].y) / 2;
+          target.quadraticCurveTo(points[i].x, points[i].y, midX, midY);
+        }
+
+        const last = points[points.length - 1];
+        target.quadraticCurveTo(last.x, last.y, last.x, last.y);
+      };
 
       // Grid lines
       ctx.strokeStyle = 'rgba(171, 194, 229, 0.07)';
@@ -402,7 +408,7 @@ document.addEventListener('DOMContentLoaded', () => {
       for (let i = 0; i <= GRID_STEPS; i++) {
         const val = maxCost - (maxCost / GRID_STEPS) * i;
         const y = mt + (gh / GRID_STEPS) * i;
-        const label = val >= 1000 ? '$' + Math.round(val / 1000) + 'k' : '$' + Math.round(val);
+        const label = formatAxisCurrency(val);
         ctx.fillText(label, ml - 10, y);
       }
 
@@ -436,35 +442,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Savings fill (area between lines after pivot)
       const pivotIdx = PIVOT_MONTH;
-      ctx.beginPath();
-      ctx.moveTo(withoutPoints[pivotIdx].x, withoutPoints[pivotIdx].y);
-      for (let i = pivotIdx; i < withoutPoints.length; i++) {
-        ctx.lineTo(withoutPoints[i].x, withoutPoints[i].y);
-      }
-      for (let i = withPoints.length - 1; i >= pivotIdx; i--) {
-        ctx.lineTo(withPoints[i].x, withPoints[i].y);
-      }
-      ctx.closePath();
+      const fillPath = new Path2D();
+      traceSmoothPath(fillPath, withoutPoints.slice(pivotIdx));
+      traceSmoothPath(fillPath, withPoints.slice(pivotIdx).reverse(), false);
+      fillPath.closePath();
       const fillGrad = ctx.createLinearGradient(0, mt, 0, mt + gh);
       fillGrad.addColorStop(0, 'rgba(132, 241, 212, 0.12)');
       fillGrad.addColorStop(1, 'rgba(85, 196, 255, 0.04)');
       ctx.fillStyle = fillGrad;
-      ctx.fill();
+      ctx.fill(fillPath);
 
       // Without Verachi line (full)
       ctx.lineJoin = 'round';
       ctx.lineCap = 'round';
-      ctx.beginPath();
-      ctx.moveTo(withoutPoints[0].x, withoutPoints[0].y);
-      for (let i = 1; i < withoutPoints.length; i++) {
-        ctx.lineTo(withoutPoints[i].x, withoutPoints[i].y);
-      }
+      const withoutPath = new Path2D();
+      traceSmoothPath(withoutPath, withoutPoints);
       ctx.strokeStyle = '#f6a693';
       ctx.lineWidth = 2.5;
       ctx.shadowColor = 'rgba(246, 166, 147, 0.4)';
       ctx.shadowBlur = 8;
       ctx.shadowOffsetY = 2;
-      ctx.stroke();
+      ctx.stroke(withoutPath);
 
       // Reset shadow for the base part of the next line to avoid double-shadowing
       ctx.shadowColor = 'transparent';
@@ -472,20 +470,14 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.shadowOffsetY = 0;
 
       // With Verachi line (same as without until pivot, then diverges)
-      ctx.beginPath();
-      ctx.moveTo(withPoints[0].x, withPoints[0].y);
-      for (let i = 1; i <= pivotIdx; i++) {
-        ctx.lineTo(withPoints[i].x, withPoints[i].y);
-      }
+      const withBeforePivotPath = new Path2D();
+      traceSmoothPath(withBeforePivotPath, withPoints.slice(0, pivotIdx + 1));
       ctx.strokeStyle = '#f6a693';
       ctx.lineWidth = 2.5;
-      ctx.stroke();
+      ctx.stroke(withBeforePivotPath);
 
-      ctx.beginPath();
-      ctx.moveTo(withPoints[pivotIdx].x, withPoints[pivotIdx].y);
-      for (let i = pivotIdx + 1; i < withPoints.length; i++) {
-        ctx.lineTo(withPoints[i].x, withPoints[i].y);
-      }
+      const withAfterPivotPath = new Path2D();
+      traceSmoothPath(withAfterPivotPath, withPoints.slice(pivotIdx));
       const lineGrad = ctx.createLinearGradient(withPoints[pivotIdx].x, 0, withPoints[withPoints.length - 1].x, 0);
       lineGrad.addColorStop(0, '#8fd9ff');
       lineGrad.addColorStop(1, '#84f1d4');
@@ -494,7 +486,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.shadowColor = 'rgba(132, 241, 212, 0.4)';
       ctx.shadowBlur = 8;
       ctx.shadowOffsetY = 2;
-      ctx.stroke();
+      ctx.stroke(withAfterPivotPath);
 
       // Reset shadow for subsequent elements (like the pivot line and text)
       ctx.shadowColor = 'transparent';
