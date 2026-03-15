@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Verachi — Decide Once. Remember Everywhere.</title>
+  <title>Verachi — Your Team's Decision Memory</title>
   <meta name="description"
     content="Verachi is the cited memory layer for delivery decisions. Keep primary sources primary, show citations and confidence with every answer." />
   <meta name="theme-color" content="#0a0b10" />
@@ -61,8 +61,8 @@
       </button>
 
       <nav class="site-nav" id="primaryNav" aria-label="Primary">
-        <a href="#proof">See A Record</a>
-        <a href="#how-it-works">How It Works</a>
+        <a href="#showcase">How It Works</a>
+        <a href="#use-cases">Use Cases</a>
         <a href="trust.html">Trust</a>
       </nav>
 
@@ -80,897 +80,367 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-backdrop" aria-hidden="true">
         <div class="hero-glow hero-glow-primary"></div>
-        <div class="hero-glow hero-glow-secondary"></div>
-        <div class="hero-grid"></div>
       </div>
 
-      <div class="container hero-layout">
-        <div class="hero-content">
-          <p class="hero-eyebrow" data-reveal="fade-up">For delivery leads and engineering teams</p>
+      <div class="container hero-centered">
+        <h1 id="hero-title" class="display-title" data-reveal="fade-up">
+          Your team's <span class="title-emphasis">decision memory.</span>
+        </h1>
 
-          <h1 id="hero-title" class="display-title" data-reveal="fade-up" style="--delay: 1">
-            Cited decision memory <span class="title-emphasis">for teams that need the why to stay attached.</span>
-          </h1>
+        <p class="hero-intro" data-reveal="fade-up" style="--delay: 1">
+          Turn scattered Slack threads, Jira tickets, and GitHub discussions into cited decision records your whole
+          team can trust.
+        </p>
 
-          <p class="hero-intro" data-reveal="fade-up" style="--delay: 2">
-            Verachi sits on top of Slack, Jira, GitHub, and uploaded documents to turn scattered conversations into
-            durable decision records with citations, confidence, audit history, and visible lineage. See what changed,
-            what a decision superseded, and which projects now depend on it. Primary systems stay primary.
-          </p>
+        <div class="hero-actions" data-reveal="fade-up" style="--delay: 2">
+          <a class="button button-primary-hero" href="https://app.verachi.io/signup">
+            Get started — free
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+          <a class="button button-outline" href="sales.html">Book a demo</a>
+        </div>
 
-          <div class="hero-actions" data-reveal="fade-up" style="--delay: 3">
-            <a class="button button-primary-hero" href="#proof">
-              See a cited record
+        <!-- Trusted-by logo strip -->
+        <div class="logo-strip" data-reveal="fade-up" style="--delay: 3" aria-label="Trusted by teams using">
+          <span class="logo-strip-label">Trusted by teams using</span>
+          <div class="logo-strip-logos">
+            <!-- Slack -->
+            <svg class="logo-strip-icon" viewBox="0 0 24 24" fill="currentColor" aria-label="Slack">
+              <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zm1.271 0a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zm0 1.271a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zm10.124 2.521a2.528 2.528 0 0 1 2.52-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.52V8.834zm-1.271 0a2.528 2.528 0 0 1-2.521 2.521 2.528 2.528 0 0 1-2.521-2.521V2.522A2.528 2.528 0 0 1 15.166 0a2.528 2.528 0 0 1 2.521 2.522v6.312zm-2.521 10.124a2.528 2.528 0 0 1 2.521 2.52A2.528 2.528 0 0 1 15.166 24a2.528 2.528 0 0 1-2.521-2.522v-2.52h2.521zm0-1.271a2.528 2.528 0 0 1-2.521-2.521 2.528 2.528 0 0 1 2.521-2.521h6.312A2.528 2.528 0 0 1 24 15.166a2.528 2.528 0 0 1-2.522 2.521h-6.312z"/>
+            </svg>
+            <!-- Jira -->
+            <svg class="logo-strip-icon" viewBox="0 0 24 24" fill="currentColor" aria-label="Jira">
+              <path d="M11.571 11.513H0a5.218 5.218 0 0 0 5.232 5.215h2.13v2.057A5.215 5.215 0 0 0 12.575 24V12.518a1.005 1.005 0 0 0-1.005-1.005zm5.723-5.756H5.736a5.215 5.215 0 0 0 5.215 5.214h2.129v2.058a5.218 5.218 0 0 0 5.215 5.214V6.758a1.001 1.001 0 0 0-1.001-1.001zM23.013 0H11.455a5.215 5.215 0 0 0 5.215 5.215h2.129v2.057A5.215 5.215 0 0 0 24 12.483V1.005A1.005 1.005 0 0 0 23.013 0z"/>
+            </svg>
+            <!-- GitHub -->
+            <svg class="logo-strip-icon" viewBox="0 0 24 24" fill="currentColor" aria-label="GitHub">
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+            </svg>
+            <!-- Notion -->
+            <svg class="logo-strip-icon" viewBox="0 0 24 24" fill="currentColor" aria-label="Notion">
+              <path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L18.29 2.29c-.42-.326-.98-.7-2.055-.607L3.01 2.95c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.84-.046.933-.56.933-1.167V6.354c0-.606-.233-.933-.746-.886l-15.177.886c-.56.047-.747.327-.747.934zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.747 0-.933-.234-1.494-.934l-4.577-7.186v6.952l1.447.327s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.14c-.093-.514.28-.886.747-.933zM2.1 1.542l13.728-1.008c1.68-.14 2.1.093 2.8.607l3.876 2.707c.466.327.606.747.606 1.214V21.39c0 1.027-.373 1.634-1.68 1.727l-15.457.934c-.98.046-1.448-.094-1.962-.747L.467 20.224c-.56-.747-.793-1.307-.793-1.96V3.13c0-.84.374-1.54 1.54-1.634z"/>
+            </svg>
+            <!-- Linear -->
+            <svg class="logo-strip-icon" viewBox="0 0 24 24" fill="currentColor" aria-label="Linear">
+              <path d="M.834 17.953a.588.588 0 0 1-.15-.57L4.56 4.63a.588.588 0 0 1 .958-.223l14.078 14.078a.588.588 0 0 1-.222.957l-12.754 3.876a.588.588 0 0 1-.57-.15L.835 17.954zm1.907-4.2a.294.294 0 0 0-.49.12l-1.94 6.392a.294.294 0 0 0 .365.363l6.39-1.94a.294.294 0 0 0 .121-.49l-4.446-4.446zm12.08-12.574a.588.588 0 0 0-.957.222L10.62 13.14a.294.294 0 0 0 .07.305l.862.862a.294.294 0 0 0 .305.07l11.74-3.245a.588.588 0 0 0 .222-.957L14.82 1.18z"/>
+            </svg>
+            <!-- Figma -->
+            <svg class="logo-strip-icon" viewBox="0 0 24 24" fill="currentColor" aria-label="Figma">
+              <path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.098-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Hero Visual: Full-width Product Preview -->
+        <div class="hero-visual-full" data-reveal="fade-up" style="--delay: 3">
+          <div class="product-preview">
+            <div class="preview-chrome">
+              <div class="chrome-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="chrome-bar">app.verachi.io</div>
+            </div>
+            <div class="preview-body">
+              <div class="preview-search">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <div class="preview-typing">
+                  <span class="typed-query">Why did we choose Postgres?</span><span
+                    class="cursor-blink">|</span>
+                </div>
+              </div>
+              <div class="preview-result" style="opacity:1;transform:none">
+                <p>Postgres was chosen for the new microservice due to its <strong>JSONB support</strong>, which
+                  fits the multi-tenant schema better than MySQL.</p>
+              </div>
+              <div class="preview-citation" style="opacity:1;transform:none">
+                <div class="cite-badge">
+                  <span class="cite-dot"></span>
+                  Slack · #architecture-decisions · Sarah · Oct 14
+                </div>
+                <div class="cite-confidence">
+                  <span class="confidence-bar"><span class="confidence-fill"></span></span>
+                  <span>94% confidence</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== PRODUCT SHOWCASE ========== -->
+    <section class="section" id="showcase">
+      <div class="container">
+        <div class="showcase-card" data-observe="fade-up">
+          <div class="showcase-header">
+            <span class="section-kicker-simple">How Verachi works</span>
+            <h2 class="section-title showcase-title">One search. Cited answers. Full context.</h2>
+            <p class="section-subtitle">Ask any question about past decisions. Get an answer that links to the
+              original Slack thread, Jira ticket, or PR comment — with a confidence score you can verify.</p>
+          </div>
+
+          <div class="showcase-benefits">
+            <div class="benefit-item">
+              <div class="benefit-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 11l3 3L22 4" />
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                </svg>
+              </div>
+              <p class="benefit-text">Every answer cites its source</p>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                </svg>
+              </div>
+              <p class="benefit-text">Connects to Slack, Jira, GitHub</p>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="18" cy="18" r="3" />
+                  <circle cx="6" cy="6" r="3" />
+                  <path d="M13 6h3a2 2 0 0 1 2 2v7" />
+                  <path d="M11 18H8a2 2 0 0 1-2-2V9" />
+                </svg>
+              </div>
+              <p class="benefit-text">See downstream impact at a glance</p>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+              </div>
+              <p class="benefit-text">Onboard engineers in days, not weeks</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== STATS MARQUEE ========== -->
+    <section class="section section-marquee" aria-label="Key metrics">
+      <div class="marquee-track" aria-hidden="true">
+        <div class="marquee-content">
+          <span class="marquee-stat">Onboarding cut from 15 days → 4</span>
+          <span class="marquee-divider">·</span>
+          <span class="marquee-stat">94% citation confidence</span>
+          <span class="marquee-divider">·</span>
+          <span class="marquee-stat">Zero workflow change required</span>
+          <span class="marquee-divider">·</span>
+          <span class="marquee-stat">Connects to 4+ dev tools</span>
+          <span class="marquee-divider">·</span>
+          <span class="marquee-stat">Onboarding cut from 15 days → 4</span>
+          <span class="marquee-divider">·</span>
+          <span class="marquee-stat">94% citation confidence</span>
+          <span class="marquee-divider">·</span>
+          <span class="marquee-stat">Zero workflow change required</span>
+          <span class="marquee-divider">·</span>
+          <span class="marquee-stat">Connects to 4+ dev tools</span>
+          <span class="marquee-divider">·</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== CUSTOMER QUOTES ========== -->
+    <section class="section" id="testimonials">
+      <div class="container">
+        <div class="section-head section-head-centered" data-observe="fade-up">
+          <span class="section-kicker-simple">What teams are saying</span>
+          <h2 class="section-title" style="max-width: 18ch;">Real feedback from engineering leaders.</h2>
+        </div>
+
+        <div class="quotes-scroll" data-observe="fade-up" style="--delay: 1">
+          <div class="quote-card">
+            <blockquote class="quote-text">
+              We onboarded four engineers last quarter. Before Verachi, each one spent their first two weeks asking
+              "why" questions in Slack. Now they search Verachi and get cited answers in seconds.
+            </blockquote>
+            <footer class="quote-person">
+              <img class="quote-avatar" src="./avatars/sarah.png" alt="Sarah Jenkins" width="40" height="40"
+                loading="lazy" />
+              <div>
+                <div class="quote-name">Sarah Jenkins</div>
+                <div class="quote-role">VP of Engineering, TechCorp</div>
+              </div>
+            </footer>
+          </div>
+
+          <div class="quote-card">
+            <blockquote class="quote-text">
+              Every architecture decision used to live in someone's head. Now new hires can search Verachi and
+              understand why we built things the way we did — with links to the original discussion.
+            </blockquote>
+            <footer class="quote-person">
+              <img class="quote-avatar" src="./avatars/marcus.png" alt="Marcus Chen" width="40" height="40"
+                loading="lazy" />
+              <div>
+                <div class="quote-name">Marcus Chen</div>
+                <div class="quote-role">Staff Engineer, DataFlow</div>
+              </div>
+            </footer>
+          </div>
+
+          <div class="quote-card">
+            <blockquote class="quote-text">
+              The confidence scores changed how we think about documentation. We stopped arguing about what was
+              decided and started focusing on what to do next. That shift alone saved us a full sprint.
+            </blockquote>
+            <footer class="quote-person">
+              <img class="quote-avatar" src="./avatars/emma.png" alt="Emma Lindqvist" width="40" height="40"
+                loading="lazy" />
+              <div>
+                <div class="quote-name">Emma Lindqvist</div>
+                <div class="quote-role">Engineering Manager, NordPlatform</div>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== SAVINGS CALCULATOR ========== -->
+    <section class="section" id="savings">
+      <div class="container">
+        <div class="section-head section-head-centered" data-observe="fade-up">
+          <span class="section-kicker-simple">ROI Calculator</span>
+          <h2 class="section-title" style="max-width: 22ch;">See your potential savings.</h2>
+          <p class="section-subtitle">Adjust the sliders to match your team. Watch the graph show what
+            happens when decision archaeology stops eating your budget.</p>
+        </div>
+
+        <div class="savings-card" data-observe="fade-up" style="--delay: 1">
+          <div class="savings-grid">
+
+            <!-- Left: Inputs -->
+            <div class="savings-inputs">
+              <div class="savings-input-group">
+                <label class="savings-label" for="calcTeamSize">
+                  Engineering team size
+                  <input type="number" class="savings-value" id="calcTeamSizeValue" value="10" min="1" readonly />
+                </label>
+                <input type="range" id="calcTeamSize" class="savings-range" min="5" max="100" value="10" step="1" />
+                <div class="savings-range-labels"><span>5</span><span>100</span></div>
+              </div>
+
+              <div class="savings-input-group">
+                <label class="savings-label" for="calcHoursWeek">
+                  Hours / week finding past decisions
+                  <input type="number" class="savings-value" id="calcHoursWeekValue" value="5" min="1" readonly />
+                </label>
+                <input type="range" id="calcHoursWeek" class="savings-range" min="1" max="20" value="5" step="1" />
+                <div class="savings-range-labels"><span>1 hr</span><span>20 hrs</span></div>
+              </div>
+
+              <div class="savings-input-group">
+                <label class="savings-label" for="calcHourlyRate">
+                  Cost per engineer / hour
+                  <input type="number" class="savings-value" id="calcHourlyRateValue" value="75" min="1" readonly />
+                </label>
+                <input type="range" id="calcHourlyRate" class="savings-range" min="30" max="250" value="75"
+                  step="5" />
+                <div class="savings-range-labels"><span>$30</span><span>$250</span></div>
+              </div>
+            </div>
+
+            <!-- Right: Results + Graph -->
+            <div class="savings-results">
+              <div class="savings-kpis">
+                <div class="savings-kpi">
+                  <span class="savings-kpi-label">Estimated Annual Savings</span>
+                  <span class="savings-kpi-number" id="calcAnnualSavings">$117,000</span>
+                </div>
+                <div class="savings-kpi">
+                  <span class="savings-kpi-label">Hours Reclaimed / Year</span>
+                  <span class="savings-kpi-number" id="calcHoursReclaimed">1,560</span>
+                </div>
+              </div>
+
+              <div class="savings-graph-wrap">
+                <canvas id="savingsCanvas" width="600" height="340"></canvas>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== USE-CASE GALLERY ========== -->
+    <section class="section" id="use-cases">
+      <div class="container">
+        <div class="section-head section-head-centered" data-observe="fade-up">
+          <span class="section-kicker-simple">Use cases</span>
+          <h2 class="section-title" style="max-width: 20ch;">See how teams use Verachi.</h2>
+        </div>
+
+        <div class="usecase-scroll" data-observe="fade-up" style="--delay: 1">
+          <a class="usecase-card" href="#">
+            <h3 class="usecase-title">Find why Postgres was chosen — in seconds</h3>
+            <p class="usecase-desc">Search any past decision. Get the answer with a link to the original Slack thread.</p>
+            <span class="usecase-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="usecase-card" href="#">
+            <h3 class="usecase-title">Onboard a new engineer without Slack archaeology</h3>
+            <p class="usecase-desc">New hires get cited answers from day one. No more "ask Sarah, she'll know."</p>
+            <span class="usecase-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="usecase-card" href="#">
+            <h3 class="usecase-title">Audit every decision tied to a failing service</h3>
+            <p class="usecase-desc">Trace decisions to their sources when something goes wrong. Know what changed and why.</p>
+            <span class="usecase-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="usecase-card" href="#">
+            <h3 class="usecase-title">See which projects depend on a single decision</h3>
+            <p class="usecase-desc">Open the graph to review downstream impact before changing anything.</p>
+            <span class="usecase-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== BOTTOM CTA ========== -->
+    <section class="section section-cta" id="cta">
+      <div class="cta-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="cta-centered" data-observe="fade-up">
+          <h2 class="section-title cta-title">Start building your decision memory.</h2>
+          <p class="section-subtitle cta-sub">Every decision your team makes deserves a source of truth. Start for free — no credit card required.</p>
+          <div class="hero-actions cta-actions">
+            <a class="button button-primary-hero" href="https://app.verachi.io/signup">
+              Get started — free
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
               </svg>
             </a>
-            <a class="button button-outline" href="trust.html">Review trust</a>
-          </div>
-
-          <p class="hero-note" data-reveal="fade-up" style="--delay: 4">
-            Ready to test the live product? <a href="https://app.verachi.io/signup">Create a workspace</a> when you
-            want to evaluate the wedge hands-on.
-          </p>
-
-          <div class="hero-proof" data-reveal="fade-up" style="--delay: 5">
-            <div class="hero-proof-card">
-              <span>Linked lineage</span>
-              See which older decision was superseded, what supporting context still matters, and where the source came from
-            </div>
-            <div class="hero-proof-card">
-              <span>Downstream impact</span>
-              Keep dependent projects, pull requests, and operational follow-through attached to the same decision
-            </div>
-            <div class="hero-proof-card">
-              <span>Trust-first</span>
-              Citations, confidence, and audit posture stay visible before login and inside the product
-            </div>
-          </div>
-        </div>
-
-        <!-- Hero Visual: Animated Carousel -->
-        <div class="hero-visual" data-reveal="fade-in" style="--delay: 3">
-          <div class="hero-carousel" id="heroCarousel">
-            <div class="hero-slides">
-
-              <!-- Slide 1: Connect -->
-              <div class="hero-slide is-active" data-slide="0">
-                <div class="slide-connect">
-                  <svg class="connect-svg" viewBox="0 0 400 340" fill="none" aria-hidden="true">
-                    <!-- Connection lines (animated dash) -->
-                    <line class="connect-line cl-1" x1="72" y1="68" x2="200" y2="170" />
-                    <line class="connect-line cl-2" x1="328" y1="68" x2="200" y2="170" />
-                    <line class="connect-line cl-3" x1="72" y1="272" x2="200" y2="170" />
-                    <line class="connect-line cl-4" x1="328" y1="272" x2="200" y2="170" />
-
-                    <!-- Tool nodes -->
-                    <!-- Slack -->
-                    <g class="tool-node tn-1">
-                      <circle cx="72" cy="68" r="32" fill="rgba(11,20,35,0.92)" stroke="rgba(171,194,229,0.18)"
-                        stroke-width="1.5" />
-                      <text x="72" y="64" text-anchor="middle" fill="#E01E5A" font-size="20" font-weight="700">#</text>
-                      <text x="72" y="82" text-anchor="middle" fill="var(--ink-2)" font-size="9"
-                        font-weight="600">Slack</text>
-                    </g>
-                    <!-- Jira -->
-                    <g class="tool-node tn-2">
-                      <circle cx="328" cy="68" r="32" fill="rgba(11,20,35,0.92)" stroke="rgba(171,194,229,0.18)"
-                        stroke-width="1.5" />
-                      <text x="328" y="64" text-anchor="middle" fill="#2684FF" font-size="20" font-weight="700">◆</text>
-                      <text x="328" y="82" text-anchor="middle" fill="var(--ink-2)" font-size="9"
-                        font-weight="600">Jira</text>
-                    </g>
-                    <!-- GitHub -->
-                    <g class="tool-node tn-3">
-                      <circle cx="72" cy="272" r="32" fill="rgba(11,20,35,0.92)" stroke="rgba(171,194,229,0.18)"
-                        stroke-width="1.5" />
-                      <text x="72" y="268" text-anchor="middle" fill="var(--ink-0)" font-size="20"
-                        font-weight="700">⬡</text>
-                      <text x="72" y="286" text-anchor="middle" fill="var(--ink-2)" font-size="9"
-                        font-weight="600">GitHub</text>
-                    </g>
-                    <!-- Documents -->
-                    <g class="tool-node tn-4">
-                      <circle cx="328" cy="272" r="32" fill="rgba(11,20,35,0.92)" stroke="rgba(171,194,229,0.18)"
-                        stroke-width="1.5" />
-                      <text x="328" y="268" text-anchor="middle" fill="#F6CF93" font-size="18"
-                        font-weight="700">▣</text>
-                      <text x="328" y="286" text-anchor="middle" fill="var(--ink-2)" font-size="9"
-                        font-weight="600">Docs</text>
-                    </g>
-
-                    <!-- Central Verachi node -->
-                    <circle class="center-glow" cx="200" cy="170" r="44" fill="rgba(143,217,255,0.06)" />
-                    <circle cx="200" cy="170" r="36" fill="rgba(11,20,35,0.96)" stroke="var(--accent)"
-                      stroke-width="2" />
-                    <g class="center-icon">
-                      <path d="M200 152L190 157l10 5 10-5-10-5z" stroke="var(--accent)" stroke-width="1.5"
-                        stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                      <path d="M190 167l10 5 10-5" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" fill="none" />
-                      <path d="M190 162l10 5 10-5" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" fill="none" />
-                    </g>
-                    <text x="200" y="192" text-anchor="middle" fill="var(--accent)" font-size="9" font-weight="800"
-                      letter-spacing="0.12em">VERACHI</text>
-                  </svg>
-                  <div class="slide-label">Connects to your existing tools</div>
-                </div>
-              </div>
-
-              <!-- Slide 2: Graph -->
-              <div class="hero-slide" data-slide="1">
-                <div class="slide-graph">
-                  <svg class="graph-svg" viewBox="0 0 400 340" fill="none" aria-hidden="true">
-                    <!-- Edges -->
-                    <line class="graph-edge ge-1" x1="200" y1="80" x2="120" y2="170" />
-                    <line class="graph-edge ge-2" x1="200" y1="80" x2="280" y2="150" />
-                    <line class="graph-edge ge-3" x1="120" y1="170" x2="160" y2="260" />
-                    <line class="graph-edge ge-4" x1="120" y1="170" x2="280" y2="150" />
-                    <line class="graph-edge ge-5" x1="280" y1="150" x2="310" y2="250" />
-                    <line class="graph-edge ge-6" x1="160" y1="260" x2="310" y2="250" />
-                    <line class="graph-edge ge-7" x1="200" y1="80" x2="160" y2="260" />
-
-                    <!-- Nodes -->
-                    <g class="graph-node gn-1">
-                      <circle cx="200" cy="80" r="28" fill="rgba(11,20,35,0.94)" stroke="var(--accent)"
-                        stroke-width="1.5" />
-                      <text x="200" y="76" text-anchor="middle" fill="var(--accent)" font-size="14"
-                        font-weight="700">DB</text>
-                      <text x="200" y="90" text-anchor="middle" fill="var(--ink-2)" font-size="8"
-                        font-weight="600">Decision</text>
-                    </g>
-                    <g class="graph-node gn-2">
-                      <circle cx="120" cy="170" r="24" fill="rgba(11,20,35,0.94)" stroke="var(--mint)"
-                        stroke-width="1.5" />
-                      <text x="120" y="166" text-anchor="middle" fill="var(--mint)" font-size="12"
-                        font-weight="700">API</text>
-                      <text x="120" y="180" text-anchor="middle" fill="var(--ink-2)" font-size="8"
-                        font-weight="600">Context</text>
-                    </g>
-                    <g class="graph-node gn-3">
-                      <circle cx="280" cy="150" r="24" fill="rgba(11,20,35,0.94)" stroke="var(--gold)"
-                        stroke-width="1.5" />
-                      <text x="280" y="146" text-anchor="middle" fill="var(--gold)" font-size="12"
-                        font-weight="700">Auth</text>
-                      <text x="280" y="160" text-anchor="middle" fill="var(--ink-2)" font-size="8"
-                        font-weight="600">Tool</text>
-                    </g>
-                    <g class="graph-node gn-4">
-                      <circle cx="160" cy="260" r="22" fill="rgba(11,20,35,0.94)" stroke="var(--accent)"
-                        stroke-width="1.5" />
-                      <text x="160" y="256" text-anchor="middle" fill="var(--accent)" font-size="11"
-                        font-weight="700">SQL</text>
-                      <text x="160" y="268" text-anchor="middle" fill="var(--ink-2)" font-size="8"
-                        font-weight="600">Decision</text>
-                    </g>
-                    <g class="graph-node gn-5">
-                      <circle cx="310" cy="250" r="22" fill="rgba(11,20,35,0.94)" stroke="var(--mint)"
-                        stroke-width="1.5" />
-                      <text x="310" y="246" text-anchor="middle" fill="var(--mint)" font-size="11"
-                        font-weight="700">CI</text>
-                      <text x="310" y="258" text-anchor="middle" fill="var(--ink-2)" font-size="8"
-                        font-weight="600">Pipeline</text>
-                    </g>
-                  </svg>
-                  <div class="slide-label">Keeps lineage and downstream work attached</div>
-                </div>
-              </div>
-
-              <!-- Slide 3: Query -->
-              <div class="hero-slide" data-slide="2">
-                <div class="slide-query">
-                  <div class="product-preview">
-                    <div class="preview-chrome">
-                      <div class="chrome-dots">
-                        <span></span><span></span><span></span>
-                      </div>
-                      <div class="chrome-bar">app.verachi.io</div>
-                    </div>
-                    <div class="preview-body">
-                      <div class="preview-search">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                          stroke-width="2" aria-hidden="true">
-                          <circle cx="11" cy="11" r="8" />
-                          <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                        </svg>
-                        <div class="preview-typing">
-                          <span class="typed-query">Why did we choose Postgres?</span><span
-                            class="cursor-blink">|</span>
-                        </div>
-                      </div>
-                      <div class="preview-result slide-result-1">
-                        <p>Postgres was chosen for the new microservice due to its <strong>JSONB support</strong>, which
-                          fits
-                          the multi-tenant schema better than MySQL.</p>
-                      </div>
-                      <div class="preview-citation slide-result-2">
-                        <div class="cite-badge">
-                          <span class="cite-dot"></span>
-                          Slack · #architecture-decisions · Sarah · Oct 14
-                        </div>
-                        <div class="cite-confidence">
-                          <span class="confidence-bar"><span class="confidence-fill"></span></span>
-                          <span>94% confidence</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="slide-label">Explains what changed and why</div>
-                </div>
-              </div>
-
-            </div>
-
-            <!-- Carousel indicators -->
-            <div class="carousel-dots" role="tablist" aria-label="Hero carousel steps">
-              <button class="carousel-dot is-active" role="tab" aria-selected="true" aria-label="Step 1: Connect"
-                data-dot="0">
-                <span class="dot-label">Connect</span>
-              </button>
-              <button class="carousel-dot" role="tab" aria-selected="false" aria-label="Step 2: Build Graph"
-                data-dot="1">
-                <span class="dot-label">Graph</span>
-              </button>
-              <button class="carousel-dot" role="tab" aria-selected="false" aria-label="Step 3: Query" data-dot="2">
-                <span class="dot-label">Query</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ========== PROOF ========== -->
-    <section class="section" id="proof">
-      <div class="container">
-        <div class="section-head">
-          <p class="section-kicker" data-observe="fade-up">Proof, Not Promise</p>
-          <h2 class="section-title" data-observe="fade-up" style="--delay: 1">A trusted record should show what changed
-            and who it affects.</h2>
-          <p class="section-subtitle" data-observe="fade-up" style="--delay: 2">The record is not just the answer. It
-            shows what was replaced, what active work now depends on it, and where the supporting evidence lives.</p>
-        </div>
-
-        <div class="proof-grid">
-          <article class="proof-record" data-observe="slide-up">
-            <div class="proof-record-top">
-              <span class="proof-chip">DEC-044</span>
-              <span class="proof-chip proof-chip-muted">Supersedes DEC-031</span>
-              <span class="proof-chip proof-chip-muted">3 downstream projects</span>
-              <span class="proof-chip proof-chip-accent">94% confidence</span>
-            </div>
-            <h3>Adopt PostgreSQL with JSONB for the multi-tenant event service.</h3>
-            <p class="proof-summary">
-              Chosen after comparing MySQL and PostgreSQL during the payments rewrite. This record replaces the earlier
-              MySQL shard plan after the migration spike showed that JSONB and row-level security fit the tenant model
-              better without losing auditability.
-            </p>
-
-            <div class="proof-relationship-strip" aria-label="Decision lineage and downstream impact">
-              <article class="proof-relation-card">
-                <span>Supersedes</span>
-                <strong>DEC-031 — MySQL shard plan</strong>
-                <p>Replaced once the spike proved that the newer tenant model needed JSONB flexibility and stronger audit controls.</p>
-              </article>
-              <article class="proof-relation-card">
-                <span>Depends on</span>
-                <strong>Platform auth unification</strong>
-                <p>The schema and access model assume the shared auth/session work lands first across the services in scope.</p>
-              </article>
-              <article class="proof-relation-card">
-                <span>Downstream work</span>
-                <strong>Checkout rewrite, tenant reporting, event replay</strong>
-                <p>Three active projects inherit this choice, so the affected delivery work stays visible from the same record.</p>
-              </article>
-            </div>
-
-            <div class="proof-columns">
-              <div class="proof-block">
-                <h4>Why this answer is trustworthy</h4>
-                <ul class="proof-list">
-                  <li>The summary is grounded in linked source artifacts.</li>
-                  <li>Confidence reflects how much direct evidence supports the record.</li>
-                  <li>The superseded path, dependency context, and update history are part of the audit trail.</li>
-                </ul>
-              </div>
-              <div class="proof-block">
-                <h4>Linked evidence</h4>
-                <ul class="proof-links">
-                  <li>Slack: <span>#architecture-decisions</span> with the original discussion thread</li>
-                  <li>Jira: <span>PAY-218</span> for the database selection work item</li>
-                  <li>GitHub: <span>PR #402</span> for the migration spike and implementation notes</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="proof-footer">
-              <span>Audit trail: captured from Slack reaction, reviewed in Verachi, linked to DEC-031, and still tied to the primary sources and downstream delivery work.</span>
-              <a href="trust.html">Review trust details</a>
-            </div>
-          </article>
-
-          <div class="proof-aside">
-            <article class="proof-note" data-observe="slide-up" style="--delay: 1">
-              <span class="proof-note-eyebrow">What Verachi reads</span>
-              <h3>Decision context from the systems your team already uses.</h3>
-              <p>Launch posture focuses on Slack, Jira, GitHub, and uploaded documents. The goal is evidence capture,
-                not replacing the systems where work already lives.</p>
-            </article>
-
-            <article class="proof-note" data-observe="slide-up" style="--delay: 2">
-              <span class="proof-note-eyebrow">What Verachi stores</span>
-              <h3>Cited summaries, relationship edges, metadata, and audit history.</h3>
-              <p>Primary sources remain primary. Verachi stores the memory layer that makes those sources reusable and
-                explainable across the workspace.</p>
-            </article>
-
-            <article class="proof-note" data-observe="slide-up" style="--delay: 3">
-              <span class="proof-note-eyebrow">What prospects can verify now</span>
-              <h3>A public trust path exists before login.</h3>
-              <p>Review data boundaries, citations, confidence posture, privacy, and terms directly from the public
-                site instead of hitting an auth wall.</p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ========== HOW IT WORKS ========== -->
-    <section class="section section-tight" id="how-it-works">
-      <div class="container workflow-container">
-        <div class="section-head section-head-centered">
-          <p class="section-kicker" data-observe="fade-up">How Verachi Works</p>
-          <h2 class="section-title" data-observe="fade-up" style="--delay: 1">Capture once. Keep the downstream picture.</h2>
-          <p class="section-subtitle" data-observe="fade-up" style="--delay: 2">Start from the tools your team already
-            uses, keep the lineage attached, and see which active work depends on the decision.</p>
-        </div>
-
-        <div class="triptych-strip" data-observe="fade-up" style="--delay: 3">
-
-          <!-- Panel 1: Connect -->
-          <div class="triptych-panel" data-panel="0">
-            <div class="triptych-badge">1</div>
-            <div class="triptych-scene">
-              <svg class="triptych-svg" viewBox="0 0 380 320" fill="none" aria-hidden="true">
-                <!-- Background ambient glow -->
-                <circle cx="300" cy="160" r="120" fill="rgba(143,217,255,0.04)" />
-
-                <!-- Connection lines flowing right -->
-                <line class="tp-line tpl-1" x1="60" y1="70" x2="300" y2="140" />
-                <line class="tp-line tpl-2" x1="60" y1="160" x2="300" y2="160" />
-                <line class="tp-line tpl-3" x1="60" y1="250" x2="300" y2="180" />
-                <line class="tp-line tpl-4" x1="140" y1="100" x2="300" y2="150" />
-
-                <!-- Tool nodes on left side -->
-                <g class="tp-node tp-n1">
-                  <circle cx="60" cy="70" r="28" fill="rgba(11,20,35,0.92)" stroke="rgba(171,194,229,0.18)"
-                    stroke-width="1.5" />
-                  <text x="60" y="66" text-anchor="middle" fill="#E01E5A" font-size="18" font-weight="700">#</text>
-                  <text x="60" y="84" text-anchor="middle" fill="var(--ink-2)" font-size="8"
-                    font-weight="600">Slack</text>
-                </g>
-                <g class="tp-node tp-n2">
-                  <circle cx="140" cy="100" r="22" fill="rgba(11,20,35,0.92)" stroke="rgba(171,194,229,0.18)"
-                    stroke-width="1.5" />
-                  <text x="140" y="96" text-anchor="middle" fill="#2684FF" font-size="15" font-weight="700">◆</text>
-                  <text x="140" y="114" text-anchor="middle" fill="var(--ink-2)" font-size="8"
-                    font-weight="600">Jira</text>
-                </g>
-                <g class="tp-node tp-n3">
-                  <circle cx="60" cy="160" r="28" fill="rgba(11,20,35,0.92)" stroke="rgba(171,194,229,0.18)"
-                    stroke-width="1.5" />
-                  <text x="60" y="156" text-anchor="middle" fill="var(--ink-0)" font-size="18"
-                    font-weight="700">⬡</text>
-                  <text x="60" y="174" text-anchor="middle" fill="var(--ink-2)" font-size="8"
-                    font-weight="600">GitHub</text>
-                </g>
-                <g class="tp-node tp-n4">
-                  <circle cx="60" cy="250" r="24" fill="rgba(11,20,35,0.92)" stroke="rgba(171,194,229,0.18)"
-                    stroke-width="1.5" />
-                  <text x="60" y="246" text-anchor="middle" fill="#F6CF93" font-size="16" font-weight="700">▣</text>
-                  <text x="60" y="264" text-anchor="middle" fill="var(--ink-2)" font-size="8"
-                    font-weight="600">Docs</text>
-                </g>
-
-                <!-- Verachi hub on the right edge (continues into panel 2) -->
-                <circle class="tp-glow" cx="300" cy="160" r="42" fill="rgba(143,217,255,0.06)" />
-                <circle cx="300" cy="160" r="34" fill="rgba(11,20,35,0.96)" stroke="var(--accent)" stroke-width="2" />
-                <g class="tp-center-icon">
-                  <path d="M300 144L290 149l10 5 10-5-10-5z" stroke="var(--accent)" stroke-width="1.5"
-                    stroke-linecap="round" stroke-linejoin="round" fill="none" />
-                  <path d="M290 159l10 5 10-5" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"
-                    stroke-linejoin="round" fill="none" />
-                  <path d="M290 154l10 5 10-5" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"
-                    stroke-linejoin="round" fill="none" />
-                </g>
-              </svg>
-            </div>
-            <div class="triptych-label">
-              <h3>Capture where work already happens</h3>
-              <p>Slack threads, Jira issues, GitHub pull requests, and uploaded documents become cited inputs instead of duplicate forms.</p>
-            </div>
-          </div>
-
-          <!-- Panel 2: Process -->
-          <div class="triptych-panel" data-panel="1">
-            <div class="triptych-badge">2</div>
-            <div class="triptych-scene">
-              <svg class="triptych-svg" viewBox="0 0 380 320" fill="none" aria-hidden="true">
-                <!-- Background ambient -->
-                <circle cx="190" cy="160" r="140" fill="rgba(132,241,212,0.03)" />
-
-                <!-- Data flow: particles moving through pipeline -->
-                <rect class="tp-pipe" x="30" y="140" width="320" height="40" rx="20" />
-
-                <!-- Data particles flowing -->
-                <circle class="tp-particle tp-p1" cx="60" cy="160" r="5" fill="var(--accent)" opacity="0.7" />
-                <circle class="tp-particle tp-p2" cx="120" cy="160" r="4" fill="var(--mint)" opacity="0.6" />
-                <circle class="tp-particle tp-p3" cx="200" cy="160" r="6" fill="var(--gold)" opacity="0.7" />
-                <circle class="tp-particle tp-p4" cx="280" cy="160" r="5" fill="var(--accent)" opacity="0.6" />
-                <circle class="tp-particle tp-p5" cx="340" cy="160" r="4" fill="var(--mint)" opacity="0.5" />
-
-                <!-- Processing stages -->
-                <g class="tp-stage tp-s1">
-                  <rect x="60" y="60" width="80" height="50" rx="14" fill="rgba(11,20,35,0.94)" stroke="var(--accent)"
-                    stroke-width="1.5" />
-                  <text x="100" y="82" text-anchor="middle" fill="var(--accent)" font-size="10"
-                    font-weight="700">Normalize</text>
-                  <text x="100" y="98" text-anchor="middle" fill="var(--ink-2)" font-size="8"
-                    font-weight="600">Structure</text>
-                </g>
-                <line class="tp-flow-line" x1="100" y1="110" x2="100" y2="140" stroke="rgba(143,217,255,0.2)"
-                  stroke-width="1" stroke-dasharray="4 3" />
-
-                <g class="tp-stage tp-s2">
-                  <rect x="160" y="60" width="80" height="50" rx="14" fill="rgba(11,20,35,0.94)" stroke="var(--mint)"
-                    stroke-width="1.5" />
-                  <text x="200" y="82" text-anchor="middle" fill="var(--mint)" font-size="10"
-                    font-weight="700">Classify</text>
-                  <text x="200" y="98" text-anchor="middle" fill="var(--ink-2)" font-size="8"
-                    font-weight="600">Categorize</text>
-                </g>
-                <line class="tp-flow-line" x1="200" y1="110" x2="200" y2="140" stroke="rgba(132,241,212,0.2)"
-                  stroke-width="1" stroke-dasharray="4 3" />
-
-                <g class="tp-stage tp-s3">
-                  <rect x="260" y="60" width="80" height="50" rx="14" fill="rgba(11,20,35,0.94)" stroke="var(--gold)"
-                    stroke-width="1.5" />
-                  <text x="300" y="82" text-anchor="middle" fill="var(--gold)" font-size="10"
-                    font-weight="700">Cite</text>
-                  <text x="300" y="98" text-anchor="middle" fill="var(--ink-2)" font-size="8" font-weight="600">Link
-                    Sources</text>
-                </g>
-                <line class="tp-flow-line" x1="300" y1="110" x2="300" y2="140" stroke="rgba(246,207,147,0.2)"
-                  stroke-width="1" stroke-dasharray="4 3" />
-
-                <!-- Output nodes below pipeline -->
-                <g class="tp-stage tp-s4">
-                  <rect x="100" y="210" width="90" height="44" rx="12" fill="rgba(11,20,35,0.94)"
-                    stroke="rgba(171,194,229,0.18)" stroke-width="1" />
-                  <text x="145" y="228" text-anchor="middle" fill="var(--ink-1)" font-size="9" font-weight="600">📋
-                    Records</text>
-                  <text x="145" y="244" text-anchor="middle" fill="var(--ink-2)" font-size="7" font-weight="600">with
-                    citations</text>
-                </g>
-                <line class="tp-flow-line" x1="145" y1="180" x2="145" y2="210" stroke="rgba(143,217,255,0.14)"
-                  stroke-width="1" stroke-dasharray="4 3" />
-
-                <g class="tp-stage tp-s5">
-                  <rect x="210" y="210" width="90" height="44" rx="12" fill="rgba(11,20,35,0.94)"
-                    stroke="rgba(171,194,229,0.18)" stroke-width="1" />
-                  <text x="255" y="228" text-anchor="middle" fill="var(--ink-1)" font-size="9" font-weight="600">🔗
-                    Relations</text>
-                  <text x="255" y="244" text-anchor="middle" fill="var(--ink-2)" font-size="7"
-                    font-weight="600">auto-linked</text>
-                </g>
-                <line class="tp-flow-line" x1="255" y1="180" x2="255" y2="210" stroke="rgba(143,217,255,0.14)"
-                  stroke-width="1" stroke-dasharray="4 3" />
-              </svg>
-            </div>
-            <div class="triptych-label">
-              <h3>Attach citations and lineage</h3>
-              <p>Verachi links source evidence, superseded records, and adjacent work into one durable decision surface.</p>
-            </div>
-          </div>
-
-          <!-- Panel 3: Mind Map -->
-          <div class="triptych-panel" data-panel="2">
-            <div class="triptych-badge">3</div>
-            <div class="triptych-scene">
-              <svg class="triptych-svg" viewBox="0 0 380 320" fill="none" aria-hidden="true">
-                <!-- Background ambient -->
-                <circle cx="190" cy="160" r="150" fill="rgba(246,207,147,0.03)" />
-
-                <!-- Connection web -->
-                <line class="tp-web tw-1" x1="190" y1="60" x2="80" y2="140" />
-                <line class="tp-web tw-2" x1="190" y1="60" x2="300" y2="120" />
-                <line class="tp-web tw-3" x1="80" y1="140" x2="120" y2="250" />
-                <line class="tp-web tw-4" x1="300" y1="120" x2="310" y2="240" />
-                <line class="tp-web tw-5" x1="80" y1="140" x2="300" y2="120" />
-                <line class="tp-web tw-6" x1="120" y1="250" x2="310" y2="240" />
-                <line class="tp-web tw-7" x1="190" y1="60" x2="120" y2="250" />
-                <line class="tp-web tw-8" x1="190" y1="60" x2="310" y2="240" />
-                <line class="tp-web tw-9" x1="80" y1="140" x2="310" y2="240" />
-                <line class="tp-web tw-10" x1="300" y1="120" x2="120" y2="250" />
-
-                <!-- Mind map nodes -->
-                <g class="tp-mind tp-m1">
-                  <circle cx="190" cy="60" r="30" fill="rgba(11,20,35,0.94)" stroke="var(--accent)" stroke-width="2" />
-                  <text x="190" y="56" text-anchor="middle" fill="var(--accent)" font-size="13"
-                    font-weight="700">💡</text>
-                  <text x="190" y="72" text-anchor="middle" fill="var(--ink-1)" font-size="8"
-                    font-weight="700">Ideas</text>
-                </g>
-                <g class="tp-mind tp-m2">
-                  <circle cx="80" cy="140" r="26" fill="rgba(11,20,35,0.94)" stroke="#ff6b6b" stroke-width="1.5" />
-                  <text x="80" y="136" text-anchor="middle" fill="#ff6b6b" font-size="13" font-weight="700">⚠</text>
-                  <text x="80" y="152" text-anchor="middle" fill="var(--ink-1)" font-size="8"
-                    font-weight="700">Risks</text>
-                </g>
-                <g class="tp-mind tp-m3">
-                  <circle cx="300" cy="120" r="26" fill="rgba(11,20,35,0.94)" stroke="var(--mint)" stroke-width="1.5" />
-                  <text x="300" y="116" text-anchor="middle" fill="var(--mint)" font-size="13"
-                    font-weight="700">📈</text>
-                  <text x="300" y="132" text-anchor="middle" fill="var(--ink-1)" font-size="8"
-                    font-weight="700">Progress</text>
-                </g>
-                <g class="tp-mind tp-m4">
-                  <circle cx="120" cy="250" r="24" fill="rgba(11,20,35,0.94)" stroke="var(--gold)" stroke-width="1.5" />
-                  <text x="120" y="246" text-anchor="middle" fill="var(--gold)" font-size="13"
-                    font-weight="700">📊</text>
-                  <text x="120" y="262" text-anchor="middle" fill="var(--ink-1)" font-size="8"
-                    font-weight="700">Data</text>
-                </g>
-                <g class="tp-mind tp-m5">
-                  <circle cx="310" cy="240" r="24" fill="rgba(11,20,35,0.94)" stroke="var(--accent-strong)"
-                    stroke-width="1.5" />
-                  <text x="310" y="236" text-anchor="middle" fill="var(--accent-strong)" font-size="13"
-                    font-weight="700">✓</text>
-                  <text x="310" y="252" text-anchor="middle" fill="var(--ink-1)" font-size="8"
-                    font-weight="700">Decisions</text>
-                </g>
-              </svg>
-            </div>
-            <div class="triptych-label">
-              <h3>See downstream impact</h3>
-              <p>Open the graph to review dependent projects, conflicting work, and gaps where active delivery still lacks a decision.</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ========== WHY VERACHI ========== -->
-    <section class="section" id="why">
-      <div class="container">
-        <div class="section-head">
-          <p class="section-kicker" data-observe="fade-up">Why Verachi</p>
-          <h2 class="section-title" data-observe="fade-up" style="--delay: 1">Lightweight in the workflow. Rigorous in
-            the answer.</h2>
-          <p class="section-subtitle" data-observe="fade-up" style="--delay: 2">The capture moment stays almost
-            invisible. The trust moment is unmistakable when someone needs the original source.</p>
-        </div>
-
-        <div class="feature-layout">
-          <!-- Primary feature — larger -->
-          <div class="feature-card feature-primary" data-observe="slide-up">
-            <div class="feat-visual">
-              <div class="mock-doc">
-                <div class="m-line w-full"></div>
-                <div class="m-line w-3/4"></div>
-                <div class="m-highlight">
-                  <div class="m-line w-1/2"></div>
-                  <div class="m-tooltip">Source: PR #402</div>
-                </div>
-                <div class="m-line w-full"></div>
-              </div>
-            </div>
-            <h3>Every answer is cited</h3>
-            <p>Verachi links every claim to its original source — a Slack thread, a Jira ticket, a PR comment. You
-              verify the answer, not the tool.</p>
-          </div>
-
-          <!-- Secondary features — smaller, side by side -->
-          <div class="feature-card feature-secondary" data-observe="slide-up" style="--delay: 1">
-            <h3>Zero workflow change</h3>
-            <p>Connect Slack, Jira, and GitHub. Upload supporting documents when needed. There's no new tool to learn,
-              no duplicate forms to fill out, and no forced system switch.</p>
-          </div>
-
-          <div class="feature-card feature-secondary" data-observe="slide-up" style="--delay: 2">
-            <h3>Works in your IDE</h3>
-            <p>Our MCP server lets Cursor, Copilot, and other tools query your team's decision history while you code.
-              Context arrives where you need it.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ========== TESTIMONIALS ========== -->
-    <section class="section section-dark" id="testimonials">
-      <div class="container">
-        <div class="section-head">
-          <p class="section-kicker" data-observe="fade-up">Customer Stories</p>
-          <h2 class="section-title" data-observe="fade-up" style="--delay: 1">Teams stop re-litigating the same
-            decisions.</h2>
-          <p class="section-subtitle" data-observe="fade-up" style="--delay: 2">What changes is not just speed. It is
-            confidence in the answer and calm in the workflow.</p>
-        </div>
-
-        <div class="testimonial-layout">
-          <blockquote class="testimonial-card testimonial-featured" data-observe="slide-up">
-            <p class="testimonial-quote">
-              We onboarded four engineers last quarter. Before Verachi, each one spent their first two weeks asking
-              “why” questions in Slack. Now they search Verachi and get cited answers in seconds. Onboarding dropped
-              from 15 days to 4.
-            </p>
-            <footer class="testimonial-person">
-              <img class="testimonial-avatar" src="./avatars/sarah.png" alt="Sarah Jenkins" width="48" height="48"
-                loading="lazy" />
-              <div>
-                <div class="testimonial-name">Sarah Jenkins</div>
-                <div class="testimonial-role">VP of Engineering, TechCorp</div>
-              </div>
-            </footer>
-          </blockquote>
-
-          <blockquote class="testimonial-card" data-observe="slide-up" style="--delay: 1">
-            <p class="testimonial-quote">
-              The thing I trust about Verachi is that it shows me where the answer came from. I click the citation, I
-              see the original Slack thread. No black box.
-            </p>
-            <footer class="testimonial-person">
-              <img class="testimonial-avatar" src="./avatars/marcus.png" alt="Marcus Rodriguez" width="48" height="48"
-                loading="lazy" />
-              <div>
-                <div class="testimonial-name">Marcus Rodriguez</div>
-                <div class="testimonial-role">Lead Architect, Innovate.io</div>
-              </div>
-            </footer>
-          </blockquote>
-
-          <blockquote class="testimonial-card" data-observe="slide-up" style="--delay: 2">
-            <p class="testimonial-quote">
-              We used to re-litigate the same database decision every six months. Verachi ended that loop — the decision
-              is recorded, cited, and findable. Done.
-            </p>
-            <footer class="testimonial-person">
-              <img class="testimonial-avatar" src="./avatars/emma.png" alt="Emma Lin" width="48" height="48"
-                loading="lazy" />
-              <div>
-                <div class="testimonial-name">Emma Lin</div>
-                <div class="testimonial-role">CTO, BuildFast</div>
-              </div>
-            </footer>
-          </blockquote>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ========== LAUNCH PATHS ========== -->
-    <section class="section" id="plans">
-      <div class="container">
-        <div class="section-head">
-          <p class="section-kicker" data-observe="fade-up">Launch Paths</p>
-          <h2 class="section-title" data-observe="fade-up" style="--delay: 1">Evaluate first. Roll out once trust is
-            earned.</h2>
-          <p class="section-subtitle" data-observe="fade-up" style="--delay: 2">The current launch posture is
-            read-first and wedge-first: prove the decision memory layer, then expand the rollout around the teams who
-            rely on it daily.</p>
-        </div>
-
-        <div class="launch-grid">
-          <article class="launch-card" data-observe="slide-up">
-            <span class="launch-card-eyebrow">Self-serve</span>
-            <h3>Start with one workspace.</h3>
-            <p>Best for teams that want to connect the wedge quickly and evaluate cited decision records in the live
-              product.</p>
-            <ul class="launch-list" aria-label="Self-serve launch path">
-              <li>Connect Slack, Jira, GitHub, and uploaded documents</li>
-              <li>Use the app first, then extend into API or MCP workflows</li>
-              <li>Keep primary systems primary while Verachi builds the memory layer</li>
-            </ul>
-            <a class="button button-outline" href="https://app.verachi.io/signup">Create a workspace</a>
-          </article>
-
-          <article class="launch-card launch-card-featured" data-observe="slide-up" style="--delay: 1">
-            <span class="launch-card-eyebrow">Guided pilot</span>
-            <h3>Prove the wedge with delivery leadership and engineering together.</h3>
-            <p>Best for teams that need activation help, rollout shape, and a concrete trust review before expanding
-              usage.</p>
-            <ul class="launch-list" aria-label="Guided pilot launch path">
-              <li>Align on one buyer story: fewer repeated decisions and less context archaeology</li>
-              <li>Define the first capture path and first visible decision value</li>
-              <li>Review sources, boundaries, and operator expectations up front</li>
-            </ul>
-            <a class="button button-solid" href="sales.html">Talk to sales</a>
-          </article>
-
-          <article class="launch-card" data-observe="slide-up" style="--delay: 2">
-            <span class="launch-card-eyebrow">Trust review</span>
-            <h3>Do due diligence without logging in.</h3>
-            <p>Use the public trust path to verify what Verachi reads, what it stores, and how evidence remains
-              traceable before procurement or security review begins.</p>
-            <ul class="launch-list" aria-label="Trust review launch path">
-              <li>Read the public data-boundaries and trust page</li>
-              <li>Review privacy and terms alongside the product story</li>
-              <li>Use the same trust language your future users will see in-product</li>
-            </ul>
-            <a class="button button-outline" href="trust.html">Review trust</a>
-          </article>
-        </div>
-
-        <div class="evaluation-links" data-observe="fade-up" style="--delay: 3">
-          <a class="evaluation-link" href="trust.html">Trust &amp; data boundaries</a>
-          <a class="evaluation-link" href="sales.html">Product story &amp; demo path</a>
-          <a class="evaluation-link" href="privacy.html">Privacy</a>
-          <a class="evaluation-link" href="terms.html">Terms</a>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ========== ROI CALCULATOR ========== -->
-    <section id="roi" class="section roi-section"
-      style="background: rgba(255, 255, 255, 0.02); border-top: 1px solid var(--line-0); border-bottom: 1px solid var(--line-0);">
-      <div class="container">
-        <div class="section-head section-head-centered" data-observe="fade-up">
-          <p class="section-kicker">ROI Calculator</p>
-          <h2 class="section-title">See your potential savings</h2>
-          <p class="section-subtitle">Calculate how much time and money your team can save by eliminating decision
-            archaeology and redundant discussions.</p>
-        </div>
-
-        <div class="roi-grid">
-          <div class="roi-controls" data-observe="slide-up">
-            <div class="slider-group">
-              <div class="slider-header">
-                <label for="engineers">Engineering Team Size</label>
-                <div class="slider-val-container">
-                  <span id="engineers-val" class="slider-value">50</span>
-                  <input type="number" id="engineers-input" class="slider-input" min="10" value="50"
-                    style="display: none;">
-                </div>
-              </div>
-              <input type="range" id="engineers" name="engineers" min="10" max="500" value="50" step="10"
-                class="roi-slider">
-            </div>
-
-            <div class="slider-group">
-              <div class="slider-header">
-                <label for="hourly-rate">Avg. Hourly Rate ($)</label>
-                <div class="slider-val-container">
-                  <span id="rate-val" class="slider-value">$75</span>
-                  <input type="number" id="hourly-rate-input" class="slider-input" min="30" value="75"
-                    style="display: none;">
-                </div>
-              </div>
-              <input type="range" id="hourly-rate" name="hourly-rate" min="30" max="150" value="75" step="5"
-                class="roi-slider">
-            </div>
-
-            <div class="slider-group">
-              <div class="slider-header">
-                <label for="hours-lost">Hours lost per engineer / week</label>
-                <div class="slider-val-container">
-                  <span id="hours-val" class="slider-value">4 hrs</span>
-                  <input type="number" id="hours-lost-input" class="slider-input" min="1" value="4"
-                    style="display: none;">
-                </div>
-              </div>
-              <input type="range" id="hours-lost" name="hours-lost" min="1" max="10" value="4" step="1"
-                class="roi-slider">
-              <p class="slider-hint" style="color: var(--ink-2); font-size: 0.85rem; margin-top: 0.5rem;">Time spent
-                digging for context or re-discussing decisions.</p>
-            </div>
-          </div>
-
-          <div class="roi-results" data-observe="slide-up" style="--delay: 1">
-            <div class="result-card">
-              <h3>Estimated Annual Savings</h3>
-              <div class="result-number" id="money-saved">$780,000</div>
-              <p class="result-label">Reclaimed productivity value</p>
-            </div>
-            <div class="result-card secondary-result">
-              <h3>Hours Reclaimed</h3>
-              <div class="result-number" id="time-saved">10,400</div>
-              <p class="result-label">Hours returned to engineering per year</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== CONTACT FORM ========== -->
-    <section id="demo" class="section contact-section">
-      <div class="container">
-        <div class="contact-grid">
-          <div class="contact-text" data-observe="fade-up">
-            <h2 class="section-title">Stop repeating mistakes.</h2>
-            <p class="section-subtitle" style="margin-bottom: 2rem;">Empower your team with a canonical, cited memory
-              layer. Talk to our sales team to see how Verachi can scale across your organization.</p>
-            <ul class="contact-benefits">
-              <li>✓ Custom onboarding & data migration</li>
-              <li>✓ Enterprise SLA & dedicated support</li>
-              <li>✓ Unlimited integrations</li>
-            </ul>
-          </div>
-          <div class="contact-form-wrapper" data-observe="slide-up" style="--delay: 1">
-            <form class="contact-form" action="#" method="POST"
-              onsubmit="event.preventDefault(); alert('Thanks for your request! Our team will contact you shortly.');">
-              <div class="form-row" style="display: flex; gap: 1.5rem;">
-                <div class="form-group" style="flex: 1;">
-                  <label for="name">Full Name</label>
-                  <input type="text" id="name" name="name" placeholder="Jane Doe" required />
-                </div>
-                <div class="form-group" style="flex: 1;">
-                  <label for="email">Work Email</label>
-                  <input type="email" id="email" name="email" placeholder="jane@company.com" required />
-                </div>
-              </div>
-              <div class="form-row" style="display: flex; gap: 1.5rem;">
-                <div class="form-group" style="flex: 1;">
-                  <label for="title">Job Title</label>
-                  <input type="text" id="title" name="title" placeholder="VP of Engineering" required />
-                </div>
-                <div class="form-group" style="flex: 1;">
-                  <label for="company">Company</label>
-                  <input type="text" id="company" name="company" placeholder="Acme Corp" required />
-                </div>
-              </div>
-              <div class="form-row" style="display: flex; gap: 1.5rem;">
-                <div class="form-group" style="flex: 1;">
-                  <label for="company_size">Company Size</label>
-                  <select id="company_size" name="company_size" required class="form-select">
-                    <option value="" disabled selected>Select size...</option>
-                    <option value="1-50">1 - 50</option>
-                    <option value="51-200">51 - 200</option>
-                    <option value="201-500">201 - 500</option>
-                    <option value="501-1000">501 - 1000</option>
-                    <option value="1000+">1000+</option>
-                  </select>
-                </div>
-                <div class="form-group" style="flex: 1;">
-                  <label for="industry">Industry</label>
-                  <select id="industry" name="industry" required class="form-select">
-                    <option value="" disabled selected>Select industry...</option>
-                    <option value="technology">Technology</option>
-                    <option value="finance">Finance</option>
-                    <option value="healthcare">Healthcare</option>
-                    <option value="retail">Retail</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="country">Country/Region</label>
-                <select id="country" name="country" required class="form-select">
-                  <option value="" disabled selected>Select region...</option>
-                  <option value="north_america">North America</option>
-                  <option value="europe">Europe</option>
-                  <option value="asia_pacific">Asia Pacific</option>
-                  <option value="latin_america">Latin America</option>
-                  <option value="middle_east_africa">Middle East & Africa</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="needs">What kind of needs do you have?</label>
-                <textarea id="needs" name="needs" rows="3" placeholder="Tell us about your team and use case..."
-                  required></textarea>
-              </div>
-              <button type="submit" class="button button-solid form-submit"
-                style="width: 100%; margin-top: 0.5rem; border: none;">Submit Request</button>
-            </form>
+            <a class="button button-outline" href="sales.html">Talk to sales</a>
           </div>
         </div>
       </div>
@@ -999,9 +469,8 @@
       </div>
       <div class="footer-col">
         <h4>Product</h4>
-        <a href="#proof">See A Record</a>
-        <a href="#how-it-works">How It Works</a>
-        <a href="#why">Why Verachi</a>
+        <a href="#showcase">How It Works</a>
+        <a href="#use-cases">Use Cases</a>
         <a href="trust.html">Trust &amp; Data Boundaries</a>
         <a href="testimonials.html">Customer Stories</a>
       </div>
@@ -1012,6 +481,12 @@
         <a href="trust.html">Trust</a>
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="#">Blog</a>
+        <a href="#">Docs</a>
+        <a href="#">Changelog</a>
       </div>
     </div>
     <div class="container footer-legal">

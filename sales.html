@@ -1,265 +1,237 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Verachi — Decide Once. Cascade Everywhere.</title>
+  <title>Contact Sales — Verachi</title>
+  <meta name="description"
+    content="Talk to the Verachi sales team. Get a personalized demo and see how cited decision memory can transform your engineering organization." />
+  <meta name="theme-color" content="#0a0b10" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://verachi.io/sales.html" />
+
+  <link rel="icon" href="./favicon.ico" />
+
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link href="./styles.css" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="./landing.css" />
+  <script src="./landing.js" defer></script>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NHXTJ2NZMT"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'G-NHXTJ2NZMT');
   </script>
 </head>
-<body>
-  <div class="bg-effects">
-    <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
-  </div>
 
-  <nav class="navbar">
-    <div class="container nav-inner">
-      <a href="index.html" class="brand"><span class="kanji">知</span> verachi</a>
-      <div class="nav-links">
-        <a href="sales.html" class="nav-link">Sales Deck</a>
-        <a href="story.html" class="nav-link">Product Story</a>
-        <a href="index.html#plans" class="nav-link">Launch Paths</a>
-      </div>
-      <div class="nav-actions">
-        <a href="https://app.verachi.io/login" class="nav-link">Log in</a>
-        <a href="#demo" class="btn btn-primary">Start for free</a>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header" data-header>
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="Verachi home">
+        <div class="brand-mark">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+            <path d="M2 17l10 5 10-5" />
+            <path d="M2 12l10 5 10-5" />
+          </svg>
+        </div>
+        <span class="brand-word">VERACHI</span>
+      </a>
+
+      <button class="menu-toggle" id="mobileMenuToggle" type="button" aria-expanded="false" aria-controls="primaryNav"
+        aria-label="Toggle menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+
+      <nav class="site-nav" id="primaryNav" aria-label="Primary">
+        <a href="index.html#showcase">How It Works</a>
+        <a href="index.html#use-cases">Use Cases</a>
+        <a href="trust.html">Trust</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="header-link" href="https://app.verachi.io/login">Sign In</a>
+        <a class="button button-compact" href="https://app.verachi.io/signup">Get Started</a>
       </div>
     </div>
-  </nav>
+  </header>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <div class="hero-content" style="max-width: 800px; margin: 0 auto; text-align: center;">
-          <div class="badge reveal-up">The Enterprise Solution</div>
-          <h1 class="reveal-up delay-1">
-            Decide once.<br/>
-            <span class="text-gradient">Cascade everywhere.</span>
-          </h1>
-          <p class="hero-subtitle reveal-up delay-2">
-            Eliminate "zero decision memory." Protect your organization's institutional knowledge by capturing decisions where they happen and instantly distributing them to the rest of the team. No new workflows required.
-          </p>
-          <div class="hero-cta reveal-up delay-3" style="justify-content: center;">
-            <a href="#demo" class="btn btn-primary btn-lg">Book a Demo</a>
-            <a href="#roi" class="btn btn-secondary btn-lg">Calculate ROI</a>
-          </div>
-        </div>
+
+  <main id="main-content" tabindex="-1">
+
+    <!-- ========== HERO ========== -->
+    <section class="hero" aria-labelledby="sales-hero-title" style="padding-bottom: 0;">
+      <div class="hero-backdrop" aria-hidden="true">
+        <div class="hero-glow hero-glow-primary"></div>
+      </div>
+
+      <div class="container hero-centered">
+        <div class="hero-eyebrow" data-reveal="fade-up">Contact Sales</div>
+        <h1 id="sales-hero-title" class="display-title" data-reveal="fade-up" style="--delay: 1">
+          Let's find the right <span class="title-emphasis">plan for your team.</span>
+        </h1>
+
+        <p class="hero-intro" data-reveal="fade-up" style="--delay: 2">
+          Tell us a little about your organization and we'll tailor a demo to your exact workflow.
+        </p>
       </div>
     </section>
 
-    <!-- Social Proof / Logos -->
-    <section class="social-proof section-pad" style="padding-top: 2rem;">
-      <div class="container">
-        <p class="section-label text-center">Trusted by modern engineering teams</p>
-        <div class="logo-grid">
-          <div class="logo-placeholder">Acme Corp</div>
-          <div class="logo-placeholder">Globex</div>
-          <div class="logo-placeholder">Soylent</div>
-          <div class="logo-placeholder">Initech</div>
-          <div class="logo-placeholder">Umbrella</div>
-        </div>
-      </div>
-    </section>
 
-    <!-- The Problem -->
-    <section class="social-proof section-pad" style="padding-top: 4rem;">
+    <!-- ========== CONTACT FORM ========== -->
+    <section class="section" id="contact-form" style="padding-top: clamp(48px, 5vw, 72px);">
       <div class="container">
-        <div class="section-header text-center reveal-up">
-          <h2>The cost of "Zero Decision Memory"</h2>
-          <p class="section-subtitle">Data is scattered. Slack threads disappear. Handover context is lost. Teams are forced to repeatedly re-litigate the same trade-offs, leading to silent project failures.</p>
-        </div>
-        <div class="bento-grid" style="margin-top: 3rem;">
-           <div class="bento-card reveal-up">
-            <div class="card-content">
-              <h3>Same Problem Twice</h3>
-              <p>Engineering teams waste countless hours debugging issues that were already solved weeks ago in a forgotten Slack thread.</p>
-            </div>
-          </div>
-          <div class="bento-card reveal-up delay-1">
-            <div class="card-content">
-              <h3>Decision Archaeology</h3>
-              <p>Project managers spend 20% of their week digging through Jira and GitHub just to report *why* a decision was made.</p>
-            </div>
-          </div>
-          <div class="bento-card reveal-up delay-2">
-            <div class="card-content">
-              <h3>Lagging Information</h3>
-              <p>Leadership acts on partial information because the real context is locked in private conversations and unlinked PRs.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        <div class="contact-layout" data-observe="fade-up">
 
-    <!-- Value Prop -->
-    <section id="features" class="features section-pad">
-      <div class="container">
-        <div class="section-header text-center reveal-up">
-          <div class="badge">How Verachi Works</div>
-          <h2>The layer on top of your existing tools</h2>
-          <p class="section-subtitle">No rip-and-replace. Verachi connects to Jira, Slack, and GitHub to observe, capture, and cite project activity.</p>
-        </div>
-        
-        <div class="bento-grid">
-          <div class="bento-card reveal-up">
-            <div class="card-content">
-              <h3>1. Connect & Observe</h3>
-              <p>Read-only integrations allow Verachi to observe real project activity without disrupting how developers and managers currently work.</p>
-            </div>
-          </div>
-          
-          <div class="bento-card reveal-up delay-1">
-            <div class="card-content">
-              <h3>2. Capture & Cite</h3>
-              <p>Capture decisions with a simple emoji reaction (📌) or slash command. Verachi creates a summarized "Decision Record" with direct citations to the primary source.</p>
-            </div>
-          </div>
-          
-          <div class="bento-card reveal-up delay-2">
-            <div class="card-content">
-              <h3>3. Cascade & Reuse</h3>
-              <p>Verachi instantly links and distributes decisions to the rest of the organization. When troubleshooting new incidents, similar past decisions are surfaced automatically.</p>
-            </div>
-          </div>
+          <!-- Left column: benefits -->
+          <div class="contact-info">
+            <h2 class="contact-info-title">What you'll get</h2>
 
-          <div class="bento-card col-span-3 reveal-up delay-3" style="text-align: center;">
-             <div class="card-content">
-              <h3>Trust-First AI</h3>
-              <p><strong>"No citation, no claim."</strong> Every piece of AI-generated insight includes direct citations to the primary sources and a confidence indicator. External actions are approval-gated until you fully trust the system.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ROI Calculator Section -->
-    <section id="roi" class="roi-section section-pad" style="background: rgba(255, 255, 255, 0.02); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-      <div class="container">
-        <div class="section-header text-center reveal-up">
-          <div class="badge">ROI Calculator</div>
-          <h2>See your potential savings</h2>
-          <p class="section-subtitle">Calculate how much time and money your team can save by eliminating decision archaeology and redundant discussions.</p>
-        </div>
-        
-        <div class="roi-grid">
-          <div class="roi-controls reveal-up delay-1">
-            <div class="slider-group">
-              <div class="slider-header">
-                <label for="engineers">Engineering Team Size</label>
-                <span id="engineers-val" class="slider-value">50</span>
-              </div>
-              <input type="range" id="engineers" name="engineers" min="10" max="500" value="50" step="10" class="roi-slider">
-            </div>
-            
-            <div class="slider-group">
-              <div class="slider-header">
-                <label for="hourly-rate">Avg. Hourly Rate ($)</label>
-                <span id="rate-val" class="slider-value">$75</span>
-              </div>
-              <input type="range" id="hourly-rate" name="hourly-rate" min="30" max="150" value="75" step="5" class="roi-slider">
-            </div>
-            
-            <div class="slider-group">
-              <div class="slider-header">
-                <label for="hours-lost">Hours lost per engineer / week</label>
-                <span id="hours-val" class="slider-value">4 hrs</span>
-              </div>
-              <input type="range" id="hours-lost" name="hours-lost" min="1" max="10" value="4" step="1" class="roi-slider">
-              <p class="slider-hint" style="color: var(--fg-muted); font-size: 0.85rem; margin-top: 0.5rem;">Time spent digging for context or re-discussing decisions.</p>
-            </div>
-          </div>
-          
-          <div class="roi-results reveal-up delay-2">
-            <div class="result-card">
-              <h3>Estimated Annual Savings</h3>
-              <div class="result-number" id="money-saved">$780,000</div>
-              <p class="result-label">Reclaimed productivity value</p>
-            </div>
-            <div class="result-card secondary-result">
-              <h3>Hours Reclaimed</h3>
-              <div class="result-number" id="time-saved">10,400</div>
-              <p class="result-label">Hours returned to engineering per year</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Form Section -->
-    <section id="demo" class="contact-section section-pad">
-      <div class="container">
-        <div class="contact-grid">
-          <div class="contact-text reveal-up">
-            <h2>Stop repeating mistakes.</h2>
-            <p>Empower your team with a canonical, cited memory layer. Talk to our sales team to see how Verachi can scale across your organization.</p>
-            <ul class="contact-benefits">
-              <li>✓ Custom onboarding & data migration</li>
-              <li>✓ Enterprise SLA & dedicated support</li>
-              <li>✓ Unlimited integrations</li>
-            </ul>
-          </div>
-          <div class="contact-form-wrapper reveal-up delay-1">
-            <form class="contact-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Thanks for your request! Our team will contact you shortly.');">
-              <div class="form-row" style="display: flex; gap: 1.5rem;">
-                <div class="form-group" style="flex: 1;">
-                  <label for="name">Full Name</label>
-                  <input type="text" id="name" name="name" placeholder="Jane Doe" required />
+            <div class="contact-benefit-list">
+              <div class="contact-benefit-item">
+                <div class="benefit-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 11l3 3L22 4" />
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                  </svg>
                 </div>
-                <div class="form-group" style="flex: 1;">
-                  <label for="email">Work Email</label>
-                  <input type="email" id="email" name="email" placeholder="jane@company.com" required />
+                <div>
+                  <h3 class="contact-benefit-title">Personalized demo</h3>
+                  <p class="contact-benefit-desc">See Verachi working with your actual tools — Slack, Jira, GitHub.</p>
                 </div>
               </div>
-              <div class="form-row" style="display: flex; gap: 1.5rem;">
-                <div class="form-group" style="flex: 1;">
-                  <label for="title">Job Title</label>
-                  <input type="text" id="title" name="title" placeholder="VP of Engineering" required />
+
+              <div class="contact-benefit-item">
+                <div class="benefit-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
                 </div>
-                <div class="form-group" style="flex: 1;">
-                  <label for="company">Company</label>
-                  <input type="text" id="company" name="company" placeholder="Acme Corp" required />
+                <div>
+                  <h3 class="contact-benefit-title">Custom onboarding</h3>
+                  <p class="contact-benefit-desc">White-glove setup and data migration for your team.</p>
                 </div>
               </div>
-              <div class="form-row" style="display: flex; gap: 1.5rem;">
-                <div class="form-group" style="flex: 1;">
-                  <label for="company_size">Company Size</label>
-                  <select id="company_size" name="company_size" required style="background: rgba(9, 9, 11, 0.5); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.8rem 1rem; font-family: var(--font-main); font-size: 0.95rem; color: var(--fg);">
-                    <option value="" disabled selected>Select size...</option>
-                    <option value="1-50">1 - 50</option>
-                    <option value="51-200">51 - 200</option>
-                    <option value="201-500">201 - 500</option>
-                    <option value="501-1000">501 - 1000</option>
-                    <option value="1000+">1000+</option>
+
+              <div class="contact-benefit-item">
+                <div class="benefit-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                      d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="contact-benefit-title">Enterprise SLA</h3>
+                  <p class="contact-benefit-desc">Dedicated support, SSO, audit logs, and data residency options.</p>
+                </div>
+              </div>
+
+              <div class="contact-benefit-item">
+                <div class="benefit-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                    <line x1="1" y1="10" x2="23" y2="10" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="contact-benefit-title">No credit card required</h3>
+                  <p class="contact-benefit-desc">Start exploring immediately after your demo call.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right column: form -->
+          <div class="contact-form-card">
+            <form id="contactForm" class="cf" novalidate>
+              <!-- Honeypot — hidden from humans, bots auto-fill it -->
+              <div class="cf-honeypot" aria-hidden="true" tabindex="-1">
+                <label for="cf_website">Website</label>
+                <input type="text" id="cf_website" name="website" autocomplete="off" tabindex="-1" />
+              </div>
+              <!-- Timestamp for time-based check -->
+              <input type="hidden" id="cf_loaded_at" name="_loaded_at" />
+
+              <div class="cf-row">
+                <div class="cf-field">
+                  <label class="cf-label" for="cf_name">Full Name</label>
+                  <input class="cf-input" type="text" id="cf_name" name="name" placeholder="Jane Doe" required />
+                </div>
+                <div class="cf-field">
+                  <label class="cf-label" for="cf_email">Work Email</label>
+                  <input class="cf-input" type="email" id="cf_email" name="email" placeholder="jane@company.com"
+                    required />
+                </div>
+              </div>
+
+              <div class="cf-row">
+                <div class="cf-field">
+                  <label class="cf-label" for="cf_title">Job Title</label>
+                  <input class="cf-input" type="text" id="cf_title" name="title" placeholder="VP of Engineering"
+                    required />
+                </div>
+                <div class="cf-field">
+                  <label class="cf-label" for="cf_company">Company</label>
+                  <input class="cf-input" type="text" id="cf_company" name="company" placeholder="Acme Corp"
+                    required />
+                </div>
+              </div>
+
+              <div class="cf-row">
+                <div class="cf-field">
+                  <label class="cf-label" for="cf_company_size">Company Size</label>
+                  <select class="cf-select" id="cf_company_size" name="company_size" required>
+                    <option value="" disabled selected>Select size…</option>
+                    <option value="1-50">1 – 50</option>
+                    <option value="51-200">51 – 200</option>
+                    <option value="201-500">201 – 500</option>
+                    <option value="501-1000">501 – 1,000</option>
+                    <option value="1000+">1,000+</option>
                   </select>
                 </div>
-                <div class="form-group" style="flex: 1;">
-                  <label for="industry">Industry</label>
-                  <select id="industry" name="industry" required style="background: rgba(9, 9, 11, 0.5); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.8rem 1rem; font-family: var(--font-main); font-size: 0.95rem; color: var(--fg);">
-                    <option value="" disabled selected>Select industry...</option>
+                <div class="cf-field">
+                  <label class="cf-label" for="cf_industry">Industry</label>
+                  <select class="cf-select" id="cf_industry" name="industry" required>
+                    <option value="" disabled selected>Select industry…</option>
                     <option value="technology">Technology</option>
                     <option value="finance">Finance</option>
                     <option value="healthcare">Healthcare</option>
-                    <option value="retail">Retail</option>
+                    <option value="retail">Retail / E-commerce</option>
+                    <option value="education">Education</option>
+                    <option value="government">Government</option>
                     <option value="other">Other</option>
                   </select>
                 </div>
               </div>
-              <div class="form-group">
-                <label for="country">Country/Region</label>
-                <select id="country" name="country" required style="background: rgba(9, 9, 11, 0.5); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.8rem 1rem; font-family: var(--font-main); font-size: 0.95rem; color: var(--fg);">
-                  <option value="" disabled selected>Select region...</option>
+
+              <div class="cf-field">
+                <label class="cf-label" for="cf_country">Country / Region</label>
+                <select class="cf-select" id="cf_country" name="country" required>
+                  <option value="" disabled selected>Select region…</option>
                   <option value="north_america">North America</option>
                   <option value="europe">Europe</option>
                   <option value="asia_pacific">Asia Pacific</option>
@@ -267,52 +239,97 @@
                   <option value="middle_east_africa">Middle East & Africa</option>
                 </select>
               </div>
-              <div class="form-group">
-                <label for="needs">What kind of needs do you have?</label>
-                <textarea id="needs" name="needs" rows="3" placeholder="Tell us about your team and use case..." required></textarea>
+
+              <div class="cf-field">
+                <label class="cf-label" for="cf_needs">What kind of needs do you have?</label>
+                <textarea class="cf-textarea" id="cf_needs" name="needs" rows="4"
+                  placeholder="Tell us about your team, your current pain points, and what you'd like to achieve with Verachi…"
+                  required></textarea>
               </div>
-              <button type="submit" class="btn btn-primary btn-lg form-submit">Submit Request</button>
+
+              <!-- Validation error message -->
+              <div class="cf-message cf-message-error" id="cfError" role="alert" hidden></div>
+
+              <button type="submit" class="button button-primary-hero cf-submit" id="cfSubmit">
+                <span class="cf-submit-text">Submit Request</span>
+                <span class="cf-submit-loading" hidden>
+                  <svg class="cf-spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5" stroke-linecap="round">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                  </svg>
+                  Sending…
+                </span>
+              </button>
             </form>
+
+            <!-- Success message (shown after submit) -->
+            <div class="cf-success" id="cfSuccess" hidden>
+              <div class="cf-success-icon" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+              </div>
+              <h3 class="cf-success-title">Thanks! We'll be in touch.</h3>
+              <p class="cf-success-desc">Our team will reach out within 1 business day to schedule your personalized
+                demo.</p>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
+
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand-col">
-          <a href="#" class="brand"><span class="kanji">知</span> verachi</a>
-          <p>Cited decision memory for delivery teams.</p>
-        </div>
-        <div class="footer-links-col">
-          <h4>Product</h4>
-          <a href="#">Features</a>
-          <a href="#">Integrations</a>
-          <a href="index.html#plans">Launch Paths</a>
-          <a href="#">Changelog</a>
-        </div>
-        <div class="footer-links-col">
-          <h4>Company</h4>
-          <a href="#">About Us</a>
-          <a href="#">Careers</a>
-          <a href="#">Blog</a>
-          <a href="#">Contact</a>
-        </div>
-        <div class="footer-links-col">
-          <h4>Legal</h4>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Security</a>
-        </div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="Verachi home">
+          <div class="brand-mark">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5z" />
+              <path d="M2 17l10 5 10-5" />
+              <path d="M2 12l10 5 10-5" />
+            </svg>
+          </div>
+          <span class="brand-word">VERACHI</span>
+        </a>
+        <p class="footer-blurb">Cited memory for engineering decisions, built for teams that move fast without losing
+          context.</p>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 verachi. All rights reserved.</p>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="index.html#showcase">How It Works</a>
+        <a href="index.html#use-cases">Use Cases</a>
+        <a href="trust.html">Trust & Data Boundaries</a>
+        <a href="testimonials.html">Customer Stories</a>
       </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="https://app.verachi.io/login">Sign In</a>
+        <a href="sales.html">Contact Sales</a>
+        <a href="trust.html">Trust</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="#">Blog</a>
+        <a href="#">Docs</a>
+        <a href="#">Changelog</a>
+      </div>
+    </div>
+    <div class="container footer-legal">
+      <p>&copy; 2026 Verachi. All rights reserved.</p>
     </div>
   </footer>
 
-  <script src="./app.js"></script>
+
 </body>
+
 </html>
