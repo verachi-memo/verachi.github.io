@@ -22,8 +22,29 @@
     <div class="header-inner">
       <a class="brand" href="index.html" aria-label="Verachi home">
         <div class="brand-mark">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
+          <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="verachi-v-right" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#2dd4bf" />
+                <stop offset="50%" stop-color="#3b82f6" />
+                <stop offset="100%" stop-color="#8b5cf6" />
+              </linearGradient>
+              <linearGradient id="verachi-v-left" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0d9488" />
+                <stop offset="40%" stop-color="#14b8a6" />
+                <stop offset="80%" stop-color="#6366f1" />
+                <stop offset="100%" stop-color="#a855f7" />
+              </linearGradient>
+              <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="2" dy="5" stdDeviation="3" flood-opacity="0.3" />
+              </filter>
+            </defs>
+            <g transform="translate(65, 50) rotate(26)">
+              <rect x="-15" y="-40" width="30" height="80" rx="15" fill="url(#verachi-v-right)" />
+            </g>
+            <g transform="translate(35, 50) rotate(-26)">
+              <rect x="-15" y="-40" width="30" height="80" rx="15" fill="url(#verachi-v-left)" filter="url(#shadow)" />
+            </g>
           </svg>
         </div>
         <span class="brand-word">VERACHI</span>
