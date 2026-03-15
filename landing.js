@@ -157,6 +157,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const ctx = savingsCanvas.getContext('2d');
     const currencyFmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
     const numberFmt = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });
+    const HOURS_PER_YEAR = 2080;
+    const WEEKS_PER_YEAR = 52;
+    const BURDEN_MULTIPLIER = 1.25;
+    const RECOVERY_RATE = 0.60;
     const PIVOT_MONTH = 6;
     const AXIS_HEADROOM = 1.08;
     const GRID_STEPS = 5;
@@ -247,30 +251,23 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const getSavingsMetrics = (team, hours, rate) => {
-      const pmHiddenCost = hours * (rate * 1.25) * 0.35;
-      const devHiddenCost = team * rate * 0.10;
-      const delayRiskCost = team * rate * 0.05;
-      const annualCost = pmHiddenCost + devHiddenCost + delayRiskCost;
-
-      const pmSavings = pmHiddenCost * 0.30;
-      const devSavings = team * rate * 0.07;
-      const riskSavings = delayRiskCost * 0.80;
-      const annualSaved = pmSavings + devSavings + riskSavings;
-      const currentReduction = annualCost > 0 ? annualSaved / annualCost : 0;
-
+      const loadedHourlyRate = (rate * BURDEN_MULTIPLIER) / HOURS_PER_YEAR;
+      const annualHoursLost = team * hours * WEEKS_PER_YEAR;
+      const annualCost = annualHoursLost * loadedHourlyRate;
+      const hoursReclaimed = annualHoursLost * RECOVERY_RATE;
+      const annualSaved = hoursReclaimed * loadedHourlyRate;
+      const currentReduction = RECOVERY_RATE;
       const monthlyCost = annualCost / 12;
       const months = 12;
       const projectedWithout = monthlyCost * months;
       const projectedWith = (monthlyCost * PIVOT_MONTH) + (monthlyCost * (1 - currentReduction) * (months - PIVOT_MONTH));
 
-      const pmHoursSaved = hours * 2080 * 0.35 * 0.30;
-      const devHoursSaved = team * 2080 * 0.07;
-      const hoursReclaimed = pmHoursSaved + devHoursSaved;
-
       return {
+        annualHoursLost,
         annualCost,
         annualSaved,
         currentReduction,
+        loadedHourlyRate,
         hoursReclaimed,
         monthlyCost,
         projectedWithout,
@@ -354,7 +351,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderGraph = (team, hours, rate, axisMax = getAxisMaxForValues(team, hours, rate)) => {
       const metrics = getSavingsMetrics(team, hours, rate);
       const {
-        annualCost,
         annualSaved,
         currentReduction,
         hoursReclaimed,
