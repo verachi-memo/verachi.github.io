@@ -159,6 +159,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const numberFmt = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });
     const REDUCTION = 0.6;
     const PIVOT_MONTH = 6;
+    const AXIS_HEADROOM = 1.08;
+    const VALUE_SMOOTHING_MS = 140;
+    const AXIS_EXPAND_MS = 160;
+    const AXIS_SHRINK_MS = 240;
 
     // Pair each slider with its number input
     const sliderPairs = [
@@ -190,9 +194,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Sync number input → slider (clamp to slider range)
     const syncInputToSlider = (pair) => {
+      const min = parseInt(pair.slider.min, 10) || 1;
       let val = parseInt(pair.input.value, 10);
-      if (isNaN(val) || val < 1) {
-        val = 1;
+      if (isNaN(val) || val < min) {
+        val = min;
         pair.input.value = val;
       }
       const max = parseInt(pair.slider.max, 10);
@@ -202,59 +207,109 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Get the effective value (from number input, which may exceed slider max)
     const getVal = (pair) => {
+      const min = parseInt(pair.slider.min, 10) || 1;
       const v = parseInt(pair.input.value, 10);
-      return isNaN(v) || v < 1 ? 1 : v;
+      return isNaN(v) || v < min ? min : v;
     };
 
-    // Animation state
-    const state = {
+    const getCurrentValues = () => ({
       team: getVal(sliderPairs[0]),
       hours: getVal(sliderPairs[1]),
       rate: getVal(sliderPairs[2])
-    };
-    
-    let animFrame = null;
+    });
 
-    const animateGraph = () => {
-      let needsUpdate = false;
-      const targetTeam = getVal(sliderPairs[0]);
-      const targetHours = getVal(sliderPairs[1]);
-      const targetRate = getVal(sliderPairs[2]);
-      
-      const ease = 0.15;
-      const updateVal = (current, target) => {
-        if (Math.abs(target - current) < 0.05) return target;
-        needsUpdate = true;
-        return current + (target - current) * ease;
-      };
-      
-      state.team = updateVal(state.team, targetTeam);
-      state.hours = updateVal(state.hours, targetHours);
-      state.rate = updateVal(state.rate, targetRate);
-      
-      renderGraph(state.team, state.hours, state.rate);
-      
-      if (needsUpdate) {
-        animFrame = requestAnimationFrame(animateGraph);
-      } else {
-        animFrame = null;
+    const getNiceAxisMax = (value) => {
+      if (value <= 0) return 1000;
+      const exponent = Math.floor(Math.log10(value));
+      const magnitude = 10 ** exponent;
+      const normalized = value / magnitude;
+
+      let niceNormalized = 10;
+      if (normalized <= 1) niceNormalized = 1;
+      else if (normalized <= 2) niceNormalized = 2;
+      else if (normalized <= 5) niceNormalized = 5;
+
+      return niceNormalized * magnitude;
+    };
+
+    const getAxisMaxForValues = (team, hours, rate) => {
+      const weeklyCost = team * hours * rate;
+      const monthlyCost = weeklyCost * 4.33;
+      const months = 12;
+      const projectedWithout = monthlyCost * months;
+      const projectedWith = monthlyCost * (PIVOT_MONTH + (months - PIVOT_MONTH) * (1 - REDUCTION));
+      return getNiceAxisMax(Math.max(projectedWithout, projectedWith) * AXIS_HEADROOM);
+    };
+
+    const stepTowards = (current, target, deltaMs, smoothingMs) => {
+      if (!Number.isFinite(current)) return target;
+      if (Math.abs(target - current) < 0.01) return target;
+      const blend = 1 - Math.exp(-deltaMs / smoothingMs);
+      return current + (target - current) * blend;
+    };
+
+    const renderState = {
+      ...getCurrentValues(),
+      axisMax: null
+    };
+
+    let renderFrame = null;
+    let lastRenderTime = 0;
+
+    const animateGraph = (timestamp) => {
+      const deltaMs = lastRenderTime ? Math.min(timestamp - lastRenderTime, 32) : 16;
+      lastRenderTime = timestamp;
+
+      const target = getCurrentValues();
+      const targetAxisMax = getAxisMaxForValues(target.team, target.hours, target.rate);
+
+      renderState.team = stepTowards(renderState.team, target.team, deltaMs, VALUE_SMOOTHING_MS);
+      renderState.hours = stepTowards(renderState.hours, target.hours, deltaMs, VALUE_SMOOTHING_MS);
+      renderState.rate = stepTowards(renderState.rate, target.rate, deltaMs, VALUE_SMOOTHING_MS);
+
+      const axisSmoothing = targetAxisMax > renderState.axisMax ? AXIS_EXPAND_MS : AXIS_SHRINK_MS;
+      renderState.axisMax = stepTowards(renderState.axisMax, targetAxisMax, deltaMs, axisSmoothing);
+
+      renderGraph(renderState.team, renderState.hours, renderState.rate, renderState.axisMax);
+
+      const stillAnimating =
+        Math.abs(target.team - renderState.team) > 0.02 ||
+        Math.abs(target.hours - renderState.hours) > 0.02 ||
+        Math.abs(target.rate - renderState.rate) > 0.02 ||
+        Math.abs(targetAxisMax - renderState.axisMax) > 1;
+
+      if (stillAnimating) {
+        renderFrame = requestAnimationFrame(animateGraph);
+        return;
       }
+
+      renderState.team = target.team;
+      renderState.hours = target.hours;
+      renderState.rate = target.rate;
+      renderState.axisMax = targetAxisMax;
+      renderGraph(renderState.team, renderState.hours, renderState.rate, renderState.axisMax);
+
+      renderFrame = null;
+      lastRenderTime = 0;
     };
 
-    const drawGraph = () => {
-      if (!animFrame) animFrame = requestAnimationFrame(animateGraph);
+    const queueRender = () => {
+      if (renderFrame !== null) return;
+      renderFrame = requestAnimationFrame(animateGraph);
     };
 
     const resizeCanvas = () => {
       const dpr = window.devicePixelRatio || 1;
       const rect = savingsCanvas.getBoundingClientRect();
-      savingsCanvas.width = rect.width * dpr;
-      savingsCanvas.height = rect.width * 0.56 * dpr;
-      savingsCanvas.style.height = (rect.width * 0.56) + 'px';
-      ctx.scale(dpr, dpr);
+      const width = Math.max(rect.width, 320);
+      const height = width * 0.56;
+      savingsCanvas.width = Math.round(width * dpr);
+      savingsCanvas.height = Math.round(height * dpr);
+      savingsCanvas.style.height = `${height}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
-    const renderGraph = (team, hours, rate) => {
+    const renderGraph = (team, hours, rate, axisMax = getAxisMaxForValues(team, hours, rate)) => {
       // Compute KPIs
       const weeklyCost = team * hours * rate;
       const annualCost = weeklyCost * 52;
@@ -273,14 +328,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const gw = W - ml - mr;
       const gh = H - mt - mb;
 
-      ctx.clearRect(0, 0, Math.max(W, 1000), Math.max(H, 1000));
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, savingsCanvas.width, savingsCanvas.height);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       if (gw <= 0 || gh <= 0) return;
 
       // Monthly cost data
       const monthlyCost = weeklyCost * 4.33;
       const months = 12;
-      const maxCost = monthlyCost * (months + 1);
+      const maxCost = axisMax;
 
       const xForMonth = (m) => ml + (m / months) * gw;
       const yForCost = (c) => mt + (maxCost > 0 ? gh - (c / maxCost) * gh : gh);
@@ -352,6 +409,8 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.fill();
 
       // Without Verachi line (full)
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
       ctx.beginPath();
       ctx.moveTo(withoutPoints[0].x, withoutPoints[0].y);
       for (let i = 1; i < withoutPoints.length; i++) {
@@ -426,20 +485,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial sync
     sliderPairs.forEach(syncSliderToInput);
-    
-    // Set initial animation state safely after sync
-    state.team = getVal(sliderPairs[0]);
-    state.hours = getVal(sliderPairs[1]);
-    state.rate = getVal(sliderPairs[2]);
-    
+
+    const initialValues = getCurrentValues();
+    renderState.team = initialValues.team;
+    renderState.hours = initialValues.hours;
+    renderState.rate = initialValues.rate;
+    renderState.axisMax = getAxisMaxForValues(initialValues.team, initialValues.hours, initialValues.rate);
     resizeCanvas();
-    renderGraph(state.team, state.hours, state.rate);
+    renderGraph(initialValues.team, initialValues.hours, initialValues.rate, renderState.axisMax);
 
     // Slider → input sync + redraw
     sliderPairs.forEach((pair) => {
       pair.slider.addEventListener('input', () => {
         syncSliderToInput(pair);
-        drawGraph();
+        queueRender();
       });
     });
 
@@ -447,25 +506,29 @@ document.addEventListener('DOMContentLoaded', () => {
     sliderPairs.forEach((pair) => {
       pair.input.addEventListener('input', () => {
         syncInputToSlider(pair);
-        drawGraph();
+        queueRender();
       });
 
       // Validate on blur: ensure always a positive number
       pair.input.addEventListener('blur', () => {
+        const min = parseInt(pair.slider.min, 10) || 1;
         let val = parseInt(pair.input.value, 10);
-        if (isNaN(val) || val < 1) {
-          val = parseInt(pair.slider.min, 10) || 1;
+        if (isNaN(val) || val < min) {
+          val = min;
           pair.input.value = val;
         }
         syncInputToSlider(pair);
-        drawGraph();
+        queueRender();
       });
     });
 
     let resizeTimer;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => { resizeCanvas(); drawGraph(); }, 100);
+      resizeTimer = setTimeout(() => {
+        resizeCanvas();
+        queueRender();
+      }, 100);
     });
   }
 
@@ -525,6 +588,15 @@ document.addEventListener('DOMContentLoaded', () => {
       cfError.textContent = '';
       contactForm.classList.add('was-validated');
 
+      // Helper to restore the submit button from loading state
+      const submitText = cfSubmit.querySelector('.cf-submit-text');
+      const submitLoading = cfSubmit.querySelector('.cf-submit-loading');
+      const resetButton = () => {
+        submitText.hidden = false;
+        submitLoading.hidden = true;
+        cfSubmit.disabled = false;
+      };
+
       // 1. Honeypot check
       const honeypot = document.getElementById('cf_website');
       if (honeypot && honeypot.value) {
@@ -547,6 +619,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!contactForm.checkValidity()) {
         cfError.textContent = 'Please fill in all required fields.';
         cfError.hidden = false;
+        resetButton();
         return;
       }
 
@@ -557,6 +630,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cfError.textContent = 'Please use your work email. Free email providers (Gmail, Yahoo, etc.) are not accepted.';
         cfError.hidden = false;
         emailInput.focus();
+        resetButton();
         return;
       }
 
@@ -573,8 +647,6 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
       // Show loading state
-      const submitText = cfSubmit.querySelector('.cf-submit-text');
-      const submitLoading = cfSubmit.querySelector('.cf-submit-loading');
       submitText.hidden = true;
       submitLoading.hidden = false;
       cfSubmit.disabled = true;
@@ -613,8 +685,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // always appears as an opaque response / error anyway)
         contactForm.hidden = true;
         cfSuccess.hidden = false;
+      } finally {
+        // If the form is still visible (e.g. unexpected error path),
+        // always restore the button so it doesn't stay stuck on "Sending…"
+        if (!contactForm.hidden) {
+          resetButton();
+        }
       }
     });
   }
 });
-

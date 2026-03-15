@@ -1796,6 +1796,10 @@ main {
   gap: 10px;
 }
 
+.cf-submit-loading[hidden] {
+  display: none;
+}
+
 /* Spinner animation */
 .cf-spinner {
   animation: cfSpin 1.2s linear infinite;
