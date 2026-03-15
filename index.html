@@ -96,7 +96,7 @@
 
         <div class="hero-actions" data-reveal="fade-up" style="--delay: 2">
           <a class="button button-primary-hero" href="https://app.verachi.io/signup">
-            Get started — free
+            Start 14-day trial
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
               aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
               <line x1="5" y1="12" x2="19" y2="12" />
@@ -412,30 +412,325 @@
         <div class="section-head section-head-centered" data-observe="fade-up">
           <span class="section-kicker-simple">Use cases</span>
           <h2 class="section-title" style="max-width: 20ch;">See how teams use Verachi.</h2>
+          <p class="section-subtitle">Bring cited answers into the places your team already works: editor, chat, and pull requests.</p>
         </div>
 
-        <div class="usecase-scroll" data-observe="fade-up" style="--delay: 1">
-          <a class="usecase-card" href="#">
-            <h3 class="usecase-title">Find why Postgres was chosen — in seconds</h3>
-            <p class="usecase-desc">Search any past decision. Get the answer with a link to the original Slack thread.</p>
-            <span class="usecase-arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="usecase-card" href="#">
-            <h3 class="usecase-title">Onboard a new engineer without Slack archaeology</h3>
-            <p class="usecase-desc">New hires get cited answers from day one. No more "ask Sarah, she'll know."</p>
-            <span class="usecase-arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="usecase-card" href="#">
-            <h3 class="usecase-title">Audit every decision tied to a failing service</h3>
-            <p class="usecase-desc">Trace decisions to their sources when something goes wrong. Know what changed and why.</p>
-            <span class="usecase-arrow" aria-hidden="true">→</span>
-          </a>
-          <a class="usecase-card" href="#">
-            <h3 class="usecase-title">See which projects depend on a single decision</h3>
-            <p class="usecase-desc">Open the graph to review downstream impact before changing anything.</p>
-            <span class="usecase-arrow" aria-hidden="true">→</span>
-          </a>
+        <div class="usecase-showcase" data-observe="fade-up" style="--delay: 1">
+          <div class="usecase-nav" role="tablist" aria-label="Verachi product workflows">
+            <button class="usecase-tab is-active" type="button" role="tab" aria-selected="true" data-usecase-tab="ide">
+              <span class="usecase-tab-title">Inside the IDE</span>
+              <span class="usecase-tab-copy">Answer architecture questions while code is still open.</span>
+            </button>
+            <button class="usecase-tab" type="button" role="tab" aria-selected="false" data-usecase-tab="slack">
+              <span class="usecase-tab-title">Inside Slack</span>
+              <span class="usecase-tab-copy">Deflect repeat questions with cited answers in channel.</span>
+            </button>
+            <button class="usecase-tab" type="button" role="tab" aria-selected="false" data-usecase-tab="github">
+              <span class="usecase-tab-title">Inside PR review</span>
+              <span class="usecase-tab-copy">Catch architectural drift before the wrong pattern ships.</span>
+            </button>
+          </div>
+
+          <div class="usecase-stage">
+            <article class="usecase-panel is-active" data-usecase-panel="ide" role="tabpanel">
+              <div class="usecase-panel-copy">
+                <span class="usecase-eyebrow">IDE Copilot</span>
+                <h3 class="usecase-panel-title">Explain the decision behind code without leaving the editor.</h3>
+                <p class="usecase-panel-desc">An engineer can ask why a schema, service boundary, or metadata shape exists and get a direct answer with citations back to the original discussion.</p>
+                <ul class="usecase-panel-list">
+                  <li>Answers appear beside the code being changed.</li>
+                  <li>Each reply points to the decision record and source thread.</li>
+                  <li>Teams stop relying on tribal memory for architectural context.</li>
+                </ul>
+              </div>
+
+              <div class="usecase-visual usecase-visual-ide" aria-hidden="true">
+                <div class="mock-window">
+                  <div class="mock-topbar">
+                    <span class="mock-dots"><i></i><i></i><i></i></span>
+                    <span class="mock-title">schema.sql + Verachi AI</span>
+                  </div>
+                  <div class="ide-layout">
+                    <div class="ide-code">
+                      <span class="code-line"><em>20</em> CREATE TABLE projects (</span>
+                      <span class="code-line"><em>21</em> &nbsp;&nbsp;id UUID PRIMARY KEY,</span>
+                      <span class="code-line"><em>22</em> &nbsp;&nbsp;name VARCHAR(255) NOT NULL,</span>
+                      <span class="code-line"><em>23</em> &nbsp;&nbsp;created_at TIMESTAMP,</span>
+                      <span class="code-line is-highlight"><em>24</em> &nbsp;&nbsp;metadata JSONB,</span>
+                      <span class="code-line"><em>25</em> &nbsp;&nbsp;CONSTRAINT name_unique UNIQUE(name)</span>
+                      <span class="code-line"><em>26</em> );</span>
+                    </div>
+                    <div class="ide-chat">
+                      <div class="mock-chip">Verachi AI Chat</div>
+                      <div class="ide-bubble ide-bubble-user">Why is the metadata column JSONB instead of a structured relation?</div>
+                      <div class="ide-bubble ide-bubble-bot">
+                        Decision #45 chose JSONB to move faster during early modeling. The structured relation was deferred until the access patterns stabilized.
+                      </div>
+                      <div class="ide-sources">
+                        <span class="source-pill">Slack thread • Jan 15</span>
+                        <span class="source-pill">Jira • ARCH-201</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="usecase-panel" data-usecase-panel="slack" role="tabpanel" hidden>
+              <div class="usecase-panel-copy">
+                <span class="usecase-eyebrow">Slack Assistant</span>
+                <h3 class="usecase-panel-title">Answer packaging and policy questions where the question already happens.</h3>
+                <p class="usecase-panel-desc">Support, product, and engineering can ask in channel and get a response grounded in ADRs, Jira, and prior delivery decisions instead of guesswork.</p>
+                <ul class="usecase-panel-list">
+                  <li>Reduces repetitive internal questions for PMs and leads.</li>
+                  <li>Shows the source material that informed the answer.</li>
+                  <li>Confidence indicators make uncertain answers visible instead of implied.</li>
+                </ul>
+              </div>
+
+              <div class="usecase-visual usecase-visual-slack" aria-hidden="true">
+                <div class="mock-window">
+                  <div class="mock-topbar">
+                    <span class="mock-dots"><i></i><i></i><i></i></span>
+                    <span class="mock-title">#product-eng-qa</span>
+                  </div>
+                  <div class="slack-shell">
+                    <aside class="slack-sidebar">
+                      <span class="slack-workspace">Verachi</span>
+                      <span class="slack-channel is-active"># product-eng-qa</span>
+                      <span class="slack-channel"># announcements</span>
+                      <span class="slack-channel"># release-notes</span>
+                    </aside>
+                    <div class="slack-thread">
+                      <div class="slack-message">
+                        <span class="slack-author">Sarah Chen</span>
+                        <p>Why do free tier users not have access to advanced reporting?</p>
+                      </div>
+                      <div class="slack-message slack-message-bot">
+                        <span class="slack-author">Verachi</span>
+                        <p>Advanced Reporting is reserved for paid tiers because the underlying processing and review flows are designed for enterprise-grade usage.</p>
+                        <div class="slack-sources">
+                          <span class="source-pill">ADR-042</span>
+                          <span class="source-pill">Jira PROD-119</span>
+                        </div>
+                        <div class="slack-confidence">
+                          <span class="confidence-dot"></span>
+                          High 98%
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="usecase-panel" data-usecase-panel="github" role="tabpanel" hidden>
+              <div class="usecase-panel-copy">
+                <span class="usecase-eyebrow">PR Guardrails</span>
+                <h3 class="usecase-panel-title">Flag pull requests that contradict prior architectural decisions.</h3>
+                <p class="usecase-panel-desc">When a change drifts away from an established pattern, Verachi can surface the relevant decision in review before the inconsistency lands in production.</p>
+                <ul class="usecase-panel-list">
+                  <li>Connects code review back to ADRs and architectural history.</li>
+                  <li>Highlights the exact file and implementation choice at risk.</li>
+                  <li>Keeps consistency enforceable without manual policing.</li>
+                </ul>
+              </div>
+
+              <div class="usecase-visual usecase-visual-github" aria-hidden="true">
+                <div class="mock-window">
+                  <div class="mock-topbar">
+                    <span class="mock-dots"><i></i><i></i><i></i></span>
+                    <span class="mock-title">Pull request #124</span>
+                  </div>
+                  <div class="github-shell">
+                    <div class="github-header">
+                      <span class="github-repo">OctoCorp / web-app</span>
+                      <span class="github-status">Merged</span>
+                    </div>
+                    <div class="github-pr-title">Add axios for data fetching</div>
+                    <div class="github-comment">
+                      <div class="github-badge-row">
+                        <span class="github-bot">Verachi Bot</span>
+                        <span class="github-severity">Architectural Alignment</span>
+                      </div>
+                      <p>This PR introduces <strong>axios</strong> in <strong>src/api/userService.js</strong>, but ADR-87 standardized on the native fetch API.</p>
+                      <div class="github-links">
+                        <span class="source-pill">ADR-87 Native Fetch</span>
+                        <span class="source-pill">Confidence 98.2%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
         </div>
+      </div>
+    </section>
+
+
+    <!-- ========== PRICING ========== -->
+    <section class="section" id="pricing">
+      <div class="container">
+        <div class="section-head section-head-centered" data-observe="fade-up">
+          <span class="section-kicker-simple">Pricing</span>
+          <h2 class="section-title" style="max-width: 20ch;">Simple, transparent pricing.</h2>
+          <p class="section-subtitle">Predictable pricing for teams that need cited decisions, durable recall, and clear AI spend.</p>
+        </div>
+
+        <div class="pricing-billing-toggle-wrap" data-observe="fade-up" style="--delay: 0.5">
+          <div class="pricing-billing-toggle" role="tablist" aria-label="Billing cadence">
+            <button
+              class="pricing-billing-option is-active"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              data-billing-toggle="month"
+            >
+              Monthly
+            </button>
+            <button
+              class="pricing-billing-option"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              data-billing-toggle="quarter"
+            >
+              Quarterly
+            </button>
+            <button
+              class="pricing-billing-option"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              data-billing-toggle="year"
+            >
+              Yearly
+            </button>
+          </div>
+        </div>
+
+        <div class="pricing-grid" data-observe="fade-up" style="--delay: 1">
+
+          <!-- Starter -->
+          <div class="pricing-card">
+            <div class="pricing-card-inner">
+              <div class="pricing-tier">Starter</div>
+              <div class="pricing-price">
+                <span class="pricing-amount" data-price-month="$5" data-price-quarter="$15" data-price-year="$60">$15</span>
+                <span class="pricing-cadence" data-cadence-month="/ month" data-cadence-quarter="/ quarter" data-cadence-year="/ year">/ quarter</span>
+              </div>
+              <p class="pricing-tagline">Advanced recall without the most advanced AI model spend.</p>
+              <a class="button button-outline pricing-cta" href="https://app.verachi.io/signup">Start 14-day trial</a>
+              <ul class="pricing-features">
+                <li>
+                  <svg class="pf-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  Essential cited decision workspace
+                </li>
+                <li>
+                  <svg class="pf-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  Search and recall across key team context
+                </li>
+                <li>
+                  <svg class="pf-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  Predictable usage with bounded AI costs
+                </li>
+                <li>
+                  <svg class="pf-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  Built for small delivery and engineering teams
+                </li>
+                <li>
+                  <svg class="pf-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  14-day free trial
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Pro (highlighted) -->
+          <div class="pricing-card pricing-card-featured">
+            <div class="pricing-card-glow" aria-hidden="true"></div>
+            <div class="pricing-card-inner">
+              <div class="pricing-badge">Most popular</div>
+              <div class="pricing-tier">Pro</div>
+              <div class="pricing-price">
+                <span class="pricing-amount" data-price-month="$49" data-price-quarter="$147" data-price-year="$588">$147</span>
+                <span class="pricing-cadence" data-cadence-month="/ user / month" data-cadence-quarter="/ user / quarter" data-cadence-year="/ user / year">/ user / quarter</span>
+              </div>
+              <p class="pricing-tagline">Gemini 3.1 Pro + more headroom.</p>
+              <a class="button button-primary-hero pricing-cta" href="https://app.verachi.io/signup">Start 14-day trial</a>
+              <ul class="pricing-features">
+                <li>
+                  <svg class="pf-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  Gemini 3.1 Pro
+                </li>
+                <li>
+                  <svg class="pf-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  More AI allowance and operating headroom
+                </li>
+                <li>
+                  <svg class="pf-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  Clear monthly usage visibility
+                </li>
+                <li>
+                  <svg class="pf-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  Cited answers across your working context
+                </li>
+                <li>
+                  <svg class="pf-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  Budget controls and predictable spend
+                </li>
+                <li>
+                  <svg class="pf-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  Built for growing engineering teams
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Enterprise -->
+          <div class="pricing-card">
+            <div class="pricing-card-inner">
+              <div class="pricing-tier">Enterprise</div>
+              <div class="pricing-price">
+                <span class="pricing-amount">Custom</span>
+              </div>
+              <p class="pricing-tagline">The most advanced AI models, BYOK, uncapped AI.</p>
+              <a class="button button-outline pricing-cta" href="#contact-form">Talk to sales</a>
+              <ul class="pricing-features">
+                <li>
+                  <svg class="pf-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  Everything in Pro
+                </li>
+                <li>
+                  <svg class="pf-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  Bring your own keys
+                </li>
+                <li>
+                  <svg class="pf-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  Access to the most advanced AI models
+                </li>
+                <li>
+                  <svg class="pf-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  SSO / SAML and audit controls
+                </li>
+                <li>
+                  <svg class="pf-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  Custom security and deployment requirements
+                </li>
+                <li>
+                  <svg class="pf-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  Dedicated onboarding and support
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="pricing-note" data-observe="fade-up" style="--delay: 2">
+          Monthly, quarterly, and yearly prices are shown as straightforward rollups of the base monthly rate. All paid plans include a <strong>14-day free trial</strong>.
+        </p>
       </div>
     </section>
 
@@ -641,10 +936,10 @@
       <div class="container">
         <div class="cta-centered" data-observe="fade-up">
           <h2 class="section-title cta-title">Start building your decision memory.</h2>
-          <p class="section-subtitle cta-sub">Every decision your team makes deserves a source of truth. Start for free — no credit card required.</p>
+          <p class="section-subtitle cta-sub">Every decision your team makes deserves a source of truth. Start a 14-day trial with no credit card required.</p>
           <div class="hero-actions cta-actions">
             <a class="button button-primary-hero" href="https://app.verachi.io/signup">
-              Get started — free
+              Start 14-day trial
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12" />

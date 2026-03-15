@@ -139,6 +139,76 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  const usecaseTabs = document.querySelectorAll('[data-usecase-tab]');
+  const usecasePanels = document.querySelectorAll('[data-usecase-panel]');
+
+  const setUsecasePanel = (panelId) => {
+    usecaseTabs.forEach((tab) => {
+      const isActive = tab.dataset.usecaseTab === panelId;
+      tab.classList.toggle('is-active', isActive);
+      tab.setAttribute('aria-selected', String(isActive));
+    });
+
+    usecasePanels.forEach((panel) => {
+      const isActive = panel.dataset.usecasePanel === panelId;
+      panel.classList.toggle('is-active', isActive);
+      panel.hidden = !isActive;
+    });
+  };
+
+  if (usecaseTabs.length > 0 && usecasePanels.length > 0) {
+    usecaseTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const panelId = tab.dataset.usecaseTab;
+        if (!panelId) {
+          return;
+        }
+
+        setUsecasePanel(panelId);
+      });
+    });
+
+    setUsecasePanel('ide');
+  }
+
+  const billingToggleButtons = document.querySelectorAll('[data-billing-toggle]');
+  const pricingAmounts = document.querySelectorAll('.pricing-amount[data-price-month][data-price-quarter][data-price-year]');
+  const pricingCadences = document.querySelectorAll('.pricing-cadence[data-cadence-month][data-cadence-quarter][data-cadence-year]');
+
+  const setBillingCadence = (cadence) => {
+    const priceKey = cadence === 'year' ? 'priceYear' : cadence === 'month' ? 'priceMonth' : 'priceQuarter';
+    const cadenceKey = cadence === 'year' ? 'cadenceYear' : cadence === 'month' ? 'cadenceMonth' : 'cadenceQuarter';
+
+    billingToggleButtons.forEach((button) => {
+      const isActive = button.dataset.billingToggle === cadence;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-selected', String(isActive));
+    });
+
+    pricingAmounts.forEach((element) => {
+      element.textContent = element.dataset[priceKey] || element.textContent;
+    });
+
+    pricingCadences.forEach((element) => {
+      element.textContent = element.dataset[cadenceKey] || element.textContent;
+    });
+  };
+
+  if (billingToggleButtons.length > 0) {
+    billingToggleButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const nextCadence = button.dataset.billingToggle;
+        if (!nextCadence) {
+          return;
+        }
+
+        setBillingCadence(nextCadence);
+      });
+    });
+
+    setBillingCadence('month');
+  }
+
 
   /* ============================================================
      SAVINGS CALCULATOR — Interactive ROI graph
