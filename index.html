@@ -101,7 +101,7 @@
               <polyline points="12 5 19 12 12 19" />
             </svg>
           </a>
-          <a class="button button-outline" href="sales.html">Book a demo</a>
+          <a class="button button-outline" href="#contact-form">Book a demo</a>
         </div>
 
         <!-- Trusted-by logo strip -->
@@ -424,6 +424,199 @@
     </section>
 
 
+    <!-- ========== CONTACT FORM ========== -->
+    <section class="section" id="contact-form">
+      <div class="container">
+        <div class="section-head section-head-centered" data-observe="fade-up">
+          <span class="section-kicker-simple">Contact Sales</span>
+          <h2 class="section-title" style="max-width: 22ch;">Let's find the right plan for your team.</h2>
+          <p class="section-subtitle">Tell us a little about your organization and we'll tailor a demo to your exact workflow.</p>
+        </div>
+
+        <div class="contact-layout" data-observe="fade-up" style="--delay: 1">
+
+          <!-- Left column: benefits -->
+          <div class="contact-info">
+            <h3 class="contact-info-title">What you'll get</h3>
+
+            <div class="contact-benefit-list">
+              <div class="contact-benefit-item">
+                <div class="benefit-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 11l3 3L22 4" />
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="contact-benefit-title">Personalized demo</h4>
+                  <p class="contact-benefit-desc">See Verachi working with your actual tools — Slack, Jira, GitHub.</p>
+                </div>
+              </div>
+
+              <div class="contact-benefit-item">
+                <div class="benefit-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="contact-benefit-title">Custom onboarding</h4>
+                  <p class="contact-benefit-desc">White-glove setup and data migration for your team.</p>
+                </div>
+              </div>
+
+              <div class="contact-benefit-item">
+                <div class="benefit-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                      d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="contact-benefit-title">Enterprise SLA</h4>
+                  <p class="contact-benefit-desc">Dedicated support, SSO, audit logs, and data residency options.</p>
+                </div>
+              </div>
+
+              <div class="contact-benefit-item">
+                <div class="benefit-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                    <line x1="1" y1="10" x2="23" y2="10" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="contact-benefit-title">No credit card required</h4>
+                  <p class="contact-benefit-desc">Start exploring immediately after your demo call.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right column: form -->
+          <div class="contact-form-card">
+            <form id="contactForm" class="cf" novalidate>
+              <!-- Honeypot — hidden from humans, bots auto-fill it -->
+              <div class="cf-honeypot" aria-hidden="true" tabindex="-1">
+                <label for="cf_website">Website</label>
+                <input type="text" id="cf_website" name="website" autocomplete="off" tabindex="-1" />
+              </div>
+              <!-- Timestamp for time-based check -->
+              <input type="hidden" id="cf_loaded_at" name="_loaded_at" />
+
+              <div class="cf-row">
+                <div class="cf-field">
+                  <label class="cf-label" for="cf_name">Full Name</label>
+                  <input class="cf-input" type="text" id="cf_name" name="name" placeholder="Jane Doe" required />
+                </div>
+                <div class="cf-field">
+                  <label class="cf-label" for="cf_email">Work Email</label>
+                  <input class="cf-input" type="email" id="cf_email" name="email" placeholder="jane@company.com"
+                    required />
+                </div>
+              </div>
+
+              <div class="cf-row">
+                <div class="cf-field">
+                  <label class="cf-label" for="cf_title">Job Title</label>
+                  <input class="cf-input" type="text" id="cf_title" name="title" placeholder="VP of Engineering"
+                    required />
+                </div>
+                <div class="cf-field">
+                  <label class="cf-label" for="cf_company">Company</label>
+                  <input class="cf-input" type="text" id="cf_company" name="company" placeholder="Acme Corp"
+                    required />
+                </div>
+              </div>
+
+              <div class="cf-row">
+                <div class="cf-field">
+                  <label class="cf-label" for="cf_company_size">Company Size</label>
+                  <select class="cf-select" id="cf_company_size" name="company_size" required>
+                    <option value="" disabled selected>Select size…</option>
+                    <option value="1-50">1 – 50</option>
+                    <option value="51-200">51 – 200</option>
+                    <option value="201-500">201 – 500</option>
+                    <option value="501-1000">501 – 1,000</option>
+                    <option value="1000+">1,000+</option>
+                  </select>
+                </div>
+                <div class="cf-field">
+                  <label class="cf-label" for="cf_industry">Industry</label>
+                  <select class="cf-select" id="cf_industry" name="industry" required>
+                    <option value="" disabled selected>Select industry…</option>
+                    <option value="technology">Technology</option>
+                    <option value="finance">Finance</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="retail">Retail / E-commerce</option>
+                    <option value="education">Education</option>
+                    <option value="government">Government</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="cf-field">
+                <label class="cf-label" for="cf_country">Country / Region</label>
+                <select class="cf-select" id="cf_country" name="country" required>
+                  <option value="" disabled selected>Select region…</option>
+                  <option value="north_america">North America</option>
+                  <option value="europe">Europe</option>
+                  <option value="asia_pacific">Asia Pacific</option>
+                  <option value="latin_america">Latin America</option>
+                  <option value="middle_east_africa">Middle East & Africa</option>
+                </select>
+              </div>
+
+              <div class="cf-field">
+                <label class="cf-label" for="cf_needs">What kind of needs do you have?</label>
+                <textarea class="cf-textarea" id="cf_needs" name="needs" rows="4"
+                  placeholder="Tell us about your team, your current pain points, and what you'd like to achieve with Verachi…"
+                  required></textarea>
+              </div>
+
+              <!-- Validation error message -->
+              <div class="cf-message cf-message-error" id="cfError" role="alert" hidden></div>
+
+              <button type="submit" class="button button-primary-hero cf-submit" id="cfSubmit">
+                <span class="cf-submit-text">Submit Request</span>
+                <span class="cf-submit-loading" hidden>
+                  <svg class="cf-spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5" stroke-linecap="round">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                  </svg>
+                  Sending…
+                </span>
+              </button>
+            </form>
+
+            <!-- Success message (shown after submit) -->
+            <div class="cf-success" id="cfSuccess" hidden>
+              <div class="cf-success-icon" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+              </div>
+              <h3 class="cf-success-title">Thanks! We'll be in touch.</h3>
+              <p class="cf-success-desc">Our team will reach out within 1 business day to schedule your personalized
+                demo.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
     <!-- ========== BOTTOM CTA ========== -->
     <section class="section section-cta" id="cta">
       <div class="cta-glow" aria-hidden="true"></div>
@@ -440,7 +633,7 @@
                 <polyline points="12 5 19 12 12 19" />
               </svg>
             </a>
-            <a class="button button-outline" href="sales.html">Talk to sales</a>
+            <a class="button button-outline" href="#contact-form">Talk to sales</a>
           </div>
         </div>
       </div>
@@ -477,7 +670,7 @@
       <div class="footer-col">
         <h4>Company</h4>
         <a href="https://app.verachi.io/login">Sign In</a>
-        <a href="sales.html">Contact Sales</a>
+        <a href="#contact-form">Contact Sales</a>
         <a href="trust.html">Trust</a>
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
