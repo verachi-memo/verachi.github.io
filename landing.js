@@ -157,9 +157,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const ctx = savingsCanvas.getContext('2d');
     const currencyFmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
     const numberFmt = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });
-    const REDUCTION = 0.6;
     const PIVOT_MONTH = 6;
     const AXIS_HEADROOM = 1.08;
+    const GRID_STEPS = 5;
     const VALUE_SMOOTHING_MS = 140;
     const AXIS_EXPAND_MS = 160;
     const AXIS_SHRINK_MS = 240;
@@ -218,27 +218,69 @@ document.addEventListener('DOMContentLoaded', () => {
       rate: getVal(sliderPairs[2])
     });
 
-    const getNiceAxisMax = (value) => {
+    const getNiceNumber = (value, round = false) => {
       if (value <= 0) return 1000;
       const exponent = Math.floor(Math.log10(value));
       const magnitude = 10 ** exponent;
       const normalized = value / magnitude;
 
-      let niceNormalized = 10;
-      if (normalized <= 1) niceNormalized = 1;
-      else if (normalized <= 2) niceNormalized = 2;
-      else if (normalized <= 5) niceNormalized = 5;
+      let niceNormalized;
+      if (round) {
+        if (normalized < 1.5) niceNormalized = 1;
+        else if (normalized < 3) niceNormalized = 2;
+        else if (normalized < 7) niceNormalized = 5;
+        else niceNormalized = 10;
+      } else {
+        if (normalized <= 1) niceNormalized = 1;
+        else if (normalized <= 2) niceNormalized = 2;
+        else if (normalized <= 5) niceNormalized = 5;
+        else niceNormalized = 10;
+      }
 
       return niceNormalized * magnitude;
     };
 
-    const getAxisMaxForValues = (team, hours, rate) => {
-      const weeklyCost = team * hours * rate;
-      const monthlyCost = weeklyCost * 4.33;
+    const getNiceAxisMax = (value) => {
+      if (value <= 0) return 1000;
+      const tickSpacing = getNiceNumber(value / GRID_STEPS, true);
+      return tickSpacing * GRID_STEPS;
+    };
+
+    const getSavingsMetrics = (team, hours, rate) => {
+      const pmHiddenCost = hours * (rate * 1.25) * 0.35;
+      const devHiddenCost = team * rate * 0.10;
+      const delayRiskCost = team * rate * 0.05;
+      const annualCost = pmHiddenCost + devHiddenCost + delayRiskCost;
+
+      const pmSavings = pmHiddenCost * 0.30;
+      const devSavings = team * rate * 0.07;
+      const riskSavings = delayRiskCost * 0.80;
+      const annualSaved = pmSavings + devSavings + riskSavings;
+      const currentReduction = annualCost > 0 ? annualSaved / annualCost : 0;
+
+      const monthlyCost = annualCost / 12;
       const months = 12;
       const projectedWithout = monthlyCost * months;
-      const projectedWith = monthlyCost * (PIVOT_MONTH + (months - PIVOT_MONTH) * (1 - REDUCTION));
-      return getNiceAxisMax(Math.max(projectedWithout, projectedWith) * AXIS_HEADROOM);
+      const projectedWith = (monthlyCost * PIVOT_MONTH) + (monthlyCost * (1 - currentReduction) * (months - PIVOT_MONTH));
+
+      const pmHoursSaved = hours * 2080 * 0.35 * 0.30;
+      const devHoursSaved = team * 2080 * 0.07;
+      const hoursReclaimed = pmHoursSaved + devHoursSaved;
+
+      return {
+        annualCost,
+        annualSaved,
+        currentReduction,
+        hoursReclaimed,
+        monthlyCost,
+        projectedWithout,
+        projectedWith
+      };
+    };
+
+    const getAxisMaxForValues = (team, hours, rate) => {
+      const metrics = getSavingsMetrics(team, hours, rate);
+      return getNiceAxisMax(Math.max(metrics.projectedWithout, metrics.projectedWith) * AXIS_HEADROOM);
     };
 
     const stepTowards = (current, target, deltaMs, smoothingMs) => {
@@ -310,11 +352,15 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const renderGraph = (team, hours, rate, axisMax = getAxisMaxForValues(team, hours, rate)) => {
-      // Compute KPIs
-      const weeklyCost = team * hours * rate;
-      const annualCost = weeklyCost * 52;
-      const annualSaved = annualCost * REDUCTION;
-      const hoursReclaimed = team * hours * REDUCTION * 52;
+      const metrics = getSavingsMetrics(team, hours, rate);
+      const {
+        annualCost,
+        annualSaved,
+        currentReduction,
+        hoursReclaimed,
+        monthlyCost
+      } = metrics;
+
       calcAnnualSavings.textContent = currencyFmt.format(annualSaved);
       calcHoursReclaimed.textContent = numberFmt.format(hoursReclaimed);
 
@@ -335,7 +381,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (gw <= 0 || gh <= 0) return;
 
       // Monthly cost data
-      const monthlyCost = weeklyCost * 4.33;
       const months = 12;
       const maxCost = axisMax;
 
@@ -345,9 +390,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // Grid lines
       ctx.strokeStyle = 'rgba(171, 194, 229, 0.07)';
       ctx.lineWidth = 1;
-      const gridSteps = 5;
-      for (let i = 0; i <= gridSteps; i++) {
-        const y = mt + (gh / gridSteps) * i;
+      for (let i = 0; i <= GRID_STEPS; i++) {
+        const y = mt + (gh / GRID_STEPS) * i;
         ctx.beginPath();
         ctx.moveTo(ml, y);
         ctx.lineTo(W - mr, y);
@@ -359,9 +403,9 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.font = '500 10px "JetBrains Mono", monospace';
       ctx.textAlign = 'right';
       ctx.textBaseline = 'middle';
-      for (let i = 0; i <= gridSteps; i++) {
-        const val = maxCost - (maxCost / gridSteps) * i;
-        const y = mt + (gh / gridSteps) * i;
+      for (let i = 0; i <= GRID_STEPS; i++) {
+        const val = maxCost - (maxCost / GRID_STEPS) * i;
+        const y = mt + (gh / GRID_STEPS) * i;
         const label = val >= 1000 ? '$' + Math.round(val / 1000) + 'k' : '$' + Math.round(val);
         ctx.fillText(label, ml - 10, y);
       }
@@ -378,13 +422,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const withPoints = [];
       let cumWithout = 0;
       let cumWith = 0;
+      
       for (let m = 0; m <= months; m++) {
         if (m > 0) {
           cumWithout += monthlyCost;
           if (m <= PIVOT_MONTH) {
             cumWith += monthlyCost;
           } else {
-            cumWith += monthlyCost * (1 - REDUCTION);
+            // Subtract the monthly savings from the monthly cost to get the new ongoing monthly cost
+            const reducedMonthlyCost = monthlyCost * (1 - currentReduction);
+            cumWith += reducedMonthlyCost;
           }
         }
         withoutPoints.push({ x: xForMonth(m), y: yForCost(cumWithout) });
@@ -418,7 +465,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       ctx.strokeStyle = '#f6a693';
       ctx.lineWidth = 2.5;
+      ctx.shadowColor = 'rgba(246, 166, 147, 0.4)';
+      ctx.shadowBlur = 8;
+      ctx.shadowOffsetY = 2;
       ctx.stroke();
+
+      // Reset shadow for the base part of the next line to avoid double-shadowing
+      ctx.shadowColor = 'transparent';
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetY = 0;
 
       // With Verachi line (same as without until pivot, then diverges)
       ctx.beginPath();
@@ -440,7 +495,15 @@ document.addEventListener('DOMContentLoaded', () => {
       lineGrad.addColorStop(1, '#84f1d4');
       ctx.strokeStyle = lineGrad;
       ctx.lineWidth = 2.5;
+      ctx.shadowColor = 'rgba(132, 241, 212, 0.4)';
+      ctx.shadowBlur = 8;
+      ctx.shadowOffsetY = 2;
       ctx.stroke();
+
+      // Reset shadow for subsequent elements (like the pivot line and text)
+      ctx.shadowColor = 'transparent';
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetY = 0;
 
       // Pivot dashed line
       const pivotX = xForMonth(PIVOT_MONTH);
@@ -465,17 +528,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
       ctx.fillStyle = '#f6a693';
       ctx.font = '600 10px "Manrope", sans-serif';
-      ctx.textAlign = 'left';
-      ctx.textBaseline = 'middle';
-      ctx.fillText('Without Verachi', withoutPoints[lastIdx].x - gw * 0.28, withoutPoints[lastIdx].y - 12);
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'bottom';
+      ctx.fillText('Without Verachi', withoutPoints[lastIdx].x, withoutPoints[lastIdx].y - 8);
 
       ctx.fillStyle = '#84f1d4';
-      ctx.fillText('With Verachi', withPoints[lastIdx].x - gw * 0.22, withPoints[lastIdx].y + 14);
+      ctx.textBaseline = 'top';
+      ctx.fillText('With Verachi', withPoints[lastIdx].x, withPoints[lastIdx].y + 8);
 
       // "YOUR SAVINGS" label in middle of shaded area
       const midMonth = Math.round((PIVOT_MONTH + months) / 2);
       const savingsLabelY = (withoutPoints[midMonth].y + withPoints[midMonth].y) / 2;
-      ctx.fillStyle = 'rgba(132, 241, 212, 0.35)';
+      ctx.fillStyle = 'rgba(132, 241, 212, 0.9)';
       ctx.font = '800 11px "Manrope", sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';

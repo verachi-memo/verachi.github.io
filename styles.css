@@ -127,8 +127,10 @@ a {
   color: var(--fg-muted);
   transition: color 0.2s ease;
 }
-.nav-link:hover {
-  color: var(--fg);
+@media (hover: hover) {
+  .nav-link:hover {
+    color: var(--fg);
+  }
 }
 
 .nav-actions {
@@ -154,9 +156,11 @@ a {
   background-color: var(--primary);
   color: #ffffff;
 }
-.btn-primary:hover {
-  background-color: var(--primary-hover);
-  transform: translateY(-1px);
+@media (hover: hover) {
+  .btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+  }
 }
 
 .btn-secondary {
@@ -164,9 +168,11 @@ a {
   color: var(--fg);
   border: 1px solid var(--border);
 }
-.btn-secondary:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: var(--border-hover);
+@media (hover: hover) {
+  .btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--border-hover);
+  }
 }
 
 .btn-lg {
@@ -344,9 +350,11 @@ a {
   transition: all 0.3s ease;
 }
 
-.bento-card:hover {
-  background: rgba(24, 24, 27, 0.8);
-  border-color: var(--border-hover);
+@media (hover: hover) {
+  .bento-card:hover {
+    background: rgba(24, 24, 27, 0.8);
+    border-color: var(--border-hover);
+  }
 }
 
 .col-span-2 {
@@ -509,8 +517,10 @@ a {
   transition: color 0.2s ease;
 }
 
-.footer-links-col a:hover {
-  color: var(--fg);
+@media (hover: hover) {
+  .footer-links-col a:hover {
+    color: var(--fg);
+  }
 }
 
 .footer-bottom {
@@ -748,8 +758,10 @@ a {
   transition: transform 0.1s;
 }
 
-.roi-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
+@media (hover: hover) {
+  .roi-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+  }
 }
 
 .roi-slider::-moz-range-thumb {
@@ -762,8 +774,10 @@ a {
   transition: transform 0.1s;
 }
 
-.roi-slider::-moz-range-thumb:hover {
-  transform: scale(1.2);
+@media (hover: hover) {
+  .roi-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+  }
 }
 
 .roi-results {
