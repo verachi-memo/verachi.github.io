@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — Verachi</title>
+  <meta name="description" content="Verachi Terms of Service. B2B SaaS terms covering integrations, data ownership, AI-generated summaries, and liability." />
+  <meta name="theme-color" content="#0a0b10" />
+  <link rel="canonical" href="https://verachi.io/terms.html" />
+  <link rel="icon" href="./favicon.ico" />
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./landing.css" />
+  <script src="./landing.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header" data-header>
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="Verachi home">
+        <div class="brand-mark">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
+          </svg>
+        </div>
+        <span class="brand-word">VERACHI</span>
+      </a>
+      <button class="menu-toggle" id="mobileMenuToggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+      <nav class="site-nav" id="primaryNav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html#showcase">How It Works</a></li>
+          <li><a href="index.html#use-cases">Use Cases</a></li>
+          <li><a href="trust.html">Trust</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a class="header-link" href="https://app.verachi.io/login">Sign In</a>
+        <a class="button button-compact" href="https://app.verachi.io/signup">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <section class="hero trust-hero" aria-labelledby="terms-title">
+      <div class="hero-backdrop" aria-hidden="true">
+        <div class="hero-glow hero-glow-primary"></div>
+        <div class="hero-grid"></div>
+      </div>
+      <div class="container hero-content" style="position: relative; z-index: 1;">
+        <div class="hero-eyebrow">Legal</div>
+        <h1 id="terms-title" class="display-title" data-reveal="fade-up">Terms of <span class="title-emphasis">Service.</span></h1>
+        <p class="hero-intro" data-reveal="fade-up" style="--delay: 1; max-width: 54ch;">Plain-language terms for a B2B SaaS product built on trust. Your data stays in your tools. We cite our claims.</p>
+        <div class="trust-meta" data-reveal="fade-up" style="--delay: 2">
+          <span>Effective: March 15, 2026</span><span>·</span><span>Last updated: March 15, 2026</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="terms-content">
+      <div class="container">
+        <div class="subpage-prose" data-observe="fade-up">
+
+          <h2>1. Agreement to Terms</h2>
+          <p>By accessing or using Verachi ("the Service"), you agree to be bound by these Terms of Service. If you are using the Service on behalf of an organization, you represent that you have the authority to bind that organization. If you do not agree, do not use the Service.</p>
+
+          <h2>2. The Service</h2>
+          <p>Verachi is a decision workspace for delivery teams. It captures decisions from integrated tools (Slack, Jira, GitHub), links them to projects and source artifacts, and provides grounded chat, reports, and governance surfaces. See <a href="https://app.verachi.io/docs">app.verachi.io/docs</a> for full documentation.</p>
+
+          <h2>3. Accounts and Access</h2>
+          <p>You are responsible for maintaining the security of your account credentials. Workspace administrators control access. Notify us at <a href="mailto:security@verachi.io">security@verachi.io</a> if you suspect unauthorized access.</p>
+
+          <h2>4. Integrations and API Keys</h2>
+          <p>Verachi connects to third-party services through OAuth and API keys:</p>
+          <ul class="trust-list">
+            <li><strong>OAuth scopes</strong> are requested at the minimum level required, documented in our <a href="https://app.verachi.io/docs">docs</a></li>
+            <li><strong>API keys</strong> are encrypted at rest and scoped to your workspace</li>
+            <li><strong>You remain bound</strong> by the terms of each third-party tool</li>
+            <li><strong>Revocation:</strong> Disconnect any integration from workspace settings; OAuth tokens are removed within 24 hours</li>
+          </ul>
+
+          <h2>5. Data Ownership</h2>
+          <ul class="trust-list">
+            <li><strong>Primary sources stay in your tools.</strong> Verachi stores canonical, cited records that point back to Slack, Jira, GitHub</li>
+            <li><strong>Decision records</strong> are your intellectual property — exportable via API or settings</li>
+            <li><strong>We do not use your data</strong> to train ML models, sell to third parties, or aggregate across workspaces</li>
+          </ul>
+
+          <h2>6. AI-Generated Content</h2>
+          <p>Verachi uses large language models to generate summaries and answer questions:</p>
+          <ul class="trust-list">
+            <li><strong>Every answer cites its source</strong> — Slack threads, Jira tickets, GitHub PRs</li>
+            <li><strong>Confidence scores</strong> are displayed so you can assess reliability</li>
+            <li><strong>Not legal, financial, or business advice.</strong> AI content is for informational purposes; verify against cited sources</li>
+            <li><strong>No accuracy guarantee.</strong> AI summaries may contain errors or misinterpretations</li>
+          </ul>
+
+          <h2>7. License Grant</h2>
+          <p>We grant you a limited, non-exclusive, non-transferable, revocable license to access the Service for internal business purposes during your subscription.</p>
+
+          <h2>8. Restrictions</h2>
+          <ul class="trust-list">
+            <li>Do not reverse engineer, decompile, or disassemble the Service</li>
+            <li>Do not use the Service to develop a competing product</li>
+            <li>Do not attempt to access another workspace's data</li>
+            <li>Do not use the Service in violation of applicable law</li>
+          </ul>
+
+          <h2>9. Payment and Billing</h2>
+          <p>Paid plans are billed in advance (monthly or annual). Fees are non-refundable except as required by law. 30 days' notice for pricing changes.</p>
+
+          <h2>10. Termination</h2>
+          <p>Either party may terminate at any time. You may export data for 30 days post-closure. All data is deleted within 30 days; backups purged within 90.</p>
+
+          <h2>11. Service Availability</h2>
+          <p>We target 99.9% uptime for paid plans with 72 hours' notice for maintenance. We are not liable for third-party service outages or force majeure.</p>
+
+          <h2>12. Limitation of Liability</h2>
+          <p>Total liability shall not exceed fees paid in the preceding 12 months. We are not liable for indirect, incidental, special, or consequential damages. <strong>Verachi is a decision-support tool, not a decision-making authority.</strong></p>
+
+          <h2>13. Indemnification</h2>
+          <p>You agree to indemnify Verachi from claims arising from your use, your violation of these Terms, or your violation of third-party rights.</p>
+
+          <h2>14. Governing Law</h2>
+          <p>Governed by the laws of Japan. Disputes resolved in the courts of Tokyo, Japan.</p>
+
+          <h2>15. Changes</h2>
+          <p>Material changes notified via email and in-app banner at least 30 days before taking effect.</p>
+
+          <h2>16. Contact</h2>
+          <p>Questions: <a href="mailto:legal@verachi.io">legal@verachi.io</a></p>
+          <p>Verachi, Inc. · Tokyo, Japan</p>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="Verachi home">
+          <div class="brand-mark">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
+            </svg>
+          </div>
+          <span class="brand-word">VERACHI</span>
+        </a>
+        <p class="footer-blurb">Cited memory for engineering decisions, built for teams that move fast without losing context.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="index.html#showcase">How It Works</a>
+        <a href="index.html#use-cases">Use Cases</a>
+        <a href="trust.html">Trust &amp; Data Boundaries</a>
+        <a href="testimonials.html">Customer Stories</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="https://app.verachi.io/login">Sign In</a>
+        <a href="index.html#contact-form">Contact Sales</a>
+        <a href="trust.html">Trust</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="careers.html">Careers</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="https://app.verachi.io/docs">Docs</a>
+      </div>
+    </div>
+    <div class="container footer-legal">
+      <p>&copy; 2026 Verachi. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

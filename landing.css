@@ -1975,6 +1975,183 @@ main {
 
 
 /* ============================================================
+   SUBPAGE PROSE — Long-form text for privacy/terms pages
+   ============================================================ */
+
+.subpage-prose {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.subpage-prose h2 {
+  color: var(--ink-0);
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin: 48px 0 16px;
+}
+
+.subpage-prose h2:first-child {
+  margin-top: 0;
+}
+
+.subpage-prose p {
+  color: var(--ink-1);
+  font-size: 0.96rem;
+  line-height: 1.78;
+  text-wrap: pretty;
+  margin-bottom: 14px;
+}
+
+.subpage-prose a {
+  color: var(--accent);
+  font-weight: 700;
+  transition: color var(--dur-fast) var(--ease-standard);
+}
+
+@media (hover: hover) {
+  .subpage-prose a:hover {
+    color: var(--ink-0);
+  }
+}
+
+.subpage-prose strong {
+  color: var(--ink-0);
+  font-weight: 700;
+}
+
+
+/* ============================================================
+   STORY CARDS — Testimonials deep-dive
+   ============================================================ */
+
+.story-card {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: clamp(28px, 4vw, 56px);
+  padding: clamp(28px, 4vw, 48px);
+  margin-bottom: 24px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(12, 22, 38, 0.72), rgba(9, 16, 29, 0.92));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition: border-color var(--dur) var(--ease-standard);
+}
+
+@media (hover: hover) {
+  .story-card:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+}
+
+.story-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.story-card-meta .quote-avatar {
+  width: 56px;
+  height: 56px;
+}
+
+.story-card-headline {
+  color: var(--ink-0);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+
+.story-card-quote {
+  color: var(--ink-1);
+  font-size: 0.94rem;
+  line-height: 1.8;
+  font-style: italic;
+  text-wrap: pretty;
+  margin-bottom: 24px;
+  padding-left: 18px;
+  border-left: 2px solid rgba(143, 217, 255, 0.3);
+}
+
+.story-card-metrics {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.story-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  min-width: 140px;
+}
+
+.story-metric-number {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 500;
+  background: linear-gradient(135deg, var(--mint) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.story-metric-label {
+  color: var(--ink-3);
+  font-size: 0.76rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.story-card-detail {
+  color: var(--ink-2);
+  font-size: 0.92rem;
+  line-height: 1.78;
+  text-wrap: pretty;
+}
+
+.story-avatar-placeholder {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(143, 217, 255, 0.08);
+  border: 1px solid rgba(143, 217, 255, 0.12);
+  color: var(--accent);
+}
+
+@media (max-width: 720px) {
+  .story-card {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .story-card-meta {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .story-card-metrics {
+    gap: 12px;
+  }
+
+  .story-metric {
+    min-width: 120px;
+    flex: 1;
+  }
+}
+
+
+/* ============================================================
    LEGACY STYLES — kept for other pages (trust.html, sales.html, etc.)
    ============================================================ */
 
