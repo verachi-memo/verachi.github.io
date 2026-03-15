@@ -1946,6 +1946,11 @@ main {
   margin: 0 auto;
 }
 
+.cf-success-link {
+  display: inline-flex;
+  margin-top: 20px;
+}
+
 /* Responsive contact form */
 @media (max-width: 960px) {
   .contact-layout {

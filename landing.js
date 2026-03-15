@@ -609,6 +609,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 4. Fill in the config below
   const GOOGLE_FORM_CONFIG = {
     actionUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdUs3xM0Z_9zR-62EH_8QOp35mvRw5053NUwcDTTzLofrK46w/formResponse',
+    prefillUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdUs3xM0Z_9zR-62EH_8QOp35mvRw5053NUwcDTTzLofrK46w/viewform?usp=pp_url',
     fields: {
       name:         'entry.328464235',
       email:        'entry.1157589296',
@@ -638,13 +639,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const cfLoadedAt = document.getElementById('cf_loaded_at');
   const cfError = document.getElementById('cfError');
   const cfSuccess = document.getElementById('cfSuccess');
+  const cfSuccessLink = document.getElementById('cfSuccessLink');
   const cfSubmit = document.getElementById('cfSubmit');
 
   if (contactForm && cfLoadedAt) {
     // Record page load time for time-based check
     cfLoadedAt.value = Date.now().toString();
 
-    contactForm.addEventListener('submit', async (event) => {
+    contactForm.addEventListener('submit', (event) => {
       event.preventDefault();
 
       // Reset error
@@ -659,6 +661,15 @@ document.addEventListener('DOMContentLoaded', () => {
         submitText.hidden = false;
         submitLoading.hidden = true;
         cfSubmit.disabled = false;
+      };
+
+      const showSuccess = (prefilledUrl) => {
+        if (cfSuccessLink && prefilledUrl) {
+          cfSuccessLink.href = prefilledUrl;
+        }
+
+        contactForm.hidden = true;
+        cfSuccess.hidden = false;
       };
 
       // 1. Honeypot check
@@ -715,47 +726,40 @@ document.addEventListener('DOMContentLoaded', () => {
       submitLoading.hidden = false;
       cfSubmit.disabled = true;
 
-      try {
-        // 5. Submit to Google Forms (if configured)
-        if (GOOGLE_FORM_CONFIG.actionUrl) {
-          const gfData = new FormData();
-          for (const [key, entryId] of Object.entries(GOOGLE_FORM_CONFIG.fields)) {
-            if (entryId && formData[key] !== undefined) {
-              gfData.append(entryId, formData[key]);
-            }
-          }
+      if (!GOOGLE_FORM_CONFIG.prefillUrl) {
+        cfError.textContent = 'The Google Form is not configured yet.';
+        cfError.hidden = false;
+        resetButton();
+        return;
+      }
 
-          await fetch(GOOGLE_FORM_CONFIG.actionUrl, {
-            method: 'POST',
-            mode: 'no-cors', // Google Forms doesn't support CORS
-            body: gfData,
-          });
-        }
-
-        // Success
-        contactForm.hidden = true;
-        cfSuccess.hidden = false;
-
-        // Track conversion in GA
-        if (typeof gtag === 'function') {
-          gtag('event', 'generate_lead', {
-            event_category: 'contact',
-            event_label: formData.company_size,
-          });
-        }
-
-      } catch (_error) {
-        // Even on network error, show success (Google Forms no-cors
-        // always appears as an opaque response / error anyway)
-        contactForm.hidden = true;
-        cfSuccess.hidden = false;
-      } finally {
-        // If the form is still visible (e.g. unexpected error path),
-        // always restore the button so it doesn't stay stuck on "Sending…"
-        if (!contactForm.hidden) {
-          resetButton();
+      const params = new URLSearchParams();
+      for (const [key, entryId] of Object.entries(GOOGLE_FORM_CONFIG.fields)) {
+        if (entryId && formData[key] !== undefined) {
+          params.set(entryId, formData[key]);
         }
       }
+
+      const separator = GOOGLE_FORM_CONFIG.prefillUrl.includes('?') ? '&' : '?';
+      const prefilledUrl = `${GOOGLE_FORM_CONFIG.prefillUrl}${separator}${params.toString()}`;
+      const openedWindow = window.open(prefilledUrl, '_blank', 'noopener,noreferrer');
+
+      showSuccess(prefilledUrl);
+
+      // Track conversion when the handoff starts.
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', {
+          event_category: 'contact',
+          event_label: formData.company_size,
+        });
+      }
+
+      // If the popup was blocked, the in-page fallback link stays visible.
+      if (openedWindow) {
+        openedWindow.opener = null;
+      }
+
+      resetButton();
     });
   }
 });
