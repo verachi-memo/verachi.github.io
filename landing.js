@@ -821,4 +821,80 @@ document.addEventListener('DOMContentLoaded', () => {
       resetButton();
     });
   }
+
+
+  /* ============================================================
+     HERO CYCLING — Rotate through decision examples
+     ============================================================ */
+
+  const heroCycleExamples = [
+    {
+      query: 'Why did we migrate to event-driven?',
+      result: 'The team moved to event-driven architecture after the synchronous payment flow hit <strong>4-second timeouts</strong> under peak load. The async pipeline reduced P99 latency to 320ms.',
+      source: 'Slack · #platform-arch · Marcus · Sep 22',
+      confidence: 97,
+    },
+    {
+      query: 'Why did we drop MongoDB for Postgres?',
+      result: 'MongoDB\'s lack of <strong>ACID transactions</strong> across collections caused silent data loss during concurrent writes. Postgres with JSONB gave us schema flexibility without sacrificing consistency.',
+      source: 'Jira · ARCH-112 · Priya · Jul 08',
+      confidence: 94,
+    },
+    {
+      query: 'Why is auth handled by a separate service?',
+      result: 'After the credential leak incident in Q2, the team isolated auth into a <strong>dedicated microservice</strong> with its own database and rotation policy to limit blast radius.',
+      source: 'GitHub · PR #287 · Sarah · Aug 15',
+      confidence: 91,
+    },
+    {
+      query: 'Why did we choose gRPC over REST internally?',
+      result: 'Internal benchmarks showed gRPC reduced serialization overhead by <strong>62%</strong> compared to JSON-over-REST for our high-throughput order pipeline, cutting inter-service latency from 45ms to 17ms.',
+      source: 'Slack · #backend-eng · Alex · Nov 03',
+      confidence: 96,
+    },
+  ];
+
+  const heroQuery = document.querySelector('[data-hero-query]');
+  const heroResult = document.querySelector('[data-hero-result]');
+  const heroSource = document.querySelector('[data-hero-source]');
+  const heroConfidence = document.querySelector('[data-hero-confidence]');
+  const heroConfidenceText = document.querySelector('[data-hero-confidence-text]');
+  const heroCycleContainer = document.querySelector('[data-hero-cycle]');
+
+  if (heroQuery && heroResult && heroSource && heroCycleContainer && heroCycleExamples.length > 1) {
+    let heroIndex = 0;
+    const HERO_CYCLE_INTERVAL = 6000;
+    const HERO_FADE_DURATION = 400;
+
+    const cycleHero = () => {
+      heroIndex = (heroIndex + 1) % heroCycleExamples.length;
+      const example = heroCycleExamples[heroIndex];
+
+      // Fade out
+      heroCycleContainer.style.opacity = '0';
+      heroCycleContainer.style.transform = 'translateY(6px)';
+
+      setTimeout(() => {
+        // Update content
+        heroQuery.textContent = example.query;
+        heroResult.innerHTML = `<p>${example.result}</p>`;
+        heroSource.textContent = example.source;
+        if (heroConfidence) {
+          heroConfidence.style.width = `${example.confidence}%`;
+        }
+        if (heroConfidenceText) {
+          heroConfidenceText.textContent = `${example.confidence}% confidence`;
+        }
+
+        // Fade in
+        heroCycleContainer.style.opacity = '1';
+        heroCycleContainer.style.transform = 'translateY(0)';
+      }, HERO_FADE_DURATION);
+    };
+
+    // Add transition property
+    heroCycleContainer.style.transition = `opacity ${HERO_FADE_DURATION}ms ease, transform ${HERO_FADE_DURATION}ms ease`;
+
+    setInterval(cycleHero, HERO_CYCLE_INTERVAL);
+  }
 });

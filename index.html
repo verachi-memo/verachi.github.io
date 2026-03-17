@@ -164,7 +164,7 @@
               </div>
               <div class="chrome-bar">app.verachi.io</div>
             </div>
-            <div class="preview-body">
+            <div class="preview-body" data-hero-cycle>
               <div class="preview-search">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                   stroke-width="2" aria-hidden="true">
@@ -172,22 +172,21 @@
                   <line x1="21" y1="21" x2="16.65" y2="16.65" />
                 </svg>
                 <div class="preview-typing">
-                  <span class="typed-query">Why did we choose Postgres?</span><span
+                  <span class="typed-query" data-hero-query>Why did we migrate to event-driven?</span><span
                     class="cursor-blink">|</span>
                 </div>
               </div>
-              <div class="preview-result">
-                <p>Postgres was chosen for the new microservice due to its <strong>JSONB support</strong>, which
-                  fits the multi-tenant schema better than MySQL.</p>
+              <div class="preview-result" data-hero-result>
+                <p>The team moved to event-driven architecture after the synchronous payment flow hit <strong>4-second timeouts</strong> under peak load. The async pipeline reduced P99 latency to 320ms.</p>
               </div>
               <div class="preview-citation">
                 <div class="cite-badge">
                   <span class="cite-dot"></span>
-                  Slack · #architecture-decisions · Sarah · Oct 14
+                  <span data-hero-source>Slack · #platform-arch · Marcus · Sep 22</span>
                 </div>
                 <div class="cite-confidence">
-                  <span class="confidence-bar"><span class="confidence-fill"></span></span>
-                  <span>94% confidence</span>
+                  <span class="confidence-bar"><span class="confidence-fill" data-hero-confidence style="width: 97%"></span></span>
+                  <span data-hero-confidence-text>97% confidence</span>
                 </div>
               </div>
             </div>
@@ -591,7 +590,7 @@
                     <div class="github-mac-dots"><span class="mock-dots"><i></i><i></i><i></i></span></div>
                     <div class="github-browser-tab">
                       <div class="github-tab-icon"></div>
-                      <div class="github-tab-title">Add axios for data fetching &middot; Pull Request #124 &middot; OctoCorp/web-app &middot; GitHub</div>
+                      <div class="github-tab-title">Add axios for data fetching · Pull Request #124</div>
                     </div>
                   </div>
                   <div class="github-navbar">
