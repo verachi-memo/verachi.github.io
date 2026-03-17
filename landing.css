@@ -1939,11 +1939,12 @@ main {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .ide-layout,
-  
+  .usecase-tab-copy {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
 
-  .ide-code,
-  
+
 
   .savings-grid {
     grid-template-columns: 1fr;
@@ -2052,7 +2053,30 @@ main {
   }
 
   .usecase-nav {
-    grid-template-columns: 1fr;
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+
+  .usecase-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .usecase-tab {
+    flex: 0 0 auto;
+    min-width: 200px;
+    max-width: 260px;
+    scroll-snap-align: start;
+    padding: 16px 18px;
+    border-radius: 16px;
+  }
+
+  .usecase-tab-copy {
+    display: none;
   }
 
   .usecase-panel {
@@ -2063,6 +2087,8 @@ main {
   .mock-window {
     border-radius: 18px;
   }
+
+
 
   .footer-grid {
     grid-template-columns: 1fr 1fr;
@@ -2083,10 +2109,7 @@ main {
     font-size: 1.35rem;
   }
 
-  .ide-code,
-  .ide-chat,
-  .slack-thread,
-  
+
 
   .brand-word {
     font-size: 0.78rem;
@@ -3633,4 +3656,73 @@ main {
   padding: 2px 8px;
   border-radius: 12px;
   font-size: 0.75rem;
+}
+
+
+/* ============================================================
+   MOCK APP VISUALS — Mobile responsive overrides
+   Must come AFTER mock base styles to win the cascade.
+   ============================================================ */
+
+@media (max-width: 720px) {
+  /* VSCode: hide sidebar chrome, show only editor + chat */
+  .vscode-activity-bar,
+  .vscode-sidebar {
+    display: none;
+  }
+
+  .vscode-layout {
+    min-height: auto;
+  }
+
+  .vscode-title {
+    font-size: 0.65rem;
+  }
+
+  .vscode-panel {
+    width: 50%;
+  }
+
+  /* Slack: hide sidebar, show only thread */
+  .slack-sidebar {
+    display: none;
+  }
+
+  .slack-layout {
+    min-height: auto;
+  }
+
+  /* GitHub: hide browser chrome, compact layout */
+  .github-browser-topbar,
+  .github-navbar {
+    display: none;
+  }
+
+  .github-layout {
+    min-height: auto;
+    padding: 16px;
+  }
+
+  .github-header-title {
+    font-size: 1.1rem;
+  }
+
+  .github-header-meta {
+    flex-wrap: wrap;
+    font-size: 0.78rem;
+  }
+
+  .github-tabs {
+    gap: 10px;
+    overflow-x: auto;
+  }
+
+  .github-tab {
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  .github-nav-search {
+    width: auto;
+  }
 }
