@@ -239,9 +239,9 @@ document.addEventListener('DOMContentLoaded', () => {
       function initChart() {
           const ctx = savingsChartEl.getContext('2d');
           
-          const greenGrad = ctx.createLinearGradient(0, 0, 0, 400);
-          greenGrad.addColorStop(0, 'rgba(132, 241, 212, 0.3)'); // mint
-          greenGrad.addColorStop(1, 'rgba(132, 241, 212, 0)');
+          const accentGrad = ctx.createLinearGradient(0, 0, 0, 400);
+          accentGrad.addColorStop(0, 'rgba(143, 217, 255, 0.3)'); // accent
+          accentGrad.addColorStop(1, 'rgba(143, 217, 255, 0)');
 
           const grayGrad = ctx.createLinearGradient(0, 0, 0, 400);
           grayGrad.addColorStop(0, 'rgba(171, 194, 229, 0.1)'); // ink-3 roughly
@@ -266,12 +266,12 @@ document.addEventListener('DOMContentLoaded', () => {
                       {
                           label: 'Verachi Optimized Path',
                           data: [],
-                          borderColor: '#84f1d4', // mint
+                          borderColor: '#8fd9ff', // accent strong
                           borderWidth: 3,
                           pointRadius: 0,
                           pointHoverRadius: 6,
                           fill: '-1',
-                          backgroundColor: 'rgba(132, 241, 212, 0.15)',
+                          backgroundColor: 'rgba(143, 217, 255, 0.15)',
                           tension: 0.4
                       }
                   ]
