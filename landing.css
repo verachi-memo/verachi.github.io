@@ -728,6 +728,34 @@ main {
 
 .preview-result strong { color: var(--ink-0); font-weight: 700; }
 
+/* Hero cycle progress indicator */
+.hero-cycle-progress {
+  position: relative;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  overflow: hidden;
+}
+
+.hero-cycle-progress-fill {
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  background: linear-gradient(90deg, var(--mint), var(--accent));
+  border-radius: inherit;
+}
+
+/* When JS kicks in, this class drives the animation */
+.hero-cycle-progress-fill.is-running {
+  animation: hero-progress-fill var(--hero-cycle-duration, 10s) linear forwards;
+}
+
+@keyframes hero-progress-fill {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+
 .preview-citation {
   opacity: 0;
   transform: translateY(12px);

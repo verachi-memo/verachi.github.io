@@ -863,8 +863,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (heroQuery && heroResult && heroSource && heroCycleContainer && heroCycleExamples.length > 1) {
     let heroIndex = 0;
-    const HERO_CYCLE_INTERVAL = 6000;
-    const HERO_FADE_DURATION = 400;
+    const HERO_CYCLE_INTERVAL = 10000;
+    const HERO_FADE_DURATION = 500;
+
+    const heroProgress = document.querySelector('[data-hero-progress]');
+
+    // Set the CSS variable so the animation duration matches the JS interval
+    if (heroProgress) {
+      heroProgress.parentElement.style.setProperty('--hero-cycle-duration', `${HERO_CYCLE_INTERVAL / 1000}s`);
+    }
+
+    const startProgress = () => {
+      if (!heroProgress) return;
+      // Restart CSS animation by removing and re-adding the class
+      heroProgress.classList.remove('is-running');
+      // Force a reflow so the browser registers the removal
+      void heroProgress.offsetWidth;
+      heroProgress.classList.add('is-running');
+    };
 
     const cycleHero = () => {
       heroIndex = (heroIndex + 1) % heroCycleExamples.length;
@@ -872,7 +888,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Fade out
       heroCycleContainer.style.opacity = '0';
-      heroCycleContainer.style.transform = 'translateY(6px)';
+      heroCycleContainer.style.transform = 'translateY(8px)';
 
       setTimeout(() => {
         // Update content
@@ -889,11 +905,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // Fade in
         heroCycleContainer.style.opacity = '1';
         heroCycleContainer.style.transform = 'translateY(0)';
+
+        // Restart the progress bar for the next cycle
+        startProgress();
       }, HERO_FADE_DURATION);
     };
 
-    // Add transition property
+    // Smooth fade transition
     heroCycleContainer.style.transition = `opacity ${HERO_FADE_DURATION}ms ease, transform ${HERO_FADE_DURATION}ms ease`;
+
+    // Start the first progress bar fill immediately
+    startProgress();
 
     setInterval(cycleHero, HERO_CYCLE_INTERVAL);
   }
