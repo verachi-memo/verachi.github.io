@@ -22,6 +22,7 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="./landing.css" />
   <script src="./landing.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NHXTJ2NZMT"></script>
   <script>
@@ -363,64 +364,100 @@
     <!-- ========== SAVINGS CALCULATOR ========== -->
     <section class="section" id="savings">
       <div class="container">
-        <div class="section-head section-head-centered" data-observe="fade-up">
-          <span class="section-kicker-simple">ROI Calculator</span>
-          <h2 class="section-title" style="max-width: 22ch;">See your potential savings.</h2>
-          <p class="section-subtitle">Adjust the sliders to match your team. Watch the graph show what
-            happens when decision archaeology stops eating your budget.</p>
-        </div>
+        
+        <div class="roi-grid">
+            
+            <!-- Left Column: Inputs -->
+            <div class="roi-inputs-col order-2 lg:order-1" data-observe="fade-up">
+                <div class="section-head">
+                    <span class="section-kicker-simple">ROI Calculator</span>
+                    <h2 class="section-title">Scale your organization.</h2>
+                    <p class="section-subtitle" style="margin-top: 16px;">Quantify engineering friction and visualize the immediate impact of Verachi.</p>
+                </div>
 
-        <div class="savings-card" data-observe="fade-up" style="--delay: 1">
-          <div class="savings-grid">
+                <div class="card-blur roi-controls-group">
+                    <!-- Org Size -->
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <label>Organization Size</label>
+                            <span id="org-size-val" class="slider-value">120</span>
+                        </div>
+                        <input type="range" id="org-size" min="10" max="2000" step="10" value="120" class="savings-range">
+                        <div class="savings-range-labels">
+                            <span>Startup</span>
+                            <span>Enterprise+</span>
+                        </div>
+                    </div>
 
-            <!-- Inputs -->
-            <div class="savings-inputs">
-              <div class="savings-input-group">
-                <label class="savings-label" for="calcTeamSize">
-                  Developers
-                  <input type="number" class="savings-value" id="calcTeamSizeValue" value="6" min="2" readonly />
-                </label>
-                <input type="range" id="calcTeamSize" class="savings-range" min="2" max="50" value="6" step="1" />
-                <div class="savings-range-labels"><span>2</span><span>50</span></div>
-              </div>
+                    <!-- Hours Lost -->
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <label>Hours Lost / Dev / Week</label>
+                            <span id="hours-lost-val" class="slider-value">8h</span>
+                        </div>
+                        <input type="range" id="hours-lost" min="1" max="40" value="8" class="savings-range">
+                    </div>
 
-              <div class="savings-input-group">
-                <label class="savings-label" for="calcHoursWeek">
-                  Hours Lost / Dev / Week
-                  <input type="number" class="savings-value" id="calcHoursWeekValue" value="1" min="1" readonly />
-                </label>
-                <input type="range" id="calcHoursWeek" class="savings-range" min="1" max="10" value="1" step="1" />
-                <div class="savings-range-labels"><span>1</span><span>10</span></div>
-              </div>
+                    <!-- Average Salary -->
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <label>Avg. Developer Salary</label>
+                            <span id="salary-val" class="slider-value">$145k</span>
+                        </div>
+                        <input type="range" id="salary" min="60" max="400" step="5" value="145" class="savings-range">
+                    </div>
+                </div>
 
-              <div class="savings-input-group">
-                <label class="savings-label" for="calcHourlyRate">
-                  Average Salary / Developer
-                  <input type="number" class="savings-value" id="calcHourlyRateValue" value="120000" min="50000" readonly />
-                </label>
-                <input type="range" id="calcHourlyRate" class="savings-range" min="50000" max="250000" value="120000" step="5000" />
-                <div class="savings-range-labels"><span>$50k</span><span>$250k</span></div>
-              </div>
+                <div class="roi-results-grid">
+                    <div class="card-blur roi-result-box border-mint">
+                        <p class="result-label">Annual Recovered Capital</p>
+                        <h3 id="annual-savings" class="result-value text-mint">$0</h3>
+                        <p id="pricing-note" class="result-note pricing-note-style"></p>
+                    </div>
+                    <div class="card-blur roi-result-box border-accent">
+                        <p class="result-label">ROI Multiplier</p>
+                        <h3 id="roi-multiplier" class="result-value text-accent">0x</h3>
+                        <p class="result-note">Efficiency yield per $1 spent</p>
+                    </div>
+                </div>
             </div>
 
-            <!-- KPIs -->
-            <div class="savings-kpis">
-              <div class="savings-kpi">
-                <span class="savings-kpi-label">Estimated Annual Savings</span>
-                <span class="savings-kpi-number" id="calcAnnualSavings">$13,500</span>
-              </div>
-              <div class="savings-kpi">
-                <span class="savings-kpi-label">Hours Reclaimed / Year</span>
-                <span class="savings-kpi-number" id="calcHoursReclaimed">187</span>
-              </div>
+            <!-- Right Column: Bifurcated Graph -->
+            <div class="roi-graph-col order-1 lg:order-2" data-observe="fade-up" style="--delay: 1">
+                <div class="card-blur roi-graph-card">
+                    <div class="graph-badge-wrapper">
+                        <div class="savings-badge">
+                            Operational Excellence
+                        </div>
+                    </div>
+                    
+                    <div class="graph-header">
+                        <h3 style="font-size: 1.125rem; font-weight: 600; color: var(--ink-0); margin-bottom: 4px;">Financial Impact Visualization</h3>
+                        <p style="font-size: 0.85rem; color: var(--ink-2);">Legacy Cost vs. Verachi Optimized Performance</p>
+                    </div>
+                    
+                    <div class="graph-container">
+                        <canvas id="savingsChart"></canvas>
+                    </div>
+
+                    <div class="graph-footer">
+                        <div class="graph-legend">
+                            <div class="legend-item">
+                                <span class="legend-color legend-legacy"></span> 
+                                <span>Legacy Path (Friction)</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color legend-verachi"></span> 
+                                <span>Verachi Path</span>
+                            </div>
+                        </div>
+                        <div class="graph-tag">
+                            Interactive Real-Time Simulation
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Graph -->
-            <div class="savings-graph-wrap">
-              <canvas id="savingsCanvas" width="600" height="340"></canvas>
-            </div>
-
-          </div>
         </div>
       </div>
     </section>

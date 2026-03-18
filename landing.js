@@ -212,447 +212,202 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ============================================================
-     SAVINGS CALCULATOR — Interactive ROI graph
+     SAVINGS CALCULATOR — Interactive ROI graph (Chart.js)
      ============================================================ */
-  const calcTeamSize = document.getElementById('calcTeamSize');
-  const calcHoursWeek = document.getElementById('calcHoursWeek');
-  const calcHourlyRate = document.getElementById('calcHourlyRate');
-  const calcTeamSizeValue = document.getElementById('calcTeamSizeValue');
-  const calcHoursWeekValue = document.getElementById('calcHoursWeekValue');
-  const calcHourlyRateValue = document.getElementById('calcHourlyRateValue');
-  const calcAnnualSavings = document.getElementById('calcAnnualSavings');
-  const calcHoursReclaimed = document.getElementById('calcHoursReclaimed');
-  const savingsCanvas = document.getElementById('savingsCanvas');
+  const orgSizeInput = document.getElementById('org-size');
+  const hoursLostInput = document.getElementById('hours-lost');
+  const salaryInput = document.getElementById('salary');
+  
+  const orgSizeVal = document.getElementById('org-size-val');
+  const hoursLostVal = document.getElementById('hours-lost-val');
+  const salaryVal = document.getElementById('salary-val');
+  
+  const annualSavingsEl = document.getElementById('annual-savings');
+  const roiEl = document.getElementById('roi-multiplier');
+  const pricingNoteEl = document.getElementById('pricing-note');
+  const savingsChartEl = document.getElementById('savingsChart');
 
-  if (calcTeamSize && calcHoursWeek && calcHourlyRate && savingsCanvas) {
-    const ctx = savingsCanvas.getContext('2d');
-    const currencyFmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-    const numberFmt = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });
-    const HOURS_PER_YEAR = 2080;
-    const WEEKS_PER_YEAR = 52;
-    const BURDEN_MULTIPLIER = 1.25;
-    const RECOVERY_RATE = 0.60;
-    const PIVOT_MONTH = 6;
-    const AXIS_HEADROOM = 1.08;
-    const GRID_STEPS = 5;
-    const VALUE_SMOOTHING_MS = 140;
-    const AXIS_EXPAND_MS = 160;
-    const AXIS_SHRINK_MS = 240;
+  if (orgSizeInput && hoursLostInput && salaryInput && savingsChartEl) {
+      let chart;
 
-    // Pair each slider with its number input
-    const sliderPairs = [
-      { slider: calcTeamSize, input: calcTeamSizeValue },
-      { slider: calcHoursWeek, input: calcHoursWeekValue },
-      { slider: calcHourlyRate, input: calcHourlyRateValue },
-    ];
-
-    const setPercent = (pair) => {
-      const min = parseInt(pair.slider.min, 10) || 0;
-      const max = parseInt(pair.slider.max, 10) || 100;
-      const val = parseInt(pair.slider.value, 10) || min;
-      const percent = ((val - min) / (max - min)) * 100;
-      pair.slider.style.setProperty('--val', `${percent}%`);
-    };
-
-    // Sync slider → number input, unlock at max
-    const syncSliderToInput = (pair) => {
-      const val = parseInt(pair.slider.value, 10);
-      const max = parseInt(pair.slider.max, 10);
-      pair.input.value = val;
-      if (val >= max) {
-        pair.input.removeAttribute('readonly');
-      } else {
-        pair.input.setAttribute('readonly', '');
-      }
-      setPercent(pair);
-    };
-
-    // Sync number input → slider (clamp to slider range)
-    const syncInputToSlider = (pair) => {
-      const min = parseInt(pair.slider.min, 10) || 1;
-      let val = parseInt(pair.input.value, 10);
-      if (isNaN(val) || val < min) {
-        val = min;
-        pair.input.value = val;
-      }
-      const max = parseInt(pair.slider.max, 10);
-      pair.slider.value = Math.min(val, max);
-      setPercent(pair);
-    };
-
-    // Get the effective value (from number input, which may exceed slider max)
-    const getVal = (pair) => {
-      const min = parseInt(pair.slider.min, 10) || 1;
-      const v = parseInt(pair.input.value, 10);
-      return isNaN(v) || v < min ? min : v;
-    };
-
-    const getCurrentValues = () => ({
-      team: getVal(sliderPairs[0]),
-      hours: getVal(sliderPairs[1]),
-      rate: getVal(sliderPairs[2])
-    });
-
-    const getSavingsMetrics = (team, hours, rate) => {
-      const loadedHourlyRate = (rate * BURDEN_MULTIPLIER) / HOURS_PER_YEAR;
-      const annualHoursLost = team * hours * WEEKS_PER_YEAR;
-      const annualCost = annualHoursLost * loadedHourlyRate;
-      const hoursReclaimed = annualHoursLost * RECOVERY_RATE;
-      const annualSaved = hoursReclaimed * loadedHourlyRate;
-      const currentReduction = RECOVERY_RATE;
-      const monthlyCost = annualCost / 12;
-      const months = 12;
-      const projectedWithout = monthlyCost * months;
-      const projectedWith = (monthlyCost * PIVOT_MONTH) + (monthlyCost * (1 - currentReduction) * (months - PIVOT_MONTH));
-
-      return {
-        annualHoursLost,
-        annualCost,
-        annualSaved,
-        currentReduction,
-        loadedHourlyRate,
-        hoursReclaimed,
-        monthlyCost,
-        projectedWithout,
-        projectedWith
-      };
-    };
-
-    const getAxisMaxForValues = (team, hours, rate) => {
-      const metrics = getSavingsMetrics(team, hours, rate);
-      return Math.max(metrics.projectedWithout, metrics.projectedWith) * AXIS_HEADROOM;
-    };
-
-    const stepTowards = (current, target, deltaMs, smoothingMs) => {
-      if (!Number.isFinite(current)) return target;
-      if (Math.abs(target - current) < 0.01) return target;
-      const blend = 1 - Math.exp(-deltaMs / smoothingMs);
-      return current + (target - current) * blend;
-    };
-
-    const renderState = {
-      ...getCurrentValues(),
-      axisMax: null
-    };
-
-    let renderFrame = null;
-    let lastRenderTime = 0;
-
-    const animateGraph = (timestamp) => {
-      const deltaMs = lastRenderTime ? Math.min(timestamp - lastRenderTime, 32) : 16;
-      lastRenderTime = timestamp;
-
-      const target = getCurrentValues();
-      const targetAxisMax = getAxisMaxForValues(target.team, target.hours, target.rate);
-
-      renderState.team = stepTowards(renderState.team, target.team, deltaMs, VALUE_SMOOTHING_MS);
-      renderState.hours = stepTowards(renderState.hours, target.hours, deltaMs, VALUE_SMOOTHING_MS);
-      renderState.rate = stepTowards(renderState.rate, target.rate, deltaMs, VALUE_SMOOTHING_MS);
-
-      const axisSmoothing = targetAxisMax > renderState.axisMax ? AXIS_EXPAND_MS : AXIS_SHRINK_MS;
-      renderState.axisMax = stepTowards(renderState.axisMax, targetAxisMax, deltaMs, axisSmoothing);
-
-      renderGraph(renderState.team, renderState.hours, renderState.rate, renderState.axisMax);
-
-      const stillAnimating =
-        Math.abs(target.team - renderState.team) > 0.02 ||
-        Math.abs(target.hours - renderState.hours) > 0.02 ||
-        Math.abs(target.rate - renderState.rate) > 0.02 ||
-        Math.abs(targetAxisMax - renderState.axisMax) > 1;
-
-      if (stillAnimating) {
-        renderFrame = requestAnimationFrame(animateGraph);
-        return;
+      function getPricingTier(size) {
+          if (size < 50) return { price: 49, label: 'Professional' };
+          if (size < 250) return { price: 29, label: 'Growth' };
+          return { price: 15, label: 'Enterprise' };
       }
 
-      renderState.team = target.team;
-      renderState.hours = target.hours;
-      renderState.rate = target.rate;
-      renderState.axisMax = targetAxisMax;
-      renderGraph(renderState.team, renderState.hours, renderState.rate, renderState.axisMax);
+      function initChart() {
+          const ctx = savingsChartEl.getContext('2d');
+          
+          const greenGrad = ctx.createLinearGradient(0, 0, 0, 400);
+          greenGrad.addColorStop(0, 'rgba(132, 241, 212, 0.3)'); // mint
+          greenGrad.addColorStop(1, 'rgba(132, 241, 212, 0)');
 
-      renderFrame = null;
-      lastRenderTime = 0;
-    };
+          const grayGrad = ctx.createLinearGradient(0, 0, 0, 400);
+          grayGrad.addColorStop(0, 'rgba(171, 194, 229, 0.1)'); // ink-3 roughly
+          grayGrad.addColorStop(1, 'rgba(171, 194, 229, 0)');
 
-    const queueRender = () => {
-      if (renderFrame !== null) return;
-      renderFrame = requestAnimationFrame(animateGraph);
-    };
-
-    const resizeCanvas = () => {
-      const dpr = window.devicePixelRatio || 1;
-      const rect = savingsCanvas.getBoundingClientRect();
-      const width = Math.max(rect.width, 320);
-      const height = width * 0.56;
-      savingsCanvas.width = Math.round(width * dpr);
-      savingsCanvas.height = Math.round(height * dpr);
-      savingsCanvas.style.height = `${height}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
-
-    const renderGraph = (team, hours, rate, axisMax = getAxisMaxForValues(team, hours, rate)) => {
-      const metrics = getSavingsMetrics(team, hours, rate);
-      const {
-        annualSaved,
-        currentReduction,
-        hoursReclaimed,
-        monthlyCost
-      } = metrics;
-
-      calcAnnualSavings.textContent = currencyFmt.format(annualSaved);
-      calcHoursReclaimed.textContent = numberFmt.format(hoursReclaimed);
-
-      // Canvas dimensions (CSS pixels)
-      const dpr = window.devicePixelRatio || 1;
-      const W = savingsCanvas.width / dpr || 600;
-      const H = savingsCanvas.height / dpr || 340;
-      const maxCost = Math.max(axisMax, 1);
-
-      // Margins
-      const ml = 64, mr = 24, mt = 32, mb = 44;
-      const gw = W - ml - mr;
-      const gh = H - mt - mb;
-
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.clearRect(0, 0, savingsCanvas.width, savingsCanvas.height);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      if (gw <= 0 || gh <= 0) return;
-
-      // Monthly cost data
-      const months = 12;
-
-      const xForMonth = (m) => ml + (m / months) * gw;
-      const yForCost = (c) => mt + (maxCost > 0 ? gh - (c / maxCost) * gh : gh);
-      const formatAxisCurrency = (value) => {
-        if (value >= 1000000) {
-          return `$${(value / 1000000).toFixed(value >= 10000000 ? 0 : 1)}m`;
-        }
-
-        if (value >= 1000) {
-          return `$${Math.round(value / 1000)}k`;
-        }
-
-        return `$${Math.round(value)}`;
-      };
-
-      const traceSmoothPath = (target, points, moveToStart = true) => {
-        if (!points.length) return;
-
-        if (moveToStart) {
-          target.moveTo(points[0].x, points[0].y);
-        }
-
-        if (points.length === 1) return;
-        if (points.length === 2) {
-          target.lineTo(points[1].x, points[1].y);
-          return;
-        }
-
-        for (let i = 1; i < points.length - 1; i++) {
-          const midX = (points[i].x + points[i + 1].x) / 2;
-          const midY = (points[i].y + points[i + 1].y) / 2;
-          target.quadraticCurveTo(points[i].x, points[i].y, midX, midY);
-        }
-
-        const last = points[points.length - 1];
-        target.quadraticCurveTo(last.x, last.y, last.x, last.y);
-      };
-
-      // Grid lines
-      ctx.strokeStyle = 'rgba(171, 194, 229, 0.07)';
-      ctx.lineWidth = 1;
-      for (let i = 0; i <= GRID_STEPS; i++) {
-        const y = mt + (gh / GRID_STEPS) * i;
-        ctx.beginPath();
-        ctx.moveTo(ml, y);
-        ctx.lineTo(W - mr, y);
-        ctx.stroke();
+          chart = new Chart(ctx, {
+              type: 'line',
+              data: {
+                  labels: ['Month 1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10', 'M11', 'Year 1'],
+                  datasets: [
+                      {
+                          label: 'Legacy Friction Cost',
+                          data: [],
+                          borderColor: 'rgba(171, 194, 229, 0.4)',
+                          borderWidth: 2,
+                          pointRadius: 0,
+                          fill: true,
+                          backgroundColor: grayGrad,
+                          tension: 0.4,
+                          borderDash: [4, 4]
+                      },
+                      {
+                          label: 'Verachi Optimized Path',
+                          data: [],
+                          borderColor: '#84f1d4', // mint
+                          borderWidth: 3,
+                          pointRadius: 0,
+                          pointHoverRadius: 6,
+                          fill: '-1',
+                          backgroundColor: 'rgba(132, 241, 212, 0.15)',
+                          tension: 0.4
+                      }
+                  ]
+              },
+              options: {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  interaction: { intersect: false, mode: 'index' },
+                  plugins: {
+                      legend: { display: false },
+                      tooltip: {
+                          backgroundColor: 'rgba(11, 20, 35, 0.95)',
+                          borderColor: 'rgba(255,255,255,0.1)',
+                          borderWidth: 1,
+                          padding: 12,
+                          titleFont: { size: 12, weight: 'bold', family: '"Manrope", sans-serif' },
+                          bodyFont: { size: 12, family: '"Manrope", sans-serif' },
+                          callbacks: {
+                              label: (context) => ` ${context.dataset.label}: $${context.parsed.y.toLocaleString()}`
+                          }
+                      }
+                  },
+                  scales: {
+                      y: {
+                          beginAtZero: true,
+                          grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                          ticks: {
+                              color: 'rgba(171, 194, 229, 0.4)',
+                              font: { size: 10, family: '"JetBrains Mono", monospace' },
+                              callback: (val) => {
+                                  if (val >= 1000000) return '$' + (val / 1000000).toFixed(1) + 'M';
+                                  if (val >= 1000) return '$' + (val / 1000) + 'k';
+                                  return '$' + val;
+                              }
+                          }
+                      },
+                      x: {
+                          grid: { display: false },
+                          ticks: { color: 'rgba(171, 194, 229, 0.4)', font: { size: 10, family: '"Manrope", sans-serif' } }
+                      }
+                  },
+                  animations: {
+                      y: { duration: 400, easing: 'easeOutQuart' },
+                      x: { duration: 0 }
+                  }
+              }
+          });
       }
 
-      // Y-axis labels
-      ctx.fillStyle = 'rgba(163, 177, 200, 0.5)';
-      ctx.font = '500 10px "JetBrains Mono", monospace';
-      ctx.textAlign = 'right';
-      ctx.textBaseline = 'middle';
-      for (let i = 0; i <= GRID_STEPS; i++) {
-        const val = maxCost - (maxCost / GRID_STEPS) * i;
-        const y = mt + (gh / GRID_STEPS) * i;
-        const label = formatAxisCurrency(val);
-        ctx.fillText(label, ml - 10, y);
-      }
+      function calculateData() {
+          const orgSize = parseInt(orgSizeInput.value);
+          const hoursLost = parseInt(hoursLostInput.value);
+          const salary = parseInt(salaryInput.value) * 1000;
+          
+          const tier = getPricingTier(orgSize);
+          const verachiSeatCost = tier.price;
+          
+          const hourlyRate = salary / 2080; 
+          const monthlyWastePerDev = hoursLost * hourlyRate * 4.33; 
+          
+          const legacyData = [];
+          const verachiData = [];
+          
+          let totalWasteRecovered = 0;
+          let totalSoftwareCost = 0;
+          let totalBaselineWaste = 0;
 
-      // X-axis labels
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'top';
-      for (let m = 1; m <= months; m++) {
-        ctx.fillText('M' + m, xForMonth(m), H - mb + 12);
-      }
+          for (let i = 0; i < 12; i++) {
+              const monthBaseline = (monthlyWastePerDev * orgSize) * Math.pow(1.015, i);
+              legacyData.push(Math.round(monthBaseline));
+              totalBaselineWaste += monthBaseline;
 
-      // Build data points
-      const withoutPoints = [];
-      const withPoints = [];
-      let cumWithout = 0;
-      let cumWith = 0;
-      
-      for (let m = 0; m <= months; m++) {
-        if (m > 0) {
-          cumWithout += monthlyCost;
-          if (m <= PIVOT_MONTH) {
-            cumWith += monthlyCost;
-          } else {
-            // Subtract the monthly savings from the monthly cost to get the new ongoing monthly cost
-            const reducedMonthlyCost = monthlyCost * (1 - currentReduction);
-            cumWith += reducedMonthlyCost;
+              let efficiency = 0.80; 
+              if (i === 0) efficiency = 0.20;
+              else if (i === 1) efficiency = 0.45;
+              else if (i === 2) efficiency = 0.65;
+
+              const wasteRecovered = monthBaseline * efficiency;
+              const monthlySoftwareCost = orgSize * verachiSeatCost;
+              
+              const monthVerachiTotal = (monthBaseline - wasteRecovered) + monthlySoftwareCost;
+              
+              verachiData.push(Math.round(monthVerachiTotal));
+              totalWasteRecovered += wasteRecovered;
+              totalSoftwareCost += monthlySoftwareCost;
           }
-        }
-        withoutPoints.push({ x: xForMonth(m), y: yForCost(cumWithout) });
-        withPoints.push({ x: xForMonth(m), y: yForCost(cumWith) });
+
+          const annualNetSavings = totalWasteRecovered - totalSoftwareCost;
+          const roiFactor = (totalWasteRecovered / totalSoftwareCost).toFixed(1);
+
+          animateValue(annualSavingsEl, annualNetSavings, "$");
+          roiEl.innerText = `${roiFactor}x`;
+          
+          orgSizeVal.innerText = orgSize.toLocaleString();
+          hoursLostVal.innerText = `${hoursLost}h`;
+          salaryVal.innerText = `$${salaryInput.value}k`;
+          
+          const percentValOrg = ((orgSize - orgSizeInput.min) / (orgSizeInput.max - orgSizeInput.min)) * 100;
+          orgSizeInput.style.background = `linear-gradient(90deg, var(--ink-0) ${percentValOrg}%, var(--surface-2) ${percentValOrg}%)`;
+          
+          const percentValHours = ((hoursLost - hoursLostInput.min) / (hoursLostInput.max - hoursLostInput.min)) * 100;
+          hoursLostInput.style.background = `linear-gradient(90deg, var(--ink-0) ${percentValHours}%, var(--surface-2) ${percentValHours}%)`;
+
+          const percentValSalary = ((salaryInput.value - salaryInput.min) / (salaryInput.max - salaryInput.min)) * 100;
+          salaryInput.style.background = `linear-gradient(90deg, var(--ink-0) ${percentValSalary}%, var(--surface-2) ${percentValSalary}%)`;
+
+          pricingNoteEl.innerHTML = `<span class="note-highlight">${tier.label} Tier</span> active ($${verachiSeatCost}/seat)`;
+
+          chart.data.datasets[0].data = legacyData;
+          chart.data.datasets[1].data = verachiData;
+          
+          chart.update();
       }
 
-      // Savings fill (area between lines after pivot)
-      const pivotIdx = PIVOT_MONTH;
-      const fillPath = new Path2D();
-      traceSmoothPath(fillPath, withoutPoints.slice(pivotIdx));
-      traceSmoothPath(fillPath, withPoints.slice(pivotIdx).reverse(), false);
-      fillPath.closePath();
-      const fillGrad = ctx.createLinearGradient(0, mt, 0, mt + gh);
-      fillGrad.addColorStop(0, 'rgba(132, 241, 212, 0.12)');
-      fillGrad.addColorStop(1, 'rgba(85, 196, 255, 0.04)');
-      ctx.fillStyle = fillGrad;
-      ctx.fill(fillPath);
+      function animateValue(obj, value, prefix = "") {
+          const start = parseInt(obj.innerText.replace(/[^0-9]/g, '')) || 0;
+          const duration = 600;
+          let startTime = null;
 
-      // Without Verachi line (full)
-      ctx.lineJoin = 'round';
-      ctx.lineCap = 'round';
-      const withoutPath = new Path2D();
-      traceSmoothPath(withoutPath, withoutPoints);
-      ctx.strokeStyle = '#f6a693';
-      ctx.lineWidth = 2.5;
-      ctx.shadowColor = 'rgba(246, 166, 147, 0.4)';
-      ctx.shadowBlur = 8;
-      ctx.shadowOffsetY = 2;
-      ctx.stroke(withoutPath);
+          const step = (timestamp) => {
+              if (!startTime) startTime = timestamp;
+              const progress = Math.min((timestamp - startTime) / duration, 1);
+              const easeProgress = 1 - Math.pow(1 - progress, 3);
+              const current = Math.floor(easeProgress * (value - start) + start);
+              obj.innerHTML = prefix + current.toLocaleString();
+              if (progress < 1) window.requestAnimationFrame(step);
+          };
+          window.requestAnimationFrame(step);
+      }
 
-      // Reset shadow for the base part of the next line to avoid double-shadowing
-      ctx.shadowColor = 'transparent';
-      ctx.shadowBlur = 0;
-      ctx.shadowOffsetY = 0;
-
-      // With Verachi line (same as without until pivot, then diverges)
-      const withBeforePivotPath = new Path2D();
-      traceSmoothPath(withBeforePivotPath, withPoints.slice(0, pivotIdx + 1));
-      ctx.strokeStyle = '#f6a693';
-      ctx.lineWidth = 2.5;
-      ctx.stroke(withBeforePivotPath);
-
-      const withAfterPivotPath = new Path2D();
-      traceSmoothPath(withAfterPivotPath, withPoints.slice(pivotIdx));
-      const lineGrad = ctx.createLinearGradient(withPoints[pivotIdx].x, 0, withPoints[withPoints.length - 1].x, 0);
-      lineGrad.addColorStop(0, '#8fd9ff');
-      lineGrad.addColorStop(1, '#84f1d4');
-      ctx.strokeStyle = lineGrad;
-      ctx.lineWidth = 2.5;
-      ctx.shadowColor = 'rgba(132, 241, 212, 0.4)';
-      ctx.shadowBlur = 8;
-      ctx.shadowOffsetY = 2;
-      ctx.stroke(withAfterPivotPath);
-
-      // Reset shadow for subsequent elements (like the pivot line and text)
-      ctx.shadowColor = 'transparent';
-      ctx.shadowBlur = 0;
-      ctx.shadowOffsetY = 0;
-
-      // Pivot dashed line
-      const pivotX = xForMonth(PIVOT_MONTH);
-      ctx.setLineDash([6, 4]);
-      ctx.strokeStyle = 'rgba(245, 247, 251, 0.2)';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(pivotX, mt);
-      ctx.lineTo(pivotX, mt + gh);
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      // Pivot label
-      ctx.fillStyle = 'rgba(245, 247, 251, 0.45)';
-      ctx.font = '700 9px "Manrope", sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'bottom';
-      ctx.fillText('START USING VERACHI', pivotX, mt - 8);
-
-      // Legend labels at end of lines
-      const lastIdx = withoutPoints.length - 1;
-
-      ctx.fillStyle = '#f6a693';
-      ctx.font = '600 10px "Manrope", sans-serif';
-      ctx.textAlign = 'right';
-      ctx.textBaseline = 'bottom';
-      ctx.fillText('Without Verachi', withoutPoints[lastIdx].x, withoutPoints[lastIdx].y - 8);
-
-      ctx.fillStyle = '#84f1d4';
-      ctx.textBaseline = 'top';
-      ctx.fillText('With Verachi', withPoints[lastIdx].x, withPoints[lastIdx].y + 8);
-
-      // "YOUR SAVINGS" label in middle of shaded area
-      const midMonth = Math.round((PIVOT_MONTH + months) / 2);
-      const savingsLabelY = (withoutPoints[midMonth].y + withPoints[midMonth].y) / 2;
-      ctx.fillStyle = 'rgba(132, 241, 212, 0.9)';
-      ctx.font = '800 11px "Manrope", sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.letterSpacing = '0.08em';
-      ctx.fillText('YOUR SAVINGS', xForMonth(midMonth), savingsLabelY);
-    };
-
-    // Initial sync
-    sliderPairs.forEach(syncSliderToInput);
-
-    const initialValues = getCurrentValues();
-    renderState.team = initialValues.team;
-    renderState.hours = initialValues.hours;
-    renderState.rate = initialValues.rate;
-    renderState.axisMax = getAxisMaxForValues(initialValues.team, initialValues.hours, initialValues.rate);
-    resizeCanvas();
-    renderGraph(initialValues.team, initialValues.hours, initialValues.rate, renderState.axisMax);
-
-    // Slider → input sync + redraw
-    sliderPairs.forEach((pair) => {
-      pair.slider.addEventListener('input', () => {
-        syncSliderToInput(pair);
-        queueRender();
-      });
-    });
-
-    // Number input → slider sync + redraw
-    sliderPairs.forEach((pair) => {
-      pair.input.addEventListener('input', () => {
-        syncInputToSlider(pair);
-        queueRender();
+      [orgSizeInput, hoursLostInput, salaryInput].forEach(input => {
+          input.addEventListener('input', calculateData);
       });
 
-      // Validate on blur: ensure always a positive number
-      pair.input.addEventListener('blur', () => {
-        const min = parseInt(pair.slider.min, 10) || 1;
-        let val = parseInt(pair.input.value, 10);
-        if (isNaN(val) || val < min) {
-          val = min;
-          pair.input.value = val;
-        }
-        syncInputToSlider(pair);
-        queueRender();
-      });
-    });
-
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        resizeCanvas();
-        queueRender();
-      }, 100);
-    });
+      initChart();
+      calculateData();
   }
 
 
