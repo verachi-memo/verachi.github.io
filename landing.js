@@ -88,18 +88,12 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileNavQuery.addListener(syncOnQueryChange);
   }
 
-  const revealTargets = document.querySelectorAll('[data-reveal], [data-observe]');
+  const revealTargets = document.querySelectorAll('[data-observe]');
   if (reducedMotionQuery.matches) {
     revealTargets.forEach((element) => element.classList.add('is-visible'));
   } else if (!('IntersectionObserver' in window)) {
     revealTargets.forEach((element) => element.classList.add('is-visible'));
   } else {
-    window.requestAnimationFrame(() => {
-      document.querySelectorAll('[data-reveal]').forEach((element) => {
-        element.classList.add('is-visible');
-      });
-    });
-
     const observer = new IntersectionObserver((entries, activeObserver) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) {
@@ -115,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
       threshold: 0.12
     });
 
-    document.querySelectorAll('[data-observe]').forEach((element) => observer.observe(element));
+    revealTargets.forEach((element) => observer.observe(element));
   }
 
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
