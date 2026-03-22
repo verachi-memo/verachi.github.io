@@ -591,6 +591,54 @@ main {
   }
 }
 
+/* Trust strip — compact security commitments */
+.section-trust-strip {
+  padding: clamp(36px, 4vw, 56px) 0;
+  border-bottom: 1px solid rgba(171, 194, 229, 0.06);
+}
+
+.trust-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px 24px;
+}
+
+.trust-strip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.trust-strip-icon {
+  flex: none;
+  margin-top: 2px;
+  color: var(--accent);
+  opacity: 0.6;
+}
+
+.trust-strip-item span {
+  color: var(--ink-2);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+@media (max-width: 720px) {
+  .trust-strip-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1024px) {
+  .trust-strip-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* Hero visual — full-width product preview */
 .hero-visual-full {
   width: 100%;

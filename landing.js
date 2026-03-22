@@ -581,25 +581,29 @@ document.addEventListener('DOMContentLoaded', () => {
       query: 'Why did we migrate to event-driven?',
       result: 'The team moved to event-driven architecture after the synchronous payment flow hit <strong>4-second timeouts</strong> under peak load. The async pipeline reduced P99 latency to 320ms.',
       source: 'Slack · #platform-arch · Marcus · Sep 22',
-      confidence: 97,
+      confidence: 90,
+      confidenceLabel: 'High confidence',
     },
     {
       query: 'Why did we drop MongoDB for Postgres?',
       result: 'MongoDB\'s lack of <strong>ACID transactions</strong> across collections caused silent data loss during concurrent writes. Postgres with JSONB gave us schema flexibility without sacrificing consistency.',
       source: 'Jira · ARCH-112 · Priya · Jul 08',
-      confidence: 94,
+      confidence: 90,
+      confidenceLabel: 'High confidence',
     },
     {
       query: 'Why is auth handled by a separate service?',
       result: 'After the credential leak incident in Q2, the team isolated auth into a <strong>dedicated microservice</strong> with its own database and rotation policy to limit blast radius.',
       source: 'GitHub · PR #287 · Sarah · Aug 15',
-      confidence: 91,
+      confidence: 90,
+      confidenceLabel: 'High confidence',
     },
     {
       query: 'Why did we choose gRPC over REST internally?',
-      result: 'Internal benchmarks showed gRPC reduced serialization overhead by <strong>62%</strong> compared to JSON-over-REST for our high-throughput order pipeline, cutting inter-service latency from 45ms to 17ms.',
+      result: 'Internal benchmarks showed gRPC <strong>significantly reduced serialization overhead</strong> compared to JSON-over-REST, cutting inter-service latency for high-throughput pipelines.',
       source: 'Slack · #backend-eng · Alex · Nov 03',
-      confidence: 96,
+      confidence: 90,
+      confidenceLabel: 'High confidence',
     },
   ];
 
@@ -648,7 +652,7 @@ document.addEventListener('DOMContentLoaded', () => {
           heroConfidence.style.width = `${example.confidence}%`;
         }
         if (heroConfidenceText) {
-          heroConfidenceText.textContent = `${example.confidence}% confidence`;
+          heroConfidenceText.textContent = example.confidenceLabel || `${example.confidence}% confidence`;
         }
 
         // Fade in
