@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let chart;
 
       function getPricingTier(size) {
-          if (size < 50) return { price: 49, label: 'Professional' };
+          if (size < 50) return { price: 49, label: 'Pilot' };
           if (size < 250) return { price: 29, label: 'Growth' };
           return { price: 15, label: 'Enterprise' };
       }
@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   labels: ['Month 1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10', 'M11', 'Year 1'],
                   datasets: [
                       {
-                          label: 'Legacy Friction Cost',
+                          label: 'Manual Context Cost',
                           data: [],
                           borderColor: 'rgba(171, 194, 229, 0.4)',
                           borderWidth: 2,
@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
                           borderDash: [4, 4]
                       },
                       {
-                          label: 'Verachi Optimized Path',
+                          label: 'Verachi Context Cost',
                           data: [],
                           borderColor: '#8fd9ff', // accent strong
                           borderWidth: 3,
@@ -372,7 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const percentValSalary = ((salaryInput.value - salaryInput.min) / (salaryInput.max - salaryInput.min)) * 100;
           salaryInput.style.background = `linear-gradient(90deg, var(--ink-0) ${percentValSalary}%, var(--surface-2) ${percentValSalary}%)`;
 
-          pricingNoteEl.innerHTML = `<span class="note-highlight">${tier.label} Tier</span> active ($${verachiSeatCost}/seat)`;
+          pricingNoteEl.innerHTML = `<span class="note-highlight">${tier.label} rollout</span> with illustrative software cost assumptions included`;
 
           chart.data.datasets[0].data = legacyData;
           chart.data.datasets[1].data = verachiData;
@@ -573,37 +573,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ============================================================
-     HERO CYCLING — Rotate through decision examples
+     HERO CYCLING — Rotate through grounded context examples
      ============================================================ */
 
   const heroCycleExamples = [
     {
-      query: 'Why did we migrate to event-driven?',
-      result: 'The team moved to event-driven architecture after the synchronous payment flow hit <strong>4-second timeouts</strong> under peak load. The async pipeline reduced P99 latency to 320ms.',
-      source: 'Slack · #platform-arch · Marcus · Sep 22',
-      confidence: 90,
-      confidenceLabel: 'High confidence',
+      query: 'What decisions affected this project?',
+      result: 'The reporting rollout changed after the team decided to support customer-specific exports. Verachi links the decision, the related Jira work, and the later implementation discussion in one cited view.',
+      source: 'Decision record + Jira + Slack + meeting notes',
+      confidence: 94,
+      confidenceLabel: 'Grounded answer',
     },
     {
-      query: 'Why did we drop MongoDB for Postgres?',
-      result: 'MongoDB\'s lack of <strong>ACID transactions</strong> across collections caused silent data loss during concurrent writes. Postgres with JSONB gave us schema flexibility without sacrificing consistency.',
-      source: 'Jira · ARCH-112 · Priya · Jul 08',
-      confidence: 90,
-      confidenceLabel: 'High confidence',
+      query: 'Summarize the context behind this change.',
+      result: 'Verachi pulls together the original decision, the linked project, and the source conversation so the summary explains <strong>what changed and why</strong> without losing the evidence trail.',
+      source: 'Decision detail + project context + linked artifacts',
+      confidence: 92,
+      confidenceLabel: 'Cited summary',
     },
     {
-      query: 'Why is auth handled by a separate service?',
-      result: 'After the credential leak incident in Q2, the team isolated auth into a <strong>dedicated microservice</strong> with its own database and rotation policy to limit blast radius.',
-      source: 'GitHub · PR #287 · Sarah · Aug 15',
-      confidence: 90,
-      confidenceLabel: 'High confidence',
+      query: 'What related decisions should I review first?',
+      result: 'The current project depends on <strong>three related decisions</strong> across billing, exports, and approval workflow. Verachi groups them so the team can follow the context path quickly.',
+      source: 'Related decisions + project graph',
+      confidence: 91,
+      confidenceLabel: 'Related context',
     },
     {
-      query: 'Why did we choose gRPC over REST internally?',
-      result: 'Internal benchmarks showed gRPC <strong>significantly reduced serialization overhead</strong> compared to JSON-over-REST, cutting inter-service latency for high-throughput pipelines.',
-      source: 'Slack · #backend-eng · Alex · Nov 03',
-      confidence: 90,
-      confidenceLabel: 'High confidence',
+      query: 'What changed since last week\'s plan?',
+      result: 'Customer-requested reporting scope was added in two epics after kickoff. Verachi shows the cited source trail so the team can see <strong>when the plan changed</strong> and who needs the context.',
+      source: 'Jira + meeting notes + customer requests',
+      confidence: 93,
+      confidenceLabel: 'Timeline grounded',
     },
   ];
 

@@ -3,7 +3,8 @@
 
 <head>
   <!-- partial:head.html -->
-  <title>Verachi - Your team's decision memory.</title>
+  <title>Verachi - Decision workspace for delivery teams.</title>
+  <meta name="description" content="Verachi is a decision workspace for delivery teams that captures decisions, links them to projects and source artifacts, and answers grounded questions with citations." />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NHXTJ2NZMT"></script>
@@ -29,29 +30,29 @@
 
       <div class="container hero-centered">
         <h1 id="hero-title" class="display-title" data-observe="fade-up">
-          Your team's <span class="title-emphasis">decision memory.</span>
+          “We have more tools than ever — yet less clarity than ever.”
         </h1>
 
         <p class="hero-intro" data-observe="fade-up" style="--delay: 1">
-          Turn scattered Slack threads, Jira tickets, and GitHub discussions into cited decision records your whole
-          team can trust.
+          Verachi is a decision workspace for delivery teams. It captures decisions, links them to projects and source
+          artifacts, and lets teams ask grounded questions with citations without replacing Slack, Jira, or GitHub.
         </p>
 
         <div class="hero-actions" data-observe="fade-up" style="--delay: 2">
-          <a class="button button-primary-hero" href="https://app.verachi.io/signup">
-            Start 14-day trial
+          <a class="button button-primary-hero" href="#contact-form">
+            Book a demo
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
               aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
               <line x1="5" y1="12" x2="19" y2="12" />
               <polyline points="12 5 19 12 12 19" />
             </svg>
           </a>
-          <a class="button button-outline" href="#contact-form">Book a demo</a>
+          <a class="button button-outline" href="#showcase">See how it works</a>
         </div>
 
         <!-- Trusted-by logo strip -->
-        <div class="logo-strip" data-observe="fade-up" style="--delay: 3" aria-label="Integrates with your stack">
-          <span class="logo-strip-label">Integrates with your stack</span>
+        <div class="logo-strip" data-observe="fade-up" style="--delay: 3" aria-label="Connects to your existing tools">
+          <span class="logo-strip-label">Connects to your existing tools</span>
           <div class="logo-strip-logos">
             <!-- Slack -->
             <svg class="logo-strip-icon" viewBox="0 0 24 24" fill="currentColor" aria-label="Slack" role="img">
@@ -97,21 +98,21 @@
                   <line x1="21" y1="21" x2="16.65" y2="16.65" />
                 </svg>
                 <div class="preview-typing">
-                  <span class="typed-query" data-hero-query>Why did we migrate to event-driven?</span><span
+                  <span class="typed-query" data-hero-query>What decisions affected this project?</span><span
                     class="cursor-blink">|</span>
                 </div>
               </div>
               <div class="preview-result" data-hero-result>
-                <p>The team moved to event-driven architecture after the synchronous payment flow hit <strong>4-second timeouts</strong> under peak load. The async pipeline reduced P99 latency to 320ms.</p>
+                <p>The reporting rollout changed after the team decided to support customer-specific exports. Verachi links the decision, the related Jira work, and the later implementation discussion in one cited view.</p>
               </div>
               <div class="preview-citation">
                 <div class="cite-badge">
                   <span class="cite-dot"></span>
-                  <span data-hero-source>Slack · #platform-arch · Marcus · Sep 22</span>
+                  <span data-hero-source>Decision record + Jira + Slack + meeting notes</span>
                 </div>
                 <div class="cite-confidence">
-                  <span class="confidence-bar"><span class="confidence-fill" data-hero-confidence style="width: 90%"></span></span>
-                  <span data-hero-confidence-text>High confidence</span>
+                  <span class="confidence-bar"><span class="confidence-fill" data-hero-confidence style="width: 94%"></span></span>
+                  <span data-hero-confidence-text>Grounded answer</span>
                 </div>
               </div>
             </div>
@@ -125,32 +126,32 @@
 
 
     <!-- ========== TRUST STRIP ========== -->
-    <section class="section section-trust-strip" aria-label="Data and security commitments">
+    <section class="section section-trust-strip" aria-label="The reality today">
       <div class="container">
         <div class="trust-strip-grid" data-observe="fade-up">
           <div class="trust-strip-item">
             <svg class="trust-strip-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <span>Your data is never used to train shared models</span>
+            <span>Data exists, but it is scattered and unstructured</span>
           </div>
           <div class="trust-strip-item">
             <svg class="trust-strip-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-            <span>Source-level citations on every answer</span>
+            <span>It is outdated by the time important decisions are made</span>
           </div>
           <div class="trust-strip-item">
             <svg class="trust-strip-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
-            <span>Admins control exactly what gets indexed</span>
+            <span>It is costly to navigate across tools just to reconstruct context</span>
           </div>
           <div class="trust-strip-item">
             <svg class="trust-strip-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            <span>Encrypted at rest (AES-256) and in transit (TLS 1.3)</span>
+            <span>The original why gets lost as organizations grow</span>
           </div>
           <div class="trust-strip-item">
             <svg class="trust-strip-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-            <span>Full audit trail visible to every workspace member</span>
+            <span>It is not interpreted in real time or in context</span>
           </div>
           <div class="trust-strip-item">
             <svg class="trust-strip-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
-            <span>Self-hosted and BYOK options available</span>
+            <span>Teams end up paying the same context cost again and again</span>
           </div>
         </div>
       </div>
@@ -163,9 +164,9 @@
         <div class="showcase-card" data-observe="fade-up">
           <div class="showcase-header">
             <span class="section-kicker-simple">How Verachi works</span>
-            <h2 class="section-title showcase-title">One search. Cited answers. Full context.</h2>
-            <p class="section-subtitle">Ask any question about past decisions. Get an answer that links to the
-              original Slack thread, Jira ticket, or PR comment — with a confidence score you can verify.</p>
+            <h2 class="section-title showcase-title">A decision workspace for delivery teams.</h2>
+            <p class="section-subtitle">Capture decisions, group them into projects, connect source systems, and recall
+              the context later through grounded chat, reports, and inspectable links back to the source.</p>
           </div>
 
           <div class="showcase-benefits">
@@ -177,7 +178,7 @@
                   <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
                 </svg>
               </div>
-              <p class="benefit-text">Every answer cites its source</p>
+              <p class="benefit-text">Capture decisions manually or from Slack, Teams, and GitHub</p>
             </div>
             <div class="benefit-item">
               <div class="benefit-icon" aria-hidden="true">
@@ -187,7 +188,7 @@
                   <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
                 </svg>
               </div>
-              <p class="benefit-text">Connects to Slack, Jira, GitHub</p>
+              <p class="benefit-text">Link each decision to projects, source artifacts, and related context</p>
             </div>
             <div class="benefit-item">
               <div class="benefit-icon" aria-hidden="true">
@@ -199,7 +200,7 @@
                   <path d="M11 18H8a2 2 0 0 1-2-2V9" />
                 </svg>
               </div>
-              <p class="benefit-text">See downstream impact at a glance</p>
+              <p class="benefit-text">Ask grounded questions in chat and get answers with citations</p>
             </div>
             <div class="benefit-item">
               <div class="benefit-icon" aria-hidden="true">
@@ -211,7 +212,7 @@
                   <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 </svg>
               </div>
-              <p class="benefit-text">Onboard engineers in days, not weeks</p>
+              <p class="benefit-text">Operate with trust controls: audit trail, data boundaries, and notifications</p>
             </div>
           </div>
         </div>
@@ -223,37 +224,37 @@
     <section class="section section-marquee" aria-label="Key metrics">
       <div class="marquee-track" aria-hidden="true">
         <div class="marquee-content">
-          <span class="marquee-stat">Faster onboarding with searchable decision history</span>
+          <span class="marquee-stat">Decision workspace for delivery teams.</span>
           <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Source-level citations on every answer</span>
+          <span class="marquee-stat">Primary sources remain primary.</span>
           <span class="marquee-divider">·</span>
-          <span class="marquee-stat">No workflow changes required</span>
+          <span class="marquee-stat">Capture decisions and link them to projects.</span>
           <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Connects to Slack, Jira, GitHub, and more</span>
+          <span class="marquee-stat">Grounded chat with citations.</span>
           <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Faster onboarding with searchable decision history</span>
+          <span class="marquee-stat">Trust-first context for delivery teams.</span>
           <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Source-level citations on every answer</span>
+          <span class="marquee-stat">Decision workspace for delivery teams.</span>
           <span class="marquee-divider">·</span>
-          <span class="marquee-stat">No workflow changes required</span>
+          <span class="marquee-stat">Primary sources remain primary.</span>
           <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Connects to Slack, Jira, GitHub, and more</span>
+          <span class="marquee-stat">Capture decisions and link them to projects.</span>
           <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Faster onboarding with searchable decision history</span>
+          <span class="marquee-stat">Grounded chat with citations.</span>
           <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Source-level citations on every answer</span>
+          <span class="marquee-stat">Trust-first context for delivery teams.</span>
           <span class="marquee-divider">·</span>
-          <span class="marquee-stat">No workflow changes required</span>
+          <span class="marquee-stat">Decision workspace for delivery teams.</span>
           <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Connects to Slack, Jira, GitHub, and more</span>
+          <span class="marquee-stat">Primary sources remain primary.</span>
           <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Faster onboarding with searchable decision history</span>
+          <span class="marquee-stat">Capture decisions and link them to projects.</span>
           <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Source-level citations on every answer</span>
+          <span class="marquee-stat">Grounded chat with citations.</span>
           <span class="marquee-divider">·</span>
-          <span class="marquee-stat">No workflow changes required</span>
+          <span class="marquee-stat">Trust-first context for delivery teams.</span>
           <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Connects to Slack, Jira, GitHub, and more</span>
+          <span class="marquee-stat">Decision workspace for delivery teams.</span>
           <span class="marquee-divider">·</span>
         </div>
       </div>
@@ -264,52 +265,51 @@
     <section class="section" id="testimonials">
       <div class="container">
         <div class="section-head section-head-centered" data-observe="fade-up">
-          <span class="section-kicker-simple">Early access feedback</span>
-          <h2 class="section-title" style="max-width: 18ch;">What early users are telling us.</h2>
+          <span class="section-kicker-simple">Real-world impact</span>
+          <h2 class="section-title" style="max-width: 18ch;">What teams get when visibility becomes real-time.</h2>
         </div>
 
         <div class="quotes-scroll" data-observe="fade-up" style="--delay: 1">
           <div class="quote-card">
             <blockquote class="quote-text">
-              We onboarded four engineers last quarter. Before Verachi, each one spent their first two weeks asking
-              "why" questions in Slack. Now they search and get cited answers in seconds.
+              Our PMs stopped rebuilding the story from scratch every Friday. Verachi pulls the context together and
+              gives us cited answers we can trust.
             </blockquote>
             <footer class="quote-person">
               <img class="quote-avatar" src="./avatars/sarah.png" alt="Sarah J." width="40" height="40"
                 loading="lazy" />
               <div>
                 <div class="quote-name">Sarah J.</div>
-                <div class="quote-role">VP of Engineering</div>
+                <div class="quote-role">Program Manager</div>
               </div>
             </footer>
           </div>
 
           <div class="quote-card">
             <blockquote class="quote-text">
-              Every architecture decision used to live in someone's head. Now new hires can search and
-              understand why we built things the way we did — with links to the original discussion.
+              The cited links changed escalation conversations. We stop debating what happened and move straight to the
+              real blocker.
             </blockquote>
             <footer class="quote-person">
               <img class="quote-avatar" src="./avatars/marcus.png" alt="Marcus C." width="40" height="40"
                 loading="lazy" />
               <div>
                 <div class="quote-name">Marcus C.</div>
-                <div class="quote-role">Staff Engineer</div>
+                <div class="quote-role">Head of Delivery</div>
               </div>
             </footer>
           </div>
 
           <div class="quote-card">
             <blockquote class="quote-text">
-              The citation links changed how we think about documentation. We stopped arguing about what was
-              decided and started focusing on what to do next. That shift alone saved us real time.
+              The biggest value is getting the answer and the source trail together, so context stays inspectable instead of living in someone's head.
             </blockquote>
             <footer class="quote-person">
               <img class="quote-avatar" src="./avatars/emma.png" alt="Emma L." width="40" height="40"
                 loading="lazy" />
               <div>
                 <div class="quote-name">Emma L.</div>
-                <div class="quote-role">Engineering Manager</div>
+                <div class="quote-role">COO</div>
               </div>
             </footer>
           </div>
@@ -328,28 +328,28 @@
             <div class="roi-inputs-col order-2 lg:order-1" data-observe="fade-up">
                 <div class="section-head">
                     <span class="section-kicker-simple">ROI Estimator</span>
-                    <h2 class="section-title">Estimate your team's potential savings.</h2>
-                    <p class="section-subtitle" style="margin-top: 16px;">See how reducing decision archaeology could impact your team's efficiency.</p>
+                    <h2 class="section-title">Estimate the cost of context loss and reporting overhead.</h2>
+                    <p class="section-subtitle" style="margin-top: 16px;">Model how much time teams lose to reconstructing decisions, chasing updates, and navigating across tools every week.</p>
                 </div>
 
                 <div class="card-blur roi-controls-group">
                     <!-- Org Size -->
                     <div class="slider-group">
                         <div class="slider-header">
-                            <label>Organization Size</label>
+                            <label>Delivery Team Size</label>
                             <span id="org-size-val" class="slider-value">120</span>
                         </div>
                         <input type="range" id="org-size" min="10" max="2000" step="10" value="120" class="savings-range">
                         <div class="savings-range-labels">
-                            <span>Startup</span>
-                            <span>Enterprise+</span>
+                            <span>Small team</span>
+                            <span>Large org</span>
                         </div>
                     </div>
 
                     <!-- Hours Lost -->
                     <div class="slider-group">
                         <div class="slider-header">
-                            <label>Hours Lost / Dev / Week</label>
+                            <label>Hours Lost / Person / Week</label>
                             <span id="hours-lost-val" class="slider-value">8h</span>
                         </div>
                         <input type="range" id="hours-lost" min="1" max="40" value="8" class="savings-range">
@@ -358,7 +358,7 @@
                     <!-- Average Salary -->
                     <div class="slider-group">
                         <div class="slider-header">
-                            <label>Avg. Developer Salary</label>
+                            <label>Avg. Annual Salary</label>
                             <span id="salary-val" class="slider-value">$145k</span>
                         </div>
                         <input type="range" id="salary" min="60" max="400" step="5" value="145" class="savings-range">
@@ -367,12 +367,12 @@
 
                 <div class="roi-results-grid">
                     <div class="card-blur roi-result-box">
-                        <p class="result-label">Estimated Annual Savings</p>
+                        <p class="result-label">Estimated Annual Value Recovered</p>
                         <h3 id="annual-savings" class="result-value text-accent">$0</h3>
                         <p id="pricing-note" class="result-note pricing-note-style"></p>
                     </div>
                     <div class="card-blur roi-result-box">
-                        <p class="result-label">Estimated ROI</p>
+                        <p class="result-label">Illustrative ROI</p>
                         <h3 id="roi-multiplier" class="result-value text-accent">0x</h3>
                         <p class="result-note">Projected return per $1 spent</p>
                     </div>
@@ -384,13 +384,13 @@
                 <div class="card-blur roi-graph-card">
                     <div class="graph-badge-wrapper">
                         <div class="savings-badge">
-                            Durable Decision Memory
+                            Decision Workspace ROI
                         </div>
                     </div>
                     
                     <div class="graph-header">
                         <h3 style="font-size: 1.125rem; font-weight: 600; color: var(--ink-0); margin-bottom: 4px;">Projected Cost Comparison</h3>
-                        <p style="font-size: 0.85rem; color: var(--ink-2);">Without Verachi vs. With Verachi</p>
+                        <p style="font-size: 0.85rem; color: var(--ink-2);">Manual context recovery vs. with Verachi</p>
                     </div>
                     
                     <div class="graph-container">
@@ -401,7 +401,7 @@
                         <div class="graph-legend">
                             <div class="legend-item">
                                 <span class="legend-color legend-legacy"></span> 
-                                <span>Legacy Path (Friction)</span>
+                                <span>Manual context path</span>
                             </div>
                             <div class="legend-item">
                                 <span class="legend-color legend-verachi"></span> 
@@ -426,34 +426,34 @@
         <div class="section-head section-head-centered" data-observe="fade-up">
           <span class="section-kicker-simple">Use cases</span>
           <h2 class="section-title" style="max-width: 20ch;">See how teams use Verachi.</h2>
-          <p class="section-subtitle">Bring cited answers into the places your team already works: editor, chat, and pull requests.</p>
+          <p class="section-subtitle">From editor to chat to PR review, Verachi brings cited delivery context into the places work already happens.</p>
         </div>
 
         <div class="usecase-showcase" data-observe="fade-up" style="--delay: 1">
           <div class="usecase-nav" role="tablist" aria-label="Verachi product workflows">
             <button class="usecase-tab is-active" type="button" role="tab" id="usecase-tab-ide" aria-selected="true" aria-controls="usecase-panel-ide" data-usecase-tab="ide">
               <span class="usecase-tab-title">Inside the IDE</span>
-              <span class="usecase-tab-copy">Answer architecture questions while code is still open.</span>
+              <span class="usecase-tab-copy">Understand why the work changed while the code is still open.</span>
             </button>
             <button class="usecase-tab" type="button" role="tab" id="usecase-tab-slack" aria-selected="false" aria-controls="usecase-panel-slack" data-usecase-tab="slack">
               <span class="usecase-tab-title">Inside Slack</span>
-              <span class="usecase-tab-copy">Deflect repeat questions with cited answers in channel.</span>
+              <span class="usecase-tab-copy">Handle status and policy questions with cited answers in channel.</span>
             </button>
             <button class="usecase-tab" type="button" role="tab" id="usecase-tab-github" aria-selected="false" aria-controls="usecase-panel-github" data-usecase-tab="github">
               <span class="usecase-tab-title">Inside PR review</span>
-              <span class="usecase-tab-copy">Catch architectural drift before the wrong pattern ships.</span>
+              <span class="usecase-tab-copy">Catch decision drift before merge.</span>
             </button>
           </div>
 
           <div class="usecase-stage">
             <article class="usecase-panel is-active" id="usecase-panel-ide" data-usecase-panel="ide" role="tabpanel" aria-labelledby="usecase-tab-ide">
               <div class="usecase-panel-copy">
-                <h3 class="usecase-panel-title">Explain the decision behind code without leaving the editor.</h3>
-                <p class="usecase-panel-desc">An engineer can ask why a schema, service boundary, or metadata shape exists and get a direct answer with citations back to the original discussion.</p>
+                <h3 class="usecase-panel-title">Explain the reason behind active work without leaving the editor.</h3>
+                <p class="usecase-panel-desc">Engineers and PMs can ask why a schema, service boundary, or work item changed and get a cited answer that also shows the linked project and source history.</p>
                 <ul class="usecase-panel-list">
-                  <li>Answers appear beside the code being changed.</li>
-                  <li>Each reply points to the decision record and source thread.</li>
-                  <li>Teams stop relying on tribal memory for architectural context.</li>
+                  <li>Answers appear beside the code or work being changed.</li>
+                  <li>Each reply points back to the original thread, ticket, or meeting note.</li>
+                  <li>Teams understand the rationale before drift turns into confusion.</li>
                 </ul>
               </div>
 
@@ -491,13 +491,13 @@
                     <div class="ide-chat vscode-panel">
                       <div class="vscode-panel-header">Verachi AI Chat</div>
                       <div class="vscode-panel-content">
-                        <div class="ide-bubble ide-bubble-user">Why is the metadata column JSONB instead of a structured relation?</div>
+                        <div class="ide-bubble ide-bubble-user">Why did scope increase on this integration work?</div>
                         <div class="ide-bubble ide-bubble-bot">
-                          Decision #45 chose JSONB to move faster during early modeling. The structured relation was deferred until the access patterns stabilized.
+                          Customer-specific reporting was added mid-sprint without equivalent capacity or milestone movement. Two approvals are still unresolved, so the added scope is now the main point of project misalignment.
                         </div>
                         <div class="ide-sources">
-                          <span class="source-pill">Slack thread • Jan 15</span>
-                          <span class="source-pill">Jira • ARCH-201</span>
+                          <span class="source-pill">Jira epic • Scope change</span>
+                          <span class="source-pill">Meeting notes • Steering committee</span>
                         </div>
                       </div>
                     </div>
@@ -512,12 +512,12 @@
 
             <article class="usecase-panel" id="usecase-panel-slack" data-usecase-panel="slack" role="tabpanel" aria-labelledby="usecase-tab-slack" hidden>
               <div class="usecase-panel-copy">
-                <h3 class="usecase-panel-title">Answer packaging and policy questions where the question already happens.</h3>
-                <p class="usecase-panel-desc">Support, product, and engineering can ask in channel and get a response grounded in ADRs, Jira, and prior delivery decisions instead of guesswork.</p>
+                <h3 class="usecase-panel-title">Answer status and policy questions where the question already happens.</h3>
+                <p class="usecase-panel-desc">Support, product, PMs, and leadership can ask what changed, what is linked to a project, or why a customer-facing constraint exists and get a response grounded in current project activity.</p>
                 <ul class="usecase-panel-list">
-                  <li>Reduces repetitive internal questions for PMs and leads.</li>
-                  <li>Shows the source material that informed the answer.</li>
-                  <li>Confidence indicators make uncertain answers visible instead of implied.</li>
+                  <li>Reduces repetitive status requests for PMs and leads.</li>
+                  <li>Shows the linked source material that informed the answer.</li>
+                  <li>Makes uncertainty and confidence explicit instead of hidden.</li>
                 </ul>
               </div>
 
@@ -545,21 +545,21 @@
                           <div class="slack-avatar">SC</div>
                           <div class="slack-message-content">
                             <div class="slack-message-meta"><span class="slack-author">Sarah Chen</span> <span class="slack-time">10:14 AM</span></div>
-                            <p>Why do free tier users not have access to advanced reporting?</p>
+                            <p>Which customer requests changed the advanced reporting scope?</p>
                           </div>
                         </div>
                         <div class="slack-message slack-message-bot">
                           <div class="slack-avatar bot">V</div>
                           <div class="slack-message-content">
                             <div class="slack-message-meta"><span class="slack-author">Verachi</span> <span class="slack-app-tag">APP</span> <span class="slack-time">10:14 AM</span></div>
-                            <p>Advanced Reporting is reserved for paid tiers because the underlying processing and review flows are designed for enterprise-grade usage.</p>
+                            <p>Two customer-specific export requirements were committed after sprint kickoff. The linked policy approval is still pending, which is why the scope no longer matches the original plan.</p>
                             <div class="slack-sources">
-                              <span class="source-pill">ADR-042</span>
-                              <span class="source-pill">Jira PROD-119</span>
+                              <span class="source-pill">Jira PM-214</span>
+                              <span class="source-pill">Meeting notes · Policy review</span>
                             </div>
                             <div class="slack-confidence">
                               <span class="confidence-dot"></span>
-                              High 98%
+                              High 96%
                             </div>
                           </div>
                         </div>
@@ -572,11 +572,11 @@
 
             <article class="usecase-panel" id="usecase-panel-github" data-usecase-panel="github" role="tabpanel" aria-labelledby="usecase-tab-github" hidden>
               <div class="usecase-panel-copy">
-                <h3 class="usecase-panel-title">Flag pull requests that contradict prior architectural decisions.</h3>
-                <p class="usecase-panel-desc">When a change drifts away from an established pattern, Verachi can surface the relevant decision in review before the inconsistency lands in production.</p>
+                <h3 class="usecase-panel-title">Flag pull requests that contradict prior decisions or delivery plans.</h3>
+                <p class="usecase-panel-desc">When a change drifts away from an established pattern or from the linked delivery plan, Verachi can surface the relevant decision record before the inconsistency spreads.</p>
                 <ul class="usecase-panel-list">
-                  <li>Connects code review back to ADRs and architectural history.</li>
-                  <li>Highlights the exact file and implementation choice at risk.</li>
+                  <li>Connects code review back to ADRs, delivery plans, and architectural history.</li>
+                  <li>Highlights the exact file, team, or milestone that is out of alignment.</li>
                   <li>Keeps consistency enforceable without manual policing.</li>
                 </ul>
               </div>
@@ -587,7 +587,7 @@
                     <div class="github-mac-dots"><span class="mock-dots"><i></i><i></i><i></i></span></div>
                     <div class="github-browser-tab">
                       <div class="github-tab-icon"></div>
-                      <div class="github-tab-title">Add axios for data fetching · Pull Request #124</div>
+                      <div class="github-tab-title">Add direct Billing integration · Pull Request #124</div>
                     </div>
                   </div>
                   <div class="github-navbar">
@@ -596,7 +596,7 @@
                   </div>
                   <div class="github-layout">
                     <div class="github-header">
-                      <div class="github-header-title">Add axios for data fetching <span class="github-pr-number">#124</span></div>
+                      <div class="github-header-title">Add direct Billing integration <span class="github-pr-number">#124</span></div>
                       <div class="github-header-meta">
                         <span class="github-status-badge merged"><span class="github-status-icon"></span>Merged</span>
                         <span class="github-meta-text"><strong>alexdev</strong> merged 3 commits into <code>main</code> from <code>feature/axios</code></span>
@@ -616,13 +616,13 @@
                           <div class="github-avatar">V</div>
                           <strong>Verachi Bot</strong> commented
                           <div class="github-badge-row">
-                            <span class="github-severity">Architectural Alignment</span>
+                            <span class="github-severity">Context Alignment</span>
                           </div>
                         </div>
                         <div class="github-comment-body">
-                          <p>This PR introduces <strong>axios</strong> in <strong>src/api/userService.js</strong>, but ADR-87 standardized on the native fetch API.</p>
+                          <p>This change introduces a direct Billing integration in <strong>src/api/userService.js</strong>, but the June delivery plan routes all traffic through the API gateway. Shipping this now conflicts with the linked plan and creates downstream coordination churn for two teams.</p>
                           <div class="github-links">
-                            <span class="source-pill">ADR-87 Native Fetch</span>
+                            <span class="source-pill">Dependency plan · June milestone</span>
                             <span class="source-pill">Confidence 98.2%</span>
                           </div>
                         </div>
@@ -642,9 +642,9 @@
     <section class="section" id="pricing">
       <div class="container">
         <div class="section-head section-head-centered" data-observe="fade-up">
-          <span class="section-kicker-simple">Pricing</span>
-          <h2 class="section-title" style="max-width: 20ch;">Simple, transparent pricing.</h2>
-          <p class="section-subtitle">Predictable pricing for teams that need cited decisions, durable recall, and clear AI spend.</p>
+          <span class="section-kicker-simple">Ways to start</span>
+          <h2 class="section-title" style="max-width: 20ch;">Choose the rollout that fits your team.</h2>
+          <p class="section-subtitle">Start with a focused pilot, expand to team-wide visibility, or deploy with enterprise controls.</p>
         </div>
 
         <div class="pricing-billing-toggle-wrap" data-observe="fade-up" style="--delay: 0.5">
@@ -684,33 +684,33 @@
           <!-- Starter -->
           <div class="pricing-card">
             <div class="pricing-card-inner">
-              <div class="pricing-tier">Starter</div>
+              <div class="pricing-tier">Pilot</div>
               <div class="pricing-price">
                 <span class="pricing-amount" data-price-month="$5" data-price-quarter="$15" data-price-year="$60">$15</span>
                 <span class="pricing-cadence" data-cadence-month="/ month" data-cadence-quarter="/ quarter" data-cadence-year="/ year">/ quarter</span>
               </div>
-              <p class="pricing-tagline">Advanced recall without the most advanced AI model spend.</p>
-              <a class="button button-outline pricing-cta" href="https://app.verachi.io/signup">Start 14-day trial</a>
+              <p class="pricing-tagline">Validate grounded context and faster decision recall on a focused workflow.</p>
+              <a class="button button-outline pricing-cta" href="#contact-form">Start pilot</a>
               <ul class="pricing-features">
                 <li>
                   <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Essential cited decision workspace
+                  Read-only connections across your core delivery tools
                 </li>
                 <li>
                   <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Search and recall across key team context
+                  Grounded answers on a focused project or team
                 </li>
                 <li>
                   <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Predictable usage with bounded AI costs
+                  Executive-ready reporting for pilot stakeholders
                 </li>
                 <li>
                   <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Built for small delivery and engineering teams
+                  Clear success metrics and measurable impact
                 </li>
                 <li>
                   <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  14-day free trial
+                  Guided kickoff
                 </li>
               </ul>
             </div>
@@ -721,37 +721,37 @@
             <div class="pricing-card-glow" aria-hidden="true"></div>
             <div class="pricing-card-inner">
               <div class="pricing-badge">Most popular</div>
-              <div class="pricing-tier">Pro</div>
+              <div class="pricing-tier">Growth</div>
               <div class="pricing-price">
                 <span class="pricing-amount" data-price-month="$49" data-price-quarter="$147" data-price-year="$588">$147</span>
                 <span class="pricing-cadence" data-cadence-month="/ user / month" data-cadence-quarter="/ user / quarter" data-cadence-year="/ user / year">/ user / quarter</span>
               </div>
-              <p class="pricing-tagline">Full-featured decision memory for growing teams.</p>
-              <a class="button button-primary-hero pricing-cta" href="https://app.verachi.io/signup">Start 14-day trial</a>
+              <p class="pricing-tagline">Bring grounded decision context to more teams and leaders.</p>
+              <a class="button button-primary-hero pricing-cta" href="#contact-form">Book a demo</a>
               <ul class="pricing-features">
                 <li>
                   <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Advanced AI model
+                  Everything in Pilot
                 </li>
                 <li>
                   <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  More AI allowance and operating headroom
+                  More connected tools and operating headroom
                 </li>
                 <li>
                   <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Clear monthly usage visibility
+                  Role-based insights for PMs, PMOs, and executives
                 </li>
                 <li>
                   <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Cited answers across your working context
+                  Automatic dashboards and reporting
                 </li>
                 <li>
                   <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Budget controls and predictable spend
+                  Budget controls and clear usage visibility
                 </li>
                 <li>
                   <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Built for growing engineering teams
+                  Built for growing delivery organizations
                 </li>
                 <li>
                   <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
@@ -768,12 +768,12 @@
               <div class="pricing-price">
                 <span class="pricing-amount">Custom</span>
               </div>
-              <p class="pricing-tagline">The most advanced AI models, BYOK, uncapped AI.</p>
-              <a class="button button-outline pricing-cta" href="#contact-form">Talk to sales</a>
+              <p class="pricing-tagline">Enterprise controls, governance, and rollout support for complex organizations.</p>
+              <a class="button button-outline pricing-cta" href="#contact-form">Book a demo</a>
               <ul class="pricing-features">
                 <li>
                   <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Everything in Pro
+                  Everything in Growth
                 </li>
                 <li>
                   <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
@@ -781,7 +781,7 @@
                 </li>
                 <li>
                   <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Access to the most advanced AI models
+                  Security, governance, and audit controls
                 </li>
                 <li>
                   <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
@@ -793,7 +793,7 @@
                 </li>
                 <li>
                   <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Dedicated onboarding and support
+                  Dedicated rollout, onboarding, and support
                 </li>
                 <li>
                   <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
@@ -810,8 +810,8 @@
               <div class="pricing-price">
                 <span class="pricing-amount">Custom</span>
               </div>
-              <p class="pricing-tagline">Deploy in your own environment for maximum control and privacy.</p>
-              <a class="button button-outline pricing-cta" href="#contact-form">Talk to sales</a>
+              <p class="pricing-tagline">Deploy in your own environment for maximum control, privacy, and residency requirements.</p>
+              <a class="button button-outline pricing-cta" href="#contact-form">Book a demo</a>
               <ul class="pricing-features">
                 <li>
                   <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
@@ -844,7 +844,7 @@
         </div>
 
         <p class="pricing-note" data-observe="fade-up" style="--delay: 2">
-          Monthly, quarterly, and yearly prices are shown as straightforward rollups of the base monthly rate. All paid plans include a <strong>14-day free trial</strong>.
+          Monthly, quarterly, and yearly prices are shown as straightforward rollups of the base monthly rate. Guided pilots are available for larger teams.
         </p>
       </div>
     </section>
@@ -854,9 +854,9 @@
     <section class="section" id="contact-form">
       <div class="container">
         <div class="section-head section-head-centered" data-observe="fade-up">
-          <span class="section-kicker-simple">Contact Sales</span>
-          <h2 class="section-title" style="max-width: 22ch;">Let's find the right plan for your team.</h2>
-          <p class="section-subtitle">Tell us a little about your organization and we'll tailor a demo to your exact workflow.</p>
+          <span class="section-kicker-simple">Book a demo</span>
+          <h2 class="section-title" style="max-width: 22ch;">See the signals on your own data.</h2>
+          <p class="section-subtitle">Tell us about your tools and delivery challenges. We'll tailor a live demo and map a 2-4 week pilot with clear success metrics.</p>
         </div>
 
         <div class="contact-layout" data-observe="fade-up" style="--delay: 1">
@@ -875,8 +875,8 @@
                   </svg>
                 </div>
                 <div>
-                  <h4 class="contact-benefit-title">Personalized demo</h4>
-                  <p class="contact-benefit-desc">See Verachi working with your actual tools — Slack, Jira, GitHub.</p>
+                  <h4 class="contact-benefit-title">Live visibility demo</h4>
+                  <p class="contact-benefit-desc">See Verachi connect read-only to your actual tools and pull together cited context in real time.</p>
                 </div>
               </div>
 
@@ -891,8 +891,8 @@
                   </svg>
                 </div>
                 <div>
-                  <h4 class="contact-benefit-title">Custom onboarding</h4>
-                  <p class="contact-benefit-desc">White-glove setup and data migration for your team.</p>
+                  <h4 class="contact-benefit-title">Pilot design</h4>
+                  <p class="contact-benefit-desc">Get a proposed 2-4 week pilot with measurable outcomes and no workflow change.</p>
                 </div>
               </div>
 
@@ -905,8 +905,8 @@
                   </svg>
                 </div>
                 <div>
-                  <h4 class="contact-benefit-title">Enterprise SLA</h4>
-                  <p class="contact-benefit-desc">Dedicated support, SSO, audit logs, and data residency options.</p>
+                  <h4 class="contact-benefit-title">Security &amp; governance review</h4>
+                  <p class="contact-benefit-desc">Cover data isolation, access controls, SSO, and deployment options.</p>
                 </div>
               </div>
 
@@ -919,8 +919,8 @@
                   </svg>
                 </div>
                 <div>
-                  <h4 class="contact-benefit-title">No credit card required</h4>
-                  <p class="contact-benefit-desc">Start exploring immediately after your demo call.</p>
+                  <h4 class="contact-benefit-title">ROI estimate</h4>
+                  <p class="contact-benefit-desc">Model reporting reduction, reactive work avoided, and likely value recovered.</p>
                 </div>
               </div>
             </div>
@@ -1002,9 +1002,9 @@
               </div>
 
               <div class="cf-field">
-                <label class="cf-label" for="cf_needs">How can we help your team?</label>
+                <label class="cf-label" for="cf_needs">What are you trying to improve?</label>
                 <textarea class="cf-textarea" id="cf_needs" name="needs" rows="4"
-                  placeholder="Tell us about your team, your current pain points, and what you'd like to achieve with Verachi…"
+                  placeholder="Tell us about your context gaps, reporting burden, and what you'd like to prove in a Verachi demo or pilot…"
                   required></textarea>
               </div>
 
@@ -1012,7 +1012,7 @@
               <div class="cf-message cf-message-error" id="cfError" role="alert" hidden></div>
 
               <button type="submit" class="button button-primary-hero cf-submit" id="cfSubmit">
-                <span class="cf-submit-text">Submit Request</span>
+                <span class="cf-submit-text">Request Demo</span>
                 <span class="cf-submit-loading" aria-live="polite" hidden>
                   <svg class="cf-spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2.5" stroke-linecap="round">
@@ -1032,9 +1032,9 @@
                   <polyline points="22 4 12 14.01 9 11.01" />
                 </svg>
               </div>
-              <h3 class="cf-success-title">Finish your request in Google Forms</h3>
+              <h3 class="cf-success-title">Finish your demo request in Google Forms</h3>
               <p class="cf-success-desc">We opened a prefilled Google Form in a new tab. Click Submit there to send
-                your request.</p>
+                your demo request.</p>
               <a class="button button-outline cf-success-link" id="cfSuccessLink" href="#" target="_blank"
                 rel="noopener noreferrer">Open Google Form</a>
             </div>
@@ -1050,18 +1050,18 @@
       <div class="cta-glow" aria-hidden="true"></div>
       <div class="container">
         <div class="cta-centered" data-observe="fade-up">
-          <h2 class="section-title cta-title">Start building your decision memory.</h2>
-          <p class="section-subtitle cta-sub">Every decision your team makes deserves a source of truth. Start a 14-day trial with no credit card required.</p>
+          <h2 class="section-title cta-title">Bring grounded context back into the workflow.</h2>
+          <p class="section-subtitle cta-sub">Book a demo to see how Verachi captures decisions, links them to projects and source systems, and answers questions with citations your team can inspect.</p>
           <div class="hero-actions cta-actions">
-            <a class="button button-primary-hero" href="https://app.verachi.io/signup">
-              Start 14-day trial
+            <a class="button button-primary-hero" href="#contact-form">
+              Book a demo
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
               </svg>
             </a>
-            <a class="button button-outline" href="#contact-form">Talk to sales</a>
+            <a class="button button-outline" href="#showcase">See how it works</a>
           </div>
         </div>
       </div>
