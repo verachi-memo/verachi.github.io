@@ -1256,6 +1256,399 @@ main {
 }
 
 /* ============================================================
+   STEP 4 — CONNECT / INTEGRATE
+   ============================================================ */
+.connect-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.connect-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(89,98,115,0.07), transparent 60%),
+    radial-gradient(circle at 80% 80%, rgba(107,114,128,0.04), transparent 40%);
+  pointer-events: none;
+}
+
+.connect-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(42px, 6vw, 88px);
+  align-items: center;
+}
+
+/* Orbit diagram */
+.connect-orbit {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+
+.orbit-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed rgba(21,33,24,0.09);
+  pointer-events: none;
+}
+
+.orbit-ring-outer {
+  inset: 0;
+  animation: orbit-spin 90s linear infinite;
+}
+
+.orbit-ring-inner {
+  inset: 18%;
+  border-style: dotted;
+  border-color: rgba(21,33,24,0.06);
+  animation: orbit-spin 60s linear infinite reverse;
+}
+
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Center logo */
+.orbit-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #2d2f35, #16171b);
+  box-shadow:
+    0 20px 50px rgba(17,18,20,0.2),
+    0 0 0 1px rgba(255,255,255,0.08) inset;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+
+.orbit-center.active {
+  opacity: 1;
+}
+
+.orbit-center svg {
+  width: 36px;
+  height: 36px;
+}
+
+/* Pulse ring behind center */
+.orbit-center::before {
+  content: "";
+  position: absolute;
+  inset: -12px;
+  border-radius: 30px;
+  border: 2px solid rgba(89,98,115,0.08);
+  opacity: 0;
+  animation: center-pulse 3s var(--ease) infinite;
+  animation-delay: 1s;
+}
+
+.orbit-center.active::before {
+  opacity: 1;
+}
+
+@keyframes center-pulse {
+  0%   { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+
+/* Tool nodes on the orbit */
+.orbit-node {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.84);
+  background: rgba(255,255,255,0.92);
+  box-shadow: var(--shadow-md);
+  z-index: 3;
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity 0.55s var(--ease), transform 0.55s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+
+.orbit-node.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.orbit-node.connected {
+  border-color: rgba(89,98,115,0.22);
+  box-shadow: 0 18px 40px rgba(89,98,115,0.14);
+}
+
+.orbit-node svg,
+.orbit-node img {
+  width: 24px;
+  height: 24px;
+}
+
+.orbit-node-label {
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--ink-3);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+
+.orbit-node.active .orbit-node-label {
+  opacity: 1;
+}
+
+/* Positions: top, right, bottom, left */
+.orbit-node-0 { top: 2%;   left: 50%;  transform: translate(-50%, 0) scale(0.7); }
+.orbit-node-0.active { transform: translate(-50%, 0) scale(1); }
+
+.orbit-node-1 { top: 50%;  right: 2%;  transform: translate(0, -50%) scale(0.7); }
+.orbit-node-1.active { transform: translate(0, -50%) scale(1); }
+
+.orbit-node-2 { bottom: 2%; left: 50%; transform: translate(-50%, 0) scale(0.7); }
+.orbit-node-2.active { transform: translate(-50%, 0) scale(1); }
+
+.orbit-node-3 { top: 50%;  left: 2%;  transform: translate(0, -50%) scale(0.7); }
+.orbit-node-3.active { transform: translate(0, -50%) scale(1); }
+
+/* Connection lines (SVG) */
+.orbit-connections {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.orbit-connections line {
+  stroke: rgba(89,98,115,0.18);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 4;
+  stroke-dashoffset: 40;
+  transition: stroke-dashoffset 1.2s var(--ease), stroke 0.5s var(--ease);
+}
+
+.orbit-connections line.drawn {
+  stroke-dashoffset: 0;
+  stroke: rgba(89,98,115,0.32);
+}
+
+/* Connection pulse dots */
+.connection-dot {
+  fill: var(--mint);
+  opacity: 0;
+  r: 3;
+}
+
+.connection-dot.active {
+  opacity: 1;
+}
+
+/* Right-side content */
+.connect-info {
+  position: relative;
+  z-index: 2;
+}
+
+.connect-setup-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(89,98,115,0.06);
+  border: 1px solid rgba(89,98,115,0.12);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--mint);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.connect-setup-badge::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--mint);
+  box-shadow: 0 0 8px rgba(89,98,115,0.3);
+}
+
+/* Integration cards grid */
+.integration-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.integration-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.84);
+  background: rgba(255,255,255,0.82);
+  box-shadow: var(--shadow-sm);
+  opacity: 0;
+  transform: translateY(14px) scale(0.97);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease), background-color 0.3s var(--ease);
+}
+
+.integration-card.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.integration-card:hover {
+  border-color: rgba(89,98,115,0.16);
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 16px 36px rgba(34,53,37,0.1);
+  transform: translateY(-2px) scale(1);
+}
+
+.integration-card-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.integration-card-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.integration-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.integration-card-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--ink-0);
+}
+
+.integration-card-desc {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+/* Icon color variants */
+.icon-color-slack {
+  background: rgba(74,21,75,0.06);
+  border: 1px solid rgba(74,21,75,0.1);
+  color: #611f69;
+}
+
+.icon-color-jira {
+  background: rgba(0,82,204,0.06);
+  border: 1px solid rgba(0,82,204,0.1);
+  color: #2962d9;
+}
+
+.icon-color-github {
+  background: rgba(21,33,24,0.05);
+  border: 1px solid rgba(21,33,24,0.08);
+  color: var(--ink-0);
+}
+
+.icon-color-teams {
+  background: rgba(75,70,166,0.06);
+  border: 1px solid rgba(75,70,166,0.1);
+  color: #4b46a6;
+}
+
+/* Connected status bar */
+.connect-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+  padding: 12px 16px;
+  border-radius: var(--radius-pill);
+  background: rgba(89,98,115,0.05);
+  border: 1px solid rgba(89,98,115,0.1);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+
+.connect-status.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.connect-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--mint);
+  box-shadow: 0 0 0 0 rgba(89,98,115,0.2);
+  animation: status-ping 2s ease-out infinite;
+}
+
+.connect-status-text {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ink-2);
+}
+
+.connect-status-text strong {
+  color: var(--mint);
+}
+
+/* Step 4 dot active color */
+.step-dot.active-connect {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 6px rgba(107,114,128,0.12);
+  transform: scale(1.08);
+}
+
+@media (max-width: 860px) {
+  .connect-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .connect-orbit {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 720px) {
+  .integration-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
    CTA + FOOTER
    ============================================================ */
 .cta-section {
@@ -1524,6 +1917,7 @@ main {
   <div class="step-dot" id="dot-problem"></div>
   <div class="step-dot" id="dot-agitate"></div>
   <div class="step-dot" id="dot-solve"></div>
+  <div class="step-dot" id="dot-connect"></div>
 </nav>
 
 <!-- ========== HEADER ========== -->
@@ -1563,6 +1957,7 @@ main {
       <a href="#problemSection">Signals</a>
       <a href="#agitateSection">Cost</a>
       <a href="#solveSection">Flow</a>
+      <a href="#connectSection">Connect</a>
     </nav>
     <div class="header-cost" id="headerCost">
       <span class="header-cost-label" id="costLabel">Context cost today</span>
@@ -1771,6 +2166,141 @@ main {
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <div class="step-divider"><div class="step-divider-line"></div></div>
+
+  <!-- ========== STEP 4 — CONNECT ========== -->
+  <section class="step-section connect-section" id="connectSection">
+    <div class="container connect-layout" data-step="04">
+
+      <!-- Left: Orbit animation -->
+      <div class="connect-orbit" id="connectOrbit" data-anim>
+        <!-- Orbit rings -->
+        <div class="orbit-ring orbit-ring-outer" aria-hidden="true"></div>
+        <div class="orbit-ring orbit-ring-inner" aria-hidden="true"></div>
+
+        <!-- SVG connection lines -->
+        <svg class="orbit-connections" viewBox="0 0 420 420" aria-hidden="true">
+          <line id="conn-0" x1="210" y1="42" x2="210" y2="174" />
+          <line id="conn-1" x1="378" y1="210" x2="246" y2="210" />
+          <line id="conn-2" x1="210" y1="378" x2="210" y2="246" />
+          <line id="conn-3" x1="42" y1="210" x2="174" y2="210" />
+          <!-- Pulse dots traveling along connections -->
+          <circle class="connection-dot" id="cdot-0" cx="210" cy="108" />
+          <circle class="connection-dot" id="cdot-1" cx="312" cy="210" />
+          <circle class="connection-dot" id="cdot-2" cx="210" cy="312" />
+          <circle class="connection-dot" id="cdot-3" cx="108" cy="210" />
+        </svg>
+
+        <!-- Center Verachi logo -->
+        <div class="orbit-center" id="orbitCenter">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="connect-logo-right" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#2dd4bf" />
+                <stop offset="50%" stop-color="#3b82f6" />
+                <stop offset="100%" stop-color="#8b5cf6" />
+              </linearGradient>
+              <linearGradient id="connect-logo-left" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0d9488" />
+                <stop offset="40%" stop-color="#14b8a6" />
+                <stop offset="80%" stop-color="#6366f1" />
+                <stop offset="100%" stop-color="#a855f7" />
+              </linearGradient>
+            </defs>
+            <g transform="translate(65, 50) rotate(26)">
+              <rect x="-15" y="-40" width="30" height="80" rx="15" fill="url(#connect-logo-right)" />
+            </g>
+            <g transform="translate(35, 50) rotate(-26)">
+              <rect x="-15" y="-40" width="30" height="80" rx="15" fill="url(#connect-logo-left)" />
+            </g>
+          </svg>
+        </div>
+
+        <!-- Tool nodes -->
+        <div class="orbit-node orbit-node-0" id="onode-0">
+          <svg viewBox="0 0 24 24" fill="#611f69" aria-label="Slack">
+            <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zm1.271 0a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zm0 1.271a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zm10.124 2.521a2.528 2.528 0 0 1 2.52-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.52V8.834zm-1.271 0a2.528 2.528 0 0 1-2.521 2.521 2.528 2.528 0 0 1-2.521-2.521V2.522A2.528 2.528 0 0 1 15.166 0a2.528 2.528 0 0 1 2.521 2.522v6.312zm-2.521 10.124a2.528 2.528 0 0 1 2.521 2.52A2.528 2.528 0 0 1 15.166 24a2.528 2.528 0 0 1-2.521-2.522v-2.52h2.521zm0-1.271a2.528 2.528 0 0 1-2.521-2.521 2.528 2.528 0 0 1 2.521-2.521h6.312A2.528 2.528 0 0 1 24 15.166a2.528 2.528 0 0 1-2.522 2.521h-6.312z"/>
+          </svg>
+          <span class="orbit-node-label">Slack</span>
+        </div>
+
+        <div class="orbit-node orbit-node-1" id="onode-1">
+          <svg viewBox="0 0 24 24" fill="#2962d9" aria-label="Jira">
+            <path d="M11.571 11.513H0a5.218 5.218 0 0 0 5.232 5.215h2.13v2.057A5.215 5.215 0 0 0 12.575 24V12.518a1.005 1.005 0 0 0-1.005-1.005zm5.723-5.756H5.736a5.215 5.215 0 0 0 5.215 5.214h2.129v2.058a5.218 5.218 0 0 0 5.215 5.214V6.758a1.001 1.001 0 0 0-1.001-1.001zM23.013 0H11.455a5.215 5.215 0 0 0 5.215 5.215h2.129v2.057A5.215 5.215 0 0 0 24 12.483V1.005A1.005 1.005 0 0 0 23.013 0z"/>
+          </svg>
+          <span class="orbit-node-label">Jira</span>
+        </div>
+
+        <div class="orbit-node orbit-node-2" id="onode-2">
+          <svg viewBox="0 0 24 24" fill="#1b1f23" aria-label="GitHub">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+          </svg>
+          <span class="orbit-node-label">GitHub</span>
+        </div>
+
+        <div class="orbit-node orbit-node-3" id="onode-3">
+          <svg viewBox="0 0 24 24" fill="#4b46a6" aria-label="Microsoft Teams">
+            <path d="M20.625 8.5h-3.75c-.69 0-1.25.56-1.25 1.25v5c0 .69.56 1.25 1.25 1.25h1.25v2.5l2.5-2.5h.75c.345 0 .625-.28.625-.625v-6.25c0-.345-.28-.625-.625-.625zM21.5 5.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0zm-5.5.5a2.25 2.25 0 1 0-4.5 0 2.25 2.25 0 0 0 4.5 0zM14 8H8c-.55 0-1 .45-1 1v6.5c0 .28.22.5.5.5H8v3l3-3h3c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1z"/>
+          </svg>
+          <span class="orbit-node-label">Teams</span>
+        </div>
+      </div>
+
+      <!-- Right: Info + integration cards -->
+      <div class="connect-info" data-anim>
+        <span class="step-badge step-badge-solve">Step 4 · Connect Now</span>
+        <h2 class="step-title">Two minutes to connect. Zero tools to replace.</h2>
+        <p class="step-desc">Verachi reads from your existing tools with read-only connections. No migration, no new process, no ramp-up time. Your team keeps working where they already work.</p>
+        <div class="connect-setup-badge">Average setup time: 2 minutes per tool</div>
+
+        <div class="integration-cards" id="integrationCards">
+          <div class="integration-card" data-int-idx="0">
+            <div class="integration-card-icon icon-color-slack">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zm1.271 0a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zm0 1.271a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zm10.124 2.521a2.528 2.528 0 0 1 2.52-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.52V8.834zm-1.271 0a2.528 2.528 0 0 1-2.521 2.521 2.528 2.528 0 0 1-2.521-2.521V2.522A2.528 2.528 0 0 1 15.166 0a2.528 2.528 0 0 1 2.521 2.522v6.312zm-2.521 10.124a2.528 2.528 0 0 1 2.521 2.52A2.528 2.528 0 0 1 15.166 24a2.528 2.528 0 0 1-2.521-2.522v-2.52h2.521zm0-1.271a2.528 2.528 0 0 1-2.521-2.521 2.528 2.528 0 0 1 2.521-2.521h6.312A2.528 2.528 0 0 1 24 15.166a2.528 2.528 0 0 1-2.522 2.521h-6.312z"/></svg>
+            </div>
+            <div class="integration-card-text">
+              <span class="integration-card-name">Slack</span>
+              <span class="integration-card-desc">Capture decisions from channels & threads</span>
+            </div>
+          </div>
+          <div class="integration-card" data-int-idx="1">
+            <div class="integration-card-icon icon-color-jira">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 11.513H0a5.218 5.218 0 0 0 5.232 5.215h2.13v2.057A5.215 5.215 0 0 0 12.575 24V12.518a1.005 1.005 0 0 0-1.005-1.005zm5.723-5.756H5.736a5.215 5.215 0 0 0 5.215 5.214h2.129v2.058a5.218 5.218 0 0 0 5.215 5.214V6.758a1.001 1.001 0 0 0-1.001-1.001zM23.013 0H11.455a5.215 5.215 0 0 0 5.215 5.215h2.129v2.057A5.215 5.215 0 0 0 24 12.483V1.005A1.005 1.005 0 0 0 23.013 0z"/></svg>
+            </div>
+            <div class="integration-card-text">
+              <span class="integration-card-name">Jira</span>
+              <span class="integration-card-desc">Link decisions to epics & tickets</span>
+            </div>
+          </div>
+          <div class="integration-card" data-int-idx="2">
+            <div class="integration-card-icon icon-color-github">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </div>
+            <div class="integration-card-text">
+              <span class="integration-card-name">GitHub</span>
+              <span class="integration-card-desc">Flag decision drift in PRs</span>
+            </div>
+          </div>
+          <div class="integration-card" data-int-idx="3">
+            <div class="integration-card-icon icon-color-teams">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.625 8.5h-3.75c-.69 0-1.25.56-1.25 1.25v5c0 .69.56 1.25 1.25 1.25h1.25v2.5l2.5-2.5h.75c.345 0 .625-.28.625-.625v-6.25c0-.345-.28-.625-.625-.625zM21.5 5.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0zm-5.5.5a2.25 2.25 0 1 0-4.5 0 2.25 2.25 0 0 0 4.5 0zM14 8H8c-.55 0-1 .45-1 1v6.5c0 .28.22.5.5.5H8v3l3-3h3c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1z"/></svg>
+            </div>
+            <div class="integration-card-text">
+              <span class="integration-card-name">Microsoft Teams</span>
+              <span class="integration-card-desc">Surface context in team channels</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="connect-status" id="connectStatus">
+          <span class="connect-status-dot"></span>
+          <span class="connect-status-text"><strong>4 tools</strong> connected · read-only · no migration required</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -2177,6 +2707,7 @@ const sections = [
   { id: "problemSection", dotId: "dot-problem", cls: "active-problem" },
   { id: "agitateSection", dotId: "dot-agitate", cls: "active-agitate" },
   { id: "solveSection",   dotId: "dot-solve",   cls: "active-solve" },
+  { id: "connectSection", dotId: "dot-connect", cls: "active-connect" },
 ];
 
 const stepObserver = new IntersectionObserver((entries) => {
@@ -2196,6 +2727,101 @@ sections.forEach(s => {
   const el = document.getElementById(s.id);
   if (el) stepObserver.observe(el);
 });
+
+
+/* ============================================================
+   STEP 4 — Connect orbit animation
+   ============================================================ */
+(function initConnectAnimation() {
+  const connectSection = document.getElementById("connectSection");
+  if (!connectSection) return;
+
+  const orbitCenter = document.getElementById("orbitCenter");
+  const nodes = [0, 1, 2, 3].map(i => document.getElementById(`onode-${i}`));
+  const lines = [0, 1, 2, 3].map(i => document.getElementById(`conn-${i}`));
+  const dots = [0, 1, 2, 3].map(i => document.getElementById(`cdot-${i}`));
+  const cards = document.querySelectorAll(".integration-card");
+  const statusBar = document.getElementById("connectStatus");
+  let animated = false;
+
+  const connectObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !animated) {
+        animated = true;
+        runConnectSequence();
+      }
+    });
+  }, { threshold: 0.25 });
+  connectObserver.observe(connectSection);
+
+  function runConnectSequence() {
+    const isReduced = prefersReducedMotion.matches;
+    const baseDelay = isReduced ? 0 : 400;
+    const stagger = isReduced ? 50 : 300;
+
+    // 1. Show center logo
+    setTimeout(() => {
+      orbitCenter.classList.add("active");
+    }, baseDelay);
+
+    // 2. Show nodes one by one
+    nodes.forEach((node, i) => {
+      setTimeout(() => {
+        node.classList.add("active");
+      }, baseDelay + 500 + i * stagger);
+    });
+
+    // 3. Draw connection lines
+    lines.forEach((line, i) => {
+      setTimeout(() => {
+        line.classList.add("drawn");
+        // Show the traveling dot
+        setTimeout(() => {
+          dots[i].classList.add("active");
+          // Mark node as connected
+          nodes[i].classList.add("connected");
+          // Pulse the dot along the line
+          animateDot(dots[i], i);
+        }, isReduced ? 0 : 400);
+      }, baseDelay + 1600 + i * stagger);
+    });
+
+    // 4. Show integration cards
+    cards.forEach((card, i) => {
+      setTimeout(() => {
+        card.classList.add("visible");
+      }, baseDelay + 3000 + i * (isReduced ? 50 : 200));
+    });
+
+    // 5. Show status bar
+    setTimeout(() => {
+      statusBar.classList.add("visible");
+    }, baseDelay + (isReduced ? 200 : 4000));
+  }
+
+  function animateDot(dot, index) {
+    if (prefersReducedMotion.matches) return;
+    // Animate the dot traveling from node to center
+    const line = lines[index];
+    const x1 = parseFloat(line.getAttribute("x1"));
+    const y1 = parseFloat(line.getAttribute("y1"));
+    const x2 = parseFloat(line.getAttribute("x2"));
+    const y2 = parseFloat(line.getAttribute("y2"));
+
+    let progress = 0;
+    function step() {
+      progress += 0.015;
+      if (progress > 1) progress = 0;
+      const cx = x1 + (x2 - x1) * progress;
+      const cy = y1 + (y2 - y1) * progress;
+      dot.setAttribute("cx", cx);
+      dot.setAttribute("cy", cy);
+      dot.style.opacity = progress < 0.1 || progress > 0.9 ? 0.3 : 0.8;
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+})();
 </script>
 
 </body>
