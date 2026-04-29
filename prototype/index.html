@@ -377,10 +377,10 @@ main {
 }
 
 .hero-sub {
-  max-width: 34ch;
+  max-width: 38ch;
   margin-top: 22px;
-  font-size: 1.12rem;
-  line-height: 1.8;
+  font-size: 1.08rem;
+  line-height: 1.72;
   color: var(--ink-2);
   text-wrap: pretty;
 }
@@ -468,9 +468,9 @@ main {
 }
 
 .hero-proof {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 12px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
   margin-top: 22px;
 }
 
@@ -478,23 +478,73 @@ main {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 12px;
-  border-radius: var(--radius-pill);
-  background: rgba(255,255,255,0.66);
-  border: 1px solid rgba(21,33,24,0.08);
   color: var(--ink-2);
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.04em;
-  box-shadow: var(--shadow-sm);
+  position: relative;
+  padding-left: 29px;
 }
 
 .hero-proof-item::before {
   content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%) rotate(-45deg);
+  width: 9px;
+  height: 4px;
+  border-left: 2px solid var(--mint);
+  border-bottom: 2px solid var(--mint);
+}
+
+.hero-proof-item.hero-tool {
+  gap: 9px;
+  color: var(--ink-0);
+}
+
+.hero-tool-icon {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.hero-tool-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.hero-inline-tool {
+  display: inline;
+  font-size: 1em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.hero-tool-inline {
+  display: none;
+}
+
+.hero-tool-name {
+  font-size: 1em;
+  font-weight: 700;
+  color: var(--ink-0);
+  line-height: inherit;
+}
+
+.hero-preview-meta .hero-meta-tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero-preview-meta .hero-meta-tool svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
 }
 
 .hero-sidebar {
@@ -516,9 +566,12 @@ main {
 .hero-panel-top {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 18px;
+  gap: 0;
   margin-bottom: 18px;
+}
+
+.hero-panel-top > div {
+  width: 100%;
 }
 
 .hero-panel-eyebrow {
@@ -532,10 +585,155 @@ main {
 }
 
 .hero-panel-title {
-  max-width: 16ch;
   font-size: 1.7rem;
   line-height: 1.08;
   letter-spacing: -0.05em;
+  text-wrap: balance;
+}
+
+.hero-panel-stack {
+  display: grid;
+  gap: 12px;
+}
+
+.hero-panel-card {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 20px;
+  border: 1px solid var(--line-0);
+  background: rgba(255,255,255,0.78);
+  box-shadow: var(--shadow-sm);
+}
+
+.hero-panel-card-label {
+  display: block;
+  color: var(--ink-3);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-panel-card-title {
+  color: var(--ink-0);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.hero-panel-card-copy {
+  color: var(--ink-1);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.hero-panel-list {
+  display: grid;
+  gap: 10px;
+}
+
+.hero-panel-list-item {
+  position: relative;
+  padding-left: 16px;
+  color: var(--ink-1);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.hero-panel-list-item::before {
+  content: "";
+  position: absolute;
+  top: 0.62rem;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.hero-impact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.hero-impact {
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  padding: 34px 30px 28px;
+  border-radius: 28px;
+  border: 1px solid rgba(89,98,115,0.14);
+  background:
+    linear-gradient(180deg, rgba(247,248,251,0.98), rgba(255,255,255,0.94)),
+    rgba(255,255,255,0.78);
+  box-shadow: 0 20px 56px rgba(17,18,20,0.08);
+}
+
+.hero-impact::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background: var(--logo-accent-gradient);
+}
+
+.hero-impact strong {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--ink-1);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero-impact-stat {
+  display: block;
+  margin-bottom: 12px;
+  font-family: var(--font-mono);
+  font-size: clamp(5.8rem, 13vw, 8.2rem);
+  line-height: 0.86;
+  letter-spacing: -0.1em;
+  font-weight: 900;
+  background: var(--logo-accent-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.hero-impact span {
+  color: var(--ink-2);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.hero-benefit-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: start;
+  margin-top: 12px;
+  padding: 0;
+  color: transparent;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1.5px;
+  background: var(--logo-accent-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-benefit-link:hover {
+  opacity: 0.86;
+  text-decoration-color: currentColor;
 }
 
 .hero-panel-badge {
@@ -1893,7 +2091,11 @@ main {
   .hero-glow,
   .hero-scroll-hint,
   .activity-stage.stage-live .chrome-status-dot,
-  .header-cost.bump .header-cost-value {
+  .header-cost.bump .header-cost-value,
+  .orbit-ring-outer,
+  .orbit-ring-inner,
+  .orbit-center::before,
+  .connect-status-dot {
     animation: none !important;
   }
   .activity-stage,
@@ -1902,6 +2104,10 @@ main {
   .header-cost,
   .header-cost-meter-fill,
   .hero-preview-card,
+  .orbit-node,
+  .orbit-center,
+  .integration-card,
+  .connect-status,
   [data-anim] {
     transition: none !important;
   }
@@ -1978,10 +2184,14 @@ main {
     <div class="container hero-layout">
       <div class="hero-copy">
         <div class="hero-kicker" data-anim>Prototype walkthrough for delivery teams</div>
-        <h1 data-anim><span class="hero-emphasis">Context stops slipping</span><span class="hero-break">between the tools.</span></h1>
-        <div class="hero-stance" data-anim data-delay="1">No more excuses.</div>
+        <h1 data-anim><span class="hero-emphasis">Prevent risks.</span><span class="hero-break">Deliver with confidence.</span></h1>
+        <div class="hero-stance" data-anim data-delay="1">Consolidate once, decide together.</div>
         <p class="hero-sub" data-anim data-delay="1">
-          <strong>Verachi gives engineering leaders and delivery teams the original why behind every decision</strong> across Slack, GitHub, Microsoft Teams, Jira, and more to come, with no tool change required.
+          <strong>Verachi keeps your team’s vision visible and current</strong> across
+          <span class="hero-inline-tool hero-tool-name">Slack</span>,
+          <span class="hero-inline-tool hero-tool-name">GitHub</span>,
+          <span class="hero-inline-tool hero-tool-name">Microsoft Teams</span> and
+          <span class="hero-inline-tool hero-tool-name">Jira</span>, with no tool change required.
         </p>
         <div class="hero-actions" data-anim data-delay="2">
           <a class="button button-primary" href="../index.html#contact-form">
@@ -1991,10 +2201,9 @@ main {
           <a class="button button-outline" href="#problemSection">See the context leak</a>
         </div>
         <div class="hero-proof" data-anim data-delay="2" aria-label="Hero proof points">
-          <span class="hero-proof-item">Slack, GitHub, Teams, Jira</span>
+          <span class="hero-proof-item">Detect blocked work earlier</span>
+          <span class="hero-proof-item">Reduce cross-team dependency risk</span>
           <span class="hero-proof-item">No tool change required</span>
-          <span class="hero-proof-item">Grounded answers with citations</span>
-          <span class="hero-proof-item">More connectors coming</span>
         </div>
       </div>
       <aside class="hero-sidebar" data-anim data-delay="3" aria-label="Prototype summary">
@@ -2002,48 +2211,42 @@ main {
           <div class="hero-panel-top">
             <div>
               <span class="hero-panel-eyebrow">What Verachi changes</span>
-              <h2 class="hero-panel-title">The why becomes a shared surface. No more excuses.</h2>
+              <h2 class="hero-panel-title">Projects don’t fail suddenly. <br>They fail silently.</h2>
             </div>
-            <span class="hero-panel-badge">No tool change required</span>
           </div>
-          <div class="hero-preview">
-            <div class="hero-preview-toolbar">
-              <span>Decision graph</span>
-              <span>6 active signals</span>
-            </div>
-            <div class="hero-preview-strip">
-              <div class="hero-preview-chip">
-                <span class="hero-preview-chip-label">Team</span>
-                <span class="hero-preview-chip-value">6 senior operators</span>
-              </div>
-              <div class="hero-preview-chip">
-                <span class="hero-preview-chip-label">Risk</span>
-                <span class="hero-preview-chip-value">Threads lose the why</span>
-              </div>
-              <div class="hero-preview-chip">
-                <span class="hero-preview-chip-label">Outcome</span>
-                <span class="hero-preview-chip-value">Work aligns earlier</span>
+          <div class="hero-panel-stack" aria-label="Verachi overview cards">
+            <div class="hero-panel-card">
+              <span class="hero-panel-card-label">Problem</span>
+              <div class="hero-panel-list">
+                <p class="hero-panel-list-item">Information &amp; data are scattered across too many tools</p>
+                <p class="hero-panel-list-item">Risks detected too late, often visible only after impact</p>
+                <p class="hero-panel-list-item">Reporting is manual, biased, outdated and overwhelming teams</p>
               </div>
             </div>
-            <div class="hero-preview-card hero-preview-card-primary">
-              <div class="hero-preview-label">Billing auth migration</div>
-              <p>Verachi links the decision, owner, source thread, and Jira epic before another engineer starts solving the same problem twice.</p>
-              <div class="hero-preview-meta">
-                <span>Slack source</span>
-                <span>Jira link</span>
-                <span>GitHub branch</span>
+            <div class="hero-panel-card">
+              <span class="hero-panel-card-label">Solution Proposal</span>
+              <div class="hero-panel-list">
+                <p class="hero-panel-list-item">All your problems in single place by connecting your tools</p>
+                <p class="hero-panel-list-item">Cut reporting overhead and accelerate cross-team resolution</p>
+                <p class="hero-panel-list-item">Give leaders clearer signals for faster, more confident decisions</p>
               </div>
             </div>
-            <div class="hero-preview-grid">
-              <div class="hero-preview-card">
-                <span class="hero-preview-stat recovered-stat">$112k</span>
-                <p>Recovered annually on this six-person team once context retrieval stops being manual.</p>
-              </div>
-              <div class="hero-preview-card">
-                <span class="hero-preview-stat">97%</span>
-                <p>Answer confidence with a visible citation trail instead of a best guess in chat.</p>
+            <div class="hero-panel-card">
+              <span class="hero-panel-card-label">Benefits</span>
+              <div class="hero-impact-grid">
+                <div class="hero-impact">
+                  <strong>Time saved</strong>
+                  <span class="hero-impact-stat">At least 749 hrs</span>
+                  <span>reclaimed per year for a team of 6.</span>
+                </div>
+                <div class="hero-impact">
+                  <strong>Money saved</strong>
+                  <span class="hero-impact-stat">At least $112,320</span>
+                  <span>annual savings for a team of 6.</span>
+                </div>
               </div>
             </div>
+            <a class="hero-benefit-link" href="../index.html#roi-calculator">See the benefit for your team</a>
           </div>
         </div>
       </aside>
