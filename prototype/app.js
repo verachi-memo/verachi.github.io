@@ -30,49 +30,40 @@ const HOURLY_RATE = (TOTAL_SALARY * 1.25) / 2080; // loaded rate across all
 const PER_SECOND = HOURLY_RATE / 3600;
 
 /* ============================================================
-   PROBLEM FEED — the chaos messages
+   UNIFIED FEED — full narrative from chaos to resolution
+   Variable per-message delays for realistic pacing.
    ============================================================ */
-const PROBLEM_MSGS = [
-  { who: "Tom Reeves",    where: "Slack",   icon: "slack",   text: "Hey, does anyone know why we changed the auth flow for the billing service? I can't find the original decision anywhere.", costBump: 54 },
-  { who: "Helena Park",   where: "Slack",   icon: "slack",   text: "I think Marcus decided that in a thread 2 weeks ago? Let me search...", costBump: 60 },
-  { who: "Marcus Chen",   where: "GitHub",  icon: "github",  text: "Opened PR #247: <code>refactor: migrate billing to JWT tokens</code>", cost: "$72/hr", costBump: 420 },
-  { who: "Priya Sharma",  where: "Jira",    icon: "jira",    text: "Created ticket ENG-1142: \"Investigate auth token migration for billing\"", cost: "$68/hr", costBump: 117 },
-  { who: "James Okafor",  where: "GitHub",  icon: "github",  text: "Opened PR #249: <code>feat: add JWT auth to billing-service</code>", cost: "$71/hr", costBump: 426 },
-  { who: "Tom Reeves",    where: "Slack",   icon: "slack",   text: "@helena wait, James is also working on this? I thought Marcus was handling it.", costBump: 36 },
-  { who: "Helena Park",   where: "Slack",   icon: "slack",   text: "Looks like we have two PRs for the same thing. Let me check who started first...", costBump: 80 },
-  { who: "Anika Lindqvist", where: "Slack", icon: "slack",   text: "I already wrote integration tests for Marcus's approach. Are those still valid?", costBump: 43 },
-  { who: "Marcus Chen",   where: "Slack",   icon: "slack",   text: "I didn't know James was also on this. My PR is based on last Tuesday's standup discussion.", costBump: 50 },
-  { who: "James Okafor",  where: "Slack",   icon: "slack",   text: "Tom told me in DM to start on it. Are we overlapping?", cost: "$71/hr", costBump: 36 },
-];
+const UNIFIED_MSGS = [
+  // ── Chaos phase: team discovers the overlap ──
+  { who: "Tom Reeves",    where: "Slack",   icon: "slack",   delay: 2000,  text: "Hey, does anyone know why we changed the auth flow for the billing service? I can't find the original decision anywhere.", costBump: 54 },
+  { who: "Helena Park",   where: "Slack",   icon: "slack",   delay: 3200,  text: "I think Marcus decided that in a thread 2 weeks ago? Let me search...", costBump: 60 },
+  { who: "Marcus Chen",   where: "GitHub",  icon: "github",  delay: 4800,  text: "Opened PR #247: <code>refactor: migrate billing to JWT tokens</code>", cost: "$72/hr", costBump: 420 },
+  { who: "Priya Sharma",  where: "Jira",    icon: "jira",    delay: 2600,  text: "Created ticket ENG-1142: \"Investigate auth token migration for billing\"", cost: "$68/hr", costBump: 117 },
+  { who: "James Okafor",  where: "GitHub",  icon: "github",  delay: 3800,  text: "Opened PR #249: <code>feat: add JWT auth to billing-service</code>", cost: "$71/hr", costBump: 426 },
+  { who: "Tom Reeves",    where: "Slack",   icon: "slack",   delay: 1500,  text: "@helena wait, James is also working on this? I thought Marcus was handling it.", costBump: 36 },
+  { who: "Helena Park",   where: "Slack",   icon: "slack",   delay: 3500,  text: "Looks like we have two PRs for the same thing. Let me check who started first...", costBump: 80 },
+  { who: "Anika Lindqvist", where: "Slack", icon: "slack",   delay: 2500,  text: "I already wrote integration tests for Marcus's approach. Are those still valid?", costBump: 43 },
 
-/* ============================================================
-   AGITATE FEED — the scramble
-   ============================================================ */
-const AGITATE_MSGS = [
-  { who: "Tom Reeves",    where: "Slack",   icon: "slack",   text: "Emergency: product review is tomorrow. Can someone summarize what state billing auth is in?", costBump: 54 },
-  { who: "Helena Park",   where: "Slack",   icon: "slack",   text: "I've been reading through 47 Slack messages and 3 Jira threads for the last 40 minutes trying to figure this out.", cost: "$83/hr", costBump: 83 },
-  { who: "Marcus Chen",   where: "GitHub",  icon: "github",  text: "Closed PR #247 — duplicate of James's PR #249. 6 hours of work discarded.", cost: "$420 wasted", costBump: 630 },
-  { who: "Priya Sharma",  where: "Jira",    icon: "jira",    text: "Moved ENG-1142 to 'Blocked'. Waiting on Helena's investigation into which approach is correct.", costBump: 47 },
-  { who: "Tom Reeves",    where: "Slack",   icon: "slack",   text: "Where was the original decision to change the auth flow? Does ANYONE have a link?", costBump: 36 },
-  { who: "James Okafor",  where: "Slack",   icon: "slack",   text: "I found a screenshot of a whiteboard from 3 weeks ago but I don't know if it's still the plan.", cost: "$71/hr", costBump: 71 },
-  { who: "Anika Lindqvist", where: "Jira",  icon: "jira",    text: "My test suite is now broken because Marcus's branch was abandoned. Re-writing from James's branch.", cost: "$62/hr", costBump: 186 },
-  { who: "Helena Park",   where: "Slack",   icon: "slack",   text: "OK — after an hour of archaeology, I believe the decision was made in a thread that I wasn't tagged on. The decision was never recorded anywhere formal.", cost: "$83/hr lost", costBump: 125 },
-  { who: "Tom Reeves",    where: "Slack",   icon: "slack",   text: "So we've burned ~2 days of senior engineer time because a decision wasn't captured. And this isn't the first time.", costBump: 36 },
-  { who: "Priya Sharma",  where: "Slack",   icon: "slack",   text: "This happens every sprint. It's not a one-time thing, Tom.", costBump: 23 },
-];
+  // ── Scramble phase: cost becomes visible ──
+  { who: "Tom Reeves",    where: "Slack",   icon: "slack",   delay: 5000,  text: "Emergency: product review is tomorrow. Can someone summarize what state billing auth is in?", costBump: 54 },
+  { who: "Helena Park",   where: "Slack",   icon: "slack",   delay: 4200,  text: "I've been reading through 47 Slack messages and 3 Jira threads for the last 40 minutes trying to figure this out.", cost: "$83/hr", costBump: 83 },
+  { who: "Marcus Chen",   where: "GitHub",  icon: "github",  delay: 5500,  text: "Closed PR #247 — duplicate of James's PR #249. 6 hours of work discarded.", cost: "$420 wasted", costBump: 630 },
+  { who: "Priya Sharma",  where: "Jira",    icon: "jira",    delay: 2800,  text: "Moved ENG-1142 to 'Blocked'. Waiting on Helena's investigation into which approach is correct.", costBump: 47 },
+  { who: "James Okafor",  where: "Slack",   icon: "slack",   delay: 3600,  text: "I found a screenshot of a whiteboard from 3 weeks ago but I don't know if it's still the plan.", cost: "$71/hr", costBump: 71 },
+  { who: "Anika Lindqvist", where: "Jira",  icon: "jira",    delay: 4000,  text: "My test suite is now broken because Marcus's branch was abandoned. Re-writing from James's branch.", cost: "$62/hr", costBump: 186 },
+  { who: "Helena Park",   where: "Slack",   icon: "slack",   delay: 6000,  text: "OK — after an hour of archaeology, I believe the decision was made in a thread that I wasn't tagged on. The decision was never recorded anywhere formal.", cost: "$83/hr lost", costBump: 125 },
+  { who: "Tom Reeves",    where: "Slack",   icon: "slack",   delay: 3000,  text: "So we've burned ~2 days of senior engineer time because a decision wasn't captured. And this isn't the first time.", costBump: 36 },
+  { who: "Priya Sharma",  where: "Slack",   icon: "slack",   delay: 2500,  text: "This happens every sprint. It's not a one-time thing, Tom.", costBump: 23 },
 
-/* ============================================================
-   SOLVE FEED — with Verachi
-   ============================================================ */
-const SOLVE_MSGS = [
-  { who: "Tom Reeves",    where: "Slack",   icon: "verachi", text: "<code>@verachi</code> What was the decision on billing auth migration?", saving: "0 min", saveBump: 0 },
-  { who: "Verachi",       where: "Verachi", icon: "verachi", text: "The team decided on March 12 to migrate billing-service to JWT tokens (replacing session cookies). The decision was made by Helena Park and Marcus Chen in the #eng-platform thread, linked to Jira epic ENG-1100.", saving: "Answered in 4 sec", saveBump: 125 },
-  { who: "Verachi",       where: "Verachi", icon: "verachi", text: "Sources: <code>Slack #eng-platform Mar 12</code> · <code>Jira ENG-1100</code> · <code>Meeting notes: Platform sync</code> — Confidence: 97%", saving: "Full citation trail", saveBump: 80 },
-  { who: "Helena Park",   where: "Verachi", icon: "verachi", text: "The decision record already shows Marcus as the owner. No need to re-investigate.", saving: "40 min saved", saveBump: 83 },
-  { who: "James Okafor",  where: "Verachi", icon: "verachi", text: "Verachi flagged the overlap before I started my PR — it surfaced Marcus's existing branch in my IDE.", saving: "6 hrs saved", saveBump: 426 },
-  { who: "Anika Lindqvist", where: "Verachi", icon: "verachi", text: "I can see the linked test plan directly from the decision record. No guessing which branch to test against.", saving: "2 hrs saved", saveBump: 186 },
-  { who: "Priya Sharma",  where: "Jira",    icon: "verachi", text: "ENG-1142 was never created — Verachi's PR check would have caught the duplication before any work began.", saving: "$420 not wasted", saveBump: 420 },
-  { who: "Tom Reeves",    where: "Slack",   icon: "verachi", text: "Product review is ready. One question got us the full context. No archaeology needed.", saving: "Half-day saved", saveBump: 540 },
+  // ── Pivot: team tries Verachi ──
+  { who: "Tom Reeves",    where: "Slack",   icon: "verachi", delay: 6500,  text: "<code>@verachi</code> What was the decision on billing auth migration?", saving: "0 min", saveBump: 0 },
+  { who: "Verachi",       where: "Verachi", icon: "verachi", delay: 1800,  text: "The team decided on March 12 to migrate billing-service to JWT tokens (replacing session cookies). The decision was made by Helena Park and Marcus Chen in the #eng-platform thread, linked to Jira epic ENG-1100.", saving: "Answered in 4 sec", saveBump: 125 },
+  { who: "Verachi",       where: "Verachi", icon: "verachi", delay: 1200,  text: "Sources: <code>Slack #eng-platform Mar 12</code> · <code>Jira ENG-1100</code> · <code>Meeting notes: Platform sync</code> — Confidence: 97%", saving: "Full citation trail", saveBump: 80 },
+  { who: "Helena Park",   where: "Verachi", icon: "verachi", delay: 2200,  text: "The decision record already shows Marcus as the owner. No need to re-investigate.", saving: "40 min saved", saveBump: 83 },
+  { who: "James Okafor",  where: "Verachi", icon: "verachi", delay: 3000,  text: "Verachi flagged the overlap before I started my PR — it surfaced Marcus's existing branch in my IDE.", saving: "6 hrs saved", saveBump: 426 },
+  { who: "Anika Lindqvist", where: "Verachi", icon: "verachi", delay: 2500, text: "I can see the linked test plan directly from the decision record. No guessing which branch to test against.", saving: "2 hrs saved", saveBump: 186 },
+  { who: "Priya Sharma",  where: "Jira",    icon: "verachi", delay: 3200,  text: "ENG-1142 was never created — Verachi's PR check would have caught the duplication before any work began.", saving: "$420 not wasted", saveBump: 420 },
+  { who: "Tom Reeves",    where: "Slack",   icon: "verachi", delay: 4000,  text: "Product review is ready. One question got us the full context. No archaeology needed.", saving: "Half-day saved", saveBump: 540 },
 ];
 
 
@@ -154,7 +145,7 @@ function renderFeed(containerId, messages, options = {}) {
       const progressEl = document.getElementById(options.progressId);
       if (stageEl) stageEl.classList.add("stage-live");
       if (statusEl) {
-        statusEl.textContent = options.solving
+        statusEl.textContent = msg.saving
           ? `${msg.who} resolved context via ${msg.where}`
           : `${msg.who} updated ${msg.where}`;
       }
@@ -166,7 +157,7 @@ function renderFeed(containerId, messages, options = {}) {
           const memberEl = rosterEl.querySelector(`[data-index="${memberIdx}"]`);
           if (memberEl) {
             memberEl.classList.add("active");
-            if (options.solving) memberEl.classList.add("is-solving");
+            if (msg.saving) memberEl.classList.add("is-solving");
             setTimeout(() => {
               memberEl.classList.remove("active", "is-solving");
             }, 2000);
@@ -217,10 +208,12 @@ function renderFeed(containerId, messages, options = {}) {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           observer.disconnect();
-          // Start staggered reveal
-          let delay = prefersReducedMotion.matches ? 0 : (options.initialDelay || 800);
+          // Start staggered reveal with per-message variable delays
+          let cumulative = prefersReducedMotion.matches ? 0 : (options.initialDelay || 800);
           for (let i = 0; i < messages.length; i++) {
-            setTimeout(revealNext, delay + i * (prefersReducedMotion.matches ? 80 : (options.interval || 1200)));
+            const msgDelay = prefersReducedMotion.matches ? 80 : (messages[i].delay || options.interval || 1200);
+            setTimeout(revealNext, cumulative);
+            cumulative += msgDelay;
           }
         }
       });
@@ -334,8 +327,8 @@ const problemVisObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.05 });
 problemVisObserver.observe(problemSection);
 
-// Toggle savings mode when solve section enters/exits view (reversible)
-const solveSection = document.getElementById("solveSection");
+// Toggle savings mode when solution sentinel enters/exits view
+const solveSentinel = document.getElementById("solveSectionSentinel");
 const solveObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -354,33 +347,17 @@ const solveObserver = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.1 });
-solveObserver.observe(solveSection);
+solveObserver.observe(solveSentinel);
 
 
 /* ============================================================
    INIT FEEDS
    ============================================================ */
-renderFeed("problemFeedList", PROBLEM_MSGS, {
-  interval: 2200,
+renderFeed("problemFeedList", UNIFIED_MSGS, {
   initialDelay: 900,
   stageId: "problemStage",
   statusId: "problemStatus",
   progressId: "problemProgress",
-});
-renderFeed("agitateFeedList", AGITATE_MSGS, {
-  interval: 2400,
-  initialDelay: 1000,
-  stageId: "agitateStage",
-  statusId: "agitateStatus",
-  progressId: "agitateProgress",
-});
-renderFeed("solveFeedList", SOLVE_MSGS, {
-  interval: 2000,
-  initialDelay: 900,
-  solving: true,
-  stageId: "solveStage",
-  statusId: "solveStatus",
-  progressId: "solveProgress",
 });
 
 
@@ -405,8 +382,6 @@ animEls.forEach(el => animObserver.observe(el));
 const sections = [
   { id: "heroSection",    dotId: "dot-hero",    cls: "" },
   { id: "problemSection", dotId: "dot-problem", cls: "active-problem" },
-  { id: "agitateSection", dotId: "dot-agitate", cls: "active-agitate" },
-  { id: "solveSection",   dotId: "dot-solve",   cls: "active-solve" },
   { id: "connectSection", dotId: "dot-connect", cls: "active-connect" },
 ];
 
@@ -665,8 +640,6 @@ sections.forEach(s => {
   const progressSections = [
     { id: "heroSection",    dotId: "dot-hero" },
     { id: "problemSection", dotId: "dot-problem" },
-    { id: "agitateSection", dotId: "dot-agitate" },
-    { id: "solveSection",   dotId: "dot-solve" },
     { id: "connectSection", dotId: "dot-connect" },
   ];
 
@@ -701,8 +674,6 @@ sections.forEach(s => {
 (function initComposingIndicator() {
   const stages = [
     { stageId: 'problemStage', chromeSelector: '.activity-chrome' },
-    { stageId: 'agitateStage', chromeSelector: '.activity-chrome' },
-    { stageId: 'solveStage', chromeSelector: '.activity-chrome' },
   ];
 
   stages.forEach(({ stageId, chromeSelector }) => {
@@ -735,7 +706,7 @@ sections.forEach(s => {
   document.body.prepend(bar);
 
   const fill = document.getElementById('mobileProgressFill');
-  const progressSections = ['heroSection', 'problemSection', 'agitateSection', 'solveSection', 'connectSection'];
+  const progressSections = ['heroSection', 'problemSection', 'connectSection'];
 
   function updateMobileProgress() {
     const scrollTop = window.scrollY;

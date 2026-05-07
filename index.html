@@ -1,22 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="theme-color" content="#0a0b10" />
+<title>Verachi - Prevent risks. Deliver with confidence.</title>
+<meta name="description" content="Verachi gives delivery teams one place to see scattered context, recover the why behind decisions, and prevent risks without replacing Slack, GitHub, Microsoft Teams, or Jira." />
 <link rel="icon" href="./favicon.ico" />
-<script>document.documentElement.classList.replace('no-js', 'js');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
-  rel="stylesheet" />
-<link rel="stylesheet" href="./landing.css" />
-<script src="./landing.js" defer></script>
-  <title>Verachi - Decision workspace for delivery teams.</title>
-  <meta name="description" content="Verachi is a decision workspace for delivery teams that captures decisions, links them to projects and source artifacts, and answers grounded questions with citations." />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./prototype/styles.css" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NHXTJ2NZMT"></script>
   <script>
@@ -28,1128 +21,443 @@
 </head>
 
 <body>
-  <a class="skip-link" href="#main-content">Skip to content</a>
 
-<header class="site-header" data-header>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header">
   <div class="header-inner">
-    <a class="brand" href="index.html" aria-label="Verachi home">
+    <a class="brand" href="#" aria-label="Verachi home">
       <div class="brand-mark">
-        <svg width="24" height="24" aria-hidden="true"><use href="./partials/icons.svg#icon-logo-v"/></svg>
+        <img src="./prototype/verachi-logo.svg" alt="" aria-hidden="true" />
       </div>
-      <span class="brand-word">VERACHI</span>
+      <span>VERACHI</span>
     </a>
-
-    <button class="menu-toggle" id="mobileMenuToggle" type="button" aria-expanded="false" aria-controls="primaryNav"
-      aria-label="Toggle menu">
-      <svg width="22" height="22" aria-hidden="true"><use href="./partials/icons.svg#icon-menu"/></svg>
-    </button>
-
-    <nav class="site-nav" id="primaryNav" aria-label="Primary">
-      <ul>
-        <li><a href="index.html#showcase">How It Works</a></li>
-        <li><a href="index.html#use-cases">Risk Scenarios</a></li>
-        <li><a href="trust.html">Trust</a></li>
-      </ul>
+    <nav class="header-nav" aria-label="Page sections">
+      <a href="#heroSection">Overview</a>
+      <a href="#problemSection">The Problem</a>
+      <a href="#connectSection">Connect</a>
     </nav>
-
     <div class="header-actions">
       <a class="header-link" href="https://app.verachi.io/login">Sign In</a>
-      <a class="button button-compact" href="index.html#contact-form">Book a Demo</a>
+      <a class="header-cta" href="#contact-form">Book a Demo</a>
     </div>
   </div>
 </header>
 
+<main id="main-content" tabindex="-1">
 
-  <main id="main-content" tabindex="-1">
-
-    <!-- ========== HERO ========== -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-backdrop" aria-hidden="true">
-        <div class="hero-glow hero-glow-primary"></div>
-      </div>
-
-      <div class="container hero-centered">
-        <h1 id="hero-title" class="display-title" data-observe="fade-up">
-          “We have more tools than ever — yet less clarity than ever.”
-        </h1>
-
-        <p class="hero-intro" data-observe="fade-up" style="--delay: 1">
-          Verachi is a decision workspace for delivery teams. It captures decisions, links them to projects and source
-          artifacts, and lets teams ask grounded questions with citations without replacing Slack, Jira, or GitHub.
+  <!-- ========== HERO — The Hook ========== -->
+  <section class="hero" id="heroSection">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container hero-layout">
+      <div class="hero-copy">
+        <div class="hero-kicker" data-anim>The single source of truth for delivery teams</div>
+        <h1 data-anim><span class="hero-emphasis">Prevent risks.</span><span class="hero-break">Deliver with confidence.</span></h1>
+        <div class="hero-stance" data-anim data-delay="1">Consolidate once, decide together.</div>
+        <p class="hero-sub" data-anim data-delay="1">
+          <strong>Verachi keeps your team’s vision visible and current</strong> across
+          <span class="hero-inline-tool hero-tool-name">Slack</span>,
+          <span class="hero-inline-tool hero-tool-name">GitHub</span>,
+          <span class="hero-inline-tool hero-tool-name">Microsoft Teams</span> and
+          <span class="hero-inline-tool hero-tool-name">Jira</span>, with no tool change required.
         </p>
-
-        <div class="hero-actions" data-observe="fade-up" style="--delay: 2">
-          <a class="button button-primary-hero" href="#contact-form">
-            Book a demo
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
+        <div class="hero-actions" data-anim data-delay="2">
+          <a class="button button-primary" href="#contact-form">
+            Book a Demo
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
-          <a class="button button-outline" href="#showcase">See how it works</a>
+          <a class="button button-outline" href="#problemSection">See the context leak</a>
         </div>
-
-        <!-- Trusted-by logo strip -->
-        <div class="logo-strip" data-observe="fade-up" style="--delay: 3" aria-label="Connects to your existing tools">
-          <span class="logo-strip-label">Connects to your existing tools</span>
-          <div class="logo-strip-logos">
-            <!-- Slack -->
-            <svg class="logo-strip-icon" viewBox="0 0 24 24" fill="currentColor" aria-label="Slack" role="img">
-              <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zm1.271 0a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zm0 1.271a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zm10.124 2.521a2.528 2.528 0 0 1 2.52-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.52V8.834zm-1.271 0a2.528 2.528 0 0 1-2.521 2.521 2.528 2.528 0 0 1-2.521-2.521V2.522A2.528 2.528 0 0 1 15.166 0a2.528 2.528 0 0 1 2.521 2.522v6.312zm-2.521 10.124a2.528 2.528 0 0 1 2.521 2.52A2.528 2.528 0 0 1 15.166 24a2.528 2.528 0 0 1-2.521-2.522v-2.52h2.521zm0-1.271a2.528 2.528 0 0 1-2.521-2.521 2.528 2.528 0 0 1 2.521-2.521h6.312A2.528 2.528 0 0 1 24 15.166a2.528 2.528 0 0 1-2.522 2.521h-6.312z"/>
-            </svg>
-            <!-- Jira -->
-            <svg class="logo-strip-icon" viewBox="0 0 24 24" fill="currentColor" aria-label="Jira" role="img">
-              <path d="M11.571 11.513H0a5.218 5.218 0 0 0 5.232 5.215h2.13v2.057A5.215 5.215 0 0 0 12.575 24V12.518a1.005 1.005 0 0 0-1.005-1.005zm5.723-5.756H5.736a5.215 5.215 0 0 0 5.215 5.214h2.129v2.058a5.218 5.218 0 0 0 5.215 5.214V6.758a1.001 1.001 0 0 0-1.001-1.001zM23.013 0H11.455a5.215 5.215 0 0 0 5.215 5.215h2.129v2.057A5.215 5.215 0 0 0 24 12.483V1.005A1.005 1.005 0 0 0 23.013 0z"/>
-            </svg>
-            <!-- GitHub -->
-            <svg class="logo-strip-icon" viewBox="0 0 24 24" fill="currentColor" aria-label="GitHub" role="img">
-              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-            </svg>
-            <!-- Notion -->
-            <svg class="logo-strip-icon" viewBox="0 0 24 24" fill="currentColor" aria-label="Notion" role="img">
-              <path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L18.29 2.29c-.42-.326-.98-.7-2.055-.607L3.01 2.95c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.84-.046.933-.56.933-1.167V6.354c0-.606-.233-.933-.746-.886l-15.177.886c-.56.047-.747.327-.747.934zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.747 0-.933-.234-1.494-.934l-4.577-7.186v6.952l1.447.327s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.14c-.093-.514.28-.886.747-.933zM2.1 1.542l13.728-1.008c1.68-.14 2.1.093 2.8.607l3.876 2.707c.466.327.606.747.606 1.214V21.39c0 1.027-.373 1.634-1.68 1.727l-15.457.934c-.98.046-1.448-.094-1.962-.747L.467 20.224c-.56-.747-.793-1.307-.793-1.96V3.13c0-.84.374-1.54 1.54-1.634z"/>
-            </svg>
-            <!-- Linear -->
-            <svg class="logo-strip-icon" viewBox="0 0 24 24" fill="currentColor" aria-label="Linear" role="img">
-              <path d="M.834 17.953a.588.588 0 0 1-.15-.57L4.56 4.63a.588.588 0 0 1 .958-.223l14.078 14.078a.588.588 0 0 1-.222.957l-12.754 3.876a.588.588 0 0 1-.57-.15L.835 17.954zm1.907-4.2a.294.294 0 0 0-.49.12l-1.94 6.392a.294.294 0 0 0 .365.363l6.39-1.94a.294.294 0 0 0 .121-.49l-4.446-4.446zm12.08-12.574a.588.588 0 0 0-.957.222L10.62 13.14a.294.294 0 0 0 .07.305l.862.862a.294.294 0 0 0 .305.07l11.74-3.245a.588.588 0 0 0 .222-.957L14.82 1.18z"/>
-            </svg>
-            <!-- Figma -->
-            <svg class="logo-strip-icon" viewBox="0 0 24 24" fill="currentColor" aria-label="Figma" role="img">
-              <path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.098-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z"/>
-            </svg>
+        <div class="hero-proof" data-anim data-delay="2" aria-label="Hero proof points">
+          <span class="hero-proof-item">Detect blocked work earlier</span>
+          <span class="hero-proof-item">Reduce cross-team dependency risk</span>
+          <span class="hero-proof-item">No tool change required</span>
+        </div>
+      </div>
+      <aside class="hero-sidebar" data-anim data-delay="3" aria-label="Verachi summary">
+        <div class="hero-panel">
+          <div class="hero-panel-top">
+            <div>
+              <span class="hero-panel-eyebrow">What Verachi changes</span>
+              <h2 class="hero-panel-title">Projects don’t fail suddenly. <br>They fail silently.</h2>
+            </div>
+          </div>
+          <div class="hero-panel-stack" aria-label="Verachi overview cards">
+            <div class="hero-panel-card">
+              <span class="hero-panel-card-label">Problem</span>
+              <div class="hero-panel-list">
+                <p class="hero-panel-list-item">Information &amp; data are scattered across too many tools</p>
+                <p class="hero-panel-list-item">Risks detected too late, often visible only after impact</p>
+                <p class="hero-panel-list-item">Reporting is manual, biased, outdated and overwhelming teams</p>
+              </div>
+            </div>
+            <div class="hero-panel-card">
+              <span class="hero-panel-card-label">Solution Proposal</span>
+              <div class="hero-panel-list">
+                <p class="hero-panel-list-item">All your problems in single place by connecting your tools</p>
+                <p class="hero-panel-list-item">Cut reporting overhead and accelerate cross-team resolution</p>
+                <p class="hero-panel-list-item">Give leaders clearer signals for faster, more confident decisions</p>
+              </div>
+            </div>
+            <div class="hero-panel-card">
+              <span class="hero-panel-card-label">Benefits</span>
+              <div class="hero-impact-grid">
+                <div class="hero-impact">
+                  <strong>Time saved</strong>
+                  <span class="hero-impact-stat" data-target="749">~750 hrs</span>
+                  <span>reclaimed per year for a team of 6.</span>
+                </div>
+                <div class="hero-impact">
+                  <strong>Money saved</strong>
+                  <span class="hero-impact-stat" data-target="112320">~$110K</span>
+                  <span>annual savings for a team of 6.</span>
+                </div>
+              </div>
+            </div>
+            <a class="hero-benefit-link" href="#contact-form">See how we calculate these numbers</a>
           </div>
         </div>
+      </aside>
+      <div class="hero-scroll-hint" data-anim data-delay="3">
+        <span>Scroll to learn more</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+  </section>
 
-        <!-- Hero Visual: Full-width Product Preview -->
-        <div class="hero-visual-full" data-observe="fade-up" style="--delay: 3" aria-hidden="true">
-          <div class="product-preview">
-            <div class="preview-chrome">
-              <div class="chrome-dots">
-                <span></span><span></span><span></span>
-              </div>
-              <div class="chrome-bar">app.verachi.io</div>
-            </div>
-            <div class="preview-body" data-hero-cycle>
-              <div class="preview-search">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2" aria-hidden="true">
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                </svg>
-                <div class="preview-typing">
-                  <span class="typed-query" data-hero-query>What decisions affected this project?</span><span
-                    class="cursor-blink">|</span>
-                </div>
-              </div>
-              <div class="preview-result" data-hero-result>
-                <p>The reporting rollout changed after the team decided to support customer-specific exports. Verachi links the decision, the related Jira work, and the later implementation discussion in one cited view.</p>
-              </div>
-              <div class="preview-citation">
-                <div class="cite-badge">
-                  <span class="cite-dot"></span>
-                  <span data-hero-source>Decision record + Jira + Slack + meeting notes</span>
-                </div>
-                <div class="cite-confidence">
-                  <span class="confidence-bar"><span class="confidence-fill" data-hero-confidence style="width: 94%"></span></span>
-                  <span data-hero-confidence-text>Grounded answer</span>
-                </div>
-              </div>
-            </div>
-            <div class="hero-cycle-progress" aria-hidden="true">
-              <div class="hero-cycle-progress-fill" data-hero-progress></div>
-            </div>
+
+  <!-- ========== THE PROBLEM ========== -->
+  <section class="step-section" id="problemSection">
+    <div class="container">
+      <div data-anim>
+        <span class="step-badge step-badge-problem">The Problem</span>
+        <h2 class="step-title">Work keeps moving.<br/>Context keeps leaking.</h2>
+        <p class="step-desc">The team is capable, fast, and already using the right tools. The failure mode is simpler: the reasons behind product and technical decisions never become a shared system. And that costs more than anyone tracks.</p>
+      </div>
+
+      <!-- Team roster with names + salaries -->
+      <div class="team-roster" id="teamRoster">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Cost cards -->
+      <div class="comparison-grid" data-anim data-delay="1">
+        <div class="comparison-card comparison-card-before featured">
+          <div class="comparison-label">⚠ Without shared context</div>
+          <div class="comparison-stat" id="statHoursLost" data-target="1248">~1,250 hrs</div>
+          <p class="comparison-detail">lost annually to "decision archaeology" — searching Slack, re-reading old tickets, asking the same questions again.</p>
+        </div>
+        <div class="comparison-card comparison-card-before">
+          <div class="comparison-label">⚠ Hidden cost per year</div>
+          <div class="comparison-stat" id="statCostLost" data-target="187200">~$187K</div>
+          <p class="comparison-detail">in fully-loaded salary burned on context reconstruction across a 6-person team averaging $200K/yr.</p>
+        </div>
+      </div>
+
+      <!-- Saved cards -->
+      <div id="solveSectionSentinel"></div>
+      <div class="solve-glow" aria-hidden="true"></div>
+      <div class="comparison-grid reverse-bias" data-anim data-delay="1">
+        <div class="comparison-card comparison-card-after">
+          <div class="comparison-label">✓ Hours reclaimed per year</div>
+          <div class="comparison-stat" data-target="749">~750 hrs</div>
+          <p class="comparison-detail">recovered by eliminating redundant context searches and rehashing past decisions.</p>
+        </div>
+        <div class="comparison-card comparison-card-after featured">
+          <div class="comparison-label">✓ Annual savings</div>
+          <div class="comparison-stat recovered-stat" data-target="112320">~$110K</div>
+          <p class="comparison-detail">returned to building instead of searching, per 6-person team. Scales linearly.</p>
+        </div>
+      </div>
+
+      <!-- UNIFIED activity feed -->
+      <div class="activity-stage" id="problemStage" data-anim data-delay="2">
+        <div class="activity-chrome">
+          <div class="chrome-dots"><span></span><span></span><span></span></div>
+          <div class="chrome-title">live team activity <span class="chrome-title-note">· simulated scenario</span></div>
+          <div class="chrome-status"><span class="chrome-status-dot"></span><span id="problemStatus">standby</span></div>
+          <div class="chrome-progress" aria-hidden="true"><div class="chrome-progress-fill" id="problemProgress"></div></div>
+        </div>
+        <div class="activity-body" id="problemFeed">
+          <div class="activity-feed" id="problemFeedList">
+            <!-- Populated by JS -->
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
+  <div class="step-divider"><div class="step-divider-line"></div></div>
 
-    <!-- ========== TRUST STRIP ========== -->
-    <section class="section section-trust-strip" aria-label="The reality today">
-      <div class="container">
-        <div class="trust-strip-grid" data-observe="fade-up">
-          <div class="trust-strip-item">
-            <svg class="trust-strip-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <span>Data exists, but it is scattered and unstructured</span>
-          </div>
-          <div class="trust-strip-item">
-            <svg class="trust-strip-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-            <span>It is outdated by the time important decisions are made</span>
-          </div>
-          <div class="trust-strip-item">
-            <svg class="trust-strip-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
-            <span>It is costly to navigate across tools just to reconstruct context</span>
-          </div>
-          <div class="trust-strip-item">
-            <svg class="trust-strip-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            <span>The original why gets lost as organizations grow</span>
-          </div>
-          <div class="trust-strip-item">
-            <svg class="trust-strip-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-            <span>It is not interpreted in real time or in context</span>
-          </div>
-          <div class="trust-strip-item">
-            <svg class="trust-strip-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
-            <span>Teams end up paying the same context cost again and again</span>
-          </div>
+  <!-- ========== STEP 4 — CONNECT ========== -->
+  <section class="step-section connect-section" id="connectSection">
+    <div class="container connect-layout">
+
+      <!-- Left: Orbit animation -->
+      <div class="connect-orbit" id="connectOrbit" data-anim>
+        <!-- Orbit rings -->
+        <div class="orbit-ring orbit-ring-outer" aria-hidden="true"></div>
+        <div class="orbit-ring orbit-ring-inner" aria-hidden="true"></div>
+
+        <!-- SVG connection lines -->
+        <svg class="orbit-connections" viewBox="0 0 420 420" aria-hidden="true">
+          <line id="conn-0" x1="210" y1="42" x2="210" y2="174" />
+          <line id="conn-1" x1="378" y1="210" x2="246" y2="210" />
+          <line id="conn-2" x1="210" y1="378" x2="210" y2="246" />
+          <line id="conn-3" x1="42" y1="210" x2="174" y2="210" />
+        </svg>
+        <div class="connection-packet connection-packet-0" id="cpacket-0">Decision thread</div>
+        <div class="connection-packet connection-packet-1" id="cpacket-1">Ticket context</div>
+        <div class="connection-packet connection-packet-2" id="cpacket-2">PR risk signal</div>
+        <div class="connection-packet connection-packet-3" id="cpacket-3">Team ask</div>
+
+        <!-- Center Verachi logo -->
+        <div class="orbit-center" id="orbitCenter">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="connect-logo-right" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#7c8f78" />
+                <stop offset="52%" stop-color="#315f5a" />
+                <stop offset="100%" stop-color="#173f3b" />
+              </linearGradient>
+              <linearGradient id="connect-logo-left" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#b6a171" />
+                <stop offset="42%" stop-color="#6f8a70" />
+                <stop offset="100%" stop-color="#315f5a" />
+              </linearGradient>
+            </defs>
+            <g transform="translate(65, 50) rotate(26)">
+              <rect x="-15" y="-40" width="30" height="80" rx="15" fill="url(#connect-logo-right)" />
+            </g>
+            <g transform="translate(35, 50) rotate(-26)">
+              <rect x="-15" y="-40" width="30" height="80" rx="15" fill="url(#connect-logo-left)" />
+            </g>
+          </svg>
+        </div>
+
+        <!-- Tool nodes -->
+        <div class="orbit-node orbit-node-0" id="onode-0">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-label="Slack">
+            <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zm1.271 0a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zm0 1.271a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zm10.124 2.521a2.528 2.528 0 0 1 2.52-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.52V8.834zm-1.271 0a2.528 2.528 0 0 1-2.521 2.521 2.528 2.528 0 0 1-2.521-2.521V2.522A2.528 2.528 0 0 1 15.166 0a2.528 2.528 0 0 1 2.521 2.522v6.312zm-2.521 10.124a2.528 2.528 0 0 1 2.521 2.52A2.528 2.528 0 0 1 15.166 24a2.528 2.528 0 0 1-2.521-2.522v-2.52h2.521zm0-1.271a2.528 2.528 0 0 1-2.521-2.521 2.528 2.528 0 0 1 2.521-2.521h6.312A2.528 2.528 0 0 1 24 15.166a2.528 2.528 0 0 1-2.522 2.521h-6.312z"/>
+          </svg>
+          <span class="orbit-node-label">Slack</span>
+        </div>
+
+        <div class="orbit-node orbit-node-1" id="onode-1">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-label="Jira">
+            <path d="M11.571 11.513H0a5.218 5.218 0 0 0 5.232 5.215h2.13v2.057A5.215 5.215 0 0 0 12.575 24V12.518a1.005 1.005 0 0 0-1.005-1.005zm5.723-5.756H5.736a5.215 5.215 0 0 0 5.215 5.214h2.129v2.058a5.218 5.218 0 0 0 5.215 5.214V6.758a1.001 1.001 0 0 0-1.001-1.001zM23.013 0H11.455a5.215 5.215 0 0 0 5.215 5.215h2.129v2.057A5.215 5.215 0 0 0 24 12.483V1.005A1.005 1.005 0 0 0 23.013 0z"/>
+          </svg>
+          <span class="orbit-node-label">Jira</span>
+        </div>
+
+        <div class="orbit-node orbit-node-2" id="onode-2">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-label="GitHub">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+          </svg>
+          <span class="orbit-node-label">GitHub</span>
+        </div>
+
+        <div class="orbit-node orbit-node-3" id="onode-3">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-label="Microsoft Teams">
+            <path d="M20.625 8.5h-3.75c-.69 0-1.25.56-1.25 1.25v5c0 .69.56 1.25 1.25 1.25h1.25v2.5l2.5-2.5h.75c.345 0 .625-.28.625-.625v-6.25c0-.345-.28-.625-.625-.625zM21.5 5.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0zm-5.5.5a2.25 2.25 0 1 0-4.5 0 2.25 2.25 0 0 0 4.5 0zM14 8H8c-.55 0-1 .45-1 1v6.5c0 .28.22.5.5.5H8v3l3-3h3c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1z"/>
+          </svg>
+          <span class="orbit-node-label">Teams</span>
         </div>
       </div>
-    </section>
 
+      <!-- Right: Info + integration cards -->
+      <div class="connect-info" data-anim>
+        <span class="step-badge step-badge-solve">Connect Now</span>
+        <h2 class="step-title">Two minutes to connect.<br/>Zero tools to replace.</h2>
+        <p class="step-desc">Verachi reads from your existing tools with read-only connections. No migration, no new process, no ramp-up time. Your team keeps working where they already work.</p>
+        <div class="connect-setup-badge">Average setup time: 2 minutes per tool</div>
 
-    <!-- ========== PRODUCT SHOWCASE ========== -->
-    <section class="section" id="showcase">
-      <div class="container">
-        <div class="showcase-card" data-observe="fade-up">
-          <div class="showcase-header">
-            <span class="section-kicker-simple">How Verachi works</span>
-            <h2 class="section-title showcase-title">A decision workspace for delivery teams.</h2>
-            <p class="section-subtitle">Capture decisions, group them into projects, connect source systems, and recall
-              the context later through grounded chat, reports, and inspectable links back to the source.</p>
-          </div>
-
-          <div class="showcase-benefits">
-            <div class="benefit-item">
-              <div class="benefit-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M9 11l3 3L22 4" />
-                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-                </svg>
-              </div>
-              <p class="benefit-text">Capture decisions manually or from Slack, Teams, and GitHub</p>
+        <div class="integration-cards" id="integrationCards">
+          <div class="integration-card" data-int-idx="0">
+            <div class="integration-card-icon icon-color-slack">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zm1.271 0a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zm0 1.271a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zm10.124 2.521a2.528 2.528 0 0 1 2.52-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.52V8.834zm-1.271 0a2.528 2.528 0 0 1-2.521 2.521 2.528 2.528 0 0 1-2.521-2.521V2.522A2.528 2.528 0 0 1 15.166 0a2.528 2.528 0 0 1 2.521 2.522v6.312zm-2.521 10.124a2.528 2.528 0 0 1 2.521 2.52A2.528 2.528 0 0 1 15.166 24a2.528 2.528 0 0 1-2.521-2.522v-2.52h2.521zm0-1.271a2.528 2.528 0 0 1-2.521-2.521 2.528 2.528 0 0 1 2.521-2.521h6.312A2.528 2.528 0 0 1 24 15.166a2.528 2.528 0 0 1-2.522 2.521h-6.312z"/></svg>
             </div>
-            <div class="benefit-item">
-              <div class="benefit-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-                </svg>
-              </div>
-              <p class="benefit-text">Link each decision to projects, source artifacts, and related context</p>
-            </div>
-            <div class="benefit-item">
-              <div class="benefit-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="18" cy="18" r="3" />
-                  <circle cx="6" cy="6" r="3" />
-                  <path d="M13 6h3a2 2 0 0 1 2 2v7" />
-                  <path d="M11 18H8a2 2 0 0 1-2-2V9" />
-                </svg>
-              </div>
-              <p class="benefit-text">Ask grounded questions in chat and get answers with citations</p>
-            </div>
-            <div class="benefit-item">
-              <div class="benefit-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                </svg>
-              </div>
-              <p class="benefit-text">Operate with trust controls: audit trail, data boundaries, and notifications</p>
+            <div class="integration-card-text">
+              <span class="integration-card-name">Slack</span>
+              <span class="integration-card-desc">Capture decisions from channels & threads</span>
             </div>
           </div>
+          <div class="integration-card" data-int-idx="1">
+            <div class="integration-card-icon icon-color-jira">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 11.513H0a5.218 5.218 0 0 0 5.232 5.215h2.13v2.057A5.215 5.215 0 0 0 12.575 24V12.518a1.005 1.005 0 0 0-1.005-1.005zm5.723-5.756H5.736a5.215 5.215 0 0 0 5.215 5.214h2.129v2.058a5.218 5.218 0 0 0 5.215 5.214V6.758a1.001 1.001 0 0 0-1.001-1.001zM23.013 0H11.455a5.215 5.215 0 0 0 5.215 5.215h2.129v2.057A5.215 5.215 0 0 0 24 12.483V1.005A1.005 1.005 0 0 0 23.013 0z"/></svg>
+            </div>
+            <div class="integration-card-text">
+              <span class="integration-card-name">Jira</span>
+              <span class="integration-card-desc">Link decisions to epics & tickets</span>
+            </div>
+          </div>
+          <div class="integration-card" data-int-idx="2">
+            <div class="integration-card-icon icon-color-github">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </div>
+            <div class="integration-card-text">
+              <span class="integration-card-name">GitHub</span>
+              <span class="integration-card-desc">Flag decision drift in PRs</span>
+            </div>
+          </div>
+          <div class="integration-card" data-int-idx="3">
+            <div class="integration-card-icon icon-color-teams">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.625 8.5h-3.75c-.69 0-1.25.56-1.25 1.25v5c0 .69.56 1.25 1.25 1.25h1.25v2.5l2.5-2.5h.75c.345 0 .625-.28.625-.625v-6.25c0-.345-.28-.625-.625-.625zM21.5 5.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0zm-5.5.5a2.25 2.25 0 1 0-4.5 0 2.25 2.25 0 0 0 4.5 0zM14 8H8c-.55 0-1 .45-1 1v6.5c0 .28.22.5.5.5H8v3l3-3h3c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1z"/></svg>
+            </div>
+            <div class="integration-card-text">
+              <span class="integration-card-name">Microsoft Teams</span>
+              <span class="integration-card-desc">Surface context in team channels</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="connect-status" id="connectStatus">
+          <span class="connect-status-dot"></span>
+          <span class="connect-status-text"><strong>4 tools</strong> connected · read-only · no migration required</span>
         </div>
       </div>
-    </section>
+
+    </div>
+  </section>
 
 
-    <!-- ========== STATS MARQUEE ========== -->
-    <section class="section section-marquee" aria-label="Key metrics">
-      <div class="marquee-track" aria-hidden="true">
-        <div class="marquee-content">
-          <span class="marquee-stat">Decision workspace for delivery teams.</span>
-          <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Primary sources remain primary.</span>
-          <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Capture decisions and link them to projects.</span>
-          <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Grounded chat with citations.</span>
-          <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Trust-first context for delivery teams.</span>
-          <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Decision workspace for delivery teams.</span>
-          <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Primary sources remain primary.</span>
-          <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Capture decisions and link them to projects.</span>
-          <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Grounded chat with citations.</span>
-          <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Trust-first context for delivery teams.</span>
-          <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Decision workspace for delivery teams.</span>
-          <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Primary sources remain primary.</span>
-          <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Capture decisions and link them to projects.</span>
-          <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Grounded chat with citations.</span>
-          <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Trust-first context for delivery teams.</span>
-          <span class="marquee-divider">·</span>
-          <span class="marquee-stat">Decision workspace for delivery teams.</span>
-          <span class="marquee-divider">·</span>
-        </div>
+  <!-- ========== BOTTOM CTA ========== -->
+  <section class="cta-section contact-section" id="contact-form">
+    <div class="container contact-layout" data-anim>
+      <div class="contact-copy">
+        <span class="step-badge step-badge-solve">Book a Demo</span>
+        <h2>Give your team one place to recover the why.</h2>
+        <p>See Verachi on your own data. We’ll walk through Slack, GitHub, Microsoft Teams, Jira, and the connectors still to come, then model the delivery time your team can win back.</p>
+        <ul class="contact-benefits" aria-label="What the demo covers">
+          <li>Live visibility across the tools your team already uses.</li>
+          <li>A 2-4 week pilot plan with clear success metrics.</li>
+          <li>Security, governance, and read-only connector review.</li>
+          <li>A practical ROI estimate based on your team shape.</li>
+        </ul>
+        <p class="cta-assumptions">Numbers above are based on a 6-person team averaging $200K/yr fully-loaded cost, losing about 12 hrs/week to context reconstruction. Assumptions vary by team size and tool footprint; we model yours during the demo.</p>
       </div>
-    </section>
 
-
-    <!-- ========== CUSTOMER QUOTES ========== -->
-    <section class="section" id="testimonials">
-      <div class="container">
-        <div class="section-head section-head-centered" data-observe="fade-up">
-          <span class="section-kicker-simple">Real-world impact</span>
-          <h2 class="section-title" style="max-width: 18ch;">What teams get when visibility becomes real-time.</h2>
-        </div>
-
-        <div class="quotes-scroll" data-observe="fade-up" style="--delay: 1">
-          <div class="quote-card">
-            <blockquote class="quote-text">
-              Our PMs stopped rebuilding the story from scratch every Friday. Verachi pulls the context together and
-              gives us cited answers we can trust.
-            </blockquote>
-            <footer class="quote-person">
-              <img class="quote-avatar" src="./avatars/sarah.png" alt="Sarah J." width="40" height="40"
-                loading="lazy" />
-              <div>
-                <div class="quote-name">Sarah J.</div>
-                <div class="quote-role">Program Manager</div>
-              </div>
-            </footer>
+      <div class="contact-form-card">
+        <form id="contactForm" class="cf" novalidate>
+          <div class="cf-honeypot" aria-hidden="true">
+            <label for="cf_website">Website</label>
+            <input type="text" id="cf_website" name="website" autocomplete="off" tabindex="-1" />
           </div>
 
-          <div class="quote-card">
-            <blockquote class="quote-text">
-              The cited links changed escalation conversations. We stop debating what happened and move straight to the
-              real blocker.
-            </blockquote>
-            <footer class="quote-person">
-              <img class="quote-avatar" src="./avatars/marcus.png" alt="Marcus C." width="40" height="40"
-                loading="lazy" />
-              <div>
-                <div class="quote-name">Marcus C.</div>
-                <div class="quote-role">Head of Delivery</div>
-              </div>
-            </footer>
-          </div>
+          <input type="hidden" id="cf_loaded_at" name="_loaded_at" />
 
-          <div class="quote-card">
-            <blockquote class="quote-text">
-              The biggest value is getting the answer and the source trail together, so context stays inspectable instead of living in someone's head.
-            </blockquote>
-            <footer class="quote-person">
-              <img class="quote-avatar" src="./avatars/emma.png" alt="Emma L." width="40" height="40"
-                loading="lazy" />
-              <div>
-                <div class="quote-name">Emma L.</div>
-                <div class="quote-role">COO</div>
-              </div>
-            </footer>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ========== SAVINGS CALCULATOR ========== -->
-    <section class="section" id="savings">
-      <div class="container">
-        
-        <div class="roi-grid">
-            
-            <!-- Left Column: Inputs -->
-            <div class="roi-inputs-col order-2 lg:order-1" data-observe="fade-up">
-                <div class="section-head">
-                    <span class="section-kicker-simple">ROI Estimator</span>
-                    <h2 class="section-title">Estimate the cost of context loss and reporting overhead.</h2>
-                    <p class="section-subtitle" style="margin-top: 16px;">Model how much time teams lose to reconstructing decisions, chasing updates, and navigating across tools every week.</p>
-                </div>
-
-                <div class="card-blur roi-controls-group">
-                    <!-- Org Size -->
-                    <div class="slider-group">
-                        <div class="slider-header">
-                            <label>Delivery Team Size</label>
-                            <span id="org-size-val" class="slider-value">120</span>
-                        </div>
-                        <input type="range" id="org-size" min="10" max="2000" step="10" value="120" class="savings-range">
-                        <div class="savings-range-labels">
-                            <span>Small team</span>
-                            <span>Large org</span>
-                        </div>
-                    </div>
-
-                    <!-- Hours Lost -->
-                    <div class="slider-group">
-                        <div class="slider-header">
-                            <label>Hours Lost / Person / Week</label>
-                            <span id="hours-lost-val" class="slider-value">8h</span>
-                        </div>
-                        <input type="range" id="hours-lost" min="1" max="40" value="8" class="savings-range">
-                    </div>
-
-                    <!-- Average Salary -->
-                    <div class="slider-group">
-                        <div class="slider-header">
-                            <label>Avg. Annual Salary</label>
-                            <span id="salary-val" class="slider-value">$145k</span>
-                        </div>
-                        <input type="range" id="salary" min="60" max="400" step="5" value="145" class="savings-range">
-                    </div>
-                </div>
-
-                <div class="roi-results-grid">
-                    <div class="card-blur roi-result-box">
-                        <p class="result-label">Estimated Annual Value Recovered</p>
-                        <h3 id="annual-savings" class="result-value text-accent">$0</h3>
-                        <p id="pricing-note" class="result-note pricing-note-style"></p>
-                    </div>
-                    <div class="card-blur roi-result-box">
-                        <p class="result-label">Illustrative ROI</p>
-                        <h3 id="roi-multiplier" class="result-value text-accent">0x</h3>
-                        <p class="result-note">Projected return per $1 spent</p>
-                    </div>
-                </div>
+          <div class="cf-row">
+            <div class="cf-field">
+              <label class="cf-label" for="cf_name">Full name</label>
+              <input class="cf-input" type="text" id="cf_name" name="name" placeholder="Jane Doe" required />
             </div>
 
-            <!-- Right Column: Bifurcated Graph -->
-            <div class="roi-graph-col order-1 lg:order-2" data-observe="fade-up" style="--delay: 1">
-                <div class="card-blur roi-graph-card">
-                    <div class="graph-badge-wrapper">
-                        <div class="savings-badge">
-                            Decision Workspace ROI
-                        </div>
-                    </div>
-                    
-                    <div class="graph-header">
-                        <h3 style="font-size: 1.125rem; font-weight: 600; color: var(--ink-0); margin-bottom: 4px;">Projected Cost Comparison</h3>
-                        <p style="font-size: 0.85rem; color: var(--ink-2);">Manual context recovery vs. with Verachi</p>
-                    </div>
-                    
-                    <div class="graph-container">
-                        <canvas id="savingsChart"></canvas>
-                    </div>
-
-                    <div class="graph-footer">
-                        <div class="graph-legend">
-                            <div class="legend-item">
-                                <span class="legend-color legend-legacy"></span> 
-                                <span>Manual context path</span>
-                            </div>
-                            <div class="legend-item">
-                                <span class="legend-color legend-verachi"></span> 
-                                <span>Verachi Path</span>
-                            </div>
-                        </div>
-                        <div class="graph-tag">
-                            Interactive estimate
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ========== USE-CASE GALLERY ========== -->
-    <section class="section" id="use-cases">
-      <div class="container">
-        <div class="section-head section-head-centered" data-observe="fade-up">
-          <span class="section-kicker-simple">Use cases</span>
-          <h2 class="section-title" style="max-width: 20ch;">See how teams use Verachi.</h2>
-          <p class="section-subtitle">From editor to chat to PR review, Verachi brings cited delivery context into the places work already happens.</p>
-        </div>
-
-        <div class="usecase-showcase" data-observe="fade-up" style="--delay: 1">
-          <div class="usecase-nav" role="tablist" aria-label="Verachi product workflows">
-            <button class="usecase-tab is-active" type="button" role="tab" id="usecase-tab-ide" aria-selected="true" aria-controls="usecase-panel-ide" data-usecase-tab="ide">
-              <span class="usecase-tab-title">Inside the IDE</span>
-              <span class="usecase-tab-copy">Understand why the work changed while the code is still open.</span>
-            </button>
-            <button class="usecase-tab" type="button" role="tab" id="usecase-tab-slack" aria-selected="false" aria-controls="usecase-panel-slack" data-usecase-tab="slack">
-              <span class="usecase-tab-title">Inside Slack</span>
-              <span class="usecase-tab-copy">Handle status and policy questions with cited answers in channel.</span>
-            </button>
-            <button class="usecase-tab" type="button" role="tab" id="usecase-tab-github" aria-selected="false" aria-controls="usecase-panel-github" data-usecase-tab="github">
-              <span class="usecase-tab-title">Inside PR review</span>
-              <span class="usecase-tab-copy">Catch decision drift before merge.</span>
-            </button>
-          </div>
-
-          <div class="usecase-stage">
-            <article class="usecase-panel is-active" id="usecase-panel-ide" data-usecase-panel="ide" role="tabpanel" aria-labelledby="usecase-tab-ide">
-              <div class="usecase-panel-copy">
-                <h3 class="usecase-panel-title">Explain the reason behind active work without leaving the editor.</h3>
-                <p class="usecase-panel-desc">Engineers and PMs can ask why a schema, service boundary, or work item changed and get a cited answer that also shows the linked project and source history.</p>
-                <ul class="usecase-panel-list">
-                  <li>Answers appear beside the code or work being changed.</li>
-                  <li>Each reply points back to the original thread, ticket, or meeting note.</li>
-                  <li>Teams understand the rationale before drift turns into confusion.</li>
-                </ul>
-              </div>
-
-                            <div class="usecase-visual usecase-visual-ide" aria-hidden="true">
-                <div class="mock-window app-vscode">
-                  <div class="vscode-topbar">
-                    <div class="vscode-mac-dots"><span class="mock-dots"><i></i><i></i><i></i></span></div>
-                    <div class="vscode-title">schema.sql - verachi - Visual Studio Code</div>
-                    <div class="vscode-spacer"></div>
-                  </div>
-                  <div class="vscode-layout">
-                    <div class="vscode-activity-bar">
-                      <div class="vscode-icon active"></div>
-                      <div class="vscode-icon"></div>
-                      <div class="vscode-icon"></div>
-                    </div>
-                    <div class="vscode-sidebar">
-                      <div class="vscode-sidebar-title">EXPLORER</div>
-                      <div class="vscode-file active"><span class="vscode-chevron"></span>schema.sql</div>
-                    </div>
-                    <div class="ide-code vscode-editor">
-                      <div class="vscode-tabs">
-                        <div class="vscode-tab active">schema.sql</div>
-                      </div>
-                      <div class="vscode-editor-content">
-                        <span class="code-line"><em>20</em> <span class="syntax-keyword">CREATE TABLE</span> <span class="syntax-entity">projects</span> (</span>
-                        <span class="code-line"><em>21</em> &nbsp;&nbsp;id <span class="syntax-type">UUID</span> <span class="syntax-keyword">PRIMARY KEY</span>,</span>
-                        <span class="code-line"><em>22</em> &nbsp;&nbsp;name <span class="syntax-type">VARCHAR</span>(255) <span class="syntax-keyword">NOT NULL</span>,</span>
-                        <span class="code-line"><em>23</em> &nbsp;&nbsp;created_at <span class="syntax-type">TIMESTAMP</span>,</span>
-                        <span class="code-line is-highlight"><em>24</em> &nbsp;&nbsp;metadata <span class="syntax-type">JSONB</span>,</span>
-                        <span class="code-line"><em>25</em> &nbsp;&nbsp;<span class="syntax-keyword">CONSTRAINT</span> name_unique <span class="syntax-keyword">UNIQUE</span>(name)</span>
-                        <span class="code-line"><em>26</em> );</span>
-                      </div>
-                    </div>
-                    <div class="ide-chat vscode-panel">
-                      <div class="vscode-panel-header">Verachi AI Chat</div>
-                      <div class="vscode-panel-content">
-                        <div class="ide-bubble ide-bubble-user">Why did scope increase on this integration work?</div>
-                        <div class="ide-bubble ide-bubble-bot">
-                          Customer-specific reporting was added mid-sprint without equivalent capacity or milestone movement. Two approvals are still unresolved, so the added scope is now the main point of project misalignment.
-                        </div>
-                        <div class="ide-sources">
-                          <span class="source-pill">Jira epic • Scope change</span>
-                          <span class="source-pill">Meeting notes • Steering committee</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="vscode-statusbar">
-                    <div class="vscode-status-item">main*</div>
-                    <div class="vscode-status-item">schema.sql</div>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="usecase-panel" id="usecase-panel-slack" data-usecase-panel="slack" role="tabpanel" aria-labelledby="usecase-tab-slack" hidden>
-              <div class="usecase-panel-copy">
-                <h3 class="usecase-panel-title">Answer status and policy questions where the question already happens.</h3>
-                <p class="usecase-panel-desc">Support, product, PMs, and leadership can ask what changed, what is linked to a project, or why a customer-facing constraint exists and get a response grounded in current project activity.</p>
-                <ul class="usecase-panel-list">
-                  <li>Reduces repetitive status requests for PMs and leads.</li>
-                  <li>Shows the linked source material that informed the answer.</li>
-                  <li>Makes uncertainty and confidence explicit instead of hidden.</li>
-                </ul>
-              </div>
-
-                            <div class="usecase-visual usecase-visual-slack" aria-hidden="true">
-                <div class="mock-window app-slack">
-                  <div class="slack-topbar">
-                    <div class="slack-mac-dots"><span class="mock-dots"><i></i><i></i><i></i></span></div>
-                    <div class="slack-search-bar"><span class="slack-search-icon"></span> Search Verachi</div>
-                    <div class="slack-profile"></div>
-                  </div>
-                  <div class="slack-layout">
-                    <aside class="slack-sidebar">
-                      <div class="slack-workspace">Verachi <span class="slack-chevron"></span></div>
-                      <div class="slack-section">Channels</div>
-                      <span class="slack-channel is-active"><span class="slack-hash">#</span> product-eng-qa</span>
-                      <span class="slack-channel"><span class="slack-hash">#</span> announcements</span>
-                      <span class="slack-channel"><span class="slack-hash">#</span> release-notes</span>
-                    </aside>
-                    <div class="slack-main">
-                      <div class="slack-header">
-                        <div class="slack-header-title"><span class="slack-hash">#</span> product-eng-qa</div>
-                      </div>
-                      <div class="slack-thread">
-                        <div class="slack-message">
-                          <div class="slack-avatar">SC</div>
-                          <div class="slack-message-content">
-                            <div class="slack-message-meta"><span class="slack-author">Sarah Chen</span> <span class="slack-time">10:14 AM</span></div>
-                            <p>Which customer requests changed the advanced reporting scope?</p>
-                          </div>
-                        </div>
-                        <div class="slack-message slack-message-bot">
-                          <div class="slack-avatar bot">V</div>
-                          <div class="slack-message-content">
-                            <div class="slack-message-meta"><span class="slack-author">Verachi</span> <span class="slack-app-tag">APP</span> <span class="slack-time">10:14 AM</span></div>
-                            <p>Two customer-specific export requirements were committed after sprint kickoff. The linked policy approval is still pending, which is why the scope no longer matches the original plan.</p>
-                            <div class="slack-sources">
-                              <span class="source-pill">Jira PM-214</span>
-                              <span class="source-pill">Meeting notes · Policy review</span>
-                            </div>
-                            <div class="slack-confidence">
-                              <span class="confidence-dot"></span>
-                              High 96%
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="usecase-panel" id="usecase-panel-github" data-usecase-panel="github" role="tabpanel" aria-labelledby="usecase-tab-github" hidden>
-              <div class="usecase-panel-copy">
-                <h3 class="usecase-panel-title">Flag pull requests that contradict prior decisions or delivery plans.</h3>
-                <p class="usecase-panel-desc">When a change drifts away from an established pattern or from the linked delivery plan, Verachi can surface the relevant decision record before the inconsistency spreads.</p>
-                <ul class="usecase-panel-list">
-                  <li>Connects code review back to ADRs, delivery plans, and architectural history.</li>
-                  <li>Highlights the exact file, team, or milestone that is out of alignment.</li>
-                  <li>Keeps consistency enforceable without manual policing.</li>
-                </ul>
-              </div>
-
-                            <div class="usecase-visual usecase-visual-github" aria-hidden="true">
-                <div class="mock-window app-github">
-                  <div class="github-browser-topbar">
-                    <div class="github-mac-dots"><span class="mock-dots"><i></i><i></i><i></i></span></div>
-                    <div class="github-browser-tab">
-                      <div class="github-tab-icon"></div>
-                      <div class="github-tab-title">Add direct Billing integration · Pull Request #124</div>
-                    </div>
-                  </div>
-                  <div class="github-navbar">
-                    <div class="github-logo"></div>
-                    <div class="github-nav-search">Search or jump to...</div>
-                  </div>
-                  <div class="github-layout">
-                    <div class="github-header">
-                      <div class="github-header-title">Add direct Billing integration <span class="github-pr-number">#124</span></div>
-                      <div class="github-header-meta">
-                        <span class="github-status-badge merged"><span class="github-status-icon"></span>Merged</span>
-                        <span class="github-meta-text"><strong>alexdev</strong> merged 3 commits into <code>main</code> from <code>feature/axios</code></span>
-                      </div>
-                    </div>
-                    
-                    <div class="github-tabs">
-                      <div class="github-tab active">Conversation <span class="github-count">1</span></div>
-                      <div class="github-tab">Commits <span class="github-count">3</span></div>
-                      <div class="github-tab">Checks <span class="github-count">0</span></div>
-                      <div class="github-tab">Files changed <span class="github-count">4</span></div>
-                    </div>
-
-                    <div class="github-timeline">
-                      <div class="github-comment-box">
-                        <div class="github-comment-header">
-                          <div class="github-avatar">V</div>
-                          <strong>Verachi Bot</strong> commented
-                          <div class="github-badge-row">
-                            <span class="github-severity">Context Alignment</span>
-                          </div>
-                        </div>
-                        <div class="github-comment-body">
-                          <p>This change introduces a direct Billing integration in <strong>src/api/userService.js</strong>, but the June delivery plan routes all traffic through the API gateway. Shipping this now conflicts with the linked plan and creates downstream coordination churn for two teams.</p>
-                          <div class="github-links">
-                            <span class="source-pill">Dependency plan · June milestone</span>
-                            <span class="source-pill">Confidence 98.2%</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ========== PRICING ========== -->
-    <section class="section" id="pricing">
-      <div class="container">
-        <div class="section-head section-head-centered" data-observe="fade-up">
-          <span class="section-kicker-simple">Ways to start</span>
-          <h2 class="section-title" style="max-width: 20ch;">Choose the rollout that fits your team.</h2>
-          <p class="section-subtitle">Start with a focused pilot, expand to team-wide visibility, or deploy with enterprise controls.</p>
-        </div>
-
-        <div class="pricing-billing-toggle-wrap" data-observe="fade-up" style="--delay: 0.5">
-          <div class="pricing-billing-toggle" role="tablist" aria-label="Billing cadence">
-            <button
-              class="pricing-billing-option is-active"
-              type="button"
-              role="tab"
-              aria-selected="true"
-              data-billing-toggle="month"
-            >
-              Monthly
-            </button>
-            <button
-              class="pricing-billing-option"
-              type="button"
-              role="tab"
-              aria-selected="false"
-              data-billing-toggle="quarter"
-            >
-              Quarterly
-            </button>
-            <button
-              class="pricing-billing-option"
-              type="button"
-              role="tab"
-              aria-selected="false"
-              data-billing-toggle="year"
-            >
-              Yearly
-            </button>
-          </div>
-        </div>
-
-        <div class="pricing-grid" data-observe="fade-up" style="--delay: 1">
-
-          <!-- Starter -->
-          <div class="pricing-card">
-            <div class="pricing-card-inner">
-              <div class="pricing-tier">Pilot</div>
-              <div class="pricing-price">
-                <span class="pricing-amount" data-price-month="$5" data-price-quarter="$15" data-price-year="$60">$15</span>
-                <span class="pricing-cadence" data-cadence-month="/ month" data-cadence-quarter="/ quarter" data-cadence-year="/ year">/ quarter</span>
-              </div>
-              <p class="pricing-tagline">Validate grounded context and faster decision recall on a focused workflow.</p>
-              <a class="button button-outline pricing-cta" href="#contact-form">Start pilot</a>
-              <ul class="pricing-features">
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Read-only connections across your core delivery tools
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Grounded answers on a focused project or team
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Executive-ready reporting for pilot stakeholders
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Clear success metrics and measurable impact
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Guided kickoff
-                </li>
-              </ul>
+            <div class="cf-field">
+              <label class="cf-label" for="cf_email">Work email</label>
+              <input class="cf-input" type="email" id="cf_email" name="email" placeholder="jane@company.com" required />
             </div>
           </div>
 
-          <!-- Pro (highlighted) -->
-          <div class="pricing-card pricing-card-featured">
-            <div class="pricing-card-glow" aria-hidden="true"></div>
-            <div class="pricing-card-inner">
-              <div class="pricing-badge">Most popular</div>
-              <div class="pricing-tier">Growth</div>
-              <div class="pricing-price">
-                <span class="pricing-amount" data-price-month="$49" data-price-quarter="$147" data-price-year="$588">$147</span>
-                <span class="pricing-cadence" data-cadence-month="/ user / month" data-cadence-quarter="/ user / quarter" data-cadence-year="/ user / year">/ user / quarter</span>
-              </div>
-              <p class="pricing-tagline">Bring grounded decision context to more teams and leaders.</p>
-              <a class="button button-primary-hero pricing-cta" href="#contact-form">Book a demo</a>
-              <ul class="pricing-features">
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Everything in Pilot
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  More connected tools and operating headroom
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Role-based insights for PMs, PMOs, and executives
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Automatic dashboards and reporting
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Budget controls and clear usage visibility
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Built for growing delivery organizations
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Document-aware AI context
-                </li>
-              </ul>
+          <div class="cf-row">
+            <div class="cf-field">
+              <label class="cf-label" for="cf_title">Job title</label>
+              <input class="cf-input" type="text" id="cf_title" name="title" placeholder="VP of Engineering" required />
+            </div>
+
+            <div class="cf-field">
+              <label class="cf-label" for="cf_company">Company</label>
+              <input class="cf-input" type="text" id="cf_company" name="company" placeholder="Acme Corp" required />
             </div>
           </div>
 
-          <!-- Enterprise -->
-          <div class="pricing-card">
-            <div class="pricing-card-inner">
-              <div class="pricing-tier">Enterprise</div>
-              <div class="pricing-price">
-                <span class="pricing-amount">Custom</span>
-              </div>
-              <p class="pricing-tagline">Enterprise controls, governance, and rollout support for complex organizations.</p>
-              <a class="button button-outline pricing-cta" href="#contact-form">Book a demo</a>
-              <ul class="pricing-features">
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Everything in Growth
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Bring your own keys
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Security, governance, and audit controls
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  SSO / SAML and audit controls
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Custom security and deployment requirements
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Dedicated rollout, onboarding, and support
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Document-aware AI context
-                </li>
-              </ul>
+          <div class="cf-row">
+            <div class="cf-field">
+              <label class="cf-label" for="cf_company_size">Company size</label>
+              <select class="cf-select" id="cf_company_size" name="company_size" required>
+                <option value="">Select size</option>
+                <option value="1-50">1-50 employees</option>
+                <option value="51-200">51-200 employees</option>
+                <option value="201-500">201-500 employees</option>
+                <option value="501-1000">501-1,000 employees</option>
+                <option value="1000+">1,000+ employees</option>
+              </select>
+            </div>
+
+            <div class="cf-field">
+              <label class="cf-label" for="cf_industry">Industry</label>
+              <select class="cf-select" id="cf_industry" name="industry" required>
+                <option value="">Select industry</option>
+                <option value="Technology">Technology</option>
+                <option value="Financial Services">Financial Services</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Manufacturing">Manufacturing</option>
+                <option value="Retail / E-commerce">Retail / E-commerce</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
           </div>
 
-          <!-- Self-hosted -->
-          <div class="pricing-card">
-            <div class="pricing-card-inner">
-              <div class="pricing-tier">Self-hosted</div>
-              <div class="pricing-price">
-                <span class="pricing-amount">Custom</span>
-              </div>
-              <p class="pricing-tagline">Deploy in your own environment for maximum control, privacy, and residency requirements.</p>
-              <a class="button button-outline pricing-cta" href="#contact-form">Book a demo</a>
-              <ul class="pricing-features">
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Everything in Enterprise
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Deploy on your own infrastructure
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Air-gapped deployment support
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Full data residency control
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Custom integrations & plugins
-                </li>
-                <li>
-                  <svg class="pf-check" width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-check"/></svg>
-                  Premium SLA and support
-                </li>
-              </ul>
-            </div>
+          <div class="cf-field">
+            <label class="cf-label" for="cf_country">Country / Region</label>
+            <select class="cf-select" id="cf_country" name="country" required>
+              <option value="">Select region</option>
+              <option value="North America">North America</option>
+              <option value="Europe">Europe</option>
+              <option value="Asia-Pacific">Asia-Pacific</option>
+              <option value="Latin America">Latin America</option>
+              <option value="Middle East & Africa">Middle East &amp; Africa</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
 
-        </div>
-
-        <p class="pricing-note" data-observe="fade-up" style="--delay: 2">
-          Monthly, quarterly, and yearly prices are shown as straightforward rollups of the base monthly rate. Guided pilots are available for larger teams.
-        </p>
-      </div>
-    </section>
-
-
-    <!-- ========== CONTACT FORM ========== -->
-    <section class="section" id="contact-form">
-      <div class="container">
-        <div class="section-head section-head-centered" data-observe="fade-up">
-          <span class="section-kicker-simple">Book a demo</span>
-          <h2 class="section-title" style="max-width: 22ch;">See the signals on your own data.</h2>
-          <p class="section-subtitle">Tell us about your tools and delivery challenges. We'll tailor a live demo and map a 2-4 week pilot with clear success metrics.</p>
-        </div>
-
-        <div class="contact-layout" data-observe="fade-up" style="--delay: 1">
-
-          <!-- Left column: benefits -->
-          <div class="contact-info">
-            <h3 class="contact-info-title">What you'll get</h3>
-
-            <div class="contact-benefit-list">
-              <div class="contact-benefit-item">
-                <div class="benefit-icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 11l3 3L22 4" />
-                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 class="contact-benefit-title">Live visibility demo</h4>
-                  <p class="contact-benefit-desc">See Verachi connect read-only to your actual tools and pull together cited context in real time.</p>
-                </div>
-              </div>
-
-              <div class="contact-benefit-item">
-                <div class="benefit-icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                    <circle cx="9" cy="7" r="4" />
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 class="contact-benefit-title">Pilot design</h4>
-                  <p class="contact-benefit-desc">Get a proposed 2-4 week pilot with measurable outcomes and no workflow change.</p>
-                </div>
-              </div>
-
-              <div class="contact-benefit-item">
-                <div class="benefit-icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path
-                      d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 class="contact-benefit-title">Security &amp; governance review</h4>
-                  <p class="contact-benefit-desc">Cover data isolation, access controls, SSO, and deployment options.</p>
-                </div>
-              </div>
-
-              <div class="contact-benefit-item">
-                <div class="benefit-icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
-                    <line x1="1" y1="10" x2="23" y2="10" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 class="contact-benefit-title">ROI estimate</h4>
-                  <p class="contact-benefit-desc">Model reporting reduction, reactive work avoided, and likely value recovered.</p>
-                </div>
-              </div>
-            </div>
+          <div class="cf-field">
+            <label class="cf-label" for="cf_needs">What are you trying to improve?</label>
+            <textarea class="cf-textarea" id="cf_needs" name="needs" rows="4" placeholder="Tell us about context gaps, reporting burden, or the delivery risk you want to prove in a pilot." required></textarea>
           </div>
 
-          <!-- Right column: form -->
-          <div class="contact-form-card">
-            <form id="contactForm" class="cf" novalidate>
-              <!-- Honeypot — hidden from humans, bots auto-fill it -->
-              <div class="cf-honeypot" aria-hidden="true" tabindex="-1">
-                <label for="cf_website">Website</label>
-                <input type="text" id="cf_website" name="website" autocomplete="off" tabindex="-1" />
-              </div>
-              <!-- Timestamp for time-based check -->
-              <input type="hidden" id="cf_loaded_at" name="_loaded_at" />
+          <p id="cfError" class="cf-message cf-message-error" hidden></p>
 
-              <div class="cf-row">
-                <div class="cf-field">
-                  <label class="cf-label" for="cf_name">Full Name</label>
-                  <input class="cf-input" type="text" id="cf_name" name="name" placeholder="Jane Doe" required />
-                </div>
-                <div class="cf-field">
-                  <label class="cf-label" for="cf_email">Work Email</label>
-                  <input class="cf-input" type="email" id="cf_email" name="email" placeholder="jane@company.com"
-                    required />
-                </div>
-              </div>
-
-              <div class="cf-row">
-                <div class="cf-field">
-                  <label class="cf-label" for="cf_title">Job Title</label>
-                  <input class="cf-input" type="text" id="cf_title" name="title" placeholder="VP of Engineering"
-                    required />
-                </div>
-                <div class="cf-field">
-                  <label class="cf-label" for="cf_company">Company</label>
-                  <input class="cf-input" type="text" id="cf_company" name="company" placeholder="Acme Corp"
-                    required />
-                </div>
-              </div>
-
-              <div class="cf-row">
-                <div class="cf-field">
-                  <label class="cf-label" for="cf_company_size">Company Size</label>
-                  <select class="cf-select" id="cf_company_size" name="company_size" required>
-                    <option value="" disabled selected>Select size…</option>
-                    <option value="50">1 – 50</option>
-                    <option value="200">51 – 200</option>
-                    <option value="500">201 – 500</option>
-                    <option value="1000">501 – 1,000</option>
-                    <option value="1001">1,000+</option>
-                  </select>
-                </div>
-                <div class="cf-field">
-                  <label class="cf-label" for="cf_industry">Industry</label>
-                  <select class="cf-select" id="cf_industry" name="industry" required>
-                    <option value="" disabled selected>Select industry…</option>
-                    <option value="Technology">Technology</option>
-                    <option value="Finance">Finance</option>
-                    <option value="Healthcare">Healthcare</option>
-                    <option value="Retail / E-commerce">Retail / E-commerce</option>
-                    <option value="Education">Education</option>
-                    <option value="Government">Government</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="cf-field">
-                <label class="cf-label" for="cf_country">Country / Region</label>
-                <select class="cf-select" id="cf_country" name="country" required>
-                  <option value="" disabled selected>Select region…</option>
-                  <option value="North America">North America</option>
-                  <option value="Europe">Europe</option>
-                  <option value="Asia Pacific">Asia Pacific</option>
-                  <option value="Latin America">Latin America</option>
-                  <option value="Middle East & Africa">Middle East & Africa</option>
-                </select>
-              </div>
-
-              <div class="cf-field">
-                <label class="cf-label" for="cf_needs">What are you trying to improve?</label>
-                <textarea class="cf-textarea" id="cf_needs" name="needs" rows="4"
-                  placeholder="Tell us about your context gaps, reporting burden, and what you'd like to prove in a Verachi demo or pilot…"
-                  required></textarea>
-              </div>
-
-              <!-- Validation error message -->
-              <div class="cf-message cf-message-error" id="cfError" role="alert" hidden></div>
-
-              <button type="submit" class="button button-primary-hero cf-submit" id="cfSubmit">
-                <span class="cf-submit-text">Request Demo</span>
-                <span class="cf-submit-loading" aria-live="polite" hidden>
-                  <svg class="cf-spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2.5" stroke-linecap="round">
-                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-                  </svg>
-                  Sending…
-                </span>
-              </button>
-            </form>
-
-            <!-- Success message (shown after submit) -->
-            <div class="cf-success" id="cfSuccess" hidden>
-              <div class="cf-success-icon" aria-hidden="true">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                  <polyline points="22 4 12 14.01 9 11.01" />
-                </svg>
-              </div>
-              <h3 class="cf-success-title">Finish your demo request in Google Forms</h3>
-              <p class="cf-success-desc">We opened a prefilled Google Form in a new tab. Click Submit there to send
-                your demo request.</p>
-              <a class="button button-outline cf-success-link" id="cfSuccessLink" href="#" target="_blank"
-                rel="noopener noreferrer">Open Google Form</a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ========== BOTTOM CTA ========== -->
-    <section class="section section-cta" id="cta">
-      <div class="cta-glow" aria-hidden="true"></div>
-      <div class="container">
-        <div class="cta-centered" data-observe="fade-up">
-          <h2 class="section-title cta-title">Bring grounded context back into the workflow.</h2>
-          <p class="section-subtitle cta-sub">Book a demo to see how Verachi captures decisions, links them to projects and source systems, and answers questions with citations your team can inspect.</p>
-          <div class="hero-actions cta-actions">
-            <a class="button button-primary-hero" href="#contact-form">
-              Book a demo
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
+          <button id="cfSubmit" class="button button-primary cf-submit" type="submit">
+            <span class="cf-submit-text">Send demo request</span>
+            <span class="cf-submit-loading" hidden>
+              <svg class="cf-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" opacity="0.2" />
+                <path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
               </svg>
-            </a>
-            <a class="button button-outline" href="#showcase">See how it works</a>
+              Sending
+            </span>
+          </button>
+        </form>
+
+        <div id="cfSuccess" class="cf-success" hidden>
+          <div class="cf-success-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
           </div>
+          <h3 class="cf-success-title">Demo request received</h3>
+          <p class="cf-success-desc">Thanks for reaching out. We’ll review your request and follow up by email.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
+</main>
 
-
-  <!-- ========== FOOTER ========== -->
-  <footer class="site-footer">
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <a class="brand" href="index.html" aria-label="Verachi home">
-        <div class="brand-mark">
-          <svg width="14" height="14" aria-hidden="true"><use href="./partials/icons.svg#icon-logo-layers"/></svg>
-        </div>
-        <span class="brand-word">VERACHI</span>
-      </a>
-      <p class="footer-blurb">Decision workspace and grounded context for delivery teams working across Slack, Jira,
-        GitHub, and more.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Product</h4>
-      <a href="index.html#showcase">How It Works</a>
-      <a href="index.html#use-cases">Risk Scenarios</a>
-      <a href="trust.html">Trust &amp; Governance</a>
-      <a href="testimonials.html">Customer Stories</a>
-    </div>
-    <div class="footer-col">
-      <h4>Company</h4>
-      <a href="https://app.verachi.io/login">Sign In</a>
-      <a href="index.html#contact-form">Book a Demo</a>
-      <a href="trust.html">Trust</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-      <a href="careers.html">Careers</a>
-    </div>
-    <div class="footer-col">
-      <h4>Resources</h4>
-      <a href="https://app.verachi.io/docs">Docs</a>
-    </div>
-  </div>
-  <div class="container footer-legal">
+<footer class="site-footer">
+  <div class="container">
     <p>&copy; 2026 Verachi. All rights reserved.</p>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="../trust.html">Trust</a>
+      <a href="../privacy.html">Privacy</a>
+      <a href="../terms.html">Terms</a>
+      <a href="https://app.verachi.io/login">Sign In</a>
+    </nav>
   </div>
 </footer>
 
+<script src="./prototype/app.js"></script>
 
 </body>
-
 </html>

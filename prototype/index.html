@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Verachi — See the real cost of lost context</title>
-<meta name="description" content="Your team is burning money every time they scramble for context. Verachi shows you the cost — and the cure." />
+<title>Verachi - Prevent risks. Deliver with confidence.</title>
+<meta name="description" content="Verachi gives delivery teams one place to see scattered context, recover the why behind decisions, and prevent risks without replacing Slack, GitHub, Microsoft Teams, or Jira." />
 <link rel="icon" href="../favicon.ico" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,47 +14,18 @@
 
 <body>
 
-<!-- ========== STICKY STEP PROGRESS ========== -->
-<nav class="step-progress" aria-label="Page progress">
-  <a href="#heroSection" class="step-dot" id="dot-hero" aria-label="Overview"></a>
-  <a href="#problemSection" class="step-dot" id="dot-problem" aria-label="Problem — signals"></a>
-  <a href="#agitateSection" class="step-dot" id="dot-agitate" aria-label="The real cost"></a>
-  <a href="#solveSection" class="step-dot" id="dot-solve" aria-label="The cure"></a>
-  <a href="#connectSection" class="step-dot" id="dot-connect" aria-label="Connect"></a>
-</nav>
+<a class="skip-link" href="#main-content">Skip to content</a>
 
 <!-- ========== HEADER ========== -->
 <header class="site-header">
   <div class="header-inner">
-    <a class="brand" href="../index.html" aria-label="Verachi home">
+    <a class="brand" href="#" aria-label="Verachi home">
       <div class="brand-mark">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-          <defs>
-            <linearGradient id="prototype-logo-right" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#7c8f78" />
-              <stop offset="52%" stop-color="#315f5a" />
-              <stop offset="100%" stop-color="#173f3b" />
-            </linearGradient>
-            <linearGradient id="prototype-logo-left" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#b6a171" />
-              <stop offset="42%" stop-color="#6f8a70" />
-              <stop offset="100%" stop-color="#315f5a" />
-            </linearGradient>
-            <filter id="prototype-logo-shadow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="2" dy="5" stdDeviation="3" flood-opacity="0.3" />
-            </filter>
-          </defs>
-          <g transform="translate(65, 50) rotate(26)">
-            <rect x="-15" y="-40" width="30" height="80" rx="15" fill="url(#prototype-logo-right)" />
-          </g>
-          <g transform="translate(35, 50) rotate(-26)">
-            <rect x="-15" y="-40" width="30" height="80" rx="15" fill="url(#prototype-logo-left)" filter="url(#prototype-logo-shadow)" />
-          </g>
-        </svg>
+        <img src="verachi-logo.svg" alt="" aria-hidden="true" />
       </div>
       <span>VERACHI</span>
     </a>
-    <nav class="header-nav" aria-label="Prototype sections">
+    <nav class="header-nav" aria-label="Page sections">
       <a href="#heroSection">Overview</a>
       <a href="#problemSection">Signals</a>
       <a href="#agitateSection">Cost</a>
@@ -68,18 +39,21 @@
         <div class="header-cost-meter-fill" id="costMeterFill"></div>
       </div>
     </div>
-    <a class="header-cta" href="../index.html#contact-form">Book a Demo</a>
+    <div class="header-actions">
+      <a class="header-link" href="https://app.verachi.io/login">Sign In</a>
+      <a class="header-cta" href="#contact-form">Book a Demo</a>
+    </div>
   </div>
 </header>
 
-<main>
+<main id="main-content" tabindex="-1">
 
   <!-- ========== HERO — The Hook ========== -->
   <section class="hero" id="heroSection">
     <div class="hero-glow" aria-hidden="true"></div>
     <div class="container hero-layout">
       <div class="hero-copy">
-        <div class="hero-kicker" data-anim>Prototype walkthrough for delivery teams</div>
+        <div class="hero-kicker" data-anim>The single source of truth for delivery teams</div>
         <h1 data-anim><span class="hero-emphasis">Prevent risks.</span><span class="hero-break">Deliver with confidence.</span></h1>
         <div class="hero-stance" data-anim data-delay="1">Consolidate once, decide together.</div>
         <p class="hero-sub" data-anim data-delay="1">
@@ -90,7 +64,7 @@
           <span class="hero-inline-tool hero-tool-name">Jira</span>, with no tool change required.
         </p>
         <div class="hero-actions" data-anim data-delay="2">
-          <a class="button button-primary" href="../index.html#contact-form">
+          <a class="button button-primary" href="#contact-form">
             Book a Demo
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
@@ -102,7 +76,7 @@
           <span class="hero-proof-item">No tool change required</span>
         </div>
       </div>
-      <aside class="hero-sidebar" data-anim data-delay="3" aria-label="Prototype summary">
+      <aside class="hero-sidebar" data-anim data-delay="3" aria-label="Verachi summary">
         <div class="hero-panel">
           <div class="hero-panel-top">
             <div>
@@ -142,12 +116,12 @@
                 </div>
               </div>
             </div>
-            <a class="hero-benefit-link" href="#ctaSection">See how we calculate these numbers</a>
+            <a class="hero-benefit-link" href="#contact-form">See how we calculate these numbers</a>
           </div>
         </div>
       </aside>
       <div class="hero-scroll-hint" data-anim data-delay="3">
-        <span>Scroll to see the cost</span>
+        <span>Scroll to learn more</span>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
     </div>
@@ -156,9 +130,9 @@
 
   <!-- ========== STEP 1 — PROBLEM ========== -->
   <section class="step-section" id="problemSection">
-    <div class="container" data-step="01">
+    <div class="container">
       <div data-anim>
-        <span class="step-badge step-badge-problem">Step 1 · Problem</span>
+        <span class="step-badge step-badge-problem">The Problem</span>
         <h2 class="step-title">Work keeps moving.<br/>Context keeps leaking.</h2>
         <p class="step-desc">The team is capable, fast, and already using the right tools. The failure mode is simpler: the reasons behind product and technical decisions never become a shared system.</p>
       </div>
@@ -189,9 +163,9 @@
 
   <!-- ========== STEP 2 — AGITATE ========== -->
   <section class="step-section" id="agitateSection">
-    <div class="container" data-step="02">
+    <div class="container">
       <div data-anim>
-        <span class="step-badge step-badge-agitate">Step 2 · The Real Cost</span>
+        <span class="step-badge step-badge-agitate">The Real Cost</span>
         <h2 class="step-title">Missing decisions turn into expensive work.</h2>
         <p class="step-desc">When the original why lives inside threads, DMs, and memory, teams do more than search. They duplicate investigation, block reviews, and burn senior time rebuilding context that already existed once.</p>
       </div>
@@ -231,9 +205,9 @@
   <!-- ========== STEP 3 — SOLVE ========== -->
   <section class="step-section" id="solveSection">
     <div class="solve-glow" aria-hidden="true"></div>
-    <div class="container" data-step="03">
+    <div class="container">
       <div data-anim>
-        <span class="step-badge step-badge-solve">Step 3 · The Cure</span>
+        <span class="step-badge step-badge-solve">The Cure</span>
         <h2 class="step-title">The why shows up where work already happens.</h2>
         <p class="step-desc">Verachi works across Slack, GitHub, Microsoft Teams, Jira, and more to come. It captures decisions and turns them into something teams can query with evidence, without asking anyone to adopt a new tool or process.</p>
       </div>
@@ -272,7 +246,7 @@
 
   <!-- ========== STEP 4 — CONNECT ========== -->
   <section class="step-section connect-section" id="connectSection">
-    <div class="container connect-layout" data-step="04">
+    <div class="container connect-layout">
 
       <!-- Left: Orbit animation -->
       <div class="connect-orbit" id="connectOrbit" data-anim>
@@ -348,7 +322,7 @@
 
       <!-- Right: Info + integration cards -->
       <div class="connect-info" data-anim>
-        <span class="step-badge step-badge-solve">Step 4 · Connect Now</span>
+        <span class="step-badge step-badge-solve">Connect Now</span>
         <h2 class="step-title">Two minutes to connect.<br/>Zero tools to replace.</h2>
         <p class="step-desc">Verachi reads from your existing tools with read-only connections. No migration, no new process, no ramp-up time. Your team keeps working where they already work.</p>
         <div class="connect-setup-badge">Average setup time: 2 minutes per tool</div>
@@ -403,17 +377,122 @@
 
 
   <!-- ========== BOTTOM CTA ========== -->
-  <section class="cta-section" id="ctaSection">
-    <div class="container" data-anim>
-      <h2>Give your team one place to recover the why.</h2>
-      <p>Book a demo to see Verachi on your own data. We’ll show it across Slack, GitHub, Microsoft Teams, Jira, and the connectors still to come, then trace how much delivery time you can win back without changing your team’s tools.</p>
-      <p class="cta-assumptions">Numbers above are based on a 6-person team averaging $200K/yr fully-loaded cost, losing ~12 hrs/week to context reconstruction (Slack archaeology, re-reading tickets, re-asking answered questions). Assumptions vary by team size and tool footprint — we model yours during the demo.</p>
-      <div class="cta-actions">
-        <a class="button button-primary" href="../index.html#contact-form">
-          Book a Demo
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <a class="button button-outline" href="../index.html">See the product</a>
+  <section class="cta-section contact-section" id="contact-form">
+    <div class="container contact-layout" data-anim>
+      <div class="contact-copy">
+        <span class="step-badge step-badge-solve">Book a Demo</span>
+        <h2>Give your team one place to recover the why.</h2>
+        <p>See Verachi on your own data. We’ll walk through Slack, GitHub, Microsoft Teams, Jira, and the connectors still to come, then model the delivery time your team can win back.</p>
+        <ul class="contact-benefits" aria-label="What the demo covers">
+          <li>Live visibility across the tools your team already uses.</li>
+          <li>A 2-4 week pilot plan with clear success metrics.</li>
+          <li>Security, governance, and read-only connector review.</li>
+          <li>A practical ROI estimate based on your team shape.</li>
+        </ul>
+        <p class="cta-assumptions">Numbers above are based on a 6-person team averaging $200K/yr fully-loaded cost, losing about 12 hrs/week to context reconstruction. Assumptions vary by team size and tool footprint; we model yours during the demo.</p>
+      </div>
+
+      <div class="contact-form-card">
+        <form id="contactForm" class="cf" novalidate>
+          <div class="cf-honeypot" aria-hidden="true">
+            <label for="cf_website">Website</label>
+            <input type="text" id="cf_website" name="website" autocomplete="off" tabindex="-1" />
+          </div>
+
+          <input type="hidden" id="cf_loaded_at" name="_loaded_at" />
+
+          <div class="cf-row">
+            <div class="cf-field">
+              <label class="cf-label" for="cf_name">Full name</label>
+              <input class="cf-input" type="text" id="cf_name" name="name" placeholder="Jane Doe" required />
+            </div>
+
+            <div class="cf-field">
+              <label class="cf-label" for="cf_email">Work email</label>
+              <input class="cf-input" type="email" id="cf_email" name="email" placeholder="jane@company.com" required />
+            </div>
+          </div>
+
+          <div class="cf-row">
+            <div class="cf-field">
+              <label class="cf-label" for="cf_title">Job title</label>
+              <input class="cf-input" type="text" id="cf_title" name="title" placeholder="VP of Engineering" required />
+            </div>
+
+            <div class="cf-field">
+              <label class="cf-label" for="cf_company">Company</label>
+              <input class="cf-input" type="text" id="cf_company" name="company" placeholder="Acme Corp" required />
+            </div>
+          </div>
+
+          <div class="cf-row">
+            <div class="cf-field">
+              <label class="cf-label" for="cf_company_size">Company size</label>
+              <select class="cf-select" id="cf_company_size" name="company_size" required>
+                <option value="">Select size</option>
+                <option value="1-50">1-50 employees</option>
+                <option value="51-200">51-200 employees</option>
+                <option value="201-500">201-500 employees</option>
+                <option value="501-1000">501-1,000 employees</option>
+                <option value="1000+">1,000+ employees</option>
+              </select>
+            </div>
+
+            <div class="cf-field">
+              <label class="cf-label" for="cf_industry">Industry</label>
+              <select class="cf-select" id="cf_industry" name="industry" required>
+                <option value="">Select industry</option>
+                <option value="Technology">Technology</option>
+                <option value="Financial Services">Financial Services</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Manufacturing">Manufacturing</option>
+                <option value="Retail / E-commerce">Retail / E-commerce</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="cf-field">
+            <label class="cf-label" for="cf_country">Country / Region</label>
+            <select class="cf-select" id="cf_country" name="country" required>
+              <option value="">Select region</option>
+              <option value="North America">North America</option>
+              <option value="Europe">Europe</option>
+              <option value="Asia-Pacific">Asia-Pacific</option>
+              <option value="Latin America">Latin America</option>
+              <option value="Middle East & Africa">Middle East &amp; Africa</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="cf-field">
+            <label class="cf-label" for="cf_needs">What are you trying to improve?</label>
+            <textarea class="cf-textarea" id="cf_needs" name="needs" rows="4" placeholder="Tell us about context gaps, reporting burden, or the delivery risk you want to prove in a pilot." required></textarea>
+          </div>
+
+          <p id="cfError" class="cf-message cf-message-error" hidden></p>
+
+          <button id="cfSubmit" class="button button-primary cf-submit" type="submit">
+            <span class="cf-submit-text">Send demo request</span>
+            <span class="cf-submit-loading" hidden>
+              <svg class="cf-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" opacity="0.2" />
+                <path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+              </svg>
+              Sending
+            </span>
+          </button>
+        </form>
+
+        <div id="cfSuccess" class="cf-success" hidden>
+          <div class="cf-success-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          </div>
+          <h3 class="cf-success-title">Demo request received</h3>
+          <p class="cf-success-desc">Thanks for reaching out. We’ll review your request and follow up by email.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -423,6 +502,12 @@
 <footer class="site-footer">
   <div class="container">
     <p>&copy; 2026 Verachi. All rights reserved.</p>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="../trust.html">Trust</a>
+      <a href="../privacy.html">Privacy</a>
+      <a href="../terms.html">Terms</a>
+      <a href="https://app.verachi.io/login">Sign In</a>
+    </nav>
   </div>
 </footer>
 

@@ -406,29 +406,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ============================================================
-     CONTACT FORM — Multi-layered spam prevention + Google Forms
+     CONTACT FORM — Multi-layered spam prevention + Verachi API
      ============================================================ */
 
-  // ── Google Forms configuration ──────────────────────────────
-  // To wire up Google Forms:
-  // 1. Create a Google Form with matching fields
-  // 2. Open the form preview, view page source
-  // 3. Find the <form action="..."> URL and each <input name="entry.XXXX">
-  // 4. Fill in the config below
-  const GOOGLE_FORM_CONFIG = {
-    actionUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdUs3xM0Z_9zR-62EH_8QOp35mvRw5053NUwcDTTzLofrK46w/formResponse',
-    prefillUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdUs3xM0Z_9zR-62EH_8QOp35mvRw5053NUwcDTTzLofrK46w/viewform?usp=pp_url',
-    fields: {
-      name:         'entry.328464235',
-      email:        'entry.1157589296',
-      title:        'entry.1626000907',
-      company:      'entry.1204361996',
-      company_size: 'entry.1296119212',
-      industry:     'entry.342561304',
-      country:      'entry.484466495',
-      needs:        'entry.714681676',
-    }
-  };
+  const CONTACT_FORM_ENDPOINT =
+    window.VERACHI_CONTACT_ENDPOINT || 'https://app.verachi.io/api/contact';
 
   // ── Free email domains to block (B2B form) ─────────────────
   const FREE_EMAIL_DOMAINS = new Set([
@@ -447,14 +429,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const cfLoadedAt = document.getElementById('cf_loaded_at');
   const cfError = document.getElementById('cfError');
   const cfSuccess = document.getElementById('cfSuccess');
-  const cfSuccessLink = document.getElementById('cfSuccessLink');
   const cfSubmit = document.getElementById('cfSubmit');
 
   if (contactForm && cfLoadedAt) {
     // Record page load time for time-based check
     cfLoadedAt.value = Date.now().toString();
 
-    contactForm.addEventListener('submit', (event) => {
+    contactForm.addEventListener('submit', async (event) => {
       event.preventDefault();
 
       // Reset error
@@ -471,11 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cfSubmit.disabled = false;
       };
 
-      const showSuccess = (prefilledUrl) => {
-        if (cfSuccessLink && prefilledUrl) {
-          cfSuccessLink.href = prefilledUrl;
-        }
-
+      const showSuccess = () => {
         contactForm.hidden = true;
         cfSuccess.hidden = false;
       };
@@ -527,6 +504,9 @@ document.addEventListener('DOMContentLoaded', () => {
         industry: document.getElementById('cf_industry').value,
         country: document.getElementById('cf_country').value,
         needs: document.getElementById('cf_needs').value.trim(),
+        website: honeypot?.value || '',
+        _loaded_at: cfLoadedAt.value,
+        sourceUrl: window.location.href,
       };
 
       // Show loading state
@@ -534,37 +514,36 @@ document.addEventListener('DOMContentLoaded', () => {
       submitLoading.hidden = false;
       cfSubmit.disabled = true;
 
-      if (!GOOGLE_FORM_CONFIG.prefillUrl) {
-        cfError.textContent = 'The Google Form is not configured yet.';
+      try {
+        const response = await fetch(CONTACT_FORM_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        });
+
+        if (!response.ok) {
+          const payload = await response.json().catch(() => null);
+          cfError.textContent =
+            payload?.error?.message || 'We could not send your request. Please try again.';
+          cfError.hidden = false;
+          resetButton();
+          return;
+        }
+      } catch (error) {
+        cfError.textContent = 'We could not send your request. Please try again.';
         cfError.hidden = false;
         resetButton();
         return;
       }
 
-      const params = new URLSearchParams();
-      for (const [key, entryId] of Object.entries(GOOGLE_FORM_CONFIG.fields)) {
-        if (entryId && formData[key] !== undefined) {
-          params.set(entryId, formData[key]);
-        }
-      }
+      showSuccess();
 
-      const separator = GOOGLE_FORM_CONFIG.prefillUrl.includes('?') ? '&' : '?';
-      const prefilledUrl = `${GOOGLE_FORM_CONFIG.prefillUrl}${separator}${params.toString()}`;
-      const openedWindow = window.open(prefilledUrl, '_blank', 'noopener,noreferrer');
-
-      showSuccess(prefilledUrl);
-
-      // Track conversion when the handoff starts.
+      // Track conversion when the request is accepted.
       if (typeof gtag === 'function') {
         gtag('event', 'generate_lead', {
           event_category: 'contact',
           event_label: formData.company_size,
         });
-      }
-
-      // If the popup was blocked, the in-page fallback link stays visible.
-      if (openedWindow) {
-        openedWindow.opener = null;
       }
 
       resetButton();
