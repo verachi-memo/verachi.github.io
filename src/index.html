@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Verachi - Prevent risks. Deliver with confidence.</title>
 <meta name="description" content="Verachi gives delivery teams one place to see scattered context, recover the why behind decisions, and prevent risks without replacing Slack, GitHub, Microsoft Teams, or Jira." />
+<meta name="theme-color" content="#fbfaf6" />
+<link rel="canonical" href="https://verachi.io/" />
 <link rel="icon" href="./favicon.ico" />
+<script>document.documentElement.classList.replace('no-js', 'js');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -27,7 +30,7 @@
 <!-- ========== HEADER ========== -->
 <header class="site-header">
   <div class="header-inner">
-    <a class="brand" href="#" aria-label="Verachi home">
+    <a class="brand" href="#heroSection" aria-label="Verachi home">
       <div class="brand-mark">
         <img src="./home/verachi-logo.svg" alt="" aria-hidden="true" />
       </div>
@@ -40,7 +43,7 @@
       <a href="#contact-form">Contact</a>
     </nav>
     <div class="header-cost" id="headerCost">
-      <span class="header-cost-label" id="costLabel">Context cost today</span>
+      <span class="header-cost-label" id="costLabel">Context cost / year</span>
       <span class="header-cost-value" id="costValue">$0</span>
       <div class="header-cost-meter" aria-hidden="true">
         <div class="header-cost-meter-fill" id="costMeterFill"></div>
@@ -56,28 +59,77 @@
 <main id="main-content" tabindex="-1">
 
   <!-- ========== HERO ========== -->
-  <section class="hero hero-centered" id="heroSection">
+  <section class="hero" id="heroSection">
     <div class="hero-glow" aria-hidden="true"></div>
-    <div class="container hero-layout-centered">
-      <div class="hero-kicker" data-anim>Decision intelligence for delivery teams</div>
-      <h1 data-anim><span class="hero-emphasis">Prevent risks.</span><span class="hero-break">Deliver with confidence.</span></h1>
-      <p class="hero-sub hero-sub-centered" data-anim data-delay="1">
-        Verachi connects your <strong>Slack</strong>, <strong>GitHub</strong>,
-        <strong>Microsoft Teams</strong> and <strong>Jira</strong> to surface what was decided,
-        what drifted, and what's at risk — without replacing any tool.
-      </p>
-      <div class="hero-actions hero-actions-centered" data-anim data-delay="2">
-        <a class="button button-primary" href="#contact-form">
-          Book a Demo
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <a class="button button-outline" href="#problemSection">See the context leak</a>
+    <div class="container hero-layout">
+      <div class="hero-copy">
+        <div class="hero-kicker" data-anim>The single source of truth for delivery teams</div>
+        <h1 data-anim><span class="hero-emphasis">Prevent risks.</span><span class="hero-break">Deliver with confidence.</span></h1>
+        <div class="hero-stance" data-anim data-delay="1">Consolidate once, decide together.</div>
+        <p class="hero-sub" data-anim data-delay="1">
+          <strong>Verachi keeps your team’s vision visible and current</strong> across
+          <span class="hero-inline-tool hero-tool-name">Slack</span>,
+          <span class="hero-inline-tool hero-tool-name">GitHub</span>,
+          <span class="hero-inline-tool hero-tool-name">Microsoft Teams</span> and
+          <span class="hero-inline-tool hero-tool-name">Jira</span>, with no tool change required.
+        </p>
+        <div class="hero-actions" data-anim data-delay="2">
+          <a class="button button-primary" href="#contact-form">
+            Book a Demo
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a class="button button-outline" href="#problemSection">See the context leak</a>
+        </div>
+        <div class="hero-proof" data-anim data-delay="2" aria-label="Hero proof points">
+          <span class="hero-proof-item">Detect blocked work earlier</span>
+          <span class="hero-proof-item">Reduce cross-team dependency risk</span>
+          <span class="hero-proof-item">No tool change required</span>
+        </div>
       </div>
-      <div class="hero-proof hero-proof-centered" data-anim data-delay="2" aria-label="Hero proof points">
-        <span class="hero-proof-item">Detect blocked work earlier</span>
-        <span class="hero-proof-item">Reduce cross-team dependency risk</span>
-        <span class="hero-proof-item">No tool change required</span>
-      </div>
+      <aside class="hero-sidebar" data-anim data-delay="3" aria-label="Verachi summary">
+        <div class="hero-panel">
+          <div class="hero-panel-top">
+            <div>
+              <span class="hero-panel-eyebrow">What Verachi changes</span>
+              <h2 class="hero-panel-title">Projects don’t fail suddenly. <br>They fail silently.</h2>
+            </div>
+          </div>
+          <div class="hero-panel-stack" aria-label="Verachi overview cards">
+            <div class="hero-panel-card">
+              <span class="hero-panel-card-label">Problem</span>
+              <div class="hero-panel-list">
+                <p class="hero-panel-list-item">Information &amp; data are scattered across too many tools</p>
+                <p class="hero-panel-list-item">Risks detected too late, often visible only after impact</p>
+                <p class="hero-panel-list-item">Reporting is manual, biased, outdated and overwhelming teams</p>
+              </div>
+            </div>
+            <div class="hero-panel-card">
+              <span class="hero-panel-card-label">Solution Proposal</span>
+              <div class="hero-panel-list">
+                <p class="hero-panel-list-item">All your problems in single place by connecting your tools</p>
+                <p class="hero-panel-list-item">Cut reporting overhead and accelerate cross-team resolution</p>
+                <p class="hero-panel-list-item">Give leaders clearer signals for faster, more confident decisions</p>
+              </div>
+            </div>
+            <div class="hero-panel-card">
+              <span class="hero-panel-card-label">Benefits</span>
+              <div class="hero-impact-grid">
+                <div class="hero-impact">
+                  <strong>Time saved</strong>
+                  <span class="hero-impact-stat" data-target="749">~750 hrs</span>
+                  <span>reclaimed per year for a team of 6.</span>
+                </div>
+                <div class="hero-impact">
+                  <strong>Money saved</strong>
+                  <span class="hero-impact-stat" data-target="112320">~$110K</span>
+                  <span>annual savings for a team of 6.</span>
+                </div>
+              </div>
+            </div>
+            <a class="hero-benefit-link" href="#contact-form">See how we calculate these numbers</a>
+          </div>
+        </div>
+      </aside>
       <div class="hero-scroll-hint" data-anim data-delay="3">
         <span>Scroll to learn more</span>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
@@ -93,11 +145,6 @@
         <span class="step-badge step-badge-problem">The Problem</span>
         <h2 class="step-title">Work keeps moving.<br/>Context keeps leaking.</h2>
         <p class="step-desc">The team is capable, fast, and already using the right tools. The failure mode is simpler: the reasons behind product and technical decisions never become a shared system. And that costs more than anyone tracks.</p>
-      </div>
-
-      <!-- Team roster with names + salaries -->
-      <div class="team-roster" id="teamRoster">
-        <!-- Populated by JS -->
       </div>
 
       <!-- Cost cards -->
@@ -125,7 +172,7 @@
         </div>
         <div class="comparison-card comparison-card-after featured">
           <div class="comparison-label">✓ Annual savings</div>
-          <div class="comparison-stat recovered-stat" data-target="112320">~$110K</div>
+          <div class="comparison-stat recovered-stat" id="statSavings" data-target="112320">~$110K</div>
           <p class="comparison-detail">returned to building instead of searching, per 6-person team. Scales linearly.</p>
         </div>
       </div>
@@ -161,11 +208,12 @@
 
         <!-- SVG connection lines -->
         <svg class="orbit-connections" viewBox="0 0 420 420" aria-hidden="true">
-          <line id="conn-0" x1="210" y1="42" x2="210" y2="174" />
-          <line id="conn-1" x1="378" y1="210" x2="246" y2="210" />
-          <line id="conn-2" x1="210" y1="378" x2="210" y2="246" />
-          <line id="conn-3" x1="42" y1="210" x2="174" y2="210" />
+          <line class="flow-line" id="conn-0" x1="210" y1="42" x2="210" y2="174" />
+          <line class="flow-line" id="conn-1" x1="378" y1="210" x2="246" y2="210" />
+          <line class="flow-line" id="conn-2" x1="210" y1="378" x2="210" y2="246" />
+          <line class="flow-line" id="conn-3" x1="42" y1="210" x2="174" y2="210" />
         </svg>
+        <div id="particles-container" aria-hidden="true"></div>
         <div class="connection-packet connection-packet-0" id="cpacket-0">Decision thread</div>
         <div class="connection-packet connection-packet-1" id="cpacket-1">Ticket context</div>
         <div class="connection-packet connection-packet-2" id="cpacket-2">PR risk signal</div>
@@ -310,7 +358,7 @@
             <li>7-day activity history</li>
             <li>Email support</li>
           </ul>
-          <a class="button button-outline pricing-cta" href="#contact-form">Get Started</a>
+          <a class="button button-outline pricing-cta" href="#contact-form">Book a Demo</a>
         </div>
 
         <!-- Team -->
@@ -334,7 +382,7 @@
             <li>Custom reporting</li>
             <li>Priority support</li>
           </ul>
-          <a class="button button-primary pricing-cta" href="#contact-form">Start Free Trial</a>
+          <a class="button button-primary pricing-cta" href="#contact-form">Book a Demo</a>
         </div>
 
         <!-- Enterprise -->
@@ -394,24 +442,24 @@
           <div class="cf-row">
             <div class="cf-field">
               <label class="cf-label" for="cf_name">Full name</label>
-              <input class="cf-input" type="text" id="cf_name" name="name" placeholder="Jane Doe" required />
+              <input class="cf-input" type="text" id="cf_name" name="name" placeholder="Jane Doe" autocomplete="name" required />
             </div>
 
             <div class="cf-field">
               <label class="cf-label" for="cf_email">Work email</label>
-              <input class="cf-input" type="email" id="cf_email" name="email" placeholder="jane@company.com" required />
+              <input class="cf-input" type="email" id="cf_email" name="email" placeholder="jane@company.com" autocomplete="email" autocapitalize="none" spellcheck="false" required />
             </div>
           </div>
 
           <div class="cf-row">
             <div class="cf-field">
               <label class="cf-label" for="cf_title">Job title</label>
-              <input class="cf-input" type="text" id="cf_title" name="title" placeholder="VP of Engineering" required />
+              <input class="cf-input" type="text" id="cf_title" name="title" placeholder="VP of Engineering" autocomplete="organization-title" required />
             </div>
 
             <div class="cf-field">
               <label class="cf-label" for="cf_company">Company</label>
-              <input class="cf-input" type="text" id="cf_company" name="company" placeholder="Acme Corp" required />
+              <input class="cf-input" type="text" id="cf_company" name="company" placeholder="Acme Corp" autocomplete="organization" required />
             </div>
           </div>
 
@@ -460,7 +508,7 @@
             <textarea class="cf-textarea" id="cf_needs" name="needs" rows="4" placeholder="Tell us about context gaps, reporting burden, or the delivery risk you want to prove in a pilot." required></textarea>
           </div>
 
-          <p id="cfError" class="cf-message cf-message-error" hidden></p>
+          <p id="cfError" class="cf-message cf-message-error" role="alert" hidden></p>
 
           <button id="cfSubmit" class="button button-primary cf-submit" type="submit">
             <span class="cf-submit-text">Send demo request</span>
@@ -474,7 +522,7 @@
           </button>
         </form>
 
-        <div id="cfSuccess" class="cf-success" hidden>
+        <div id="cfSuccess" class="cf-success" role="status" aria-live="polite" hidden>
           <div class="cf-success-icon" aria-hidden="true">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
               <path d="M20 6 9 17l-5-5" />

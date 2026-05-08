@@ -1,27 +1,31 @@
-# verachi Landing (Static Showcase)
+# verachi.io Landing (Static Site)
 
-This folder is a standalone static showcase page, detached from the app runtime.
+Static marketing site served via GitHub Pages.
 
-## Files
+## Source of truth
 
-- `index.html`
-- `styles.css`
-- `app.js`
-- `privacy.html`
-- `terms.html`
-- `og-card.png`
+- `src/*.html` — editable source pages
+- `partials/*.html` — shared head/header/footer snippets (injected at build time)
+- `home/*` + `landing.*` — static CSS/JS assets
 
 ## Local Preview
 
-From repo root:
+- Simple dev server:
 
 ```bash
-cd marketing
-python3 -m http.server 4173
+task dev
 ```
 
-Open `http://localhost:4173`.
+Open `http://localhost:8080`.
+
+## Build
+
+Builds `src/*.html` into root-level `*.html` (what GitHub Pages serves):
+
+```bash
+node build.js
+```
 
 ## Deploy
 
-Deploy the `marketing/` directory as static assets on any static host (Vercel static, Netlify, Cloudflare Pages, S3+CloudFront, GitHub Pages, etc.).
+Push to `main` (GitHub Pages serves the repository root).
