@@ -1,96 +1,317 @@
 /* ============================================================
-   BACKGROUND MORPH — disabled for performance
+   Verachi landing page interactions (home/)
+   - Keeps motion subtle and opt-out via prefers-reduced-motion
+   - Avoids "blank page until JS" by eagerly revealing in-view nodes
+   - Drives the Problem activity feed + Connect orbit sequence
+   - Submits contact form to Verachi API with spam protection
    ============================================================ */
-// (function bgMorph() { ... })();
+
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function toMoney(value) {
+  return `$${Math.floor(value).toLocaleString()}`;
+}
+
+function animateNumberText(el, targetValue, { duration = 650, formatter = v => `${Math.floor(v)}` } = {}) {
+  if (!el) return;
+
+  const startValue = (() => {
+    const raw = (el.textContent || "").replace(/[^0-9]/g, "");
+    const parsed = raw ? Number(raw) : 0;
+    return Number.isFinite(parsed) ? parsed : 0;
+  })();
+
+  if (prefersReducedMotion.matches || duration <= 0) {
+    el.textContent = formatter(targetValue);
+    return;
+  }
+
+  const startTime = performance.now();
+
+  function tick(now) {
+    const t = clamp((now - startTime) / duration, 0, 1);
+    const eased = 1 - Math.pow(1 - t, 3);
+    const current = startValue + (targetValue - startValue) * eased;
+    el.textContent = formatter(current);
+    if (t < 1) requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+}
+
+function setHeaderCostState({ mode, label, value, fillPct }) {
+  const headerCost = document.getElementById("headerCost");
+  const costLabel = document.getElementById("costLabel");
+  const costValue = document.getElementById("costValue");
+  const costFill = document.getElementById("costMeterFill");
+
+  if (!headerCost || !costLabel || !costValue || !costFill) return;
+
+  headerCost.classList.add("visible");
+  headerCost.classList.toggle("is-saving", mode === "saving");
+
+  costLabel.textContent = label;
+  animateNumberText(costValue, value, { formatter: toMoney, duration: 700 });
+  costFill.style.width = `${clamp(fillPct, 0, 100).toFixed(0)}%`;
+
+  headerCost.classList.add("bump");
+  window.setTimeout(() => headerCost.classList.remove("bump"), 520);
+}
 
 /* ============================================================
-   SCATTERED FRAGMENTS FLOATING EFFECT
+   ENTRANCE MOTION — add .in-view to elements as they enter
    ============================================================ */
-(function initScatteredParallax() {
-  const stage = document.getElementById("scatteredStage");
-  if (!stage) return;
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  if (prefersReducedMotion.matches) return;
+(function initEntranceMotion() {
+  const els = Array.from(document.querySelectorAll("[data-anim]"));
+  if (!els.length) return;
 
-  const fragments = stage.querySelectorAll(".sc-fragment");
-  if (!fragments.length) return;
+  if (prefersReducedMotion.matches) {
+    els.forEach(el => el.classList.add("in-view"));
+    return;
+  }
 
-  let mouseX = 0;
-  let mouseY = 0;
-  let ticking = false;
+  function isAlreadyVisible(el) {
+    const rect = el.getBoundingClientRect();
+    const viewH = window.innerHeight || 0;
+    return rect.top < viewH * 0.86 && rect.bottom > viewH * 0.08;
+  }
 
-  stage.addEventListener("mousemove", (e) => {
-    const rect = stage.getBoundingClientRect();
-    mouseX = (e.clientX - rect.left) / rect.width - 0.5;
-    mouseY = (e.clientY - rect.top) / rect.height - 0.5;
-
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        fragments.forEach((frag, i) => {
-          const depth = (i + 1) * 0.15;
-          const tx = mouseX * depth * -60;
-          const ty = mouseY * depth * -60;
-          frag.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
-        });
-        ticking = false;
-      });
-      ticking = true;
-    }
+  // Eagerly reveal anything already in view (important for deep-links / fast paints).
+  els.forEach(el => {
+    if (isAlreadyVisible(el)) el.classList.add("in-view");
   });
 
-  stage.addEventListener("mouseleave", () => {
-    fragments.forEach(frag => {
-      frag.style.transform = "translate3d(0, 0, 0)";
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("in-view");
+      observer.unobserve(entry.target);
     });
-  });
+  }, { threshold: 0.15 });
+
+  els.forEach(el => observer.observe(el));
 })();
 
-
 /* ============================================================
-   INTERSECTION OBSERVER — generic fade-up
+   PROBLEM STAGE — live activity feed + header cost meter
    ============================================================ */
-const animEls = document.querySelectorAll("[data-anim]");
-const animObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("in-view");
-      animObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.15 });
-animEls.forEach(el => animObserver.observe(el));
+(function initProblemStage() {
+  const stage = document.getElementById("problemStage");
+  const feedList = document.getElementById("problemFeedList");
+  const statusEl = document.getElementById("problemStatus");
+  const progressEl = document.getElementById("problemProgress");
 
+  if (!stage || !feedList || !statusEl || !progressEl) return;
+
+  const yearlyCost = Number(document.getElementById("statCostLost")?.dataset?.target || 0) || 187200;
+  const yearlySavings = Number(document.getElementById("statSavings")?.dataset?.target || 0) || 112320;
+
+  const toolIconSource = {
+    slack: "#onode-0 svg",
+    jira: "#onode-1 svg",
+    github: "#onode-2 svg",
+    teams: "#onode-3 svg",
+  };
+
+  const toolIconClass = {
+    slack: "icon-color-slack",
+    jira: "icon-color-jira",
+    github: "icon-color-github",
+    teams: "icon-color-teams",
+  };
+
+  function cloneToolSvg(tool) {
+    const source = document.querySelector(toolIconSource[tool]);
+    if (!source) return null;
+    const clone = source.cloneNode(true);
+    clone.setAttribute("aria-hidden", "true");
+    clone.removeAttribute("aria-label");
+    return clone;
+  }
+
+  function appendItem({ tool, person, cost, title, body, meta }) {
+    const item = document.createElement("div");
+    item.className = "activity-item live-current";
+
+    const icon = document.createElement("div");
+    icon.className = `activity-item-icon ${toolIconClass[tool] || ""}`.trim();
+    const svg = cloneToolSvg(tool);
+    if (svg) icon.appendChild(svg);
+
+    const content = document.createElement("div");
+    
+    // Person row
+    const personRow = document.createElement("div");
+    personRow.className = "activity-item-person";
+    personRow.innerHTML = `
+      <div class="person-details">
+        <span class="person-name">${person.name}</span>
+        <span class="person-title">${person.title}</span>
+        <span class="person-salary">$${Math.round(person.salary / 1000)}k/yr</span>
+      </div>
+      <div class="event-cost" aria-label="Cost of event">
+        +$${cost.toLocaleString()} lost
+      </div>
+    `;
+
+    const titleRow = document.createElement("div");
+    titleRow.className = "activity-item-title";
+
+    const strong = document.createElement("strong");
+    strong.textContent = title;
+
+    const metaEl = document.createElement("span");
+    metaEl.className = "activity-item-meta";
+    metaEl.textContent = meta;
+
+    titleRow.appendChild(strong);
+    titleRow.appendChild(metaEl);
+
+    const bodyEl = document.createElement("div");
+    bodyEl.className = "activity-item-body";
+    bodyEl.textContent = body;
+
+    content.appendChild(personRow);
+    content.appendChild(titleRow);
+    content.appendChild(bodyEl);
+
+    // Demote previous "current" item.
+    const prev = feedList.querySelector(".activity-item.live-current");
+    if (prev) prev.classList.remove("live-current");
+
+    item.appendChild(icon);
+    item.appendChild(content);
+    feedList.appendChild(item);
+  }
+
+  const events = [
+    {
+      tool: "slack",
+      person: { name: "Sarah", title: "Product Manager", salary: 185000 },
+      cost: 320,
+      title: "Same question, again",
+      meta: "Slack · #delivery",
+      body: "“Did we decide to ship read-only Jira write-backs for the pilot?”",
+    },
+    {
+      tool: "jira",
+      person: { name: "David", title: "Engineering Lead", salary: 210000 },
+      cost: 540,
+      title: "Ticket reopened",
+      meta: "Jira · ENG-1824",
+      body: "Acceptance criteria updated — but the original decision isn’t linked anywhere.",
+    },
+    {
+      tool: "github",
+      person: { name: "Elena", title: "Senior Staff Engineer", salary: 245000 },
+      cost: 850,
+      title: "PR drift",
+      meta: "GitHub · PR #482",
+      body: "Implementation diverged from the initial rationale; reviewers are reconstructing the why from threads.",
+    },
+    {
+      tool: "teams",
+      person: { name: "Marcus", title: "QA Lead", salary: 160000 },
+      cost: 210,
+      title: "Dependency question",
+      meta: "Teams · Standup",
+      body: "“Who owns the blocker? Which team signed off?” — context scattered across tools.",
+    },
+    {
+      tool: "slack",
+      person: { name: "Sarah", title: "Product Manager", salary: 185000 },
+      cost: 480,
+      title: "Decision archaeology",
+      meta: "Slack · thread",
+      body: "Links to three old messages, two tickets, and a PR… still no single source of truth.",
+    },
+    {
+      tool: "jira",
+      person: { name: "James", title: "Design Director", salary: 200000 },
+      cost: 650,
+      title: "Scope changes",
+      meta: "Jira · EPIC-77",
+      body: "Timeline shifted. The decision and tradeoffs weren’t captured, so the team repeats the debate.",
+    },
+    {
+      tool: "github",
+      person: { name: "David", title: "Engineering Lead", salary: 210000 },
+      cost: 1100,
+      title: "Risk surfaces late",
+      meta: "GitHub · checks",
+      body: "A risky change lands because the original constraints were never visible to reviewers.",
+    },
+    {
+      tool: "teams",
+      person: { name: "Elena", title: "Senior Staff Engineer", salary: 245000 },
+      cost: 380,
+      title: "Escalation ping",
+      meta: "Teams · incident",
+      body: "A launch question escalates — everyone asks the same “what did we decide?”",
+    },
+  ];
+
+  let started = false;
+
+  async function run() {
+    started = true;
+    stage.classList.add("stage-live");
+    statusEl.textContent = "capturing";
+
+    const baseDelay = prefersReducedMotion.matches ? 0 : 840;
+    let costSoFar = 0;
+
+    setHeaderCostState({
+      mode: "cost",
+      label: "Context cost / year",
+      value: 0,
+      fillPct: 0,
+    });
+
+    for (let i = 0; i < events.length; i++) {
+      appendItem(events[i]);
+
+      const pct = ((i + 1) / events.length) * 100;
+      progressEl.style.width = `${pct.toFixed(0)}%`;
+
+      costSoFar = Math.round((yearlyCost * (i + 1)) / events.length);
+      setHeaderCostState({
+        mode: "cost",
+        label: "Context cost / year",
+        value: costSoFar,
+        fillPct: pct,
+      });
+
+      await sleep(baseDelay);
+    }
+
+    statusEl.textContent = "captured";
+    stage.classList.remove("stage-live");
+
+    // Preload the "savings" state so it’s ready when the user reaches Connect.
+    stage.dataset.yearlySavings = String(yearlySavings);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting || started) return;
+      run();
+    });
+  }, { threshold: 0.35 });
+
+  observer.observe(stage);
+})();
 
 /* ============================================================
-   STEP PROGRESS DOTS
-   ============================================================ */
-const sections = [
-  { id: "heroSection", dotId: "dot-hero", cls: "" },
-  { id: "problemSection", dotId: "dot-problem", cls: "active-problem" },
-  { id: "connectSection", dotId: "dot-connect", cls: "active-connect" },
-];
-
-const stepObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    const sec = sections.find(s => s.id === entry.target.id);
-    if (!sec) return;
-    const dot = document.getElementById(sec.dotId);
-    if (entry.isIntersecting) {
-      dot.className = "step-dot " + sec.cls;
-    } else {
-      dot.className = "step-dot";
-    }
-  });
-}, { threshold: 0.3 });
-
-sections.forEach(s => {
-  const el = document.getElementById(s.id);
-  if (el) stepObserver.observe(el);
-});
-
-
-/* ============================================================
-   STEP 4 — Connect orbit animation
+   CONNECT ORBIT — staged reveal + optional particle streams
    ============================================================ */
 (function initConnectAnimation() {
   const connectSection = document.getElementById("connectSection");
@@ -99,96 +320,65 @@ sections.forEach(s => {
   const orbitCenter = document.getElementById("orbitCenter");
   const nodes = [0, 1, 2, 3].map(i => document.getElementById(`onode-${i}`));
   const lines = [0, 1, 2, 3].map(i => document.getElementById(`conn-${i}`));
-  const cards = document.querySelectorAll(".integration-card");
+  const packets = [0, 1, 2, 3].map(i => document.getElementById(`cpacket-${i}`));
+  const cards = Array.from(document.querySelectorAll(".integration-card"));
   const statusBar = document.getElementById("connectStatus");
-  let animated = false;
 
-  const connectObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !animated) {
-        animated = true;
-        runConnectSequence();
-      }
+  const timeouts = new Set();
+  const particleStops = [];
+
+  function later(fn, delay) {
+    const id = window.setTimeout(() => {
+      timeouts.delete(id);
+      fn();
+    }, delay);
+    timeouts.add(id);
+  }
+
+  function stopAllParticles() {
+    particleStops.splice(0).forEach(stop => {
+      try { stop(); } catch { /* ignore */ }
     });
-  }, { threshold: 0.25 });
-  connectObserver.observe(connectSection);
+  }
 
-  function runConnectSequence() {
-    const isReduced = prefersReducedMotion.matches;
-    const baseDelay = isReduced ? 0 : 400;
-    const stagger = isReduced ? 50 : 300;
-
-    // 1. Show center logo
-    setTimeout(() => {
-      orbitCenter.classList.add("active");
-    }, baseDelay);
-
-    // 2. Show nodes one by one
-    nodes.forEach((node, i) => {
-      setTimeout(() => {
-        node.classList.add("active");
-      }, baseDelay + 500 + i * stagger);
-    });
-
-    // 3. Draw connection lines
-    lines.forEach((line, i) => {
-      setTimeout(() => {
-        line.classList.add("drawn");
-        // Move contextual value from each existing tool into Verachi.
-        setTimeout(() => {
-          nodes[i].classList.add("connected");
-          if (!isReduced) {
-            startParticleStream(i);
-          }
-        }, isReduced ? 0 : 400);
-      }, baseDelay + 1600 + i * stagger);
-    });
-
-    // 4. Show integration cards
-    cards.forEach((card, i) => {
-      setTimeout(() => {
-        card.classList.add("visible");
-      }, baseDelay + 3000 + i * (isReduced ? 50 : 200));
-    });
-
-    // 5. Show status bar
-    setTimeout(() => {
-      statusBar.classList.add("visible");
-    }, baseDelay + (isReduced ? 200 : 4000));
+  function clearScheduled() {
+    timeouts.forEach(id => window.clearTimeout(id));
+    timeouts.clear();
   }
 
   function startParticleStream(index) {
     const line = lines[index];
+    const container = document.getElementById("particles-container");
+    if (!line || !container) return () => {};
+
     const x1 = parseFloat(line.getAttribute("x1"));
     const y1 = parseFloat(line.getAttribute("y1"));
     const x2 = parseFloat(line.getAttribute("x2"));
     const y2 = parseFloat(line.getAttribute("y2"));
-    const container = document.getElementById("particles-container");
-    if (!container) return;
+
+    let stopped = false;
+    let timeoutId = null;
 
     function spawnParticle() {
-      // Create particle
+      if (stopped) return;
+
       const particle = document.createElement("div");
-      particle.className = `stream-particle stream-particle-${index}`;
+      particle.className = `stream-particle stream-particle-${index} active`;
       container.appendChild(particle);
 
       let progress = 0;
-      let speed = 0.005 + Math.random() * 0.005;
+      const speed = 0.006 + Math.random() * 0.006;
 
       function step() {
-        progress += speed;
-        if (progress > 1) {
+        if (stopped) {
           particle.remove();
           return;
         }
 
-        // Slight fade at ends
-        if (progress < 0.1) {
-          particle.style.opacity = (progress / 0.1).toFixed(2);
-        } else if (progress > 0.9) {
-          particle.style.opacity = (1 - (progress - 0.9) / 0.1).toFixed(2);
-        } else {
-          particle.style.opacity = 1;
+        progress += speed;
+        if (progress > 1) {
+          particle.remove();
+          return;
         }
 
         const cx = x1 + (x2 - x1) * progress;
@@ -196,352 +386,332 @@ sections.forEach(s => {
         particle.style.left = `${(cx / 420) * 100}%`;
         particle.style.top = `${(cy / 420) * 100}%`;
 
+        // Fade at ends
+        if (progress < 0.12) {
+          particle.style.opacity = (progress / 0.12).toFixed(2);
+        } else if (progress > 0.88) {
+          particle.style.opacity = (1 - (progress - 0.88) / 0.12).toFixed(2);
+        } else {
+          particle.style.opacity = "1";
+        }
+
         requestAnimationFrame(step);
       }
+
       requestAnimationFrame(step);
 
-      // Schedule next particle
-      const nextDelay = 300 + Math.random() * 1200;
-      setTimeout(spawnParticle, nextDelay);
+      const nextDelay = 320 + Math.random() * 1100;
+      timeoutId = window.setTimeout(spawnParticle, nextDelay);
     }
 
-    // Initial spawn
     spawnParticle();
-  }
-})();
 
+    return () => {
+      stopped = true;
+      if (timeoutId) window.clearTimeout(timeoutId);
+    };
+  }
+
+  let animated = false;
+
+  function runConnectSequence() {
+    const isReduced = prefersReducedMotion.matches;
+    const baseDelay = isReduced ? 0 : 380;
+    const stagger = isReduced ? 40 : 280;
+
+    // Center logo
+    later(() => orbitCenter?.classList.add("active"), baseDelay);
+
+    // Nodes appear
+    nodes.forEach((node, i) => {
+      later(() => node?.classList.add("active"), baseDelay + 520 + i * stagger);
+    });
+
+    // Lines draw + packets appear + optional particles
+    lines.forEach((line, i) => {
+      later(() => {
+        line?.classList.add("drawn");
+        packets[i]?.classList.add("visible");
+        later(() => {
+          nodes[i]?.classList.add("connected");
+          if (!isReduced) particleStops.push(startParticleStream(i));
+        }, isReduced ? 0 : 380);
+      }, baseDelay + 1500 + i * stagger);
+    });
+
+    // Integration cards
+    cards.forEach((card, i) => {
+      later(() => card.classList.add("visible"), baseDelay + 2800 + i * (isReduced ? 40 : 180));
+    });
+
+    // Status bar
+    later(() => statusBar?.classList.add("visible"), baseDelay + (isReduced ? 180 : 3600));
+
+    // Update the header "savings" state once the connect section has "landed".
+    later(() => {
+      const yearlySavings = Number(document.getElementById("statSavings")?.dataset?.target || 0) || 112320;
+      setHeaderCostState({
+        mode: "saving",
+        label: "Recovered / year",
+        value: yearlySavings,
+        fillPct: 100,
+      });
+    }, baseDelay + (isReduced ? 200 : 3800));
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (!animated) {
+          animated = true;
+          runConnectSequence();
+        }
+        return;
+      }
+
+      // Out of view: stop particle churn to save CPU.
+      stopAllParticles();
+      clearScheduled();
+    });
+  }, { threshold: 0.22 });
+
+  observer.observe(connectSection);
+})();
 
 /* ============================================================
    COUNT-UP — animate stat numbers when they enter view
    ============================================================ */
 (function initCountUp() {
-  const statEls = document.querySelectorAll('.hero-impact-stat, .comparison-stat, .recovered-stat');
+  const statEls = document.querySelectorAll(".comparison-stat, .recovered-stat");
   if (!statEls.length) return;
 
-  function extractNumber(el) {
-    const target = el.dataset.target;
-    if (target) return parseFloat(target);
-    const cleaned = el.textContent.trim().replace(/[$,~Kk]/g, '');
-    const match = cleaned.match(/[\d.]+/);
-    return match ? parseFloat(match[0]) : null;
-  }
-
-  function formatValue(val, originalText) {
-    const isCurrency = originalText.includes('$');
-    const isHours = originalText.toLowerCase().includes('hrs');
-    if (isCurrency) {
-      return '$' + Math.floor(val).toLocaleString();
-    }
-    if (isHours) {
-      return Math.floor(val).toLocaleString() + ' hrs';
-    }
-    return Math.floor(val).toLocaleString();
-  }
-
-  const countUpObserver = new IntersectionObserver((entries) => {
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      countUpObserver.unobserve(entry.target);
+      observer.unobserve(entry.target);
       const el = entry.target;
+
+      const targetVal = Number(el.dataset.target || "");
+      if (!Number.isFinite(targetVal) || targetVal <= 0) return;
+
       const originalText = el.textContent.trim();
-      const targetVal = extractNumber(el);
-      if (targetVal === null || targetVal === 0) return;
+      const isCurrency = originalText.includes("$");
+      const isHours = originalText.toLowerCase().includes("hrs");
 
-      const duration = 1800;
-      const startTime = performance.now();
+      const formatter = (val) => {
+        const n = Math.floor(val);
+        if (isCurrency) return `$${n.toLocaleString()}`;
+        if (isHours) return `${n.toLocaleString()} hrs`;
+        return n.toLocaleString();
+      };
 
-      function tick(ts) {
-        const elapsed = ts - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        // Ease-out curve
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const current = targetVal * eased;
-        el.textContent = formatValue(current, originalText);
-        if (progress < 1) {
-          requestAnimationFrame(tick);
-        } else {
-          el.textContent = originalText;
-        }
-      }
-      requestAnimationFrame(tick);
+      animateNumberText(el, targetVal, { duration: 1400, formatter });
+
+      // Restore original copy (e.g. "~$187K") to keep the page honest and scannable.
+      window.setTimeout(() => { el.textContent = originalText; }, prefersReducedMotion.matches ? 0 : 1600);
     });
   }, { threshold: 0.2 });
 
-  statEls.forEach(el => countUpObserver.observe(el));
+  statEls.forEach(el => observer.observe(el));
 })();
 
-
 /* ============================================================
-   3D TILT — cards lean toward cursor (disabled for performance)
-   ============================================================ */
-(function init3DTilt() {
-  return; // disabled for performance
-  if (prefersReducedMotion.matches) return;
-  const cards = document.querySelectorAll('.comparison-card, .hero-panel-card');
-  if (!cards.length) return;
-
-  cards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -3;
-      const rotateY = ((x - centerX) / centerX) * 3;
-      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
-      card.style.boxShadow = `
-        ${-rotateY * 4}px ${rotateX * 4}px 30px rgba(52,49,44,0.1),
-        0 20px 60px rgba(52,49,44,0.08)
-      `;
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0px)';
-      card.style.boxShadow = '';
-      card.style.transition = 'transform 0.5s ease-out, box-shadow 0.5s ease-out';
-      card.addEventListener('transitionend', function handler() {
-        card.style.transition = 'transform 0.1s ease-out, box-shadow 0.1s ease-out, border-color var(--dur) var(--ease)';
-        card.removeEventListener('transitionend', handler);
-      });
-    });
-  });
-})();
-
-
-/* ============================================================
-   PARALLAX — step numbers drift slower than content (disabled)
-   ============================================================ */
-(function initParallax() {
-  return; // disabled for performance
-  if (prefersReducedMotion.matches) return;
-  const stepContainers = document.querySelectorAll('.container[data-step]');
-  if (!stepContainers.length) return;
-
-  function updateParallax() {
-    stepContainers.forEach(container => {
-      const rect = container.getBoundingClientRect();
-      const viewCenter = window.innerHeight / 2;
-      const elCenter = rect.top + rect.height / 2;
-      const offset = (elCenter - viewCenter) / window.innerHeight;
-      container.style.setProperty('--step-offset', offset * 30);
-    });
-  }
-
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => { updateParallax(); ticking = false; });
-      ticking = true;
-    }
-  }, { passive: true });
-  updateParallax();
-})();
-
-
-/* ============================================================
-   STEP DOT ANTICIPATION — dots glow before section arrives (disabled)
-   ============================================================ */
-(function initDotAnticipation() {
-  return; // disabled for performance
-  const progressSections = [
-    { id: "heroSection", dotId: "dot-hero" },
-    { id: "problemSection", dotId: "dot-problem" },
-    { id: "connectSection", dotId: "dot-connect" },
-  ];
-
-  function updateAnticipation() {
-    progressSections.forEach(sec => {
-      const el = document.getElementById(sec.id);
-      const dot = document.getElementById(sec.dotId);
-      if (!el || !dot) return;
-      const rect = el.getBoundingClientRect();
-      const dist = Math.abs(rect.top + rect.height * 0.3 - window.innerHeight * 0.5);
-      const anticipation = Math.max(0, 1 - dist / 400);
-      dot.style.boxShadow = anticipation > 0
-        ? `0 0 0 ${6 + anticipation * 10}px rgba(49,95,90,${0.04 + anticipation * 0.1})`
-        : '';
-      dot.style.transform = `scale(${1 + anticipation * 0.15})`;
-    });
-  }
-
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => { updateAnticipation(); ticking = false; });
-      ticking = true;
-    }
-  }, { passive: true });
-})();
-
-
-
-
-
-/* ============================================================
-   MOBILE PROGRESS BAR — horizontal bar instead of dots
+   MOBILE PROGRESS BAR — horizontal bar (tiny affordance)
    ============================================================ */
 (function initMobileProgress() {
   if (window.innerWidth > 720) return;
-  const bar = document.createElement('div');
-  bar.className = 'mobile-progress';
+
+  const bar = document.createElement("div");
+  bar.className = "mobile-progress";
   bar.innerHTML = '<div class="mobile-progress-fill" id="mobileProgressFill"></div>';
   document.body.prepend(bar);
 
-  const fill = document.getElementById('mobileProgressFill');
-  const progressSections = ['heroSection', 'problemSection', 'connectSection'];
+  const fill = document.getElementById("mobileProgressFill");
+  if (!fill) return;
 
   function updateMobileProgress() {
     const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const pct = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
-    fill.style.width = pct + '%';
+    fill.style.width = pct + "%";
   }
 
   let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => { updateMobileProgress(); ticking = false; });
-      ticking = true;
-    }
+  window.addEventListener("scroll", () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      updateMobileProgress();
+      ticking = false;
+    });
   }, { passive: true });
+
+  updateMobileProgress();
 })();
 
-
 /* ============================================================
-   MOBILE HEADER AUTO-HIDE — save vertical space on scroll
+   MOBILE HEADER AUTO-HIDE — save vertical space
    ============================================================ */
 (function initHeaderAutoHide() {
   if (window.innerWidth > 720) return;
-  const header = document.querySelector('.site-header');
+
+  const header = document.querySelector(".site-header");
   if (!header) return;
 
-  let lastScroll = 0;
+  let lastScroll = window.scrollY;
   let ticking = false;
 
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        const currentScroll = window.scrollY;
-        if (currentScroll > lastScroll && currentScroll > 120) {
-          header.classList.add('header-hidden');
-        } else {
-          header.classList.remove('header-hidden');
-        }
-        lastScroll = currentScroll;
-        ticking = false;
-      });
-      ticking = true;
-    }
+  window.addEventListener("scroll", () => {
+    if (ticking) return;
+    ticking = true;
+
+    requestAnimationFrame(() => {
+      const currentScroll = window.scrollY;
+      if (currentScroll > lastScroll && currentScroll > 120) {
+        header.classList.add("header-hidden");
+      } else {
+        header.classList.remove("header-hidden");
+      }
+      lastScroll = currentScroll;
+      ticking = false;
+    });
   }, { passive: true });
 })();
 
-
 /* ============================================================
-   PARALLAX CSS VARIABLE — wire step-offset to ::before
-   ============================================================ */
-(function initStepParallaxVar() {
-  const style = document.createElement('style');
-  style.textContent = `
-    .container[data-step]::before {
-      transform: translateY(calc(var(--step-offset, 0) * 1px));
-    }
-  `;
-  document.head.appendChild(style);
-})();
-
-
-/* ============================================================
-   CONTACT FORM — validation + submission
+   CONTACT FORM — spam protection + Verachi API
    ============================================================ */
 (function initContactForm() {
-  const form = document.getElementById('contactForm');
-  if (!form) return;
+  const contactForm = document.getElementById("contactForm");
+  const cfLoadedAt = document.getElementById("cf_loaded_at");
+  const cfError = document.getElementById("cfError");
+  const cfSuccess = document.getElementById("cfSuccess");
+  const cfSubmit = document.getElementById("cfSubmit");
 
-  const submitBtn = document.getElementById('cfSubmit');
-  const submitText = form.querySelector('.cf-submit-text');
-  const submitLoading = form.querySelector('.cf-submit-loading');
-  const errorEl = document.getElementById('cfError');
-  const successEl = document.getElementById('cfSuccess');
-  const honeypot = document.getElementById('cf_website');
-  const loadedAt = document.getElementById('cf_loaded_at');
+  if (!contactForm || !cfLoadedAt || !cfError || !cfSuccess || !cfSubmit) return;
 
-  // Record load time for bot detection
-  if (loadedAt) loadedAt.value = Date.now().toString();
+  const CONTACT_FORM_ENDPOINT =
+    window.VERACHI_CONTACT_ENDPOINT || "https://app.verachi.io/api/contact";
 
-  function validateEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
+  const FREE_EMAIL_DOMAINS = new Set([
+    "gmail.com", "googlemail.com", "yahoo.com", "yahoo.co.jp",
+    "hotmail.com", "outlook.com", "live.com", "msn.com",
+    "aol.com", "icloud.com", "me.com", "mac.com",
+    "mail.com", "protonmail.com", "proton.me", "zoho.com",
+    "yandex.com", "gmx.com", "gmx.net", "fastmail.com",
+    "tutanota.com", "hey.com", "inbox.com", "qq.com",
+    "163.com", "126.com", "naver.com", "daum.net",
+  ]);
 
-  function showError(msg) {
-    errorEl.textContent = msg;
-    errorEl.hidden = false;
-  }
+  const MIN_SUBMIT_TIME_MS = 3000;
 
-  function hideError() {
-    errorEl.hidden = true;
-  }
+  cfLoadedAt.value = Date.now().toString();
 
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
-    hideError();
+  const submitText = cfSubmit.querySelector(".cf-submit-text");
+  const submitLoading = cfSubmit.querySelector(".cf-submit-loading");
 
-    // Honeypot check
-    if (honeypot && honeypot.value) return;
+  const resetButton = () => {
+    if (submitText) submitText.hidden = false;
+    if (submitLoading) submitLoading.hidden = true;
+    cfSubmit.disabled = false;
+  };
 
-    // Time check (bots submit too fast)
-    if (loadedAt && loadedAt.value) {
-      const elapsed = Date.now() - parseInt(loadedAt.value, 10);
-      if (elapsed < 3000) return;
-    }
+  const showError = (msg) => {
+    cfError.textContent = msg;
+    cfError.hidden = false;
+  };
 
-    // Add validation class for CSS states
-    form.classList.add('was-validated');
+  const showSuccess = () => {
+    contactForm.hidden = true;
+    cfSuccess.hidden = false;
+  };
 
-    // Check required fields
-    const requiredFields = form.querySelectorAll('[required]');
-    let firstInvalid = null;
-    requiredFields.forEach(field => {
-      if (!field.value.trim()) {
-        if (!firstInvalid) firstInvalid = field;
-      }
-    });
+  contactForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
-    if (firstInvalid) {
-      showError('Please fill in all required fields.');
-      firstInvalid.focus();
+    cfError.hidden = true;
+    cfError.textContent = "";
+    contactForm.classList.add("was-validated");
+
+    // 1) Honeypot
+    const honeypot = document.getElementById("cf_website");
+    if (honeypot && honeypot.value) {
+      showSuccess();
       return;
     }
 
-    // Validate email
-    const emailField = document.getElementById('cf_email');
-    if (emailField && !validateEmail(emailField.value)) {
-      showError('Please enter a valid work email address.');
-      emailField.focus();
+    // 2) Time-based check
+    const loadedAt = parseInt(cfLoadedAt.value, 10);
+    if (Number.isFinite(loadedAt) && Date.now() - loadedAt < MIN_SUBMIT_TIME_MS) {
+      showSuccess();
       return;
     }
 
-    // Show loading state
-    submitBtn.disabled = true;
+    // 3) HTML5 validation
+    if (!contactForm.checkValidity()) {
+      showError("Please fill in all required fields.");
+      resetButton();
+      return;
+    }
+
+    // 4) Work-email validation
+    const emailInput = document.getElementById("cf_email");
+    const emailDomain = (emailInput?.value.split("@")[1] || "").toLowerCase().trim();
+    if (FREE_EMAIL_DOMAINS.has(emailDomain)) {
+      showError("Please use your work email. Free email providers (Gmail, Yahoo, etc.) are not accepted.");
+      emailInput?.focus?.();
+      resetButton();
+      return;
+    }
+
+    const formData = {
+      name: document.getElementById("cf_name")?.value.trim(),
+      email: emailInput?.value.trim(),
+      title: document.getElementById("cf_title")?.value.trim(),
+      company: document.getElementById("cf_company")?.value.trim(),
+      company_size: document.getElementById("cf_company_size")?.value,
+      industry: document.getElementById("cf_industry")?.value,
+      country: document.getElementById("cf_country")?.value,
+      needs: document.getElementById("cf_needs")?.value.trim(),
+      website: honeypot?.value || "",
+      _loaded_at: cfLoadedAt.value,
+      sourceUrl: window.location.href,
+    };
+
+    // Loading state
     if (submitText) submitText.hidden = true;
     if (submitLoading) submitLoading.hidden = false;
+    cfSubmit.disabled = true;
 
-    // Simulate submission (replace with real endpoint)
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const response = await fetch(CONTACT_FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-      // Log form data (placeholder for real API call)
-      const formData = new FormData(form);
-      console.log('Demo request submitted:', Object.fromEntries(formData));
-
-      // Show success
-      form.hidden = true;
-      if (successEl) successEl.hidden = false;
-    } catch (err) {
-      showError('Something went wrong. Please try again or email us directly.');
-      submitBtn.disabled = false;
-      if (submitText) submitText.hidden = false;
-      if (submitLoading) submitLoading.hidden = true;
+      if (!response.ok) {
+        const payload = await response.json().catch(() => null);
+        showError(payload?.error?.message || "We could not send your request. Please try again.");
+        resetButton();
+        return;
+      }
+    } catch {
+      showError("We could not send your request. Please try again.");
+      resetButton();
+      return;
     }
+
+    showSuccess();
+
+    if (typeof gtag === "function") {
+      gtag("event", "generate_lead", {
+        event_category: "contact",
+        event_label: formData.company_size || "",
+      });
+    }
+
+    resetButton();
   });
 })();
 
