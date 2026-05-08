@@ -212,7 +212,7 @@ function setHeaderCostState({ mode, label, value, fillPct }) {
       appendMessage(events[i]);
       
       totalCost += events[i].cost;
-      animateNumberText(totalCostEl, totalCost, { formatter: v => \`$\${Math.floor(v).toLocaleString()}\` });
+      animateNumberText(totalCostEl, totalCost, { formatter: v => "$" + Math.floor(v).toLocaleString() });
       
       if (costContainer) {
         costContainer.classList.add("bump");
