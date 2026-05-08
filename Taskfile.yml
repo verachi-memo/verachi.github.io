@@ -1,0 +1,15 @@
+version: "3"
+
+vars:
+  PORT: "8080"
+
+tasks:
+  dev:
+    desc: Start a local static dev server on port {{.PORT}}
+    cmds:
+      - python3 -m http.server {{.PORT}}
+
+  server:
+    desc: Alias for `task dev`
+    cmds:
+      - task: dev

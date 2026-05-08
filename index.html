@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="./prototype/styles.css" />
+<link rel="stylesheet" href="./home/styles.css" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NHXTJ2NZMT"></script>
   <script>
@@ -29,15 +29,23 @@
   <div class="header-inner">
     <a class="brand" href="#" aria-label="Verachi home">
       <div class="brand-mark">
-        <img src="./prototype/verachi-logo.svg" alt="" aria-hidden="true" />
+        <img src="./home/verachi-logo.svg" alt="" aria-hidden="true" />
       </div>
       <span>VERACHI</span>
     </a>
     <nav class="header-nav" aria-label="Page sections">
       <a href="#heroSection">Overview</a>
-      <a href="#problemSection">The Problem</a>
-      <a href="#connectSection">Connect</a>
+      <a href="#problemSection">Demo</a>
+      <a href="#pricingSection">Pricing</a>
+      <a href="#contact-form">Contact</a>
     </nav>
+    <div class="header-cost" id="headerCost">
+      <span class="header-cost-label" id="costLabel">Context cost today</span>
+      <span class="header-cost-value" id="costValue">$0</span>
+      <div class="header-cost-meter" aria-hidden="true">
+        <div class="header-cost-meter-fill" id="costMeterFill"></div>
+      </div>
+    </div>
     <div class="header-actions">
       <a class="header-link" href="https://app.verachi.io/login">Sign In</a>
       <a class="header-cta" href="#contact-form">Book a Demo</a>
@@ -47,78 +55,29 @@
 
 <main id="main-content" tabindex="-1">
 
-  <!-- ========== HERO — The Hook ========== -->
-  <section class="hero" id="heroSection">
+  <!-- ========== HERO ========== -->
+  <section class="hero hero-centered" id="heroSection">
     <div class="hero-glow" aria-hidden="true"></div>
-    <div class="container hero-layout">
-      <div class="hero-copy">
-        <div class="hero-kicker" data-anim>The single source of truth for delivery teams</div>
-        <h1 data-anim><span class="hero-emphasis">Prevent risks.</span><span class="hero-break">Deliver with confidence.</span></h1>
-        <div class="hero-stance" data-anim data-delay="1">Consolidate once, decide together.</div>
-        <p class="hero-sub" data-anim data-delay="1">
-          <strong>Verachi keeps your team’s vision visible and current</strong> across
-          <span class="hero-inline-tool hero-tool-name">Slack</span>,
-          <span class="hero-inline-tool hero-tool-name">GitHub</span>,
-          <span class="hero-inline-tool hero-tool-name">Microsoft Teams</span> and
-          <span class="hero-inline-tool hero-tool-name">Jira</span>, with no tool change required.
-        </p>
-        <div class="hero-actions" data-anim data-delay="2">
-          <a class="button button-primary" href="#contact-form">
-            Book a Demo
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-          <a class="button button-outline" href="#problemSection">See the context leak</a>
-        </div>
-        <div class="hero-proof" data-anim data-delay="2" aria-label="Hero proof points">
-          <span class="hero-proof-item">Detect blocked work earlier</span>
-          <span class="hero-proof-item">Reduce cross-team dependency risk</span>
-          <span class="hero-proof-item">No tool change required</span>
-        </div>
+    <div class="container hero-layout-centered">
+      <div class="hero-kicker" data-anim>Decision intelligence for delivery teams</div>
+      <h1 data-anim><span class="hero-emphasis">Prevent risks.</span><span class="hero-break">Deliver with confidence.</span></h1>
+      <p class="hero-sub hero-sub-centered" data-anim data-delay="1">
+        Verachi connects your <strong>Slack</strong>, <strong>GitHub</strong>,
+        <strong>Microsoft Teams</strong> and <strong>Jira</strong> to surface what was decided,
+        what drifted, and what's at risk — without replacing any tool.
+      </p>
+      <div class="hero-actions hero-actions-centered" data-anim data-delay="2">
+        <a class="button button-primary" href="#contact-form">
+          Book a Demo
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a class="button button-outline" href="#problemSection">See the context leak</a>
       </div>
-      <aside class="hero-sidebar" data-anim data-delay="3" aria-label="Verachi summary">
-        <div class="hero-panel">
-          <div class="hero-panel-top">
-            <div>
-              <span class="hero-panel-eyebrow">What Verachi changes</span>
-              <h2 class="hero-panel-title">Projects don’t fail suddenly. <br>They fail silently.</h2>
-            </div>
-          </div>
-          <div class="hero-panel-stack" aria-label="Verachi overview cards">
-            <div class="hero-panel-card">
-              <span class="hero-panel-card-label">Problem</span>
-              <div class="hero-panel-list">
-                <p class="hero-panel-list-item">Information &amp; data are scattered across too many tools</p>
-                <p class="hero-panel-list-item">Risks detected too late, often visible only after impact</p>
-                <p class="hero-panel-list-item">Reporting is manual, biased, outdated and overwhelming teams</p>
-              </div>
-            </div>
-            <div class="hero-panel-card">
-              <span class="hero-panel-card-label">Solution Proposal</span>
-              <div class="hero-panel-list">
-                <p class="hero-panel-list-item">All your problems in single place by connecting your tools</p>
-                <p class="hero-panel-list-item">Cut reporting overhead and accelerate cross-team resolution</p>
-                <p class="hero-panel-list-item">Give leaders clearer signals for faster, more confident decisions</p>
-              </div>
-            </div>
-            <div class="hero-panel-card">
-              <span class="hero-panel-card-label">Benefits</span>
-              <div class="hero-impact-grid">
-                <div class="hero-impact">
-                  <strong>Time saved</strong>
-                  <span class="hero-impact-stat" data-target="749">~750 hrs</span>
-                  <span>reclaimed per year for a team of 6.</span>
-                </div>
-                <div class="hero-impact">
-                  <strong>Money saved</strong>
-                  <span class="hero-impact-stat" data-target="112320">~$110K</span>
-                  <span>annual savings for a team of 6.</span>
-                </div>
-              </div>
-            </div>
-            <a class="hero-benefit-link" href="#contact-form">See how we calculate these numbers</a>
-          </div>
-        </div>
-      </aside>
+      <div class="hero-proof hero-proof-centered" data-anim data-delay="2" aria-label="Hero proof points">
+        <span class="hero-proof-item">Detect blocked work earlier</span>
+        <span class="hero-proof-item">Reduce cross-team dependency risk</span>
+        <span class="hero-proof-item">No tool change required</span>
+      </div>
       <div class="hero-scroll-hint" data-anim data-delay="3">
         <span>Scroll to learn more</span>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
@@ -322,6 +281,91 @@
   </section>
 
 
+  <!-- ========== PRICING ========== -->
+  <section class="step-section pricing-section" id="pricingSection">
+    <div class="container">
+      <div class="pricing-header" data-anim>
+        <span class="step-badge step-badge-solve">Pricing</span>
+        <h2 class="step-title pricing-title">Simple pricing.<br/>No surprises.</h2>
+        <p class="step-desc pricing-desc">Start small, scale as you grow. Every plan includes read-only connectors, full decision history, and audit trail.</p>
+      </div>
+
+      <div class="pricing-grid" data-anim data-delay="1">
+
+        <!-- Starter -->
+        <div class="pricing-card">
+          <div class="pricing-card-header">
+            <span class="pricing-card-name">Starter</span>
+            <p class="pricing-card-audience">For small teams getting started</p>
+          </div>
+          <div class="pricing-card-price">
+            <span class="pricing-amount">$29</span>
+            <span class="pricing-period">/ seat / month</span>
+          </div>
+          <ul class="pricing-features">
+            <li>Up to 10 users</li>
+            <li>2 tool connections</li>
+            <li>Decision capture &amp; search</li>
+            <li>Basic risk signals</li>
+            <li>7-day activity history</li>
+            <li>Email support</li>
+          </ul>
+          <a class="button button-outline pricing-cta" href="#contact-form">Get Started</a>
+        </div>
+
+        <!-- Team -->
+        <div class="pricing-card pricing-card-featured">
+          <div class="pricing-card-badge">Most popular</div>
+          <div class="pricing-card-header">
+            <span class="pricing-card-name">Team</span>
+            <p class="pricing-card-audience">For delivery teams shipping together</p>
+          </div>
+          <div class="pricing-card-price">
+            <span class="pricing-amount">$79</span>
+            <span class="pricing-period">/ seat / month</span>
+          </div>
+          <ul class="pricing-features">
+            <li>Unlimited users</li>
+            <li>Unlimited tool connections</li>
+            <li>Decision capture &amp; search</li>
+            <li>Advanced risk detection</li>
+            <li>Full activity history</li>
+            <li>Cross-team dependency graph</li>
+            <li>Custom reporting</li>
+            <li>Priority support</li>
+          </ul>
+          <a class="button button-primary pricing-cta" href="#contact-form">Start Free Trial</a>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="pricing-card">
+          <div class="pricing-card-header">
+            <span class="pricing-card-name">Enterprise</span>
+            <p class="pricing-card-audience">For organizations with compliance needs</p>
+          </div>
+          <div class="pricing-card-price">
+            <span class="pricing-amount">Custom</span>
+            <span class="pricing-period">tailored to your org</span>
+          </div>
+          <ul class="pricing-features">
+            <li>Everything in Team</li>
+            <li>Self-hosted deployment</li>
+            <li>SSO / SAML</li>
+            <li>Advanced audit &amp; compliance</li>
+            <li>Dedicated success manager</li>
+            <li>Custom SLA</li>
+            <li>On-prem data residency</li>
+            <li>Volume discounts</li>
+          </ul>
+          <a class="button button-outline pricing-cta" href="#contact-form">Contact Sales</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="step-divider"><div class="step-divider-line"></div></div>
+
   <!-- ========== BOTTOM CTA ========== -->
   <section class="cta-section contact-section" id="contact-form">
     <div class="container contact-layout" data-anim>
@@ -449,15 +493,15 @@
   <div class="container">
     <p>&copy; 2026 Verachi. All rights reserved.</p>
     <nav class="footer-nav" aria-label="Footer">
-      <a href="../trust.html">Trust</a>
-      <a href="../privacy.html">Privacy</a>
-      <a href="../terms.html">Terms</a>
+      <a href="./trust.html">Trust</a>
+      <a href="./privacy.html">Privacy</a>
+      <a href="./terms.html">Terms</a>
       <a href="https://app.verachi.io/login">Sign In</a>
     </nav>
   </div>
 </footer>
 
-<script src="./prototype/app.js"></script>
+<script src="./home/app.js"></script>
 
 </body>
 </html>
