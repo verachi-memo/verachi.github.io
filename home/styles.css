@@ -334,6 +334,11 @@ main {
   position: relative;
   padding: clamp(136px, 16vw, 184px) 0 clamp(80px, 9vw, 132px);
   overflow: clip;
+  isolation: isolate;
+  background:
+    linear-gradient(180deg, rgba(247, 244, 239, 0.58) 0%, rgba(247, 244, 239, 0.78) 56%, var(--bg-0) 100%),
+    linear-gradient(90deg, rgba(247, 244, 239, 0.86) 0%, rgba(247, 244, 239, 0.5) 46%, rgba(247, 244, 239, 0.74) 100%),
+    url("./hero-background.jpg") center 44% / cover no-repeat;
 }
 
 .hero-glow {
