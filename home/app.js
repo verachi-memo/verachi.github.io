@@ -12,6 +12,226 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+/* ============================================================
+   MOBILE MENU TOGGLE
+   ============================================================ */
+(function initMobileMenu() {
+  const toggle = document.getElementById("mobileMenuToggle");
+  const nav = document.getElementById("headerNav");
+  if (!toggle || !nav) return;
+
+  const mobileQuery = window.matchMedia("(max-width: 860px)");
+
+  function setMenuOpen(open) {
+    const shouldOpen = mobileQuery.matches ? open : false;
+    toggle.setAttribute("aria-expanded", String(shouldOpen));
+    toggle.setAttribute("aria-label", shouldOpen ? "Close menu" : "Open menu");
+    nav.hidden = !shouldOpen;
+
+    // Swap icon between hamburger and X
+    if (shouldOpen) {
+      toggle.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>`;
+    } else {
+      toggle.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7" /><line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="17" x2="20" y2="17" /></svg>`;
+    }
+  }
+
+  toggle.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    setMenuOpen(!isOpen);
+  });
+
+  // Close on nav link click
+  nav.querySelectorAll("a[href^='#']").forEach(link => {
+    link.addEventListener("click", () => setMenuOpen(false));
+  });
+
+  // Close on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setMenuOpen(false);
+  });
+
+  // On resize past breakpoint, ensure nav is visible on desktop and hidden on mobile
+  function syncWithBreakpoint() {
+    if (!mobileQuery.matches) {
+      nav.hidden = false;
+      toggle.setAttribute("aria-expanded", "false");
+    } else {
+      // On mobile, nav should be hidden unless explicitly opened
+      if (toggle.getAttribute("aria-expanded") !== "true") {
+        nav.hidden = true;
+      }
+    }
+  }
+
+  if (typeof mobileQuery.addEventListener === "function") {
+    mobileQuery.addEventListener("change", syncWithBreakpoint);
+  } else {
+    mobileQuery.addListener(syncWithBreakpoint);
+  }
+
+  // Initial sync
+  syncWithBreakpoint();
+})();
+
+/* ============================================================
+   CAPABILITY TABS
+   ============================================================ */
+(function initCapabilityTabs() {
+  const tabs = document.querySelectorAll(".capability-card[role='tab']");
+  const panels = document.querySelectorAll(".cap-slide");
+  if (!tabs.length || !panels.length) return;
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      const idx = tab.dataset.capIndex;
+
+      // Deactivate all tabs
+      tabs.forEach(t => {
+        t.classList.remove("is-active");
+        t.setAttribute("aria-selected", "false");
+      });
+
+      // Activate clicked tab
+      tab.classList.add("is-active");
+      tab.setAttribute("aria-selected", "true");
+
+      // Switch panels
+      panels.forEach(p => {
+        p.classList.remove("is-active");
+        p.hidden = true;
+      });
+
+      const target = document.getElementById(`capPanel${idx}`);
+      if (target) {
+        target.hidden = false;
+        // Force reflow to restart animation
+        void target.offsetHeight;
+        target.classList.add("is-active");
+      }
+    });
+  });
+})();
+
+/* ============================================================
+   ROI CALCULATOR — range sliders with max→input switch
+   ============================================================ */
+(function initROICalculator() {
+  var teamSlider = document.getElementById("roiTeamSize");
+  var hoursSlider = document.getElementById("roiHoursWasted");
+  var salarySlider = document.getElementById("roiAvgSalary");
+  if (!teamSlider || !hoursSlider || !salarySlider) return;
+
+  var teamVal = document.getElementById("roiTeamSizeVal");
+  var hoursVal = document.getElementById("roiHoursWastedVal");
+  var salaryVal = document.getElementById("roiAvgSalaryVal");
+  var elHoursLost = document.getElementById("roiHoursLost");
+  var elCostLost = document.getElementById("roiCostLost");
+  var elHoursSaved = document.getElementById("roiHoursSaved");
+  var elSavings = document.getElementById("roiSavings");
+
+  var WEEKS = 52, RECOVERY = 0.6;
+
+  // Current effective values (may exceed slider max when user types)
+  var values = { team: 6, hours: 12, salary: 200000 };
+
+  function fmtH(n) { return Math.round(n).toLocaleString("en-US") + " hrs"; }
+  function fmtC(n) {
+    if (n >= 1e6) return "$" + (n / 1e6).toFixed(1) + "M";
+    if (n >= 1e3) return "$" + Math.round(n / 1e3) + "K";
+    return "$" + Math.round(n);
+  }
+  function fmtSalary(n) {
+    if (n >= 1e6) return "$" + (n / 1e6).toFixed(1) + "M";
+    return "$" + Math.round(n / 1e3) + "K";
+  }
+
+  function calc() {
+    var rate = values.salary / (WEEKS * 40);
+    var lost = values.team * values.hours * WEEKS;
+    var costLost = lost * rate;
+    if (elHoursLost) elHoursLost.textContent = fmtH(lost);
+    if (elCostLost) elCostLost.textContent = fmtC(costLost);
+    if (elHoursSaved) elHoursSaved.textContent = fmtH(lost * RECOVERY);
+    if (elSavings) elSavings.textContent = fmtC(costLost * RECOVERY);
+  }
+
+  function updateDisplays() {
+    if (teamVal) teamVal.textContent = values.team;
+    if (hoursVal) hoursVal.textContent = values.hours;
+    if (salaryVal) salaryVal.textContent = fmtSalary(values.salary);
+  }
+
+  // Check if slider is at max and swap output to editable input
+  function checkMax(slider, outputEl, key, formatter) {
+    var max = parseInt(slider.max);
+    var val = parseInt(slider.value);
+    if (val >= max && outputEl && outputEl.tagName !== "INPUT") {
+      // Replace <output> with <input>
+      var inp = document.createElement("input");
+      inp.type = "number";
+      inp.className = "roi-slider-value-input";
+      inp.value = values[key];
+      inp.min = "1";
+      inp.id = outputEl.id;
+      outputEl.replaceWith(inp);
+      inp.focus();
+      inp.select();
+
+      // Update refs
+      if (key === "team") teamVal = inp;
+      if (key === "hours") hoursVal = inp;
+      if (key === "salary") salaryVal = inp;
+
+      inp.addEventListener("input", function() {
+        values[key] = Math.max(1, parseInt(inp.value) || 1);
+        calc();
+      });
+
+      inp.addEventListener("blur", function() {
+        // If value is within slider range, switch back
+        if (values[key] <= max) {
+          var out = document.createElement("output");
+          out.className = "roi-slider-value";
+          out.id = inp.id;
+          out.textContent = formatter(values[key]);
+          inp.replaceWith(out);
+          slider.value = values[key];
+
+          if (key === "team") teamVal = out;
+          if (key === "hours") hoursVal = out;
+          if (key === "salary") salaryVal = out;
+        }
+      });
+    }
+  }
+
+  // Slider event handlers
+  teamSlider.addEventListener("input", function() {
+    values.team = parseInt(teamSlider.value);
+    if (teamVal) teamVal.textContent = values.team;
+    checkMax(teamSlider, teamVal, "team", String);
+    calc();
+  });
+
+  hoursSlider.addEventListener("input", function() {
+    values.hours = parseInt(hoursSlider.value);
+    if (hoursVal) hoursVal.textContent = values.hours;
+    checkMax(hoursSlider, hoursVal, "hours", String);
+    calc();
+  });
+
+  salarySlider.addEventListener("input", function() {
+    values.salary = parseInt(salarySlider.value);
+    if (salaryVal) salaryVal.textContent = fmtSalary(values.salary);
+    checkMax(salarySlider, salaryVal, "salary", fmtSalary);
+    calc();
+  });
+
+  updateDisplays();
+  calc();
+})();
+
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
@@ -739,11 +959,7 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
     const formData = {
       name: document.getElementById("cf_name")?.value.trim(),
       email: emailInput?.value.trim(),
-      title: document.getElementById("cf_title")?.value.trim(),
       company: document.getElementById("cf_company")?.value.trim(),
-      company_size: document.getElementById("cf_company_size")?.value,
-      industry: document.getElementById("cf_industry")?.value,
-      country: document.getElementById("cf_country")?.value,
       needs: document.getElementById("cf_needs")?.value.trim(),
       website: honeypot?.value || "",
       _loaded_at: cfLoadedAt.value,
