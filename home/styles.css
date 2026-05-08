@@ -1347,8 +1347,9 @@ main {
 }
 
 .roi-card-totals .comparison-stat {
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-size: clamp(2.2rem, 5.5vw, 3.4rem);
   margin-bottom: 0;
+  white-space: nowrap;
 }
 
 .roi-card-output {
