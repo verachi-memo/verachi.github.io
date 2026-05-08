@@ -38,12 +38,13 @@
     </a>
     <nav class="header-nav" aria-label="Page sections">
       <a href="#heroSection">Overview</a>
+      <a href="#problemSection">Demo</a>
       <a href="#pricingSection">Pricing</a>
       <a href="#contact-form">Contact</a>
     </nav>
     <div class="header-actions">
       <a class="header-link" href="https://app.verachi.io/login">Sign In</a>
-      <a class="header-cta" href="#contact-form">Join the Waitlist</a>
+      <a class="header-cta" href="#contact-form">Book a Demo</a>
     </div>
   </div>
 </header>
@@ -67,7 +68,7 @@
         </p>
         <div class="hero-actions" data-anim data-delay="2">
           <a class="button button-primary" href="#contact-form">
-            Join the Waitlist
+            Book a Demo
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
           <a class="button button-outline" href="#problemSection">See the context leak</a>
@@ -118,58 +119,146 @@
                 </div>
               </div>
             </div>
+            <a class="hero-benefit-link" href="#contact-form">See how we calculate these numbers</a>
           </div>
         </div>
       </aside>
+      <div class="hero-scroll-hint" data-anim data-delay="3">
+        <span>Scroll to learn more</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
     </div>
   </section>
 
 
-  <!-- ========== THE PROBLEM (SLACK MOCK) ========== -->
-  <section class="step-section problem-slack-section" id="problemSection">
+  <!-- ========== THE PROBLEM ========== -->
+  <section class="step-section" id="problemSection">
     <div class="container">
-      <div class="slack-mock-window" data-anim>
-        <!-- Sidebar -->
-        <aside class="slack-sidebar">
-          <div class="slack-sidebar-header">
-            <div class="slack-workspace-name">Acme Corp</div>
-          </div>
-          <div class="slack-channels">
-            <div class="slack-channel-group">Channels</div>
-            <div class="slack-channel"><span class="slack-hash">#</span> general</div>
-            <div class="slack-channel active"><span class="slack-hash">#</span> delivery-team</div>
-            <div class="slack-channel"><span class="slack-hash">#</span> product-triage</div>
-            <div class="slack-channel"><span class="slack-hash">#</span> engineering</div>
-          </div>
-        </aside>
-        
-        <!-- Main Chat Area -->
-        <div class="slack-main">
-          <header class="slack-header">
-            <div class="slack-channel-info">
-              <span class="slack-header-name">#delivery-team</span>
-              <span class="slack-header-desc">Cross-functional product delivery</span>
-            </div>
-            <div class="slack-context-cost" id="slackCostContainer">
-              <span class="cost-label">Context Cost:</span>
-              <span class="cost-value" id="slackTotalCost">$0</span>
-            </div>
-          </header>
-          
-          <div class="slack-chat-area" id="slackChatFeed">
-            <!-- Messages injected via JS -->
-            <div class="slack-chat-placeholder" id="slackPlaceholder">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              <span>Waiting for team activity...</span>
-            </div>
-          </div>
-          
-          <div class="slack-input-area">
-            <div class="slack-input-box">
-              <span class="slack-input-placeholder">Message #delivery-team</span>
-            </div>
-          </div>
+      <div data-anim>
+        <span class="step-badge step-badge-problem">The Problem</span>
+        <h2 class="step-title">Work keeps moving.<br/>Context keeps leaking.</h2>
+        <p class="step-desc">The team is capable, fast, and already using the right tools. The failure mode is simpler: the reasons behind product and technical decisions never become a shared system. And that costs more than anyone tracks.</p>
+      </div>
+
+      <!-- Cost cards -->
+      <div class="comparison-grid" data-anim data-delay="1">
+        <div class="comparison-card comparison-card-before featured">
+          <div class="comparison-label">⚠ Without shared context</div>
+          <div class="comparison-stat" id="statHoursLost" data-target="1248">~1,250 hrs</div>
+          <p class="comparison-detail">lost annually to "decision archaeology" — searching Slack, re-reading old tickets, asking the same questions again.</p>
         </div>
+        <div class="comparison-card comparison-card-before">
+          <div class="comparison-label">⚠ Hidden cost per year</div>
+          <div class="comparison-stat" id="statCostLost" data-target="187200">~$187K</div>
+          <p class="comparison-detail">in fully-loaded salary burned on context reconstruction across a 6-person team averaging $200K/yr.</p>
+        </div>
+      </div>
+
+      <!-- Saved cards -->
+      <div id="solveSectionSentinel"></div>
+      <div class="solve-glow" aria-hidden="true"></div>
+      <div class="comparison-grid reverse-bias" data-anim data-delay="1">
+        <div class="comparison-card comparison-card-after">
+          <div class="comparison-label">✓ Hours reclaimed per year</div>
+          <div class="comparison-stat" data-target="749">~750 hrs</div>
+          <p class="comparison-detail">recovered by eliminating redundant context searches and rehashing past decisions.</p>
+        </div>
+        <div class="comparison-card comparison-card-after featured">
+          <div class="comparison-label">✓ Annual savings</div>
+          <div class="comparison-stat recovered-stat" id="statSavings" data-target="112320">~$110K</div>
+          <p class="comparison-detail">returned to building instead of searching, per 6-person team. Scales linearly.</p>
+        </div>
+      </div>
+
+      <div class="slack-demo-pair" data-anim data-delay="2" aria-label="Slack channel comparison">
+        <article class="slack-demo slack-demo-before" aria-labelledby="slack-before-title" data-slack-mock="before">
+          <div class="slack-demo-copy">
+            <span class="slack-demo-kicker">Before Verachi</span>
+            <h3 id="slack-before-title">Same channels. No shared memory.</h3>
+            <p>Important calls happen in Slack, but the final decision, risk owner, and source evidence stay scattered across threads.</p>
+          </div>
+          <div class="slack-window" aria-label="Slack workspace without Verachi">
+            <aside class="slack-rail" aria-label="Channels">
+              <div class="slack-team">Atlas Launch</div>
+              <button class="slack-channel is-active" type="button" data-slack-channel="launch-readiness" aria-pressed="true"><span>#</span>launch-readiness</button>
+              <button class="slack-channel" type="button" data-slack-channel="payments-risk" aria-pressed="false"><span>#</span>payments-risk</button>
+              <button class="slack-channel" type="button" data-slack-channel="security-review" aria-pressed="false"><span>#</span>security-review</button>
+              <button class="slack-channel" type="button" data-slack-channel="customer-escalations" aria-pressed="false"><span>#</span>customer-escalations</button>
+            </aside>
+            <div class="slack-thread" data-slack-thread>
+              <div class="slack-thread-header">
+                <strong>#launch-readiness</strong>
+                <span>38 unread · decision unclear</span>
+              </div>
+              <div class="slack-message-row">
+                <img class="slack-photo" src="./avatars/slack-maya.png" alt="Maya Chen" width="40" height="40" />
+                <div>
+                  <div class="slack-message-meta"><strong>Maya Chen</strong><span>Product Lead</span><span>9:42 AM</span></div>
+                  <p>Are we still holding checkout behind the fraud-review flag for the pilot?</p>
+                </div>
+              </div>
+              <div class="slack-message-row">
+                <img class="slack-photo" src="./avatars/slack-alex.png" alt="Alex Rivera" width="40" height="40" />
+                <div>
+                  <div class="slack-message-meta"><strong>Alex Rivera</strong><span>Engineering Manager</span><span>9:47 AM</span></div>
+                  <p>I remember a thread in #payments-risk, but the Jira ticket says the opposite.</p>
+                </div>
+              </div>
+              <div class="slack-message-row">
+                <img class="slack-photo" src="./avatars/slack-priya.png" alt="Priya Shah" width="40" height="40" />
+                <div>
+                  <div class="slack-message-meta"><strong>Priya Shah</strong><span>Security Lead</span><span>10:03 AM</span></div>
+                  <p>The blocker is fraud review coverage. I need the exact decision before approving the launch note.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slack-demo slack-demo-after" aria-labelledby="slack-after-title" data-slack-mock="after">
+          <div class="slack-demo-copy">
+            <span class="slack-demo-kicker">With Verachi</span>
+            <h3 id="slack-after-title">Same channels. Decisions and risks attached.</h3>
+            <p>Verachi watches the same workspace, captures the decision, links the risk, and posts a cited answer back where the team is already working.</p>
+          </div>
+          <div class="slack-window slack-window-verachi" aria-label="Slack workspace with Verachi">
+            <aside class="slack-rail" aria-label="Channels">
+              <div class="slack-team">Atlas Launch</div>
+              <button class="slack-channel is-active" type="button" data-slack-channel="launch-readiness" aria-pressed="true"><span>#</span>launch-readiness</button>
+              <button class="slack-channel" type="button" data-slack-channel="payments-risk" aria-pressed="false"><span>#</span>payments-risk</button>
+              <button class="slack-channel" type="button" data-slack-channel="security-review" aria-pressed="false"><span>#</span>security-review</button>
+              <button class="slack-channel" type="button" data-slack-channel="customer-escalations" aria-pressed="false"><span>#</span>customer-escalations</button>
+            </aside>
+            <div class="slack-thread" data-slack-thread>
+              <div class="slack-thread-header">
+                <strong>#launch-readiness</strong>
+                <span>Verachi context attached</span>
+              </div>
+              <div class="verachi-summary">
+                <div class="verachi-summary-top">
+                  <span class="verachi-bot-mark">V</span>
+                  <div>
+                    <strong>Decision found</strong>
+                    <span>DEC-104 · checkout flag remains on for pilot cohorts</span>
+                  </div>
+                </div>
+                <p>Rationale: fraud-review coverage is not complete for high-risk payment methods. Related risk is still open and assigned to Security.</p>
+                <div class="verachi-pills" aria-label="Verachi linked context">
+                  <span>Risk: at risk</span>
+                  <span>Owner: Priya</span>
+                  <span>Sources: Slack, Jira, PR</span>
+                </div>
+              </div>
+              <div class="slack-message-row">
+                <img class="slack-photo" src="./avatars/slack-jordan.png" alt="Jordan Lee" width="40" height="40" />
+                <div>
+                  <div class="slack-message-meta"><strong>Jordan Lee</strong><span>QA Lead</span><span>10:06 AM</span></div>
+                  <p>That gives QA the launch rule. I’ll update the pilot checklist against DEC-104.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -308,56 +397,119 @@
     </div>
   </section>
 
+  <div class="step-divider"><div class="step-divider-line"></div></div>
+
+  <!-- ========== DECISIONS + RISKS ========== -->
+  <section class="step-section capability-section" id="capabilitySection">
+    <div class="container">
+      <div class="capability-header" data-anim>
+        <span class="step-badge step-badge-solve">Decisions &amp; Risks</span>
+        <h2 class="step-title capability-title">The why, the risk, and the next owner.</h2>
+        <p class="step-desc capability-desc">Verachi turns scattered Slack threads, tickets, and pull requests into cited delivery records your team can act on.</p>
+      </div>
+      <div class="capability-grid" data-anim data-delay="1">
+        <article class="capability-card">
+          <span class="capability-card-label">Decisions</span>
+          <h3>Capture the resolution and rationale</h3>
+          <p>Record what was decided, why it was chosen, who reviewed it, and which source artifacts prove it.</p>
+        </article>
+        <article class="capability-card">
+          <span class="capability-card-label">Risks</span>
+          <h3>Track open risk with lifecycle notes</h3>
+          <p>Keep severity, owner, state, mitigation notes, and false-positive closures visible before launch.</p>
+        </article>
+        <article class="capability-card">
+          <span class="capability-card-label">Dependencies</span>
+          <h3>See what one decision blocks</h3>
+          <p>Link related decisions, projects, and source artifacts so review work stops depending on memory.</p>
+        </article>
+        <article class="capability-card">
+          <span class="capability-card-label">Grounded chat</span>
+          <h3>Ask with citations, not vibes</h3>
+          <p>Answers come back with source references, confidence signals, and the operational record behind them.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
 
   <!-- ========== PRICING ========== -->
   <section class="step-section pricing-section" id="pricingSection">
     <div class="container">
       <div class="pricing-header" data-anim>
-        <span class="step-badge step-badge-solve">Early Access</span>
-        <h2 class="step-title pricing-title">One simple plan.<br/>Unlimited context.</h2>
-        <p class="step-desc pricing-desc">Everything your team needs to prevent risks and deliver with confidence. No feature gating, no surprises.</p>
+        <span class="step-badge step-badge-solve">Pricing</span>
+        <h2 class="step-title pricing-title">Simple pricing.<br/>No surprises.</h2>
+        <p class="step-desc pricing-desc">Start small, scale as you grow. Every plan includes cited decision records, risk workflows, and user-visible audit history.</p>
       </div>
 
-      <div class="pricing-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); max-width: 800px; margin: 0 auto;" data-anim data-delay="1">
-        <div class="pricing-card pricing-card-featured">
+      <div class="pricing-grid" data-anim data-delay="1">
+
+        <!-- Starter -->
+        <div class="pricing-card">
           <div class="pricing-card-header">
-            <span class="pricing-card-name">Team</span>
-            <p class="pricing-card-audience">For delivery teams shipping together</p>
+            <span class="pricing-card-name">Starter</span>
+            <p class="pricing-card-audience">For small teams that want durable recall without frontier-model spend.</p>
+          </div>
+          <div class="pricing-card-price">
+            <span class="pricing-amount">$5</span>
+            <span class="pricing-period">/ month</span>
+          </div>
+          <ul class="pricing-features">
+            <li>Up to 5 users in one organization</li>
+            <li>100K monthly AI token budget</li>
+            <li>Decision capture, search, and comments</li>
+            <li>Risk records with owner and severity</li>
+            <li>Chat with 20-message context depth</li>
+            <li>5 GB workspace storage</li>
+          </ul>
+          <a class="button button-outline pricing-cta" href="#contact-form">Get Started</a>
+        </div>
+
+        <!-- Pro -->
+        <div class="pricing-card pricing-card-featured">
+          <div class="pricing-card-badge">Most popular</div>
+          <div class="pricing-card-header">
+            <span class="pricing-card-name">Pro</span>
+            <p class="pricing-card-audience">For growing organizations that need Gemini 2.5 model choice, BYOK, and more headroom.</p>
           </div>
           <div class="pricing-card-price">
             <span class="pricing-amount">$49</span>
             <span class="pricing-period">/ seat / month</span>
           </div>
           <ul class="pricing-features">
-            <li>Unlimited tool connections</li>
-            <li>Full decision capture &amp; search</li>
-            <li>Advanced risk detection</li>
-            <li>Cross-team dependency graph</li>
-            <li>Full activity history</li>
+            <li>Everything in Starter</li>
+            <li>1M monthly AI token budget</li>
+            <li>Document context in project chat</li>
+            <li>Semantic retrieval across workspace files</li>
+            <li>50-message chat history depth</li>
+            <li>More linked decisions, documents, and comments</li>
             <li>Priority support</li>
           </ul>
-          <a class="button button-primary pricing-cta" href="#contact-form">Join the Waitlist</a>
+          <a class="button button-primary pricing-cta" href="#contact-form">Start Free Trial</a>
         </div>
 
+        <!-- Enterprise -->
         <div class="pricing-card">
           <div class="pricing-card-header">
             <span class="pricing-card-name">Enterprise</span>
-            <p class="pricing-card-audience">For organizations with compliance needs</p>
+            <p class="pricing-card-audience">For tenants that need frontier Gemini preview access and effectively uncapped AI usage.</p>
           </div>
           <div class="pricing-card-price">
             <span class="pricing-amount">Custom</span>
-            <span class="pricing-period">tailored to your org</span>
+            <span class="pricing-period">tailored to your organization</span>
           </div>
           <ul class="pricing-features">
-            <li>Everything in Team</li>
-            <li>Self-hosted deployment</li>
-            <li>SSO / SAML</li>
-            <li>Advanced audit &amp; compliance</li>
-            <li>Dedicated success manager</li>
-            <li>Custom SLA</li>
+            <li>Everything in Pro</li>
+            <li>Custom monthly token budget</li>
+            <li>Frontier Gemini preview model access</li>
+            <li>500K-character transcript processing</li>
+            <li>100-message chat history depth</li>
+            <li>Security and governance review</li>
+            <li>Custom deployment and success plan</li>
           </ul>
           <a class="button button-outline pricing-cta" href="#contact-form">Contact Sales</a>
         </div>
+
       </div>
     </div>
   </section>
@@ -368,16 +520,16 @@
   <section class="cta-section contact-section" id="contact-form">
     <div class="container contact-layout" data-anim>
       <div class="contact-copy">
-        <span class="step-badge step-badge-solve">Join the Waitlist</span>
+        <span class="step-badge step-badge-solve">Book a Demo</span>
         <h2>Give your team one place to recover the why.</h2>
-        <p>See Verachi on your own data. We’ll walk through Slack, GitHub, Microsoft Teams, Jira, and the connectors still to come, then set up your workspace for early access.</p>
-        <ul class="contact-benefits" aria-label="What happens next">
+        <p>See Verachi on your own data. We’ll walk through Slack, GitHub, Microsoft Teams, Jira, and the connectors still to come, then model the delivery time your team can win back.</p>
+        <ul class="contact-benefits" aria-label="What the demo covers">
           <li>Live visibility across the tools your team already uses.</li>
-          <li>A guided onboarding session for your delivery team.</li>
+          <li>A 2-4 week pilot plan with clear success metrics.</li>
           <li>Security, governance, and read-only connector review.</li>
           <li>A practical ROI estimate based on your team shape.</li>
         </ul>
-        <p class="cta-assumptions">Due to high demand, we are onboarding teams in weekly batches to ensure a high-touch, tailored setup process.</p>
+        <p class="cta-assumptions">Numbers above are based on a 6-person team averaging $200K/yr fully-loaded cost, losing about 12 hrs/week to context reconstruction. Assumptions vary by team size and tool footprint; we model yours during the demo.</p>
       </div>
 
       <div class="contact-form-card">
@@ -461,7 +613,7 @@
           <p id="cfError" class="cf-message cf-message-error" role="alert" hidden></p>
 
           <button id="cfSubmit" class="button button-primary cf-submit" type="submit">
-            <span class="cf-submit-text">Join the Waitlist</span>
+            <span class="cf-submit-text">Send demo request</span>
             <span class="cf-submit-loading" hidden>
               <svg class="cf-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" opacity="0.2" />

@@ -16,10 +16,6 @@ function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
 
-function toMoney(value) {
-  return `$${Math.floor(value).toLocaleString()}`;
-}
-
 function animateNumberText(el, targetValue, { duration = 650, formatter = v => `${Math.floor(v)}` } = {}) {
   if (!el) return;
 
@@ -45,25 +41,6 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
   }
 
   requestAnimationFrame(tick);
-}
-
-function setHeaderCostState({ mode, label, value, fillPct }) {
-  const headerCost = document.getElementById("headerCost");
-  const costLabel = document.getElementById("costLabel");
-  const costValue = document.getElementById("costValue");
-  const costFill = document.getElementById("costMeterFill");
-
-  if (!headerCost || !costLabel || !costValue || !costFill) return;
-
-  headerCost.classList.add("visible");
-  headerCost.classList.toggle("is-saving", mode === "saving");
-
-  costLabel.textContent = label;
-  animateNumberText(costValue, value, { formatter: toMoney, duration: 700 });
-  costFill.style.width = `${clamp(fillPct, 0, 100).toFixed(0)}%`;
-
-  headerCost.classList.add("bump");
-  window.setTimeout(() => headerCost.classList.remove("bump"), 520);
 }
 
 /* ============================================================
@@ -98,6 +75,188 @@ function setHeaderCostState({ mode, label, value, fillPct }) {
   }, { threshold: 0.15 });
 
   els.forEach(el => observer.observe(el));
+})();
+
+/* ============================================================
+   SLACK CHANNEL MOCKS — switch channels in before/after panels
+   ============================================================ */
+(function initSlackChannelMocks() {
+  const mocks = Array.from(document.querySelectorAll("[data-slack-mock]"));
+  if (!mocks.length) return;
+
+  const people = {
+    maya: {
+      name: "Maya Chen",
+      title: "Product Lead",
+      avatar: "./avatars/slack-maya.png",
+    },
+    alex: {
+      name: "Alex Rivera",
+      title: "Engineering Manager",
+      avatar: "./avatars/slack-alex.png",
+    },
+    priya: {
+      name: "Priya Shah",
+      title: "Security Lead",
+      avatar: "./avatars/slack-priya.png",
+    },
+    jordan: {
+      name: "Jordan Lee",
+      title: "QA Lead",
+      avatar: "./avatars/slack-jordan.png",
+    },
+  };
+
+  const channels = {
+    before: {
+      "launch-readiness": {
+        status: "38 unread - decision unclear",
+        messages: [
+          ["maya", "9:42 AM", "Are we still holding checkout behind the fraud-review flag for the pilot?"],
+          ["alex", "9:47 AM", "I remember a thread in #payments-risk, but the Jira ticket says the opposite."],
+          ["priya", "10:03 AM", "The blocker is fraud review coverage. I need the exact decision before approving the launch note."],
+        ],
+      },
+      "payments-risk": {
+        status: "12 unread - owner unclear",
+        messages: [
+          ["alex", "9:31 AM", "The retry queue is still spiking on high-risk cards. Was the mitigation accepted or parked?"],
+          ["priya", "9:36 AM", "I found a risk note in Jira, but no owner or closed-as reason."],
+          ["maya", "9:51 AM", "Let's not unblock launch until someone confirms what changed since the last review."],
+        ],
+      },
+      "security-review": {
+        status: "7 unread - approval blocked",
+        messages: [
+          ["priya", "11:12 AM", "Can someone link the decision that scoped audit-log export out of the pilot?"],
+          ["alex", "11:19 AM", "It was in a PR conversation, I think. Searching now."],
+          ["jordan", "11:28 AM", "QA is waiting on this before we mark the evidence checklist complete."],
+        ],
+      },
+      "customer-escalations": {
+        status: "21 unread - repeated questions",
+        messages: [
+          ["maya", "1:06 PM", "Support is asking if we promised the customer a pilot date or only a readiness update."],
+          ["jordan", "1:14 PM", "The answer changed twice in Slack. I don't know which one became final."],
+          ["alex", "1:22 PM", "This is turning into a handoff risk. We need the final call before EOD."],
+        ],
+      },
+    },
+    after: {
+      "launch-readiness": {
+        status: "Verachi context attached",
+        summary: {
+          title: "Decision found",
+          detail: "DEC-104 - checkout flag remains on for pilot cohorts",
+          body: "Rationale: fraud-review coverage is not complete for high-risk payment methods. Related risk is still open and assigned to Security.",
+          pills: ["Risk: at risk", "Owner: Priya", "Sources: Slack, Jira, PR"],
+        },
+        messages: [
+          ["jordan", "10:06 AM", "That gives QA the launch rule. I'll update the pilot checklist against DEC-104."],
+        ],
+      },
+      "payments-risk": {
+        status: "Risk owner visible",
+        summary: {
+          title: "Risk found",
+          detail: "RISK-211 - retry queue can delay pilot checkout",
+          body: "Severity is at risk. Mitigation is assigned to Alex, with Priya as reviewer, and linked to the payment retry PR.",
+          pills: ["Severity: at risk", "Owner: Alex", "Next: mitigation note"],
+        },
+        messages: [
+          ["alex", "9:39 AM", "I have the owner now. I'll post the mitigation note and link the PR before standup."],
+        ],
+      },
+      "security-review": {
+        status: "Approval path clear",
+        summary: {
+          title: "Decision and control found",
+          detail: "DEC-118 - audit-log export stays out of pilot scope",
+          body: "The decision cites the security review and marks export scope as blocked until retention controls are approved.",
+          pills: ["State: blocked", "Reviewer: Priya", "Evidence: 3 sources"],
+        },
+        messages: [
+          ["priya", "11:21 AM", "This is enough for review. Keep export disabled and attach DEC-118 to the release note."],
+        ],
+      },
+      "customer-escalations": {
+        status: "Customer answer aligned",
+        summary: {
+          title: "Decision found",
+          detail: "DEC-123 - send readiness update, not pilot date",
+          body: "Support should share the readiness update after QA completes the checklist. No pilot date is committed yet.",
+          pills: ["Risk: watch", "Owner: Maya", "Source: escalation thread"],
+        },
+        messages: [
+          ["maya", "1:18 PM", "Good. I can give Support the exact wording and avoid another launch-date promise."],
+        ],
+      },
+    },
+  };
+
+  function messageHtml([personKey, time, body]) {
+    const person = people[personKey];
+    return `
+      <div class="slack-message-row">
+        <img class="slack-photo" src="${person.avatar}" alt="${person.name}" width="40" height="40" />
+        <div>
+          <div class="slack-message-meta"><strong>${person.name}</strong><span>${person.title}</span><span>${time}</span></div>
+          <p>${body}</p>
+        </div>
+      </div>
+    `;
+  }
+
+  function summaryHtml(summary) {
+    if (!summary) return "";
+    return `
+      <div class="verachi-summary">
+        <div class="verachi-summary-top">
+          <span class="verachi-bot-mark">V</span>
+          <div>
+            <strong>${summary.title}</strong>
+            <span>${summary.detail}</span>
+          </div>
+        </div>
+        <p>${summary.body}</p>
+        <div class="verachi-pills" aria-label="Verachi linked context">
+          ${summary.pills.map((pill) => `<span>${pill}</span>`).join("")}
+        </div>
+      </div>
+    `;
+  }
+
+  function renderChannel(mock, channelName) {
+    const mode = mock.dataset.slackMock;
+    const thread = mock.querySelector("[data-slack-thread]");
+    const channel = channels[mode]?.[channelName];
+    if (!thread || !channel) return;
+
+    mock.querySelectorAll("[data-slack-channel]").forEach((button) => {
+      const isActive = button.dataset.slackChannel === channelName;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+
+    thread.innerHTML = `
+      <div class="slack-thread-header">
+        <strong>#${channelName}</strong>
+        <span>${channel.status}</span>
+      </div>
+      ${summaryHtml(channel.summary)}
+      ${channel.messages.map(messageHtml).join("")}
+    `;
+  }
+
+  mocks.forEach((mock) => {
+    mock.querySelectorAll("[data-slack-channel]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const channelName = button.dataset.slackChannel;
+        if (!channelName) return;
+        renderChannel(mock, channelName);
+      });
+    });
+  });
 })();
 
 /* ============================================================
@@ -370,16 +529,6 @@ function setHeaderCostState({ mode, label, value, fillPct }) {
     // Status bar
     later(() => statusBar?.classList.add("visible"), baseDelay + (isReduced ? 180 : 3600));
 
-    // Update the header "savings" state once the connect section has "landed".
-    later(() => {
-      const yearlySavings = Number(document.getElementById("statSavings")?.dataset?.target || 0) || 112320;
-      setHeaderCostState({
-        mode: "saving",
-        label: "Recovered / year",
-        value: yearlySavings,
-        fillPct: 100,
-      });
-    }, baseDelay + (isReduced ? 200 : 3800));
   }
 
   const observer = new IntersectionObserver((entries) => {
@@ -637,4 +786,3 @@ function setHeaderCostState({ mode, label, value, fillPct }) {
     resetButton();
   });
 })();
-

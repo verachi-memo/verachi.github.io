@@ -258,86 +258,6 @@ main {
   transform: translateY(-1px);
 }
 
-.header-cost {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 9px 14px;
-  border-radius: 18px;
-  border: 1px solid var(--line-0);
-  background: var(--surface-0);
-  opacity: 0;
-  transform: translateY(-4px) scale(0.98);
-  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
-  pointer-events: none;
-}
-
-.header-cost.visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  pointer-events: auto;
-}
-
-.header-cost-label {
-  font-size: 0.67rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  white-space: nowrap;
-}
-
-.header-cost-value {
-  font-family: var(--font-mono);
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--red);
-  letter-spacing: -0.04em;
-  white-space: nowrap;
-  transition: color var(--dur) var(--ease);
-}
-
-.header-cost.is-saving {
-  background: var(--mint-soft);
-  border-color: var(--mint-soft);
-}
-
-.header-cost.is-saving .header-cost-value {
-  color: var(--mint);
-}
-
-.header-cost-meter {
-  position: relative;
-  width: 74px;
-  height: 4px;
-  flex-shrink: 0;
-  overflow: hidden;
-  border-radius: var(--radius-pill);
-  background: var(--line-0);
-}
-
-.header-cost-meter-fill {
-  width: 0%;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, var(--red), var(--gold));
-  transition: width 420ms var(--ease), background 220ms var(--ease);
-}
-
-.header-cost.is-saving .header-cost-meter-fill {
-  background: linear-gradient(90deg, var(--mint), var(--accent));
-}
-
-.header-cost.bump .header-cost-value {
-  animation: header-cost-pulse 0.48s var(--ease);
-}
-
-@keyframes header-cost-pulse {
-  0% { transform: scale(1); }
-  35% { transform: scale(1.08); }
-  100% { transform: scale(1); }
-}
-
 .header-actions {
   display: inline-flex;
   align-items: center;
@@ -1120,6 +1040,120 @@ main {
   text-wrap: pretty;
 }
 
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 36px;
+}
+
+.comparison-grid.reverse-bias {
+  margin-top: 18px;
+}
+
+.comparison-card {
+  position: relative;
+  min-height: 230px;
+  overflow: hidden;
+  padding: clamp(24px, 3vw, 34px);
+  border: 1px solid var(--line-0);
+  border-radius: 28px;
+  background: var(--surface-1);
+  box-shadow: var(--shadow-md);
+}
+
+.comparison-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background: var(--line-1);
+}
+
+.comparison-card-before {
+  border-color: rgba(180, 95, 76, 0.2);
+  background:
+    linear-gradient(135deg, rgba(180, 95, 76, 0.1), transparent 46%),
+    var(--surface-1);
+}
+
+.comparison-card-before::before {
+  background: linear-gradient(90deg, var(--red), var(--gold));
+}
+
+.comparison-card-after {
+  border-color: rgba(63, 111, 87, 0.2);
+  background:
+    linear-gradient(135deg, rgba(63, 111, 87, 0.12), transparent 46%),
+    var(--surface-2);
+}
+
+.comparison-card-after::before {
+  background: linear-gradient(90deg, var(--mint), var(--accent));
+}
+
+.comparison-card.featured {
+  min-height: 260px;
+  box-shadow: var(--shadow-lg);
+}
+
+.comparison-label {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 24px;
+  color: var(--ink-2);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.comparison-card-before .comparison-label {
+  color: var(--red);
+}
+
+.comparison-card-after .comparison-label {
+  color: var(--mint);
+}
+
+.comparison-stat {
+  display: block;
+  margin-bottom: 16px;
+  font-family: var(--font-mono);
+  font-size: clamp(3.25rem, 7vw, 5.8rem);
+  font-weight: 850;
+  line-height: 0.9;
+  letter-spacing: -0.08em;
+  color: var(--ink-0);
+}
+
+.comparison-card-before .comparison-stat {
+  color: var(--red);
+}
+
+.comparison-card-after .comparison-stat {
+  color: var(--mint);
+}
+
+.comparison-detail {
+  max-width: 38ch;
+  color: var(--ink-2);
+  font-size: 0.96rem;
+  line-height: 1.68;
+  text-wrap: pretty;
+}
+
+@media (max-width: 860px) {
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-card,
+  .comparison-card.featured {
+    min-height: auto;
+  }
+}
+
 /* ============================================================
    PROBLEM — SLACK MOCK
    ============================================================ */
@@ -1388,6 +1422,299 @@ main {
 @media (max-width: 768px) {
   .slack-sidebar {
     display: none;
+  }
+}
+
+.slack-demo-pair {
+  display: grid;
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.slack-demo {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.52fr) minmax(0, 1fr);
+  gap: clamp(22px, 4vw, 44px);
+  align-items: stretch;
+  padding: clamp(22px, 4vw, 34px);
+  border: 1px solid var(--line-1);
+  border-radius: 30px;
+  background: var(--surface-1);
+  box-shadow: var(--shadow-md);
+}
+
+.slack-demo-before {
+  border-color: rgba(180, 95, 76, 0.22);
+  background:
+    linear-gradient(135deg, rgba(180, 95, 76, 0.08), transparent 42%),
+    var(--surface-1);
+}
+
+.slack-demo-after {
+  border-color: rgba(49, 95, 90, 0.24);
+  background:
+    linear-gradient(135deg, rgba(49, 95, 90, 0.12), transparent 44%),
+    var(--surface-2);
+}
+
+.slack-demo-copy {
+  align-self: center;
+}
+
+.slack-demo-kicker {
+  display: inline-flex;
+  margin-bottom: 12px;
+  color: var(--accent-strong);
+  font-size: 0.74rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.slack-demo-before .slack-demo-kicker {
+  color: var(--red);
+}
+
+.slack-demo-copy h3 {
+  max-width: 12ch;
+  color: var(--ink-0);
+  font-size: clamp(1.55rem, 3vw, 2.35rem);
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+}
+
+.slack-demo-copy p {
+  margin-top: 14px;
+  color: var(--ink-2);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.slack-window {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  min-height: 388px;
+  overflow: hidden;
+  border: 1px solid rgba(63, 14, 64, 0.16);
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 18px 48px rgba(52, 49, 44, 0.13);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.slack-rail {
+  padding: 16px 10px;
+  background: #3f0e40;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.slack-team {
+  margin: 0 8px 14px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 850;
+}
+
+.slack-channel {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 7px;
+  font-size: 0.86rem;
+  font-weight: 650;
+  line-height: 1.3;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+
+.slack-channel span {
+  opacity: 0.58;
+}
+
+.slack-channel.is-active {
+  background: #1264a3;
+  color: #fff;
+}
+
+.slack-channel:not(.is-active):hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.slack-channel:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.74);
+  outline-offset: 2px;
+}
+
+.slack-thread {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  background: #fff;
+}
+
+.slack-thread-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 15px 18px;
+  border-bottom: 1px solid #e8e3dd;
+  color: #1d1c1d;
+}
+
+.slack-thread-header strong {
+  font-size: 0.95rem;
+}
+
+.slack-thread-header span {
+  color: #706a64;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.slack-message-row {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 11px;
+  padding: 15px 18px;
+}
+
+.slack-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: #efe8dd;
+}
+
+.slack-message-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 7px;
+  margin-bottom: 4px;
+}
+
+.slack-message-meta strong {
+  color: #1d1c1d;
+  font-size: 0.9rem;
+  font-weight: 850;
+}
+
+.slack-message-meta span {
+  color: #706a64;
+  font-size: 0.74rem;
+  font-weight: 650;
+}
+
+.slack-message-row p {
+  color: #1d1c1d;
+  font-size: 0.9rem;
+  line-height: 1.48;
+}
+
+.verachi-summary {
+  margin: 16px 18px 8px;
+  padding: 16px;
+  border: 1px solid rgba(49, 95, 90, 0.2);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(49, 95, 90, 0.1), rgba(255, 253, 248, 0.96));
+}
+
+.verachi-summary-top {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.verachi-bot-mark {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: var(--accent-strong);
+  color: #fff;
+  font-weight: 900;
+}
+
+.verachi-summary strong {
+  display: block;
+  color: var(--accent-strong);
+  font-size: 0.92rem;
+}
+
+.verachi-summary span {
+  color: var(--ink-2);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.verachi-summary p {
+  color: var(--ink-1);
+  font-size: 0.9rem;
+  line-height: 1.58;
+}
+
+.verachi-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.verachi-pills span {
+  padding: 5px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  border: 1px solid var(--line-0);
+  color: var(--accent-strong);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+@media (max-width: 980px) {
+  .slack-demo {
+    grid-template-columns: 1fr;
+  }
+
+  .slack-demo-copy h3 {
+    max-width: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .slack-window {
+    grid-template-columns: 1fr;
+  }
+
+  .slack-rail {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 12px;
+  }
+
+  .slack-team {
+    flex: 0 0 auto;
+    margin: 0 8px 0 0;
+  }
+
+  .slack-channel {
+    flex: 0 0 auto;
+    width: auto;
+  }
+
+  .slack-thread-header {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 
@@ -2047,6 +2374,90 @@ main {
 /* ============================================================
    PRICING
    ============================================================ */
+.capability-section {
+  position: relative;
+}
+
+.capability-section::before {
+  background:
+    linear-gradient(180deg, rgba(49, 95, 90, 0.08), transparent 30%),
+    linear-gradient(180deg, var(--surface-0), transparent);
+}
+
+.capability-header {
+  max-width: 760px;
+  margin: 0 auto 38px;
+  text-align: center;
+}
+
+.capability-title {
+  max-width: 15ch;
+  margin-inline: auto;
+}
+
+.capability-desc {
+  max-width: 52ch;
+  margin-inline: auto;
+}
+
+.capability-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.capability-card {
+  min-height: 270px;
+  padding: 26px 22px;
+  border: 1px solid var(--line-0);
+  border-radius: 26px;
+  background:
+    linear-gradient(180deg, var(--surface-2), var(--surface-1)),
+    var(--surface-1);
+  box-shadow: var(--shadow-sm);
+}
+
+.capability-card-label {
+  display: inline-flex;
+  margin-bottom: 26px;
+  color: var(--accent-strong);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.capability-card h3 {
+  color: var(--ink-0);
+  font-size: 1.18rem;
+  line-height: 1.18;
+  letter-spacing: -0.035em;
+}
+
+.capability-card p {
+  margin-top: 14px;
+  color: var(--ink-2);
+  font-size: 0.92rem;
+  line-height: 1.68;
+  text-wrap: pretty;
+}
+
+@media (max-width: 980px) {
+  .capability-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .capability-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .capability-card {
+    min-height: auto;
+  }
+}
+
 .pricing-section {
   position: relative;
 }
@@ -2652,12 +3063,6 @@ html.js [data-anim].in-view {
 /* ============================================================
    RESPONSIVE
    ============================================================ */
-@media (max-width: 1080px) {
-  .header-cost {
-    display: none;
-  }
-}
-
 @media (max-width: 860px) {
   .header-nav {
     display: none;
@@ -2748,7 +3153,6 @@ html.js [data-anim].in-view {
   .hero-glow,
   .hero-scroll-hint,
   .activity-stage.stage-live .chrome-status-dot,
-  .header-cost.bump .header-cost-value,
   .orbit-ring-outer,
   .orbit-ring-inner,
   .orbit-center::before,
@@ -2765,8 +3169,6 @@ html.js [data-anim].in-view {
   .activity-stage,
   .activity-item,
   .chrome-progress-fill,
-  .header-cost,
-  .header-cost-meter-fill,
   .hero-preview-card,
   .orbit-node,
   .orbit-center,
