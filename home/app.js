@@ -101,161 +101,103 @@ function setHeaderCostState({ mode, label, value, fillPct }) {
 })();
 
 /* ============================================================
-   PROBLEM STAGE — live activity feed + header cost meter
+   PROBLEM SLACK MOCK — live chat feed + cost tally
    ============================================================ */
-(function initProblemStage() {
-  const stage = document.getElementById("problemStage");
-  const feedList = document.getElementById("problemFeedList");
-  const statusEl = document.getElementById("problemStatus");
-  const progressEl = document.getElementById("problemProgress");
+(function initSlackMock() {
+  const section = document.getElementById("problemSection");
+  const feed = document.getElementById("slackChatFeed");
+  const placeholder = document.getElementById("slackPlaceholder");
+  const totalCostEl = document.getElementById("slackTotalCost");
+  const costContainer = document.getElementById("slackCostContainer");
 
-  if (!stage || !feedList || !statusEl || !progressEl) return;
+  if (!section || !feed || !totalCostEl) return;
 
-  const yearlyCost = Number(document.getElementById("statCostLost")?.dataset?.target || 0) || 187200;
-  const yearlySavings = Number(document.getElementById("statSavings")?.dataset?.target || 0) || 112320;
-
-  const toolIconSource = {
-    slack: "#onode-0 svg",
-    jira: "#onode-1 svg",
-    github: "#onode-2 svg",
-    teams: "#onode-3 svg",
-  };
-
-  const toolIconClass = {
-    slack: "icon-color-slack",
-    jira: "icon-color-jira",
-    github: "icon-color-github",
-    teams: "icon-color-teams",
-  };
-
-  function cloneToolSvg(tool) {
-    const source = document.querySelector(toolIconSource[tool]);
-    if (!source) return null;
-    const clone = source.cloneNode(true);
-    clone.setAttribute("aria-hidden", "true");
-    clone.removeAttribute("aria-label");
-    return clone;
+  function getInitials(name) {
+    return name.substring(0, 2).toUpperCase();
   }
 
-  function appendItem({ tool, person, cost, title, body, meta }) {
-    const item = document.createElement("div");
-    item.className = "activity-item live-current";
+  function appendMessage({ person, cost, title, body, time }) {
+    if (placeholder) {
+      placeholder.remove();
+    }
 
-    const icon = document.createElement("div");
-    icon.className = `activity-item-icon ${toolIconClass[tool] || ""}`.trim();
-    const svg = cloneToolSvg(tool);
-    if (svg) icon.appendChild(svg);
-
-    const content = document.createElement("div");
+    const msg = document.createElement("div");
+    msg.className = "slack-message";
     
-    // Person row
-    const personRow = document.createElement("div");
-    personRow.className = "activity-item-person";
-    personRow.innerHTML = `
-      <div class="person-details">
-        <span class="person-name">${person.name}</span>
-        <span class="person-title">${person.title}</span>
-        <span class="person-salary">$${Math.round(person.salary / 1000)}k/yr</span>
+    msg.innerHTML = `
+      <div class="slack-avatar">${getInitials(person.name)}</div>
+      <div class="slack-message-content">
+        <div class="slack-message-header">
+          <span class="slack-name">${person.name}</span>
+          <span class="slack-time">${time}</span>
+          <span class="slack-title">${person.title}</span>
+          <span class="slack-salary">$${Math.round(person.salary / 1000)}k/yr</span>
+        </div>
+        <div class="slack-body"><strong>[${title}]</strong> ${body}</div>
       </div>
-      <div class="event-cost" aria-label="Cost of event">
-        +$${cost.toLocaleString()} lost
-      </div>
+      <div class="slack-event-cost">+$${cost.toLocaleString()} lost</div>
     `;
 
-    const titleRow = document.createElement("div");
-    titleRow.className = "activity-item-title";
-
-    const strong = document.createElement("strong");
-    strong.textContent = title;
-
-    const metaEl = document.createElement("span");
-    metaEl.className = "activity-item-meta";
-    metaEl.textContent = meta;
-
-    titleRow.appendChild(strong);
-    titleRow.appendChild(metaEl);
-
-    const bodyEl = document.createElement("div");
-    bodyEl.className = "activity-item-body";
-    bodyEl.textContent = body;
-
-    content.appendChild(personRow);
-    content.appendChild(titleRow);
-    content.appendChild(bodyEl);
-
-    // Demote previous "current" item.
-    const prev = feedList.querySelector(".activity-item.live-current");
-    if (prev) prev.classList.remove("live-current");
-
-    item.appendChild(icon);
-    item.appendChild(content);
-    feedList.appendChild(item);
+    feed.appendChild(msg);
+    feed.scrollTop = feed.scrollHeight;
   }
 
   const events = [
     {
-      tool: "slack",
       person: { name: "Sarah", title: "Product Manager", salary: 185000 },
       cost: 320,
       title: "Same question, again",
-      meta: "Slack · #delivery",
+      time: "10:04 AM",
       body: "“Did we decide to ship read-only Jira write-backs for the pilot?”",
     },
     {
-      tool: "jira",
       person: { name: "David", title: "Engineering Lead", salary: 210000 },
       cost: 540,
       title: "Ticket reopened",
-      meta: "Jira · ENG-1824",
+      time: "10:12 AM",
       body: "Acceptance criteria updated — but the original decision isn’t linked anywhere.",
     },
     {
-      tool: "github",
       person: { name: "Elena", title: "Senior Staff Engineer", salary: 245000 },
       cost: 850,
       title: "PR drift",
-      meta: "GitHub · PR #482",
-      body: "Implementation diverged from the initial rationale; reviewers are reconstructing the why from threads.",
+      time: "10:35 AM",
+      body: "Implementation diverged from the initial rationale; I'm reconstructing the why from old threads.",
     },
     {
-      tool: "teams",
       person: { name: "Marcus", title: "QA Lead", salary: 160000 },
       cost: 210,
       title: "Dependency question",
-      meta: "Teams · Standup",
-      body: "“Who owns the blocker? Which team signed off?” — context scattered across tools.",
+      time: "11:02 AM",
+      body: "“Who owns the blocker? Which team signed off?” — context is scattered across 4 tools.",
     },
     {
-      tool: "slack",
       person: { name: "Sarah", title: "Product Manager", salary: 185000 },
       cost: 480,
       title: "Decision archaeology",
-      meta: "Slack · thread",
-      body: "Links to three old messages, two tickets, and a PR… still no single source of truth.",
+      time: "11:20 AM",
+      body: "Here are links to three old messages, two tickets, and a PR… still no single source of truth.",
     },
     {
-      tool: "jira",
       person: { name: "James", title: "Design Director", salary: 200000 },
       cost: 650,
       title: "Scope changes",
-      meta: "Jira · EPIC-77",
-      body: "Timeline shifted. The decision and tradeoffs weren’t captured, so the team repeats the debate.",
+      time: "1:15 PM",
+      body: "Timeline shifted. The decision and tradeoffs weren’t captured, so the team is repeating the debate.",
     },
     {
-      tool: "github",
       person: { name: "David", title: "Engineering Lead", salary: 210000 },
       cost: 1100,
       title: "Risk surfaces late",
-      meta: "GitHub · checks",
-      body: "A risky change lands because the original constraints were never visible to reviewers.",
+      time: "2:40 PM",
+      body: "A risky change landed because the original constraints were never visible to reviewers.",
     },
     {
-      tool: "teams",
       person: { name: "Elena", title: "Senior Staff Engineer", salary: 245000 },
       cost: 380,
       title: "Escalation ping",
-      meta: "Teams · incident",
-      body: "A launch question escalates — everyone asks the same “what did we decide?”",
+      time: "3:05 PM",
+      body: "A launch question escalated — everyone is asking the same “what did we decide?”",
     },
   ];
 
@@ -263,41 +205,22 @@ function setHeaderCostState({ mode, label, value, fillPct }) {
 
   async function run() {
     started = true;
-    stage.classList.add("stage-live");
-    statusEl.textContent = "capturing";
-
-    const baseDelay = prefersReducedMotion.matches ? 0 : 840;
-    let costSoFar = 0;
-
-    setHeaderCostState({
-      mode: "cost",
-      label: "Context cost / year",
-      value: 0,
-      fillPct: 0,
-    });
+    const baseDelay = prefersReducedMotion.matches ? 0 : 1200;
+    let totalCost = 0;
 
     for (let i = 0; i < events.length; i++) {
-      appendItem(events[i]);
-
-      const pct = ((i + 1) / events.length) * 100;
-      progressEl.style.width = `${pct.toFixed(0)}%`;
-
-      costSoFar = Math.round((yearlyCost * (i + 1)) / events.length);
-      setHeaderCostState({
-        mode: "cost",
-        label: "Context cost / year",
-        value: costSoFar,
-        fillPct: pct,
-      });
+      appendMessage(events[i]);
+      
+      totalCost += events[i].cost;
+      animateNumberText(totalCostEl, totalCost, { formatter: v => \`$\${Math.floor(v).toLocaleString()}\` });
+      
+      if (costContainer) {
+        costContainer.classList.add("bump");
+        setTimeout(() => costContainer.classList.remove("bump"), 300);
+      }
 
       await sleep(baseDelay);
     }
-
-    statusEl.textContent = "captured";
-    stage.classList.remove("stage-live");
-
-    // Preload the "savings" state so it’s ready when the user reaches Connect.
-    stage.dataset.yearlySavings = String(yearlySavings);
   }
 
   const observer = new IntersectionObserver((entries) => {
@@ -307,7 +230,7 @@ function setHeaderCostState({ mode, label, value, fillPct }) {
     });
   }, { threshold: 0.35 });
 
-  observer.observe(stage);
+  observer.observe(section);
 })();
 
 /* ============================================================
