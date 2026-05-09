@@ -18,15 +18,17 @@ function sleep(ms) {
 (function initMobileMenu() {
   const toggle = document.getElementById("mobileMenuToggle");
   const nav = document.getElementById("headerNav");
+  const header = document.querySelector(".site-header");
   if (!toggle || !nav) return;
 
-  const mobileQuery = window.matchMedia("(max-width: 860px)");
+  const mobileQuery = window.matchMedia("(max-width: 720px)");
 
   function setMenuOpen(open) {
     const shouldOpen = mobileQuery.matches ? open : false;
     toggle.setAttribute("aria-expanded", String(shouldOpen));
     toggle.setAttribute("aria-label", shouldOpen ? "Close menu" : "Open menu");
     nav.hidden = !shouldOpen;
+    if (header) header.classList.toggle("is-menu-open", shouldOpen);
 
     // Swap icon between hamburger and X
     if (shouldOpen) {
@@ -56,10 +58,12 @@ function sleep(ms) {
     if (!mobileQuery.matches) {
       nav.hidden = false;
       toggle.setAttribute("aria-expanded", "false");
+      if (header) header.classList.remove("is-menu-open");
     } else {
       // On mobile, nav should be hidden unless explicitly opened
       if (toggle.getAttribute("aria-expanded") !== "true") {
         nav.hidden = true;
+        if (header) header.classList.remove("is-menu-open");
       }
     }
   }

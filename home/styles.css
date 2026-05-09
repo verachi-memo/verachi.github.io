@@ -4031,14 +4031,6 @@ html.js [data-anim].in-view {
    RESPONSIVE
    ============================================================ */
 @media (max-width: 860px) {
-  .menu-toggle {
-    display: none;
-  }
-
-  .header-nav {
-    display: none;
-  }
-
   .hero-layout,
   .hero-preview-grid,
   .hero-preview-strip,
@@ -4064,6 +4056,40 @@ html.js [data-anim].in-view {
 @media (max-width: 720px) {
   .site-header {
     padding-inline: 12px;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .header-nav {
+    display: none;
+  }
+
+  .site-header.is-menu-open .header-nav {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    transform: none;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 12px;
+    border: 1px solid var(--line-1);
+    border-radius: 22px;
+    background: var(--surface-2);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .site-header.is-menu-open .header-nav a {
+    display: flex;
+    justify-content: center;
+    padding-block: 12px;
   }
 
   .container {

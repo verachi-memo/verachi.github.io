@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="./home/styles.css?v=5" />
+<link rel="stylesheet" href="./home/styles.css?v=6" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NHXTJ2NZMT"></script>
   <script>
@@ -36,7 +36,14 @@
       </div>
       <span>VERACHI</span>
     </a>
-    <nav class="header-nav" aria-label="Page sections">
+    <button class="menu-toggle" id="mobileMenuToggle" type="button" aria-expanded="false" aria-controls="headerNav" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="4" y1="7" x2="20" y2="7" />
+        <line x1="4" y1="12" x2="20" y2="12" />
+        <line x1="4" y1="17" x2="20" y2="17" />
+      </svg>
+    </button>
+    <nav class="header-nav" id="headerNav" aria-label="Page sections">
       <a href="#heroSection">Overview</a>
       <a href="#problemSection">Demo</a>
       <a href="#pricingSection">Pricing</a>
