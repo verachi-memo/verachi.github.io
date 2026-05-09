@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="./home/styles.css" />
+<link rel="stylesheet" href="./home/styles.css?v=3" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NHXTJ2NZMT"></script>
   <script>
@@ -28,7 +28,7 @@
 <a class="skip-link" href="#main-content">Skip to content</a>
 
 <!-- ========== HEADER ========== -->
-<header class="site-header" data-header>
+<header class="site-header">
   <div class="header-inner">
     <a class="brand" href="#heroSection" aria-label="Verachi home">
       <div class="brand-mark">
@@ -36,22 +36,15 @@
       </div>
       <span>VERACHI</span>
     </a>
-    <button class="menu-toggle" id="mobileMenuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="headerNav">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <line x1="4" y1="7" x2="20" y2="7" />
-        <line x1="4" y1="12" x2="20" y2="12" />
-        <line x1="4" y1="17" x2="20" y2="17" />
-      </svg>
-    </button>
-    <nav class="header-nav" id="headerNav" aria-label="Page sections" hidden>
+    <nav class="header-nav" aria-label="Page sections">
       <a href="#heroSection">Overview</a>
-      <a href="#problemSection">How It Works</a>
-      <a href="#pricingSection">Access</a>
+      <a href="#problemSection">Demo</a>
+      <a href="#pricingSection">Pricing</a>
       <a href="#contact-form">Contact</a>
     </nav>
     <div class="header-actions">
       <a class="header-link" href="https://app.verachi.io/login">Sign In</a>
-      <a class="header-cta" href="#contact-form">Request Access</a>
+      <a class="header-cta" href="#contact-form">Book a Demo</a>
     </div>
   </div>
 </header>
@@ -61,28 +54,75 @@
   <!-- ========== HERO ========== -->
   <section class="hero" id="heroSection">
     <div class="hero-glow" aria-hidden="true"></div>
-    <div class="container hero-layout-centered">
-      <div class="hero-kicker" data-anim>The single source of truth for delivery teams</div>
-      <h1 data-anim><span class="hero-emphasis">Prevent risks.</span><span class="hero-break">Deliver with confidence.</span></h1>
-      <p class="hero-sub hero-sub-centered" data-anim data-delay="1">
-        <strong>Verachi keeps your team's vision visible and current</strong> across
-        <span class="hero-inline-tool hero-tool-name">Slack</span>,
-        <span class="hero-inline-tool hero-tool-name">GitHub</span>,
-        <span class="hero-inline-tool hero-tool-name">Microsoft Teams</span> and
-        <span class="hero-inline-tool hero-tool-name">Jira</span>, with no tool change required.
-      </p>
-      <div class="hero-actions hero-actions-centered" data-anim data-delay="2">
-        <a class="button button-primary" href="#contact-form">
-          Request Access
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <a class="button button-outline" href="#problemSection">See How It Works</a>
+    <div class="container hero-layout">
+      <div class="hero-copy">
+        <div class="hero-kicker" data-anim>The single source of truth for delivery teams</div>
+        <h1 data-anim><span class="hero-emphasis">Prevent risks.</span><span class="hero-break">Deliver with confidence.</span></h1>
+        <div class="hero-stance" data-anim data-delay="1">Consolidate once, decide together.</div>
+        <p class="hero-sub" data-anim data-delay="1">
+          <strong>Verachi keeps your team’s vision visible and current</strong> across
+          <span class="hero-inline-tool hero-tool-name">Slack</span>,
+          <span class="hero-inline-tool hero-tool-name">GitHub</span>,
+          <span class="hero-inline-tool hero-tool-name">Microsoft Teams</span> and
+          <span class="hero-inline-tool hero-tool-name">Jira</span>, with no tool change required.
+        </p>
+        <div class="hero-actions" data-anim data-delay="2">
+          <a class="button button-primary" href="#contact-form">
+            Book a Demo
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a class="button button-outline" href="#problemSection">See the context leak</a>
+        </div>
+        <div class="hero-proof" data-anim data-delay="2" aria-label="Hero proof points">
+          <span class="hero-proof-item">Detect blocked work earlier</span>
+          <span class="hero-proof-item">Reduce cross-team dependency risk</span>
+          <span class="hero-proof-item">No tool change required</span>
+        </div>
       </div>
-      <div class="hero-proof hero-proof-centered" data-anim data-delay="2" aria-label="Hero proof points">
-        <span class="hero-proof-item">Detect blocked work earlier</span>
-        <span class="hero-proof-item">Reduce cross-team dependency risk</span>
-        <span class="hero-proof-item">No tool change required</span>
-      </div>
+      <aside class="hero-sidebar" data-anim data-delay="3" aria-label="Verachi summary">
+        <div class="hero-panel">
+          <div class="hero-panel-top">
+            <div>
+              <span class="hero-panel-eyebrow">What Verachi changes</span>
+              <h2 class="hero-panel-title">Projects don’t fail suddenly. <br>They fail silently.</h2>
+            </div>
+          </div>
+          <div class="hero-panel-stack" aria-label="Verachi overview cards">
+            <div class="hero-panel-card">
+              <span class="hero-panel-card-label">Problem</span>
+              <div class="hero-panel-list">
+                <p class="hero-panel-list-item">Information &amp; data are scattered across too many tools</p>
+                <p class="hero-panel-list-item">Risks detected too late, often visible only after impact</p>
+                <p class="hero-panel-list-item">Reporting is manual, biased, outdated and overwhelming teams</p>
+              </div>
+            </div>
+            <div class="hero-panel-card">
+              <span class="hero-panel-card-label">Solution Proposal</span>
+              <div class="hero-panel-list">
+                <p class="hero-panel-list-item">All your problems in single place by connecting your tools</p>
+                <p class="hero-panel-list-item">Cut reporting overhead and accelerate cross-team resolution</p>
+                <p class="hero-panel-list-item">Give leaders clearer signals for faster, more confident decisions</p>
+              </div>
+            </div>
+            <div class="hero-panel-card">
+              <span class="hero-panel-card-label">Benefits</span>
+              <div class="hero-impact-grid">
+                <div class="hero-impact">
+                  <strong>Time saved</strong>
+                  <span class="hero-impact-stat" data-target="749">~750 hrs</span>
+                  <span>reclaimed per year for a team of 6.</span>
+                </div>
+                <div class="hero-impact">
+                  <strong>Money saved</strong>
+                  <span class="hero-impact-stat" data-target="112320">~$110K</span>
+                  <span>annual savings for a team of 6.</span>
+                </div>
+              </div>
+            </div>
+            <a class="hero-benefit-link" href="#contact-form">See how we calculate these numbers</a>
+          </div>
+        </div>
+      </aside>
       <div class="hero-scroll-hint" data-anim data-delay="3">
         <span>Scroll to learn more</span>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
@@ -90,47 +130,6 @@
     </div>
   </section>
 
-  <!-- ========== OVERVIEW STRIP (ex-hero sidebar content) ========== -->
-  <section class="step-section overview-strip" aria-label="What Verachi changes">
-    <div class="container">
-      <div class="overview-header" data-anim>
-        <h2 class="step-title overview-title">Projects don't fail suddenly.<br/>They fail silently.</h2>
-      </div>
-      <div class="overview-grid" data-anim data-delay="1">
-        <div class="overview-card overview-card-problem">
-          <span class="overview-card-label">Problem</span>
-          <ul class="overview-list">
-            <li>Information &amp; data are scattered across too many tools</li>
-            <li>Risks detected too late, often visible only after impact</li>
-            <li>Reporting is manual, biased, outdated and overwhelming teams</li>
-          </ul>
-        </div>
-        <div class="overview-card overview-card-solution">
-          <span class="overview-card-label">Solution</span>
-          <ul class="overview-list">
-            <li>All your context in one place by connecting your existing tools</li>
-            <li>Cut reporting overhead and accelerate cross-team resolution</li>
-            <li>Give leaders clearer signals for faster, more confident decisions</li>
-          </ul>
-        </div>
-        <div class="overview-card overview-card-benefits">
-          <span class="overview-card-label">Benefits</span>
-          <div class="overview-impact">
-            <div class="overview-impact-item">
-              <strong>~750 hrs</strong>
-              <span>reclaimed per year for a team of 6.</span>
-            </div>
-            <div class="overview-impact-item">
-              <strong>~$110K</strong>
-              <span>annual savings for a team of 6.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="step-divider"><div class="step-divider-line"></div></div>
 
   <!-- ========== THE PROBLEM ========== -->
   <section class="step-section" id="problemSection">
@@ -141,14 +140,18 @@
         <p class="step-desc">The team is capable, fast, and already using the right tools. The failure mode is simpler: the reasons behind product and technical decisions never become a shared system. And that costs more than anyone tracks.</p>
       </div>
 
-      <!-- Interactive ROI calculator — sliders embedded in cards -->
+      <!-- Interactive ROI calculator — Bento grid layout -->
       <div class="roi-calculator" data-anim data-delay="1">
-        <div class="comparison-grid">
-
-          <!-- WITHOUT card: sliders + computed totals -->
-          <div class="comparison-card comparison-card-before featured roi-card-input">
-            <div class="comparison-label">⚠ Without shared context</div>
-            <div class="roi-sliders">
+        <div class="roi-grid">
+          
+          <!-- Top Card: Inputs (Sliders) -->
+          <div class="roi-input-card" id="roiInputCard">
+            <div class="roi-card-header">
+              <span class="roi-card-kicker">Team Profile</span>
+              <h3 class="roi-card-title">Adjust your baseline</h3>
+            </div>
+            
+            <div class="roi-sliders-grid">
               <div class="roi-slider-group">
                 <div class="roi-slider-header">
                   <label class="roi-slider-label" for="roiTeamSize">Team size</label>
@@ -156,6 +159,7 @@
                 </div>
                 <input class="roi-slider" type="range" id="roiTeamSize" min="1" max="50" value="6" step="1" />
               </div>
+              
               <div class="roi-slider-group">
                 <div class="roi-slider-header">
                   <label class="roi-slider-label" for="roiHoursWasted">Hours wasted / week</label>
@@ -163,6 +167,7 @@
                 </div>
                 <input class="roi-slider" type="range" id="roiHoursWasted" min="1" max="40" value="12" step="1" />
               </div>
+              
               <div class="roi-slider-group">
                 <div class="roi-slider-header">
                   <label class="roi-slider-label" for="roiAvgSalary">Avg salary ($/yr)</label>
@@ -171,32 +176,44 @@
                 <input class="roi-slider" type="range" id="roiAvgSalary" min="40000" max="400000" value="200000" step="5000" />
               </div>
             </div>
-            <div class="roi-card-totals">
-              <div class="roi-total-item">
-                <span class="roi-total-label">Hours lost / year</span>
-                <span class="comparison-stat" id="roiHoursLost">3,744 hrs</span>
-              </div>
-              <div class="roi-total-item">
-                <span class="roi-total-label">Cost / year</span>
-                <span class="comparison-stat" id="roiCostLost">$360K</span>
-              </div>
-            </div>
           </div>
 
-          <!-- WITH card: computed savings -->
-          <div class="comparison-card comparison-card-after featured roi-card-output">
-            <div class="comparison-label">✓ With Verachi</div>
-            <div class="roi-card-totals roi-card-totals-stacked">
-              <div class="roi-total-item">
-                <span class="roi-total-label">Hours reclaimed</span>
-                <span class="comparison-stat" id="roiHoursSaved">2,246 hrs</span>
+          <!-- Result Card 1: Before -->
+          <div class="roi-result-card roi-result-before">
+            <div class="roi-card-header">
+              <span class="roi-card-kicker kicker-alert">Without Verachi</span>
+              <h3 class="roi-card-title">The cost of context leaks</h3>
+            </div>
+            <div class="roi-result-stats">
+              <div class="roi-stat-group">
+                <span class="roi-stat-label">Hours lost / year</span>
+                <span class="roi-result-value error-stat" id="roiHoursLost">3,744 hrs</span>
               </div>
-              <div class="roi-total-item">
-                <span class="roi-total-label">Annual savings</span>
-                <span class="comparison-stat recovered-stat" id="roiSavings">$216K</span>
+              <div class="roi-stat-group">
+                <span class="roi-stat-label">Hidden cost / year</span>
+                <span class="roi-result-value error-stat" id="roiCostLost">$360K</span>
               </div>
             </div>
-            <p class="comparison-detail">recovered by eliminating redundant context searches and rehashing past decisions. Scales linearly with team size.</p>
+            <p class="roi-result-desc">Time and money burned on "decision archaeology"—searching Slack, re-reading old tickets, and asking the same questions again.</p>
+          </div>
+
+          <!-- Result Card 2: After -->
+          <div class="roi-result-card roi-result-after">
+            <div class="roi-card-header">
+              <span class="roi-card-kicker kicker-mint">With Verachi</span>
+              <h3 class="roi-card-title">The ROI of shared context</h3>
+            </div>
+            <div class="roi-result-stats">
+              <div class="roi-stat-group">
+                <span class="roi-stat-label">Hours reclaimed</span>
+                <span class="roi-result-value recovered-stat" id="roiHoursSaved" data-target="2246">2,246 hrs</span>
+              </div>
+              <div class="roi-stat-group">
+                <span class="roi-stat-label">Annual savings</span>
+                <span class="roi-result-value recovered-stat" id="roiSavings" data-target="216000">$216K</span>
+              </div>
+            </div>
+            <p class="roi-result-desc">Time and budget returned to building. Calculated based on recovering 60% of lost time across the delivery lifecycle.</p>
           </div>
 
         </div>
@@ -266,13 +283,6 @@
               <div class="slack-thread-header">
                 <strong>#launch-readiness</strong>
                 <span>Verachi context attached</span>
-              </div>
-              <div class="slack-message-row">
-                <img class="slack-photo" src="./avatars/slack-maya.png" alt="Maya Chen" width="40" height="40" />
-                <div>
-                  <div class="slack-message-meta"><strong>Maya Chen</strong><span>Product Lead</span><span>10:04 AM</span></div>
-                  <p><span class="slack-mention">@verachi</span> what's the current status of the checkout flag for pilot cohorts?</p>
-                </div>
               </div>
               <div class="verachi-summary">
                 <div class="verachi-summary-top">
@@ -447,209 +457,109 @@
         <h2 class="step-title capability-title">The why, the risk, and the next owner.</h2>
         <p class="step-desc capability-desc">Verachi turns scattered Slack threads, tickets, and pull requests into cited delivery records your team can act on.</p>
       </div>
-
-      <!-- Tabbed cards -->
-      <div class="capability-tabs" data-anim data-delay="1">
-        <div class="capability-grid" role="tablist" aria-label="Capability features">
-          <button class="capability-card is-active" role="tab" aria-selected="true" aria-controls="capPanel0" id="capTab0" data-cap-index="0">
-            <span class="capability-card-label">Decisions</span>
-            <h3>Capture the resolution and rationale</h3>
-            <p>Record what was decided, why it was chosen, who reviewed it, and which source artifacts prove it.</p>
-          </button>
-          <button class="capability-card" role="tab" aria-selected="false" aria-controls="capPanel1" id="capTab1" data-cap-index="1">
-            <span class="capability-card-label">Risks</span>
-            <h3>Track open risk with lifecycle notes</h3>
-            <p>Keep severity, owner, state, mitigation notes, and false-positive closures visible before launch.</p>
-          </button>
-          <button class="capability-card" role="tab" aria-selected="false" aria-controls="capPanel2" id="capTab2" data-cap-index="2">
-            <span class="capability-card-label">Dependencies</span>
-            <h3>See what one decision blocks</h3>
-            <p>Link related decisions, projects, and source artifacts so review work stops depending on memory.</p>
-          </button>
-          <button class="capability-card" role="tab" aria-selected="false" aria-controls="capPanel3" id="capTab3" data-cap-index="3">
-            <span class="capability-card-label">Grounded chat</span>
-            <h3>Ask with citations, not vibes</h3>
-            <p>Answers come back with source references, confidence signals, and the operational record behind them.</p>
-          </button>
-        </div>
-
-        <!-- Preview slides -->
-        <div class="capability-preview">
-          <div class="cap-mock-window">
-            <div class="cap-mock-topbar">
-              <div class="cap-mock-dots"><i></i><i></i><i></i></div>
-              <span class="cap-mock-title">verachi — Atlas Launch</span>
-            </div>
-
-            <!-- Slide 0: Decisions -->
-            <div class="cap-slide is-active" id="capPanel0" role="tabpanel" aria-labelledby="capTab0">
-              <div class="cap-mock-body">
-                <div class="cap-mock-record">
-                  <div class="cap-mock-record-header">
-                    <span class="cap-mock-badge cap-mock-badge-decision">Decision</span>
-                    <span class="cap-mock-id">DEC-104</span>
-                  </div>
-                  <h4 class="cap-mock-record-title">Checkout flag remains on for pilot cohorts</h4>
-                  <p class="cap-mock-record-rationale">Fraud-review coverage is not complete for high-risk payment methods. Flag stays on until Security confirms full coverage.</p>
-                  <div class="cap-mock-meta-grid">
-                    <div class="cap-mock-meta-item">
-                      <span class="cap-mock-meta-label">Owner</span>
-                      <span class="cap-mock-meta-value">Priya Shah</span>
-                    </div>
-                    <div class="cap-mock-meta-item">
-                      <span class="cap-mock-meta-label">Status</span>
-                      <span class="cap-mock-meta-value cap-mock-status-decided">Decided</span>
-                    </div>
-                    <div class="cap-mock-meta-item">
-                      <span class="cap-mock-meta-label">Sources</span>
-                      <span class="cap-mock-meta-value">Slack · Jira · PR #412</span>
-                    </div>
-                    <div class="cap-mock-meta-item">
-                      <span class="cap-mock-meta-label">Reviewers</span>
-                      <span class="cap-mock-meta-value">Marcus L., Sarah K.</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Slide 1: Risks -->
-            <div class="cap-slide" id="capPanel1" role="tabpanel" aria-labelledby="capTab1" hidden>
-              <div class="cap-mock-body">
-                <div class="cap-mock-record">
-                  <div class="cap-mock-record-header">
-                    <span class="cap-mock-badge cap-mock-badge-risk">Risk</span>
-                    <span class="cap-mock-id">RISK-211</span>
-                  </div>
-                  <h4 class="cap-mock-record-title">Retry queue delay under peak load</h4>
-                  <p class="cap-mock-record-rationale">Payment retry queue exceeds 90s SLA during peak traffic. Mitigation: circuit-breaker with fallback to synchronous processing.</p>
-                  <div class="cap-mock-meta-grid">
-                    <div class="cap-mock-meta-item">
-                      <span class="cap-mock-meta-label">Severity</span>
-                      <span class="cap-mock-meta-value cap-mock-status-risk">High</span>
-                    </div>
-                    <div class="cap-mock-meta-item">
-                      <span class="cap-mock-meta-label">Owner</span>
-                      <span class="cap-mock-meta-value">Jordan Reyes</span>
-                    </div>
-                    <div class="cap-mock-meta-item">
-                      <span class="cap-mock-meta-label">State</span>
-                      <span class="cap-mock-meta-value cap-mock-status-open">Open — mitigating</span>
-                    </div>
-                    <div class="cap-mock-meta-item">
-                      <span class="cap-mock-meta-label">Linked</span>
-                      <span class="cap-mock-meta-value">DEC-104 · DEC-098</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Slide 2: Dependencies -->
-            <div class="cap-slide" id="capPanel2" role="tabpanel" aria-labelledby="capTab2" hidden>
-              <div class="cap-mock-body">
-                <div class="cap-mock-record">
-                  <div class="cap-mock-record-header">
-                    <span class="cap-mock-badge cap-mock-badge-dep">Dependency Map</span>
-                    <span class="cap-mock-id">DEC-104</span>
-                  </div>
-                  <h4 class="cap-mock-record-title">Checkout flag → blocked items</h4>
-                  <p class="cap-mock-record-rationale">This decision is upstream of 3 other records. Changing it will affect the downstream items listed below.</p>
-                  <div class="cap-mock-dep-list">
-                    <div class="cap-mock-dep-item">
-                      <span class="cap-mock-dep-arrow">→</span>
-                      <div>
-                        <strong>RISK-211</strong>
-                        <span>Retry queue delay under peak load</span>
-                      </div>
-                      <span class="cap-mock-dep-status cap-mock-status-risk">High</span>
-                    </div>
-                    <div class="cap-mock-dep-item">
-                      <span class="cap-mock-dep-arrow">→</span>
-                      <div>
-                        <strong>DEC-098</strong>
-                        <span>Rate limiter threshold for guest checkout</span>
-                      </div>
-                      <span class="cap-mock-dep-status cap-mock-status-decided">Decided</span>
-                    </div>
-                    <div class="cap-mock-dep-item">
-                      <span class="cap-mock-dep-arrow">→</span>
-                      <div>
-                        <strong>DEC-112</strong>
-                        <span>Fraud model v3 rollout schedule</span>
-                      </div>
-                      <span class="cap-mock-dep-status cap-mock-status-open">Pending</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Slide 3: Grounded chat -->
-            <div class="cap-slide" id="capPanel3" role="tabpanel" aria-labelledby="capTab3" hidden>
-              <div class="cap-mock-body">
-                <div class="cap-mock-chat">
-                  <div class="cap-mock-chat-msg cap-mock-chat-user">
-                    <div class="cap-mock-chat-bubble">Why is the checkout flag still on for pilot cohorts?</div>
-                  </div>
-                  <div class="cap-mock-chat-msg cap-mock-chat-ai">
-                    <div class="cap-mock-chat-avatar">V</div>
-                    <div class="cap-mock-chat-bubble">
-                      <p>The checkout flag remains on because <strong>fraud-review coverage isn't complete</strong> for high-risk payment methods. Security needs to confirm full coverage before removal.</p>
-                      <div class="cap-mock-chat-sources">
-                        <span class="cap-mock-chat-source-label">Sources</span>
-                        <span class="cap-mock-chat-source">DEC-104</span>
-                        <span class="cap-mock-chat-source">RISK-211</span>
-                        <span class="cap-mock-chat-source">#payments · Slack</span>
-                      </div>
-                      <div class="cap-mock-chat-confidence">
-                        <span class="cap-mock-confidence-dot"></span>
-                        High confidence · 3 matching records
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
+      <div class="capability-grid" data-anim data-delay="1">
+        <article class="capability-card">
+          <span class="capability-card-label">Decisions</span>
+          <h3>Capture the resolution and rationale</h3>
+          <p>Record what was decided, why it was chosen, who reviewed it, and which source artifacts prove it.</p>
+        </article>
+        <article class="capability-card">
+          <span class="capability-card-label">Risks</span>
+          <h3>Track open risk with lifecycle notes</h3>
+          <p>Keep severity, owner, state, mitigation notes, and false-positive closures visible before launch.</p>
+        </article>
+        <article class="capability-card">
+          <span class="capability-card-label">Dependencies</span>
+          <h3>See what one decision blocks</h3>
+          <p>Link related decisions, projects, and source artifacts so review work stops depending on memory.</p>
+        </article>
+        <article class="capability-card">
+          <span class="capability-card-label">Grounded chat</span>
+          <h3>Ask with citations, not vibes</h3>
+          <p>Answers come back with source references, confidence signals, and the operational record behind them.</p>
+        </article>
       </div>
     </div>
   </section>
 
-  <div class="step-divider"><div class="step-divider-line"></div></div>
 
-  <!-- ========== EARLY ACCESS ========== -->
+  <!-- ========== PRICING ========== -->
   <section class="step-section pricing-section" id="pricingSection">
     <div class="container">
       <div class="pricing-header" data-anim>
-        <span class="step-badge step-badge-solve">Early Access</span>
-        <h2 class="step-title pricing-title">We're onboarding<br/>teams now.</h2>
-        <p class="step-desc pricing-desc">Verachi is available to delivery teams ready to consolidate scattered context into a single operational record. Request access and we'll set up your workspace.</p>
+        <span class="step-badge step-badge-solve">Pricing</span>
+        <h2 class="step-title pricing-title">Simple pricing.<br/>No surprises.</h2>
+        <p class="step-desc pricing-desc">Start small, scale as you grow. Every plan includes cited decision records, risk workflows, and user-visible audit history.</p>
       </div>
 
-      <div class="early-access-card" data-anim data-delay="1">
-        <div class="ea-card-inner">
-          <div class="ea-card-content">
-            <span class="ea-eyebrow">What's included</span>
-            <ul class="pricing-features">
-              <li>Cited decision records with full source trail</li>
-              <li>Risk tracking with owner, severity, and lifecycle</li>
-              <li>Read-only connectors for Slack, GitHub, Jira, and Teams</li>
-              <li>Grounded project chat with confidence signals</li>
-              <li>Dedicated onboarding and pilot support</li>
-              <li>Security and governance review before go-live</li>
-            </ul>
+      <div class="pricing-grid" data-anim data-delay="1">
+
+        <!-- Starter -->
+        <div class="pricing-card">
+          <div class="pricing-card-header">
+            <span class="pricing-card-name">Starter</span>
+            <p class="pricing-card-audience">For small teams that want durable recall without frontier-model spend.</p>
           </div>
-          <div class="ea-card-cta">
-            <a class="button button-primary pricing-cta" href="#contact-form">
-              Request Access
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-            <p class="ea-note">No credit card required. We'll reach out within one business day.</p>
+          <div class="pricing-card-price">
+            <span class="pricing-amount">$5</span>
+            <span class="pricing-period">/ month</span>
           </div>
+          <ul class="pricing-features">
+            <li>Up to 5 users in one organization</li>
+            <li>100K monthly AI token budget</li>
+            <li>Decision capture, search, and comments</li>
+            <li>Risk records with owner and severity</li>
+            <li>Chat with 20-message context depth</li>
+            <li>5 GB workspace storage</li>
+          </ul>
+          <a class="button button-outline pricing-cta" href="#contact-form">Get Started</a>
         </div>
+
+        <!-- Pro -->
+        <div class="pricing-card pricing-card-featured">
+          <div class="pricing-card-badge">Most popular</div>
+          <div class="pricing-card-header">
+            <span class="pricing-card-name">Pro</span>
+            <p class="pricing-card-audience">For growing organizations that need Gemini 2.5 model choice, BYOK, and more headroom.</p>
+          </div>
+          <div class="pricing-card-price">
+            <span class="pricing-amount">$49</span>
+            <span class="pricing-period">/ seat / month</span>
+          </div>
+          <ul class="pricing-features">
+            <li>Everything in Starter</li>
+            <li>1M monthly AI token budget</li>
+            <li>Document context in project chat</li>
+            <li>Semantic retrieval across workspace files</li>
+            <li>50-message chat history depth</li>
+            <li>More linked decisions, documents, and comments</li>
+            <li>Priority support</li>
+          </ul>
+          <a class="button button-primary pricing-cta" href="#contact-form">Start Free Trial</a>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="pricing-card">
+          <div class="pricing-card-header">
+            <span class="pricing-card-name">Enterprise</span>
+            <p class="pricing-card-audience">For tenants that need frontier Gemini preview access and effectively uncapped AI usage.</p>
+          </div>
+          <div class="pricing-card-price">
+            <span class="pricing-amount">Custom</span>
+            <span class="pricing-period">tailored to your organization</span>
+          </div>
+          <ul class="pricing-features">
+            <li>Everything in Pro</li>
+            <li>Custom monthly token budget</li>
+            <li>Frontier Gemini preview model access</li>
+            <li>500K-character transcript processing</li>
+            <li>100-message chat history depth</li>
+            <li>Security and governance review</li>
+            <li>Custom deployment and success plan</li>
+          </ul>
+          <a class="button button-outline pricing-cta" href="#contact-form">Contact Sales</a>
+        </div>
+
       </div>
     </div>
   </section>
@@ -660,26 +570,16 @@
   <section class="cta-section contact-section" id="contact-form">
     <div class="container contact-layout" data-anim>
       <div class="contact-copy">
-        <span class="step-badge step-badge-solve">Request Access</span>
+        <span class="step-badge step-badge-solve">Book a Demo</span>
         <h2>Give your team one place to recover the why.</h2>
-        <p>Tell us about your team and we'll set up a workspace. We'll walk through your tool setup, model the delivery time you can win back, and build a pilot plan together.</p>
-        <ul class="contact-benefits" aria-label="What you get">
+        <p>See Verachi on your own data. We’ll walk through Slack, GitHub, Microsoft Teams, Jira, and the connectors still to come, then model the delivery time your team can win back.</p>
+        <ul class="contact-benefits" aria-label="What the demo covers">
           <li>Live visibility across the tools your team already uses.</li>
-          <li>A 2–4 week pilot plan with clear success metrics.</li>
+          <li>A 2-4 week pilot plan with clear success metrics.</li>
           <li>Security, governance, and read-only connector review.</li>
           <li>A practical ROI estimate based on your team shape.</li>
         </ul>
-        <div class="contact-impact" aria-label="Typical team impact">
-          <div class="contact-impact-stat">
-            <strong>~750 hrs</strong>
-            <span>reclaimed per year</span>
-          </div>
-          <div class="contact-impact-stat">
-            <strong>~$110K</strong>
-            <span>annual savings</span>
-          </div>
-          <p class="contact-impact-note">Based on a 6-person team at $200K/yr. <a href="#problemSection">Calculate yours above</a>.</p>
-        </div>
+        <p class="cta-assumptions">Numbers above are based on a 6-person team averaging $200K/yr fully-loaded cost, losing about 12 hrs/week to context reconstruction. Assumptions vary by team size and tool footprint; we model yours during the demo.</p>
       </div>
 
       <div class="contact-form-card">
@@ -703,9 +603,56 @@
             </div>
           </div>
 
+          <div class="cf-row">
+            <div class="cf-field">
+              <label class="cf-label" for="cf_title">Job title</label>
+              <input class="cf-input" type="text" id="cf_title" name="title" placeholder="VP of Engineering" autocomplete="organization-title" required />
+            </div>
+
+            <div class="cf-field">
+              <label class="cf-label" for="cf_company">Company</label>
+              <input class="cf-input" type="text" id="cf_company" name="company" placeholder="Acme Corp" autocomplete="organization" required />
+            </div>
+          </div>
+
+          <div class="cf-row">
+            <div class="cf-field">
+              <label class="cf-label" for="cf_company_size">Company size</label>
+              <select class="cf-select" id="cf_company_size" name="company_size" required>
+                <option value="">Select size</option>
+                <option value="1-50">1-50 employees</option>
+                <option value="51-200">51-200 employees</option>
+                <option value="201-500">201-500 employees</option>
+                <option value="501-1000">501-1,000 employees</option>
+                <option value="1000+">1,000+ employees</option>
+              </select>
+            </div>
+
+            <div class="cf-field">
+              <label class="cf-label" for="cf_industry">Industry</label>
+              <select class="cf-select" id="cf_industry" name="industry" required>
+                <option value="">Select industry</option>
+                <option value="Technology">Technology</option>
+                <option value="Financial Services">Financial Services</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Manufacturing">Manufacturing</option>
+                <option value="Retail / E-commerce">Retail / E-commerce</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
           <div class="cf-field">
-            <label class="cf-label" for="cf_company">Company</label>
-            <input class="cf-input" type="text" id="cf_company" name="company" placeholder="Acme Corp" autocomplete="organization" required />
+            <label class="cf-label" for="cf_country">Country / Region</label>
+            <select class="cf-select" id="cf_country" name="country" required>
+              <option value="">Select region</option>
+              <option value="North America">North America</option>
+              <option value="Europe">Europe</option>
+              <option value="Asia-Pacific">Asia-Pacific</option>
+              <option value="Latin America">Latin America</option>
+              <option value="Middle East & Africa">Middle East &amp; Africa</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
 
           <div class="cf-field">
@@ -716,7 +663,7 @@
           <p id="cfError" class="cf-message cf-message-error" role="alert" hidden></p>
 
           <button id="cfSubmit" class="button button-primary cf-submit" type="submit">
-            <span class="cf-submit-text">Request Access</span>
+            <span class="cf-submit-text">Send demo request</span>
             <span class="cf-submit-loading" hidden>
               <svg class="cf-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" opacity="0.2" />
@@ -733,8 +680,8 @@
               <path d="M20 6 9 17l-5-5" />
             </svg>
           </div>
-          <h3 class="cf-success-title">Request received</h3>
-          <p class="cf-success-desc">Thanks for reaching out. We'll review your request and follow up by email within one business day.</p>
+          <h3 class="cf-success-title">Demo request received</h3>
+          <p class="cf-success-desc">Thanks for reaching out. We’ll review your request and follow up by email.</p>
         </div>
       </div>
     </div>

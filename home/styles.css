@@ -1207,76 +1207,176 @@ main {
   }
 }
 
-/* ROI Calculator — sliders embedded in cards */
+/* ROI Calculator — Bento grid layout */
 .roi-calculator {
-  margin-top: 36px;
+  margin-top: 48px;
 }
 
-.roi-card-input {
+.roi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 860px) {
+  .roi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.roi-input-card {
+  grid-column: 1 / -1;
+  padding: clamp(24px, 4vw, 42px);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line-1);
+  background: var(--surface-1);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.roi-input-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 6px;
+  background: linear-gradient(90deg, var(--accent), var(--mint));
+}
+
+.roi-card-header {
+  margin-bottom: 28px;
+}
+
+.roi-card-kicker {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.roi-card-title {
+  font-size: 1.5rem;
+  font-weight: 750;
+  letter-spacing: -0.04em;
+  color: var(--ink-0);
+}
+
+.roi-sliders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.roi-baseline-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line-0);
+}
+
+.roi-baseline-stat {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 4px;
 }
 
-.roi-sliders {
+.roi-baseline-label {
+  font-size: 0.68rem;
+  font-weight: 750;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.roi-baseline-value {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 750;
+  color: var(--red);
+}
+
+/* Result Cards */
+.roi-result-card {
+  padding: 34px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line-1);
+  background: var(--surface-2);
+  box-shadow: var(--shadow-lg);
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  margin: 20px 0 24px;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
 }
 
-.roi-slider-group {
+.roi-result-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 6px;
+}
+
+.roi-result-before::before {
+  background: linear-gradient(90deg, var(--red), var(--gold));
+}
+
+.roi-result-after::before {
+  background: linear-gradient(90deg, var(--mint), var(--accent));
+}
+
+.roi-result-stats {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
+  margin-bottom: 8px;
 }
 
-.roi-slider-header {
+.roi-stat-group {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.roi-slider-label {
+.roi-stat-label {
+  font-size: 0.72rem;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+}
+
+.roi-result-value {
+  font-family: var(--font-mono);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.error-stat {
+  color: var(--red);
+}
+
+.recovered-stat {
+  color: var(--mint);
+}
+
+.roi-result-desc {
+  font-size: 0.94rem;
   color: var(--ink-2);
-  font-size: 0.76rem;
-  font-weight: 700;
+  line-height: 1.5;
+  margin-top: auto;
 }
 
-.roi-slider-value {
-  font-family: var(--font-mono);
-  font-size: 0.88rem;
-  font-weight: 800;
-  color: var(--ink-0);
-  letter-spacing: -0.03em;
-  min-width: 60px;
-  text-align: right;
-}
+.kicker-alert { color: var(--red); }
+.kicker-mint { color: var(--mint); }
 
-/* Editable value input (shown at slider max) */
-.roi-slider-value-input {
-  font-family: var(--font-mono);
-  font-size: 0.88rem;
-  font-weight: 800;
-  color: var(--ink-0);
-  letter-spacing: -0.03em;
-  text-align: right;
-  width: 80px;
-  padding: 2px 6px;
-  border: 1px solid var(--accent);
-  border-radius: 8px;
-  background: var(--surface-3);
-  outline: none;
-  -moz-appearance: textfield;
-}
-
-.roi-slider-value-input::-webkit-inner-spin-button,
-.roi-slider-value-input::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Range slider track */
+/* Range slider track styling */
 .roi-slider {
   -webkit-appearance: none;
   appearance: none;
@@ -1321,34 +1421,37 @@ main {
   cursor: grab;
 }
 
-/* Card totals */
-.roi-card-totals {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(180, 95, 76, 0.15);
-}
-
-.roi-card-totals-stacked {
-  border-top: none;
-  padding-top: 0;
-  gap: 24px;
-  margin-bottom: 20px;
-}
-
-.roi-total-item {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.roi-total-label {
-  color: var(--ink-3);
-  font-size: 0.68rem;
+/* Slider values and inputs */
+.roi-slider-value {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  color: var(--ink-0);
+  letter-spacing: -0.03em;
+  min-width: 60px;
+  text-align: right;
+}
+
+.roi-slider-value-input {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--ink-0);
+  letter-spacing: -0.03em;
+  text-align: right;
+  width: 80px;
+  padding: 2px 6px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--surface-3);
+  outline: none;
+  -moz-appearance: textfield;
+}
+
+.roi-slider-value-input::-webkit-inner-spin-button,
+.roi-slider-value-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .roi-card-totals .comparison-stat {

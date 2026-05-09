@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="./home/styles.css" />
+<link rel="stylesheet" href="./home/styles.css?v=3" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NHXTJ2NZMT"></script>
   <script>
@@ -140,34 +140,84 @@
         <p class="step-desc">The team is capable, fast, and already using the right tools. The failure mode is simpler: the reasons behind product and technical decisions never become a shared system. And that costs more than anyone tracks.</p>
       </div>
 
-      <!-- Cost cards -->
-      <div class="comparison-grid" data-anim data-delay="1">
-        <div class="comparison-card comparison-card-before featured">
-          <div class="comparison-label">⚠ Without shared context</div>
-          <div class="comparison-stat" id="statHoursLost" data-target="1248">~1,250 hrs</div>
-          <p class="comparison-detail">lost annually to "decision archaeology" — searching Slack, re-reading old tickets, asking the same questions again.</p>
-        </div>
-        <div class="comparison-card comparison-card-before">
-          <div class="comparison-label">⚠ Hidden cost per year</div>
-          <div class="comparison-stat" id="statCostLost" data-target="187200">~$187K</div>
-          <p class="comparison-detail">in fully-loaded salary burned on context reconstruction across a 6-person team averaging $200K/yr.</p>
-        </div>
-      </div>
+      <!-- Interactive ROI calculator — Bento grid layout -->
+      <div class="roi-calculator" data-anim data-delay="1">
+        <div class="roi-grid">
+          
+          <!-- Top Card: Inputs (Sliders) -->
+          <div class="roi-input-card" id="roiInputCard">
+            <div class="roi-card-header">
+              <span class="roi-card-kicker">Team Profile</span>
+              <h3 class="roi-card-title">Adjust your baseline</h3>
+            </div>
+            
+            <div class="roi-sliders-grid">
+              <div class="roi-slider-group">
+                <div class="roi-slider-header">
+                  <label class="roi-slider-label" for="roiTeamSize">Team size</label>
+                  <output class="roi-slider-value" id="roiTeamSizeVal">6</output>
+                </div>
+                <input class="roi-slider" type="range" id="roiTeamSize" min="1" max="50" value="6" step="1" />
+              </div>
+              
+              <div class="roi-slider-group">
+                <div class="roi-slider-header">
+                  <label class="roi-slider-label" for="roiHoursWasted">Hours wasted / week</label>
+                  <output class="roi-slider-value" id="roiHoursWastedVal">12</output>
+                </div>
+                <input class="roi-slider" type="range" id="roiHoursWasted" min="1" max="40" value="12" step="1" />
+              </div>
+              
+              <div class="roi-slider-group">
+                <div class="roi-slider-header">
+                  <label class="roi-slider-label" for="roiAvgSalary">Avg salary ($/yr)</label>
+                  <output class="roi-slider-value" id="roiAvgSalaryVal">$200K</output>
+                </div>
+                <input class="roi-slider" type="range" id="roiAvgSalary" min="40000" max="400000" value="200000" step="5000" />
+              </div>
+            </div>
+          </div>
 
-      <!-- Saved cards -->
-      <div id="solveSectionSentinel"></div>
-      <div class="solve-glow" aria-hidden="true"></div>
-      <div class="comparison-grid reverse-bias" data-anim data-delay="1">
-        <div class="comparison-card comparison-card-after">
-          <div class="comparison-label">✓ Hours reclaimed per year</div>
-          <div class="comparison-stat" data-target="749">~750 hrs</div>
-          <p class="comparison-detail">recovered by eliminating redundant context searches and rehashing past decisions.</p>
+          <!-- Result Card 1: Before -->
+          <div class="roi-result-card roi-result-before">
+            <div class="roi-card-header">
+              <span class="roi-card-kicker kicker-alert">Without Verachi</span>
+              <h3 class="roi-card-title">The cost of context leaks</h3>
+            </div>
+            <div class="roi-result-stats">
+              <div class="roi-stat-group">
+                <span class="roi-stat-label">Hours lost / year</span>
+                <span class="roi-result-value error-stat" id="roiHoursLost">3,744 hrs</span>
+              </div>
+              <div class="roi-stat-group">
+                <span class="roi-stat-label">Hidden cost / year</span>
+                <span class="roi-result-value error-stat" id="roiCostLost">$360K</span>
+              </div>
+            </div>
+            <p class="roi-result-desc">Time and money burned on "decision archaeology"—searching Slack, re-reading old tickets, and asking the same questions again.</p>
+          </div>
+
+          <!-- Result Card 2: After -->
+          <div class="roi-result-card roi-result-after">
+            <div class="roi-card-header">
+              <span class="roi-card-kicker kicker-mint">With Verachi</span>
+              <h3 class="roi-card-title">The ROI of shared context</h3>
+            </div>
+            <div class="roi-result-stats">
+              <div class="roi-stat-group">
+                <span class="roi-stat-label">Hours reclaimed</span>
+                <span class="roi-result-value recovered-stat" id="roiHoursSaved" data-target="2246">2,246 hrs</span>
+              </div>
+              <div class="roi-stat-group">
+                <span class="roi-stat-label">Annual savings</span>
+                <span class="roi-result-value recovered-stat" id="roiSavings" data-target="216000">$216K</span>
+              </div>
+            </div>
+            <p class="roi-result-desc">Time and budget returned to building. Calculated based on recovering 60% of lost time across the delivery lifecycle.</p>
+          </div>
+
         </div>
-        <div class="comparison-card comparison-card-after featured">
-          <div class="comparison-label">✓ Annual savings</div>
-          <div class="comparison-stat recovered-stat" id="statSavings" data-target="112320">~$110K</div>
-          <p class="comparison-detail">returned to building instead of searching, per 6-person team. Scales linearly.</p>
-        </div>
+        <div id="solveSectionSentinel"></div>
       </div>
 
       <div class="slack-demo-pair" data-anim data-delay="2" aria-label="Slack channel comparison">
