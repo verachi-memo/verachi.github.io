@@ -559,7 +559,7 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
       cost: 480,
       title: "Decision archaeology",
       time: "11:20 AM",
-      body: "Here are links to three old messages, two tickets, and a PR… still no single source of truth.",
+      body: "Here are links to three old messages, two tickets, and a PR… still no shared decision record.",
     },
     {
       person: { name: "James", title: "Design Director", salary: 200000 },
@@ -883,6 +883,9 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
   const cfError = document.getElementById("cfError");
   const cfSuccess = document.getElementById("cfSuccess");
   const cfSubmit = document.getElementById("cfSubmit");
+  const cfPlan = document.getElementById("cf_plan");
+  const cfPlanNote = document.getElementById("cfPlanNote");
+  const cfPlanValue = document.getElementById("cfPlanValue");
 
   if (!contactForm || !cfLoadedAt || !cfError || !cfSuccess || !cfSubmit) return;
 
@@ -905,6 +908,19 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
 
   const submitText = cfSubmit.querySelector(".cf-submit-text");
   const submitLoading = cfSubmit.querySelector(".cf-submit-loading");
+  const setPlan = (plan) => {
+    const cleanPlan = plan || "General pilot";
+    if (cfPlan) cfPlan.value = cleanPlan;
+    if (cfPlanValue) {
+      cfPlanValue.textContent = cleanPlan;
+    } else if (cfPlanNote) {
+      cfPlanNote.textContent = `Requesting: ${cleanPlan}`;
+    }
+  };
+
+  document.querySelectorAll("[data-contact-plan]").forEach(link => {
+    link.addEventListener("click", () => setPlan(link.getAttribute("data-contact-plan")));
+  });
 
   const resetButton = () => {
     if (submitText) submitText.hidden = false;
@@ -936,21 +952,14 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
       return;
     }
 
-    // 2) Time-based check
-    const loadedAt = parseInt(cfLoadedAt.value, 10);
-    if (Number.isFinite(loadedAt) && Date.now() - loadedAt < MIN_SUBMIT_TIME_MS) {
-      showSuccess();
-      return;
-    }
-
-    // 3) HTML5 validation
+    // 2) HTML5 validation
     if (!contactForm.checkValidity()) {
       showError("Please fill in all required fields.");
       resetButton();
       return;
     }
 
-    // 4) Work-email validation
+    // 3) Work-email validation
     const emailInput = document.getElementById("cf_email");
     const emailDomain = (emailInput?.value.split("@")[1] || "").toLowerCase().trim();
     if (FREE_EMAIL_DOMAINS.has(emailDomain)) {
@@ -960,10 +969,22 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
       return;
     }
 
+    // 4) Time-based check
+    const loadedAt = parseInt(cfLoadedAt.value, 10);
+    if (Number.isFinite(loadedAt) && Date.now() - loadedAt < MIN_SUBMIT_TIME_MS) {
+      showError("Please wait a moment and try again.");
+      return;
+    }
+
     const formData = {
+      plan: cfPlan?.value || "General pilot",
       name: document.getElementById("cf_name")?.value.trim(),
       email: emailInput?.value.trim(),
+      title: document.getElementById("cf_title")?.value.trim(),
       company: document.getElementById("cf_company")?.value.trim(),
+      company_size: document.getElementById("cf_company_size")?.value,
+      industry: document.getElementById("cf_industry")?.value,
+      country: document.getElementById("cf_country")?.value,
       needs: document.getElementById("cf_needs")?.value.trim(),
       website: honeypot?.value || "",
       _loaded_at: cfLoadedAt.value,

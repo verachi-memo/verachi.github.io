@@ -1016,8 +1016,6 @@ main {
   position: relative;
   padding: clamp(84px, 10vw, 140px) 0;
   scroll-snap-align: start;
-  content-visibility: auto;
-  contain-intrinsic-size: auto 800px;
 }
 
 .step-section::before {
@@ -1362,6 +1360,16 @@ main {
   color: var(--ink-2);
   line-height: 1.5;
   margin-top: auto;
+}
+
+.roi-assumption-note {
+  max-width: 82ch;
+  margin: 18px auto 0;
+  color: var(--ink-3);
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.6;
+  text-align: center;
 }
 
 .kicker-alert { color: var(--red); }
@@ -2933,6 +2941,205 @@ main {
   }
 }
 
+/* ============================================================
+   PROOF + TRUST
+   ============================================================ */
+.proof-section {
+  position: relative;
+}
+
+.proof-section::before {
+  background:
+    radial-gradient(circle at 12% 24%, var(--gold-soft), transparent 30%),
+    radial-gradient(circle at 84% 64%, var(--accent-soft), transparent 34%),
+    linear-gradient(180deg, var(--surface-1), var(--surface-0));
+}
+
+.proof-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+
+.proof-copy {
+  align-self: start;
+}
+
+.proof-copy .step-title {
+  max-width: 10ch;
+}
+
+.proof-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.proof-record-card {
+  padding: clamp(22px, 3.5vw, 38px);
+  border: 1px solid var(--line-1);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(180deg, var(--surface-2), var(--surface-1)),
+    linear-gradient(135deg, var(--accent-soft), transparent 58%);
+  box-shadow: var(--shadow-lg);
+}
+
+.proof-record-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.proof-record-eyebrow,
+.proof-card span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--accent-strong);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.proof-record-card h3 {
+  max-width: 20ch;
+  color: var(--ink-0);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 820;
+  line-height: 1.05;
+  letter-spacing: -0.055em;
+}
+
+.proof-status {
+  flex: 0 0 auto;
+  padding: 7px 11px;
+  border-radius: var(--radius-pill);
+  background: var(--mint-soft);
+  color: var(--mint);
+  font-size: 0.7rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.proof-record-fields {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 18px 0 22px;
+  border-top: 1px solid var(--line-0);
+  border-bottom: 1px solid var(--line-0);
+}
+
+.proof-record-fields div {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 16px;
+}
+
+.proof-record-fields dt {
+  color: var(--ink-3);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.proof-record-fields dd {
+  margin: 0;
+  color: var(--ink-1);
+  font-size: 0.96rem;
+  font-weight: 650;
+  line-height: 1.55;
+}
+
+.proof-source-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.proof-source-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid var(--line-0);
+  border-radius: 14px;
+  background: rgba(255, 253, 248, 0.72);
+  color: var(--ink-2);
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+
+.proof-source-row strong {
+  min-width: 58px;
+  color: var(--accent-strong);
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.proof-grid {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.proof-card {
+  min-height: 210px;
+  padding: 26px;
+  border: 1px solid var(--line-0);
+  border-radius: 24px;
+  background: var(--surface-1);
+  box-shadow: var(--shadow-md);
+}
+
+.proof-card h3 {
+  color: var(--ink-0);
+  font-size: 1.35rem;
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+}
+
+.proof-card p {
+  margin-top: 14px;
+  color: var(--ink-2);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 960px) {
+  .proof-layout,
+  .proof-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .proof-copy .step-title {
+    max-width: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .proof-record-top,
+  .proof-source-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .proof-record-fields div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+
 .pricing-section {
   position: relative;
 }
@@ -3099,6 +3306,16 @@ main {
 .pricing-cta {
   width: 100%;
   margin-top: auto;
+}
+
+.pricing-note {
+  max-width: 64ch;
+  margin: 24px auto 0;
+  color: var(--ink-3);
+  font-size: 0.86rem;
+  font-weight: 650;
+  line-height: 1.6;
+  text-align: center;
 }
 
 @media (max-width: 960px) {
@@ -3297,6 +3514,40 @@ main {
   pointer-events: none;
 }
 
+.cf-plan-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  max-width: 100%;
+  margin: 0 0 18px;
+  color: var(--ink-2);
+  line-height: 1.2;
+}
+
+.cf-plan-note::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 5px var(--accent-soft);
+}
+
+.cf-plan-note-label {
+  color: var(--ink-3);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cf-plan-note-value {
+  color: var(--ink-1);
+  font-size: 0.76rem;
+  font-weight: 720;
+}
+
 .cf-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -3373,6 +3624,42 @@ main {
 .cf-textarea {
   min-height: 124px;
   resize: vertical;
+}
+
+.cf-optional-details {
+  margin: 0 0 18px;
+  border: 1px solid var(--line-0);
+  border-radius: 18px;
+  background: rgba(255, 253, 248, 0.48);
+}
+
+.cf-optional-details summary {
+  padding: 14px 16px;
+  color: var(--ink-1);
+  font-size: 0.84rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.cf-optional-details summary::marker {
+  color: var(--accent);
+}
+
+.cf-optional-details[open] {
+  padding-bottom: 2px;
+}
+
+.cf-optional-details[open] summary {
+  border-bottom: 1px solid var(--line-0);
+  margin-bottom: 16px;
+}
+
+.cf-optional-details .cf-row {
+  padding-inline: 16px;
+}
+
+.cf-optional-details .cf-field {
+  padding-inline: 0;
 }
 
 .cf-submit {
