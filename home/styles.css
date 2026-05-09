@@ -423,7 +423,6 @@ main {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 24px;
   padding: 10px 16px;
@@ -440,14 +439,7 @@ main {
   box-shadow: var(--shadow-sm);
 }
 
-.hero-kicker::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 5px var(--accent-soft);
-}
+
 
 .hero h1 {
   max-width: 8.6ch;
