@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#fbfaf6" />
+<link rel="icon" href="./favicon.ico" />
+<script>document.documentElement.classList.replace('no-js', 'js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+  rel="stylesheet" />
+<link rel="stylesheet" href="./landing.css" />
+<script src="./landing.js" defer></script>
+  <title>Security — Verachi</title>
+  <meta name="description" content="How Verachi handles security, data boundaries, integrations, AI context, tenant isolation, encryption, auditability, and compliance readiness." />
+  <link rel="canonical" href="https://verachi.io/security.html" />
+</head>
+<body class="legal-page security-page">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" data-header>
+  <div class="header-inner">
+    <a class="brand" href="index.html" aria-label="Verachi home">
+      <div class="brand-mark">
+        <img src="./home/verachi-logo.svg" alt="" aria-hidden="true" />
+      </div>
+      <span class="brand-word">VERACHI</span>
+    </a>
+
+    <button class="menu-toggle" id="mobileMenuToggle" type="button" aria-expanded="false" aria-controls="primaryNav"
+      aria-label="Toggle menu">
+      <svg width="22" height="22" aria-hidden="true"><use href="./partials/icons.svg#icon-menu"/></svg>
+    </button>
+
+    <nav class="site-nav" id="primaryNav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html#heroSection">Overview</a></li>
+        <li><a href="index.html#problemSection">Demo</a></li>
+        <li><a href="index.html#proofSection">Proof</a></li>
+        <li><a href="index.html#pricingSection">Pricing</a></li>
+        <li><a href="security.html">Security</a></li>
+        <li><a href="trust.html">Trust</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-link" href="https://app.verachi.io/login">Sign In</a>
+      <a class="button button-compact" href="index.html#contact-form">Book a Demo</a>
+    </div>
+  </div>
+</header>
+
+  <main id="main-content" tabindex="-1">
+    <section class="hero trust-hero security-hero" aria-labelledby="security-title">
+      <div class="hero-backdrop" aria-hidden="true">
+        <div class="hero-glow hero-glow-primary"></div>
+        <div class="hero-glow hero-glow-secondary"></div>
+        <div class="hero-grid"></div>
+      </div>
+      <div class="container security-hero-layout">
+        <div class="hero-content security-hero-copy">
+          <div class="hero-eyebrow">Security</div>
+          <h1 id="security-title" class="display-title" data-observe="fade-up">Evidence first. <span class="title-emphasis">Data boundaries always.</span></h1>
+          <p class="hero-intro" data-observe="fade-up" style="--delay: 1;">Verachi is built for teams that need decision memory without copying every thread, ticket, and pull request into another system. We store durable conclusions and source links, keep raw external content in the source system, and make sensitive actions inspectable.</p>
+          <div class="trust-meta" data-observe="fade-up" style="--delay: 2;">
+            <span>Last updated: May 15, 2026</span>
+            <a href="#controls">See controls</a>
+            <a href="index.html#contact-form">Contact security</a>
+          </div>
+        </div>
+        <aside class="security-summary-card" data-observe="fade-up" style="--delay: 2;" aria-label="Security posture summary">
+          <span class="trust-card-eyebrow">Current posture</span>
+          <div class="security-summary-row">
+            <strong>External content</strong>
+            <span>Pointer-only by default</span>
+          </div>
+          <div class="security-summary-row">
+            <strong>Tenant isolation</strong>
+            <span>Postgres RLS + scoped APIs</span>
+          </div>
+          <div class="security-summary-row">
+            <strong>AI answers</strong>
+            <span>Citations required</span>
+          </div>
+          <div class="security-summary-row">
+            <strong>Compliance</strong>
+            <span>Readiness work in progress</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="principles">
+      <div class="container">
+        <div class="section-head" data-observe="fade-up">
+          <span class="section-kicker-simple">How we think about security</span>
+          <h2 class="section-title max-w-22">Small surface area. Clear evidence. Controlled side effects.</h2>
+        </div>
+        <div class="trust-grid" data-observe="fade-up" style="--delay: 1;">
+          <article class="trust-card">
+            <span class="trust-card-eyebrow">Primary sources</span>
+            <h3>Source systems remain primary</h3>
+            <p>Slack, Microsoft Teams, Jira, GitHub, and uploaded documents stay the source of truth. Verachi links back to those systems instead of pretending to replace them.</p>
+          </article>
+          <article class="trust-card">
+            <span class="trust-card-eyebrow">Evidence first</span>
+            <h3>Citations are part of the product</h3>
+            <p>AI summaries and chat answers must point back to concrete sources. If Verachi cannot cite a claim, it should say so plainly.</p>
+          </article>
+          <article class="trust-card">
+            <span class="trust-card-eyebrow">Least privilege</span>
+            <h3>Write-backs are conservative</h3>
+            <p>External write-backs are optional, controlled, and audit-backed. Verachi reads more than it writes, and sensitive actions are designed to be reviewable.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="data-model">
+      <div class="container">
+        <div class="section-head section-head-centered" data-observe="fade-up">
+          <span class="section-kicker-simple">Data handling</span>
+          <h2 class="section-title max-w-22">What Verachi stores.</h2>
+          <p class="section-subtitle">The default integration model is pointer-only: Verachi stores its own decision record and source pointers, not raw third-party archives.</p>
+        </div>
+        <div class="security-data-grid" data-observe="fade-up" style="--delay: 1;">
+          <article class="trust-card security-data-card">
+            <span class="trust-card-eyebrow">Stored</span>
+            <h3>Durable Verachi records</h3>
+            <ul class="trust-list">
+              <li>Decision titles, summaries, rationale, status, owners, and project links</li>
+              <li>Risk findings, guideline evaluations, and user-visible audit events</li>
+              <li>Source links, provider IDs, routing IDs, counts, labels, status, and detection metadata</li>
+              <li>Uploaded documents and chat messages that users explicitly put into Verachi</li>
+            </ul>
+          </article>
+          <article class="trust-card security-data-card">
+            <span class="trust-card-eyebrow">Not durable by default</span>
+            <h3>Raw external content</h3>
+            <ul class="trust-list">
+              <li>Slack or Teams thread bodies and replies</li>
+              <li>Jira issue descriptions, comments, and linked issue bodies</li>
+              <li>GitHub PR bodies, issue bodies, review comments, repository contents, and patches</li>
+              <li>External artifact snapshots for Slack, Jira, and GitHub store source pointers, not content snapshots</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="controls">
+      <div class="container">
+        <div class="section-head" data-observe="fade-up">
+          <span class="section-kicker-simple">Controls</span>
+          <h2 class="section-title max-w-22">Protection layers in the current platform.</h2>
+        </div>
+        <div class="trust-grid" data-observe="fade-up" style="--delay: 1;">
+          <article class="trust-card">
+            <span class="trust-card-eyebrow">Tenant isolation</span>
+            <h3>Database boundaries</h3>
+            <p>Tenant-scoped tables use Postgres Row-Level Security, and application code sets tenant context per request. API routes enforce authenticated access before returning customer data.</p>
+          </article>
+          <article class="trust-card">
+            <span class="trust-card-eyebrow">Encryption</span>
+            <h3>At rest and in transit</h3>
+            <p>PostgreSQL storage and object storage use infrastructure-level encryption at rest. Web, S3 SDK, and database traffic use encrypted transport. Integration secrets are encrypted before storage.</p>
+          </article>
+          <article class="trust-card">
+            <span class="trust-card-eyebrow">Auditability</span>
+            <h3>Inspectable actions</h3>
+            <p>Syncs, sensitive actions, AI-generated summaries, and external write-backs are designed to leave audit evidence so workspace members can inspect what happened and why.</p>
+          </article>
+          <article class="trust-card">
+            <span class="trust-card-eyebrow">AI grounding</span>
+            <h3>Context, not general guessing</h3>
+            <p>Ask Verachi operates over workspace, project, decision, document, and source context. Factual claims should include citations to Slack, Jira, GitHub, uploaded documents, or internal records.</p>
+          </article>
+          <article class="trust-card">
+            <span class="trust-card-eyebrow">Access keys</span>
+            <h3>Scoped interfaces</h3>
+            <p>API keys are hashed and scoped. MCP is supported through a stateless HTTP endpoint for selected project, decision, document, guideline, and risk workflows.</p>
+          </article>
+          <article class="trust-card">
+            <span class="trust-card-eyebrow">No surveillance</span>
+            <h3>Decision memory, not productivity tracking</h3>
+            <p>Verachi is built around decisions, risks, guidelines, and evidence. It does not create individual productivity scores, keystroke monitoring, or manager dashboards comparing people.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="integrations">
+      <div class="container">
+        <div class="section-head section-head-centered" data-observe="fade-up">
+          <span class="section-kicker-simple">Integrations</span>
+          <h2 class="section-title max-w-22">How connected tools are used.</h2>
+          <p class="section-subtitle">When needed, integrations read source content temporarily for routing, analysis, and risk evaluation. Durable storage follows the pointer-only model unless a user explicitly uploads or enters content into Verachi.</p>
+        </div>
+        <div data-observe="fade-up" style="--delay: 1;">
+          <table class="trust-matrix security-matrix">
+            <thead>
+              <tr>
+                <th>Source</th>
+                <th>Used for</th>
+                <th>Durable Verachi storage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Slack / Teams</td>
+                <td>Decision capture, risk evaluation, source citation, project context</td>
+                <td>Generated conclusion, source permalink, routing IDs, counts, labels, and audit metadata</td>
+              </tr>
+              <tr>
+                <td>Jira</td>
+                <td>Issue-linked decisions, blockers, status changes, guideline checks, risk signals</td>
+                <td>Decision/risk records, Jira links, provider IDs, status and detection metadata</td>
+              </tr>
+              <tr>
+                <td>GitHub</td>
+                <td>PR and issue context, guideline checks, decision provenance, risk signals</td>
+                <td>Decision/risk records, GitHub links, installation metadata, status and detection metadata</td>
+              </tr>
+              <tr>
+                <td>Uploaded documents</td>
+                <td>Project evidence, grounded chat, decision context, guideline evaluation</td>
+                <td>User-uploaded files in object storage plus metadata, citations, and derived records</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="compliance">
+      <div class="container">
+        <div class="section-head" data-observe="fade-up">
+          <span class="section-kicker-simple">Compliance status</span>
+          <h2 class="section-title max-w-22">Clear about today's controls and the next steps.</h2>
+        </div>
+        <div class="security-status-grid" data-observe="fade-up" style="--delay: 1;">
+          <article class="launch-card">
+            <span class="launch-card-eyebrow">Implemented controls</span>
+            <h3>SOC 2 readiness foundations</h3>
+            <p>Encryption at rest, encryption in transit, logical tenant isolation, authenticated access checks, and audit logging are documented as current controls. Verachi itself is not presented as SOC 2 certified.</p>
+          </article>
+          <article class="launch-card">
+            <span class="launch-card-eyebrow">In progress</span>
+            <h3>GDPR and data lifecycle</h3>
+            <p>Data minimization and confidentiality controls are strong, including pointer-only integration storage. We are expanding lifecycle documentation and customer-facing privacy workflows for retention, deletion, data-subject requests, and processor records.</p>
+          </article>
+          <article class="launch-card">
+            <span class="launch-card-eyebrow">Roadmap</span>
+            <h3>Operational hardening</h3>
+            <p>We are continuing to mature the security program with clearer lifecycle controls, documented key rotation, managed secrets, storage access evidence, vendor records, and independent review ahead of a future Type II audit window.</p>
+          </article>
+          <article class="launch-card">
+            <span class="launch-card-eyebrow">Special requirements</span>
+            <h3>Confirm regulated use cases</h3>
+            <p>For HIPAA, strict data residency, BAA, or certification-bound workloads, we review requirements with the customer before production use.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="infrastructure">
+      <div class="container">
+        <div class="section-head section-head-centered" data-observe="fade-up">
+          <span class="section-kicker-simple">Infrastructure</span>
+          <h2 class="section-title max-w-22">Built on providers with mature security programs.</h2>
+          <p class="section-subtitle">These are provider assurance programs, not Verachi certifications. They help describe the security posture of the infrastructure Verachi runs on while we continue our own readiness work.</p>
+        </div>
+        <div class="security-provider-note" data-observe="fade-up" style="--delay: 1;">
+          <p>Provider certifications are useful diligence inputs, but they do not replace Verachi's own controls, audit evidence, or compliance roadmap. Verachi should not be represented as SOC 2 certified unless and until Verachi completes its own audit.</p>
+        </div>
+        <div data-observe="fade-up" style="--delay: 2;">
+          <table class="trust-matrix security-provider-matrix">
+            <thead>
+              <tr>
+                <th>Layer</th>
+                <th>Provider / component</th>
+                <th>How Verachi uses it</th>
+                <th>Assurance note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Hosting</td>
+                <td>AWS Lightsail</td>
+                <td>Production app host, private services, backups, and deployment infrastructure</td>
+                <td><span class="security-badge">Provider-level program</span></td>
+              </tr>
+              <tr>
+                <td>Database</td>
+                <td>PostgreSQL</td>
+                <td>Tenant-scoped application data, audit events, legal acceptances, and metadata</td>
+                <td><span class="security-badge">RLS enforced in app</span></td>
+              </tr>
+              <tr>
+                <td>Object storage</td>
+                <td>AWS S3-compatible storage</td>
+                <td>Uploaded documents, backup objects, and tenant-prefixed storage paths</td>
+                <td><span class="security-badge">Encrypted at rest</span></td>
+              </tr>
+              <tr>
+                <td>AI / RAG</td>
+                <td>Google Gemini / File Search</td>
+                <td>Grounded answers, semantic retrieval, extraction, and temporary analysis context</td>
+                <td><span class="security-badge">Google Cloud SOC 2 / ISO 27001 scope to confirm</span></td>
+              </tr>
+              <tr>
+                <td>Cache / queues</td>
+                <td>Valkey / Redis-compatible services</td>
+                <td>Rate limits, queues, cache keys, and background job transport</td>
+                <td><span class="security-badge">Private network</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head section-head-centered" data-observe="fade-up">
+          <span class="section-kicker-simple">FAQ</span>
+          <h2 class="section-title max-w-22">Common security questions.</h2>
+        </div>
+        <div class="security-faq" data-observe="fade-up" style="--delay: 1;">
+          <article class="trust-callout">
+            <h3>Does Verachi store Slack, Teams, Jira, or GitHub message bodies?</h3>
+            <p>Not as durable storage by default. External content can be fetched temporarily for analysis, routing, and risk evaluation, but durable records store Verachi-authored conclusions, links, IDs, counts, labels, status, and detection metadata.</p>
+          </article>
+          <article class="trust-callout">
+            <h3>What context is sent to AI?</h3>
+            <p>No. AI operates on the context needed for a requested summary, answer, decision capture, or risk evaluation. Claims should be grounded with citations, and raw integration content is not kept as a permanent archive by default.</p>
+          </article>
+          <article class="trust-callout">
+            <h3>Can Verachi write back to my tools?</h3>
+            <p>Only through explicit user action or configured workspace rules. External write-backs are conservative, non-destructive where possible, and audit-backed.</p>
+          </article>
+          <article class="trust-callout">
+            <h3>Is Verachi SOC 2 certified?</h3>
+            <p>No. Verachi has documented SOC 2 readiness controls and a hardening roadmap, but it should not be represented as SOC 2 certified.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-cta" id="cta">
+      <div class="cta-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="cta-centered" data-observe="fade-up">
+          <h2 class="section-title cta-title">Security review or questionnaire?</h2>
+          <p class="section-subtitle cta-sub">We can walk through the architecture, data boundaries, and current compliance roadmap with your team.</p>
+          <div class="hero-actions cta-actions">
+            <a class="button button-primary-hero" href="index.html#contact-form">
+              Contact us
+              <svg width="16" height="16" aria-hidden="true"><use href="./partials/icons.svg#icon-arrow-right"/></svg>
+            </a>
+            <a class="button button-outline" href="privacy.html">Read privacy</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="index.html" aria-label="Verachi home">
+        <div class="brand-mark">
+          <img src="./home/verachi-logo.svg" alt="" aria-hidden="true" />
+        </div>
+        <span class="brand-word">VERACHI</span>
+      </a>
+      <p class="footer-blurb">Decision workspace and grounded context for delivery teams working across Slack, Jira,
+        GitHub, and more.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="index.html#problemSection">How It Works</a>
+      <a href="index.html#pricingSection">Pricing</a>
+      <a href="security.html">Security</a>
+      <a href="trust.html">Trust &amp; Governance</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="https://app.verachi.io/login">Sign In</a>
+      <a href="index.html#contact-form">Book a Demo</a>
+      <a href="security.html">Security</a>
+      <a href="trust.html">Trust</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <a href="https://app.verachi.io/docs">Docs</a>
+    </div>
+  </div>
+  <div class="container footer-legal">
+    <p>&copy; 2026 Verachi. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
