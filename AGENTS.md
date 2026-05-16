@@ -2,7 +2,7 @@
 
 This repository serves the Verachi GitHub Pages landing site.
 
-Main app lives in ../mooomooo
+Main app lives in ../verachi
 
 ## Pushing Changes
 
