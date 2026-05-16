@@ -544,25 +544,6 @@ main {
   border-bottom: 2px solid var(--mint);
 }
 
-.hero-proof-item.hero-tool {
-  gap: 9px;
-  color: var(--ink-0);
-}
-
-.hero-tool-icon {
-  display: grid;
-  place-items: center;
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-  color: inherit;
-}
-
-.hero-tool-icon svg {
-  width: 16px;
-  height: 16px;
-}
-
 .hero-inline-tool {
   display: inline;
   font-size: 1em;
@@ -576,18 +557,6 @@ main {
   font-weight: 700;
   color: var(--ink-0);
   line-height: inherit;
-}
-
-.hero-preview-meta .hero-meta-tool {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.hero-preview-meta .hero-meta-tool svg {
-  width: 12px;
-  height: 12px;
-  flex-shrink: 0;
 }
 
 .hero-sidebar {
@@ -656,19 +625,6 @@ main {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-
-.hero-panel-card-title {
-  color: var(--ink-0);
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.35;
-}
-
-.hero-panel-card-copy {
-  color: var(--ink-1);
-  font-size: 0.9rem;
-  line-height: 1.55;
 }
 
 .hero-panel-list {
@@ -833,7 +789,6 @@ main {
 }
 
 .step-badge-problem { color: var(--red); }
-.step-badge-agitate { color: var(--gold); }
 .step-badge-solve { color: var(--mint); }
 
 .step-title {
@@ -916,35 +871,6 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 32px;
-}
-
-.roi-baseline-footer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
-  padding-top: 28px;
-  border-top: 1px solid var(--line-0);
-}
-
-.roi-baseline-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.roi-baseline-label {
-  font-size: 0.68rem;
-  font-weight: 750;
-  color: var(--ink-3);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.roi-baseline-value {
-  font-family: var(--font-mono);
-  font-size: 1.1rem;
-  font-weight: 750;
-  color: var(--red);
 }
 
 /* Result Cards */
@@ -1106,147 +1032,6 @@ main {
   -webkit-appearance: none;
   margin: 0;
 }
-
-.roi-card-totals .comparison-stat {
-  font-size: clamp(2.2rem, 5.5vw, 3.4rem);
-  margin-bottom: 0;
-  white-space: nowrap;
-}
-
-.roi-card-output {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.roi-card-output .comparison-detail {
-  margin-top: auto;
-}
-
-.comparison-card-after .roi-card-totals {
-  border-top-color: rgba(63, 111, 87, 0.15);
-}
-
-@media (max-width: 620px) {
-  .roi-card-totals {
-    grid-template-columns: 1fr;
-  }
-}
-
-.comparison-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 36px;
-}
-
-.comparison-grid.reverse-bias {
-  margin-top: 18px;
-}
-
-.comparison-card {
-  position: relative;
-  min-height: 230px;
-  overflow: hidden;
-  padding: clamp(24px, 3vw, 34px);
-  border: 1px solid var(--line-0);
-  border-radius: 28px;
-  background: var(--surface-1);
-  box-shadow: var(--shadow-md);
-}
-
-.comparison-card::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 5px;
-  background: var(--line-1);
-}
-
-.comparison-card-before {
-  border-color: rgba(180, 95, 76, 0.2);
-  background:
-    linear-gradient(135deg, rgba(180, 95, 76, 0.1), transparent 46%),
-    var(--surface-1);
-}
-
-.comparison-card-before::before {
-  background: linear-gradient(90deg, var(--red), var(--gold));
-}
-
-.comparison-card-after {
-  border-color: rgba(63, 111, 87, 0.2);
-  background:
-    linear-gradient(135deg, rgba(63, 111, 87, 0.12), transparent 46%),
-    var(--surface-2);
-}
-
-.comparison-card-after::before {
-  background: linear-gradient(90deg, var(--mint), var(--accent));
-}
-
-.comparison-card.featured {
-  min-height: 260px;
-  box-shadow: var(--shadow-lg);
-}
-
-.comparison-label {
-  display: inline-flex;
-  align-items: center;
-  margin-bottom: 24px;
-  color: var(--ink-2);
-  font-size: 0.78rem;
-  font-weight: 850;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.comparison-card-before .comparison-label {
-  color: var(--red);
-}
-
-.comparison-card-after .comparison-label {
-  color: var(--mint);
-}
-
-.comparison-stat {
-  display: block;
-  margin-bottom: 16px;
-  font-family: var(--font-mono);
-  font-size: clamp(2.2rem, 7vw, 5.8rem);
-  font-weight: 850;
-  line-height: 0.9;
-  letter-spacing: -0.08em;
-  color: var(--ink-0);
-}
-
-.comparison-card-before .comparison-stat {
-  color: var(--red);
-}
-
-.comparison-card-after .comparison-stat {
-  color: var(--mint);
-}
-
-.comparison-detail {
-  max-width: 38ch;
-  color: var(--ink-2);
-  font-size: 0.96rem;
-  line-height: 1.68;
-  text-wrap: pretty;
-}
-
-@media (max-width: 860px) {
-  .comparison-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .comparison-card,
-  .comparison-card.featured {
-    min-height: auto;
-  }
-}
-
 
 .slack-demo-pair {
   display: grid;
@@ -1441,14 +1226,6 @@ main {
   color: #1d1c1d;
   font-size: 0.9rem;
   line-height: 1.48;
-}
-
-.slack-mention {
-  padding: 2px 5px;
-  border-radius: 4px;
-  background: rgba(29, 155, 209, 0.12);
-  color: #1264a3;
-  font-weight: 700;
 }
 
 .verachi-summary {
@@ -2591,15 +2368,6 @@ main {
   font-size: 0.88rem;
 }
 
-.cta-actions {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin-top: 30px;
-}
-
 .contact-section {
   padding-block: clamp(92px, 11vw, 150px);
 }
@@ -2657,54 +2425,6 @@ main {
   border-radius: 50%;
   background: var(--mint);
   box-shadow: 0 0 0 6px var(--mint-soft);
-}
-
-.contact-impact {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
-  margin-top: 28px;
-  padding-top: 24px;
-  border-top: 1px solid var(--line-0);
-}
-
-.contact-impact-stat {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  padding: 10px 16px;
-  border-radius: var(--radius-pill);
-  background: var(--mint-soft);
-  border: 1px solid var(--mint-soft);
-}
-
-.contact-impact-stat strong {
-  font-family: var(--font-mono);
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--mint);
-  letter-spacing: -0.04em;
-}
-
-.contact-impact-stat span {
-  color: var(--ink-2);
-  font-size: 0.78rem;
-  font-weight: 700;
-}
-
-.contact-impact-note {
-  width: 100%;
-  margin-top: 4px;
-  color: var(--ink-3);
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-.contact-impact-note a {
-  color: var(--accent-strong);
-  text-decoration: underline;
-  text-underline-offset: 0.15em;
 }
 
 .contact-form-card {
@@ -3061,8 +2781,6 @@ html.js [data-anim].in-view {
    ============================================================ */
 @media (max-width: 860px) {
   .hero-layout,
-  .hero-preview-grid,
-  .hero-preview-strip,
   .contact-section .container {
     grid-template-columns: 1fr;
   }
@@ -3144,8 +2862,7 @@ html.js [data-anim].in-view {
     display: none;
   }
 
-  .hero-actions,
-  .cta-actions {
+  .hero-actions {
     flex-direction: column;
     align-items: stretch;
   }
@@ -3208,11 +2925,6 @@ html.js [data-anim].in-view {
   .hero-panel-card {
     padding: 14px;
     border-radius: 16px;
-  }
-
-  .comparison-card {
-    padding: clamp(18px, 3vw, 34px);
-    border-radius: 22px;
   }
 
   .connect-orbit {
@@ -3290,7 +3002,6 @@ html.js [data-anim].in-view {
   .integration-card,
   .connect-status,
   [data-anim],
-  .comparison-card,
   .hero-panel-card,
   .site-header {
     transition: none !important;

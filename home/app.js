@@ -608,7 +608,7 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
    COUNT-UP — animate stat numbers when they enter view
    ============================================================ */
 (function initCountUp() {
-  const statEls = document.querySelectorAll(".comparison-stat, .recovered-stat");
+  const statEls = document.querySelectorAll(".recovered-stat");
   if (!statEls.length) return;
 
   const observer = new IntersectionObserver((entries) => {
