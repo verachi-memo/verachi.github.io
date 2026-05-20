@@ -78,6 +78,89 @@ function sleep(ms) {
   syncWithBreakpoint();
 })();
 
+/* ============================================================
+   EASED ANCHORS — slower, intentional in-page navigation
+   ============================================================ */
+(function initEasedAnchorScroll() {
+  const anchors = Array.from(document.querySelectorAll('a[href^="#"]'));
+  if (!anchors.length) return;
+
+  let activeFrame = 0;
+
+  function targetTop(target) {
+    const styles = window.getComputedStyle(target);
+    const marginTop = parseFloat(styles.scrollMarginTop || "0") || 0;
+    return Math.max(0, target.getBoundingClientRect().top + window.scrollY - marginTop);
+  }
+
+  function easeOutQuint(t) {
+    return 1 - Math.pow(1 - t, 5);
+  }
+
+  function scrollToTarget(target, sourceAnchor) {
+    const startY = window.scrollY;
+    const endY = targetTop(target);
+    const distance = Math.abs(endY - startY);
+
+    if (prefersReducedMotion.matches || distance < 4) {
+      window.scrollTo(0, endY);
+      if (sourceAnchor.classList.contains("skip-link")) {
+        target.focus({ preventScroll: true });
+      }
+      return;
+    }
+
+    if (activeFrame) {
+      window.cancelAnimationFrame(activeFrame);
+      activeFrame = 0;
+    }
+
+    document.documentElement.classList.add("is-programmatic-scroll");
+    const duration = Math.min(980, Math.max(540, distance * 0.38));
+    const startTime = performance.now();
+
+    function step(now) {
+      const t = Math.min((now - startTime) / duration, 1);
+      window.scrollTo(0, startY + (endY - startY) * easeOutQuint(t));
+
+      if (t < 1) {
+        activeFrame = window.requestAnimationFrame(step);
+        return;
+      }
+
+      activeFrame = 0;
+      window.scrollTo(0, endY);
+      document.documentElement.classList.remove("is-programmatic-scroll");
+      if (sourceAnchor.classList.contains("skip-link")) {
+        target.focus({ preventScroll: true });
+      }
+    }
+
+    activeFrame = window.requestAnimationFrame(step);
+  }
+
+  anchors.forEach(anchor => {
+    anchor.addEventListener("click", (event) => {
+      const href = anchor.getAttribute("href");
+      if (!href || href === "#") return;
+
+      let targetId = href.slice(1);
+      try {
+        targetId = decodeURIComponent(targetId);
+      } catch {
+        return;
+      }
+
+      const target = document.getElementById(targetId);
+      if (!target) return;
+
+      event.preventDefault();
+      scrollToTarget(target, anchor);
+      history.pushState(null, "", href);
+    });
+  });
+})();
+
 
 /* ============================================================
    ROI CALCULATOR — range sliders with max→input switch
@@ -128,6 +211,18 @@ function sleep(ms) {
     if (salaryVal) salaryVal.textContent = fmtSalary(values.salary);
   }
 
+  function syncSliderFill(slider) {
+    var min = parseFloat(slider.min) || 0;
+    var max = parseFloat(slider.max) || 100;
+    var val = parseFloat(slider.value) || min;
+    var pct = max > min ? ((val - min) / (max - min)) * 100 : 0;
+    slider.style.setProperty("--range-progress", Math.min(Math.max(pct, 0), 100).toFixed(2) + "%");
+  }
+
+  function syncAllSliderFills() {
+    [teamSlider, hoursSlider, salarySlider].forEach(syncSliderFill);
+  }
+
   // Check if slider is at max and swap output to editable input
   function checkMax(slider, outputEl, key, formatter) {
     var max = parseInt(slider.max);
@@ -163,6 +258,7 @@ function sleep(ms) {
           out.textContent = formatter(values[key]);
           inp.replaceWith(out);
           slider.value = values[key];
+          syncSliderFill(slider);
 
           if (key === "team") teamVal = out;
           if (key === "hours") hoursVal = out;
@@ -175,6 +271,7 @@ function sleep(ms) {
   // Slider event handlers
   teamSlider.addEventListener("input", function() {
     values.team = parseInt(teamSlider.value);
+    syncSliderFill(teamSlider);
     if (teamVal) teamVal.textContent = values.team;
     checkMax(teamSlider, teamVal, "team", String);
     calc();
@@ -182,6 +279,7 @@ function sleep(ms) {
 
   hoursSlider.addEventListener("input", function() {
     values.hours = parseInt(hoursSlider.value);
+    syncSliderFill(hoursSlider);
     if (hoursVal) hoursVal.textContent = values.hours;
     checkMax(hoursSlider, hoursVal, "hours", String);
     calc();
@@ -189,11 +287,13 @@ function sleep(ms) {
 
   salarySlider.addEventListener("input", function() {
     values.salary = parseInt(salarySlider.value);
+    syncSliderFill(salarySlider);
     if (salaryVal) salaryVal.textContent = fmtSalary(values.salary);
     checkMax(salarySlider, salaryVal, "salary", fmtSalary);
     calc();
   });
 
+  syncAllSliderFills();
   updateDisplays();
   calc();
 })();
@@ -418,13 +518,16 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
     const channel = channels[mode]?.[channelName];
     if (!thread || !channel) return;
 
+    const alreadyActive = mock.querySelector(`.slack-channel.is-active[data-slack-channel="${channelName}"]`);
+    if (alreadyActive) return;
+
     mock.querySelectorAll("[data-slack-channel]").forEach((button) => {
       const isActive = button.dataset.slackChannel === channelName;
       button.classList.toggle("is-active", isActive);
       button.setAttribute("aria-pressed", String(isActive));
     });
 
-    thread.innerHTML = `
+    const nextHtml = `
       <div class="slack-thread-header">
         <strong>#${channelName}</strong>
         <span>${channel.status}</span>
@@ -432,6 +535,23 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
       ${summaryHtml(channel.summary)}
       ${channel.messages.map(messageHtml).join("")}
     `;
+
+    if (prefersReducedMotion.matches) {
+      thread.innerHTML = nextHtml;
+      return;
+    }
+
+    const token = `${Date.now()}-${Math.random()}`;
+    thread.dataset.switchToken = token;
+    thread.classList.add("is-switching");
+
+    window.setTimeout(() => {
+      if (thread.dataset.switchToken !== token) return;
+      thread.innerHTML = nextHtml;
+      window.requestAnimationFrame(() => {
+        thread.classList.remove("is-switching");
+      });
+    }, 120);
   }
 
   mocks.forEach((mock) => {

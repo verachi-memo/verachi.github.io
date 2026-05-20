@@ -23,7 +23,7 @@
   --mint: #3f6f57;
   --mint-soft: rgba(63, 111, 87, 0.12);
   --gold: #b7823b;
-  --gold-soft: rgba(183, 130, 59, 0.16);
+  --warm-soft: rgba(216, 203, 184, 0.32);
   --red: #b45f4c;
   --red-soft: rgba(180, 95, 76, 0.13);
   --shadow-sm: 0 10px 26px rgba(52, 49, 44, 0.06);
@@ -80,7 +80,7 @@ body {
   --bg-morph-y: 0;
   background:
     radial-gradient(circle at calc(85% + var(--bg-morph-x) * 4%) calc(12% + var(--bg-morph-y) * 4%), var(--accent-soft), transparent 32%),
-    radial-gradient(circle at calc(10% - var(--bg-morph-x) * 3%) calc(22% - var(--bg-morph-y) * 3%), var(--gold-soft), transparent 24%),
+    radial-gradient(circle at calc(10% - var(--bg-morph-x) * 3%) calc(22% - var(--bg-morph-y) * 3%), var(--warm-soft), transparent 24%),
     radial-gradient(circle at calc(60% + var(--bg-morph-y) * 2%) calc(70% + var(--bg-morph-x) * 2%), var(--mint-soft), transparent 30%),
     linear-gradient(175deg, var(--bg-0) 0%, var(--bg-1) 48%, var(--bg-0) 100%);
   -webkit-font-smoothing: antialiased;
@@ -147,6 +147,10 @@ main {
   position: relative;
 }
 
+:where(section[id], main[id]) {
+  scroll-margin-top: 112px;
+}
+
 /* Mobile reading progress (JS injects the element) */
 .mobile-progress {
   position: fixed;
@@ -159,7 +163,7 @@ main {
 .mobile-progress-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, var(--red), var(--accent), var(--mint));
+  background: linear-gradient(90deg, var(--accent-strong), var(--accent), var(--mint));
 }
 
 @media (min-width: 721px) {
@@ -172,6 +176,11 @@ main {
   main {
     scroll-snap-type: y proximity;
   }
+}
+
+html.is-programmatic-scroll,
+html.is-programmatic-scroll main {
+  scroll-snap-type: none !important;
 }
 
 /* ============================================================
@@ -348,7 +357,7 @@ main {
   width: min(52vw, 700px);
   height: min(52vw, 700px);
   border-radius: 50%;
-  background: radial-gradient(circle, var(--gold-soft), transparent 68%);
+  background: radial-gradient(circle, var(--warm-soft), transparent 68%);
   filter: blur(52px);
   opacity: 0.7;
   pointer-events: none;
@@ -455,7 +464,7 @@ main {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--gold);
+  background: var(--accent);
 }
 
 .hero-actions {
@@ -544,19 +553,35 @@ main {
   border-bottom: 2px solid var(--mint);
 }
 
+.hero-inline-tool-list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  margin-inline: 2px;
+  vertical-align: baseline;
+}
+
 .hero-inline-tool {
-  display: inline;
-  font-size: 1em;
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px 2px;
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 253, 248, 0.52);
+  font-size: 0.94em;
   font-weight: 700;
+  line-height: 1.45;
   white-space: nowrap;
+  vertical-align: baseline;
 }
 
 
 .hero-tool-name {
-  font-size: 1em;
+  font-size: 0.94em;
   font-weight: 700;
-  color: var(--ink-0);
-  line-height: inherit;
+  color: var(--accent-strong);
+  line-height: 1.45;
 }
 
 .hero-sidebar {
@@ -605,17 +630,30 @@ main {
 
 .hero-panel-stack {
   display: grid;
-  gap: 12px;
+  gap: 14px;
 }
 
 .hero-panel-card {
   display: grid;
   gap: 14px;
-  padding: 16px;
+  padding: 20px 24px;
   border-radius: 20px;
   border: 1px solid var(--line-0);
   background: var(--surface-0);
   box-shadow: var(--shadow-sm);
+}
+
+.hero-panel-card-before {
+  background: rgba(255, 253, 248, 0.58);
+}
+
+.hero-panel-card-before .hero-panel-list-item {
+  color: var(--ink-3);
+  opacity: 0.86;
+}
+
+.hero-panel-card-before .hero-panel-list-item::before {
+  background: var(--line-2);
 }
 
 .hero-panel-card-label {
@@ -836,6 +874,18 @@ main {
   box-shadow: var(--shadow-md);
   position: relative;
   overflow: hidden;
+  transition:
+    transform var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease);
+}
+
+.roi-input-card:hover,
+.roi-input-card:focus-within {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 24%, var(--line-1));
+  box-shadow: 0 24px 64px rgba(52, 49, 44, 0.11);
 }
 
 .roi-input-card::before {
@@ -885,6 +935,17 @@ main {
   gap: 16px;
   position: relative;
   overflow: hidden;
+  transition:
+    transform var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease);
+}
+
+.roi-result-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 18%, var(--line-1));
+  box-shadow: 0 28px 72px rgba(52, 49, 44, 0.12);
 }
 
 .roi-result-card::before {
@@ -957,15 +1018,23 @@ main {
 
 /* Range slider track styling */
 .roi-slider {
+  --range-progress: 0%;
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
   height: 6px;
   border-radius: 3px;
-  background: var(--line-1);
+  background:
+    linear-gradient(
+      90deg,
+      var(--accent) 0%,
+      var(--accent) var(--range-progress),
+      var(--line-1) var(--range-progress),
+      var(--line-1) 100%
+    );
   outline: none;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background var(--dur-fast) var(--ease);
 }
 
 .roi-slider::-webkit-slider-thumb {
@@ -1000,6 +1069,18 @@ main {
   cursor: grab;
 }
 
+.roi-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--line-1);
+}
+
+.roi-slider::-moz-range-progress {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--accent);
+}
+
 /* Slider values and inputs */
 .roi-slider-value {
   font-family: var(--font-mono);
@@ -1023,8 +1104,19 @@ main {
   border: 1px solid var(--accent);
   border-radius: 8px;
   background: var(--surface-3);
+  box-shadow: 0 0 0 4px var(--accent-soft);
   outline: none;
   -moz-appearance: textfield;
+  animation: roi-value-pop 260ms var(--ease);
+  transition:
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.roi-slider-value-input:focus {
+  border-color: var(--accent-strong);
+  box-shadow: 0 0 0 5px var(--accent-soft), 0 8px 20px rgba(23, 63, 59, 0.12);
 }
 
 .roi-slider-value-input::-webkit-inner-spin-button,
@@ -1166,6 +1258,14 @@ main {
   min-width: 0;
   flex-direction: column;
   background: #fff;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+
+.slack-thread.is-switching {
+  opacity: 0;
+  transform: translateY(4px);
 }
 
 .slack-thread-header {
@@ -1884,6 +1984,17 @@ main {
     linear-gradient(180deg, var(--surface-2), var(--surface-1)),
     var(--surface-1);
   box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease);
+}
+
+.capability-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 20%, var(--line-0));
+  box-shadow: 0 20px 48px rgba(52, 49, 44, 0.1);
 }
 
 .capability-card-label {
@@ -1936,7 +2047,7 @@ main {
 
 .proof-section::before {
   background:
-    radial-gradient(circle at 12% 24%, var(--gold-soft), transparent 30%),
+    radial-gradient(circle at 12% 24%, var(--warm-soft), transparent 30%),
     radial-gradient(circle at 84% 64%, var(--accent-soft), transparent 34%),
     linear-gradient(180deg, var(--surface-1), var(--surface-0));
 }
@@ -2763,6 +2874,12 @@ html.js [data-anim].in-view {
   100% { transform: scale(2.5); opacity: 0; }
 }
 
+@keyframes roi-value-pop {
+  0% { opacity: 0; transform: scale(0.96); }
+  58% { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
 /* Ripple on orbit node connection */
 @keyframes node-ripple {
   0%   { transform: translate(-50%, -50%) scale(0.6); opacity: 0.5; }
@@ -2923,7 +3040,7 @@ html.js [data-anim].in-view {
   }
 
   .hero-panel-card {
-    padding: 14px;
+    padding: 18px;
     border-radius: 16px;
   }
 
@@ -2996,6 +3113,9 @@ html.js [data-anim].in-view {
   .cf-spinner {
     animation: none !important;
   }
+  .roi-slider-value-input {
+    animation: none !important;
+  }
   .orbit-node,
   .orbit-center,
   .connection-packet,
@@ -3003,6 +3123,10 @@ html.js [data-anim].in-view {
   .connect-status,
   [data-anim],
   .hero-panel-card,
+  .roi-input-card,
+  .roi-result-card,
+  .capability-card,
+  .slack-thread,
   .site-header {
     transition: none !important;
   }

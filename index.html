@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="./home/styles.css?v=6" />
+<link rel="stylesheet" href="./home/styles.css?v=7" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NHXTJ2NZMT"></script>
   <script>
@@ -67,15 +67,17 @@
       <div class="hero-copy">
         <div class="hero-kicker" data-anim>Decision and risk memory for delivery teams</div>
         <h1 data-anim aria-label="Recover the why. Reduce delivery risk."><span class="hero-emphasis">Recover the why.</span><span class="hero-break">Reduce delivery risk.</span></h1>
-        <div class="hero-stance" data-anim data-delay="1">Cited records before confident decisions.</div>
+        <div class="hero-stance" data-anim data-delay="1">Decide with proof, not memory.</div>
         <p class="hero-sub" data-anim data-delay="1">
-          <strong>Verachi connects read-only to the tools your team already uses</strong>,
-          then turns scattered context from
-          <span class="hero-inline-tool hero-tool-name">Slack</span>,
-          <span class="hero-inline-tool hero-tool-name">GitHub</span>,
-          <span class="hero-inline-tool hero-tool-name">Microsoft Teams</span> and
-          <span class="hero-inline-tool hero-tool-name">Jira</span>
-          into decisions, risks, owners, and source links your team can inspect.
+          <strong>Verachi connects read-only to the tools you already run</strong>,
+          capturing context across
+          <span class="hero-inline-tool-list" aria-label="Slack, GitHub, Microsoft Teams, and Jira">
+            <span class="hero-inline-tool hero-tool-name">Slack</span>
+            <span class="hero-inline-tool hero-tool-name">GitHub</span>
+            <span class="hero-inline-tool hero-tool-name">Microsoft Teams</span>
+            <span class="hero-inline-tool hero-tool-name">Jira</span>
+          </span>
+          while it builds an inspectable trail of decisions, risks, and ownership. Automatically.
         </p>
         <div class="hero-actions" data-anim data-delay="2">
           <a class="button button-primary" href="#contact-form">
@@ -99,7 +101,7 @@
             </div>
           </div>
           <div class="hero-panel-stack" aria-label="Verachi overview cards">
-            <div class="hero-panel-card">
+            <div class="hero-panel-card hero-panel-card-before">
               <span class="hero-panel-card-label">Before</span>
               <div class="hero-panel-list">
                 <p class="hero-panel-list-item">Decision rationale lives across threads, tickets, and pull requests</p>
@@ -146,7 +148,7 @@
     <div class="container">
       <div data-anim>
         <span class="step-badge step-badge-problem">The Problem</span>
-        <h2 class="step-title">Work keeps moving.<br/>Context keeps leaking.</h2>
+        <h2 class="step-title">Work moves forward.<br/>Context leaks away.</h2>
         <p class="step-desc">The team is capable, fast, and already using the right tools. The failure mode is simpler: the reasons behind product and technical decisions never become a shared record. Model the assumptions before you trust the number.</p>
       </div>
 
@@ -465,7 +467,7 @@
     <div class="container">
       <div class="capability-header" data-anim>
         <span class="step-badge step-badge-solve">Decisions &amp; Risks</span>
-        <h2 class="step-title capability-title">The why, the risk, and the next owner.</h2>
+        <h2 class="step-title capability-title">The rationale. The risk.<br/>The next owner.</h2>
         <p class="step-desc capability-desc">Verachi turns scattered Slack threads, tickets, and pull requests into cited delivery records your team can act on.</p>
       </div>
       <div class="capability-grid" data-anim data-delay="1">
@@ -500,7 +502,7 @@
     <div class="container proof-layout">
       <div class="proof-copy" data-anim>
         <span class="step-badge step-badge-solve">Proof Before Purchase</span>
-        <h2 class="step-title">Show me the record, not the promise.</h2>
+        <h2 class="step-title">The inspectable record.</h2>
         <p class="step-desc">Before a rollout, Verachi should be able to show your team exactly what it captured, which sources support it, and what it can or cannot write back to your systems.</p>
         <div class="proof-actions">
           <a class="button button-primary" href="#contact-form">Review our pilot checklist</a>
@@ -785,7 +787,7 @@
   </div>
 </footer>
 
-<script src="./home/app.js"></script>
+<script src="./home/app.js?v=7"></script>
 
 </body>
 </html>
