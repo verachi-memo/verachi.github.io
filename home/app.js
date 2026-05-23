@@ -23,6 +23,37 @@ function sleep(ms) {
 
   const mobileQuery = window.matchMedia("(max-width: 720px)");
 
+  function iconLine(svg, x1, y1, x2, y2) {
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("x1", x1);
+    line.setAttribute("y1", y1);
+    line.setAttribute("x2", x2);
+    line.setAttribute("y2", y2);
+    svg.appendChild(line);
+  }
+
+  function createMenuIcon(open) {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("stroke", "currentColor");
+    svg.setAttribute("stroke-width", "2");
+    svg.setAttribute("stroke-linecap", "round");
+    svg.setAttribute("stroke-linejoin", "round");
+    svg.setAttribute("aria-hidden", "true");
+
+    if (open) {
+      iconLine(svg, "18", "6", "6", "18");
+      iconLine(svg, "6", "6", "18", "18");
+    } else {
+      iconLine(svg, "4", "7", "20", "7");
+      iconLine(svg, "4", "12", "20", "12");
+      iconLine(svg, "4", "17", "20", "17");
+    }
+
+    return svg;
+  }
+
   function setMenuOpen(open) {
     const shouldOpen = mobileQuery.matches ? open : false;
     toggle.setAttribute("aria-expanded", String(shouldOpen));
@@ -30,12 +61,7 @@ function sleep(ms) {
     nav.hidden = !shouldOpen;
     if (header) header.classList.toggle("is-menu-open", shouldOpen);
 
-    // Swap icon between hamburger and X
-    if (shouldOpen) {
-      toggle.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>`;
-    } else {
-      toggle.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7" /><line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="17" x2="20" y2="17" /></svg>`;
-    }
+    toggle.replaceChildren(createMenuIcon(shouldOpen));
   }
 
   toggle.addEventListener("click", () => {
@@ -480,36 +506,81 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
     },
   };
 
-  function messageHtml([personKey, time, body]) {
-    const person = people[personKey];
-    return `
-      <div class="slack-message-row">
-        <img class="slack-photo" src="${person.avatar}" alt="${person.name}" width="40" height="40" />
-        <div>
-          <div class="slack-message-meta"><strong>${person.name}</strong><span>${person.title}</span><span>${time}</span></div>
-          <p>${body}</p>
-        </div>
-      </div>
-    `;
+  function appendTextElement(parent, tagName, text, className) {
+    const el = document.createElement(tagName);
+    if (className) el.className = className;
+    el.textContent = text;
+    parent.appendChild(el);
+    return el;
   }
 
-  function summaryHtml(summary) {
-    if (!summary) return "";
-    return `
-      <div class="verachi-summary">
-        <div class="verachi-summary-top">
-          <span class="verachi-bot-mark">V</span>
-          <div>
-            <strong>${summary.title}</strong>
-            <span>${summary.detail}</span>
-          </div>
-        </div>
-        <p>${summary.body}</p>
-        <div class="verachi-pills" aria-label="Verachi linked context">
-          ${summary.pills.map((pill) => `<span>${pill}</span>`).join("")}
-        </div>
-      </div>
-    `;
+  function createMessageRow([personKey, time, body]) {
+    const person = people[personKey];
+    const row = document.createElement("div");
+    row.className = "slack-message-row";
+
+    const img = document.createElement("img");
+    img.className = "slack-photo";
+    img.src = person.avatar;
+    img.alt = person.name;
+    img.width = 40;
+    img.height = 40;
+    row.appendChild(img);
+
+    const bodyWrap = document.createElement("div");
+    const meta = document.createElement("div");
+    meta.className = "slack-message-meta";
+    appendTextElement(meta, "strong", person.name);
+    appendTextElement(meta, "span", person.title);
+    appendTextElement(meta, "span", time);
+    bodyWrap.appendChild(meta);
+    appendTextElement(bodyWrap, "p", body);
+    row.appendChild(bodyWrap);
+
+    return row;
+  }
+
+  function createSummary(summary) {
+    if (!summary) return null;
+
+    const wrap = document.createElement("div");
+    wrap.className = "verachi-summary";
+
+    const top = document.createElement("div");
+    top.className = "verachi-summary-top";
+    appendTextElement(top, "span", "V", "verachi-bot-mark");
+
+    const textWrap = document.createElement("div");
+    appendTextElement(textWrap, "strong", summary.title);
+    appendTextElement(textWrap, "span", summary.detail);
+    top.appendChild(textWrap);
+    wrap.appendChild(top);
+
+    appendTextElement(wrap, "p", summary.body);
+
+    const pills = document.createElement("div");
+    pills.className = "verachi-pills";
+    pills.setAttribute("aria-label", "Verachi linked context");
+    summary.pills.forEach((pill) => appendTextElement(pills, "span", pill));
+    wrap.appendChild(pills);
+
+    return wrap;
+  }
+
+  function createThreadContent(channelName, channel) {
+    const fragment = document.createDocumentFragment();
+
+    const header = document.createElement("div");
+    header.className = "slack-thread-header";
+    appendTextElement(header, "strong", `#${channelName}`);
+    appendTextElement(header, "span", channel.status);
+    fragment.appendChild(header);
+
+    const summary = createSummary(channel.summary);
+    if (summary) fragment.appendChild(summary);
+    channel.messages.forEach((message) => fragment.appendChild(createMessageRow(message)));
+
+    return fragment;
   }
 
   function renderChannel(mock, channelName) {
@@ -527,17 +598,8 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
       button.setAttribute("aria-pressed", String(isActive));
     });
 
-    const nextHtml = `
-      <div class="slack-thread-header">
-        <strong>#${channelName}</strong>
-        <span>${channel.status}</span>
-      </div>
-      ${summaryHtml(channel.summary)}
-      ${channel.messages.map(messageHtml).join("")}
-    `;
-
     if (prefersReducedMotion.matches) {
-      thread.innerHTML = nextHtml;
+      thread.replaceChildren(createThreadContent(channelName, channel));
       return;
     }
 
@@ -547,7 +609,7 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
 
     window.setTimeout(() => {
       if (thread.dataset.switchToken !== token) return;
-      thread.innerHTML = nextHtml;
+      thread.replaceChildren(createThreadContent(channelName, channel));
       window.requestAnimationFrame(() => {
         thread.classList.remove("is-switching");
       });
@@ -769,11 +831,11 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
 
   const bar = document.createElement("div");
   bar.className = "mobile-progress";
-  bar.innerHTML = '<div class="mobile-progress-fill" id="mobileProgressFill"></div>';
+  const fill = document.createElement("div");
+  fill.className = "mobile-progress-fill";
+  fill.id = "mobileProgressFill";
+  bar.appendChild(fill);
   document.body.prepend(bar);
-
-  const fill = document.getElementById("mobileProgressFill");
-  if (!fill) return;
 
   function updateMobileProgress() {
     const scrollTop = window.scrollY;
