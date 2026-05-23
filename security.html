@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://app.verachi.io; object-src 'none'; base-uri 'self'; form-action 'self' https://app.verachi.io; upgrade-insecure-requests" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://app.verachi.io; object-src 'none'; base-uri 'self'; form-action 'self' https://app.verachi.io; upgrade-insecure-requests" />
 <meta name="theme-color" content="#fbfaf6" />
 <link rel="icon" href="./favicon.ico" />
 <script src="./site-init.js"></script>
@@ -59,14 +59,14 @@
         <div class="hero-content security-hero-copy">
           <div class="hero-eyebrow">Security</div>
           <h1 id="security-title" class="display-title" data-observe="fade-up">Evidence first. <span class="title-emphasis">Data boundaries always.</span></h1>
-          <p class="hero-intro" data-observe="fade-up" style="--delay: 1;">Verachi is built for teams that need decision memory without copying every thread, ticket, and pull request into another system. We store durable conclusions and source links, keep raw external content in the source system, and make sensitive actions inspectable.</p>
-          <div class="trust-meta" data-observe="fade-up" style="--delay: 2;">
+          <p class="hero-intro" data-observe="fade-up" data-delay="1">Verachi is built for teams that need decision memory without copying every thread, ticket, and pull request into another system. We store durable conclusions and source links, keep raw external content in the source system, and make sensitive actions inspectable.</p>
+          <div class="trust-meta" data-observe="fade-up" data-delay="2">
             <span>Last updated: May 15, 2026</span>
             <a href="#controls">See controls</a>
             <a href="index.html#contact-form">Contact security</a>
           </div>
         </div>
-        <aside class="security-summary-card" data-observe="fade-up" style="--delay: 2;" aria-label="Security posture summary">
+        <aside class="security-summary-card" data-observe="fade-up" data-delay="2" aria-label="Security posture summary">
           <span class="trust-card-eyebrow">Current posture</span>
           <div class="security-summary-row">
             <strong>External content</strong>
@@ -94,7 +94,7 @@
           <span class="section-kicker-simple">How we think about security</span>
           <h2 class="section-title max-w-22">Small surface area. Clear evidence. Controlled side effects.</h2>
         </div>
-        <div class="trust-grid" data-observe="fade-up" style="--delay: 1;">
+        <div class="trust-grid" data-observe="fade-up" data-delay="1">
           <article class="trust-card">
             <span class="trust-card-eyebrow">Primary sources</span>
             <h3>Source systems remain primary</h3>
@@ -121,7 +121,7 @@
           <h2 class="section-title max-w-22">What Verachi stores.</h2>
           <p class="section-subtitle">The default integration model is pointer-only: Verachi stores its own decision record and source pointers, not raw third-party archives.</p>
         </div>
-        <div class="security-data-grid" data-observe="fade-up" style="--delay: 1;">
+        <div class="security-data-grid" data-observe="fade-up" data-delay="1">
           <article class="trust-card security-data-card">
             <span class="trust-card-eyebrow">Stored</span>
             <h3>Durable Verachi records</h3>
@@ -152,7 +152,7 @@
           <span class="section-kicker-simple">Controls</span>
           <h2 class="section-title max-w-22">Protection layers in the current platform.</h2>
         </div>
-        <div class="trust-grid" data-observe="fade-up" style="--delay: 1;">
+        <div class="trust-grid" data-observe="fade-up" data-delay="1">
           <article class="trust-card">
             <span class="trust-card-eyebrow">Tenant isolation</span>
             <h3>Database boundaries</h3>
@@ -194,7 +194,7 @@
           <h2 class="section-title max-w-22">How connected tools are used.</h2>
           <p class="section-subtitle">When needed, integrations read source content temporarily for routing, analysis, and risk evaluation. Durable storage follows the pointer-only model unless a user explicitly uploads or enters content into Verachi.</p>
         </div>
-        <div data-observe="fade-up" style="--delay: 1;">
+        <div data-observe="fade-up" data-delay="1">
           <table class="trust-matrix security-matrix">
             <thead>
               <tr>
@@ -236,7 +236,7 @@
           <span class="section-kicker-simple">Compliance status</span>
           <h2 class="section-title max-w-22">Clear about today's controls and the next steps.</h2>
         </div>
-        <div class="security-status-grid" data-observe="fade-up" style="--delay: 1;">
+        <div class="security-status-grid" data-observe="fade-up" data-delay="1">
           <article class="launch-card">
             <span class="launch-card-eyebrow">Implemented controls</span>
             <h3>SOC 2 readiness foundations</h3>
@@ -268,10 +268,10 @@
           <h2 class="section-title max-w-22">Built on providers with mature security programs.</h2>
           <p class="section-subtitle">These are provider assurance programs, not Verachi certifications. They help describe the security posture of the infrastructure Verachi runs on while we continue our own readiness work.</p>
         </div>
-        <div class="security-provider-note" data-observe="fade-up" style="--delay: 1;">
+        <div class="security-provider-note" data-observe="fade-up" data-delay="1">
           <p>Provider certifications are useful diligence inputs, but they do not replace Verachi's own controls, audit evidence, or compliance roadmap. Verachi should not be represented as SOC 2 certified unless and until Verachi completes its own audit.</p>
         </div>
-        <div data-observe="fade-up" style="--delay: 2;">
+        <div data-observe="fade-up" data-delay="2">
           <table class="trust-matrix security-provider-matrix">
             <thead>
               <tr>
@@ -324,7 +324,7 @@
           <span class="section-kicker-simple">FAQ</span>
           <h2 class="section-title max-w-22">Common security questions.</h2>
         </div>
-        <div class="security-faq" data-observe="fade-up" style="--delay: 1;">
+        <div class="security-faq" data-observe="fade-up" data-delay="1">
           <article class="trust-callout">
             <h3>Does Verachi store Slack, Teams, Jira, or GitHub message bodies?</h3>
             <p>Not as durable storage by default. External content can be fetched temporarily for analysis, routing, and risk evaluation, but durable records store Verachi-authored conclusions, links, IDs, counts, labels, status, and detection metadata.</p>

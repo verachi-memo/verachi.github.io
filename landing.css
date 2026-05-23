@@ -534,6 +534,10 @@ body.legal-page .section::before {
   text-wrap: pretty;
 }
 
+.hero-intro-narrow {
+  max-width: 54ch;
+}
+
 .hero-actions,
 .cta-actions {
   display: flex;
@@ -586,6 +590,14 @@ body.legal-page .section::before {
 .trust-card,
 .trust-callout {
   padding: 28px;
+}
+
+.trust-callout-full {
+  grid-column: 1 / -1;
+}
+
+.trust-grid-spaced {
+  margin-top: 20px;
 }
 
 .launch-card {
@@ -976,8 +988,16 @@ body.legal-page .section::before {
     transition: opacity 0.8s var(--ease-standard);
   }
 
-  .js [data-observe] {
-    transition-delay: calc(var(--delay, 0) * 90ms);
+  .js [data-observe][data-delay="1"] {
+    transition-delay: 90ms;
+  }
+
+  .js [data-observe][data-delay="2"] {
+    transition-delay: 180ms;
+  }
+
+  .js [data-observe][data-delay="3"] {
+    transition-delay: 270ms;
   }
 }
 

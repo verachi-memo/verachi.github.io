@@ -1,5 +1,5 @@
 <!-- SVG Icon Sprite — define once, use everywhere via <svg><use href="#icon-xxx"/></svg> -->
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+<svg xmlns="http://www.w3.org/2000/svg" hidden aria-hidden="true">
 
   <!-- Verachi V logo (header brand) -->
   <symbol id="icon-logo-v" viewBox="0 0 100 100">
