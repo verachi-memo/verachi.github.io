@@ -181,7 +181,7 @@ function sleep(ms) {
 
   var WEEKS = 52, RECOVERY = 0.6;
 
-  // Current effective values (may exceed slider max when user types)
+  // Current effective values may exceed slider max through manual edits.
   var values = { team: 6, hours: 12, salary: 200000 };
 
   function fmtH(n) { return Math.round(n).toLocaleString("en-US") + " hrs"; }
@@ -966,13 +966,6 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
     }
 
     showSuccess();
-
-    if (typeof gtag === "function") {
-      gtag("event", "generate_lead", {
-        event_category: "contact",
-        event_label: formData.company_size || "",
-      });
-    }
 
     resetButton();
   });
