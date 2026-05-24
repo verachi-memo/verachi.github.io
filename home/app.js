@@ -249,18 +249,23 @@ function sleep(ms) {
     [teamSlider, hoursSlider, salarySlider].forEach(syncSliderFill);
   }
 
-  // Check if slider is at max and swap output to editable input
-  function checkMax(slider, outputEl, key, formatter) {
-    var max = parseInt(slider.max);
-    var val = parseInt(slider.value);
-    if (val >= max && outputEl && outputEl.tagName !== "INPUT") {
-      // Replace <output> with <input>
+  // Make slider output value clickable to enter custom unconstrained input
+  function makeValEditable(outputEl, slider, key, formatter) {
+    if (!outputEl || outputEl.tagName === "INPUT") return;
+
+    outputEl.style.cursor = "pointer";
+    outputEl.title = "Click to enter custom value";
+
+    outputEl.addEventListener("click", function() {
+      if (outputEl.tagName === "INPUT") return;
+
       var inp = document.createElement("input");
       inp.type = "number";
       inp.className = "roi-slider-value-input";
       inp.value = values[key];
       inp.min = "1";
       inp.id = outputEl.id;
+
       outputEl.replaceWith(inp);
       inp.focus();
       inp.select();
@@ -272,26 +277,36 @@ function sleep(ms) {
 
       inp.addEventListener("input", function() {
         values[key] = Math.max(1, parseInt(inp.value) || 1);
+        var max = parseInt(slider.max);
+        if (values[key] <= max) {
+          slider.value = values[key];
+          syncSliderFill(slider);
+        } else {
+          slider.value = max;
+          syncSliderFill(slider);
+        }
         calc();
       });
 
       inp.addEventListener("blur", function() {
-        // If value is within slider range, switch back
-        if (values[key] <= max) {
-          var out = document.createElement("output");
-          out.className = "roi-slider-value";
-          out.id = inp.id;
-          out.textContent = formatter(values[key]);
-          inp.replaceWith(out);
-          slider.value = values[key];
-          syncSliderFill(slider);
+        var out = document.createElement("output");
+        out.className = "roi-slider-value";
+        out.id = inp.id;
+        out.textContent = formatter(values[key]);
+        inp.replaceWith(out);
 
-          if (key === "team") teamVal = out;
-          if (key === "hours") hoursVal = out;
-          if (key === "salary") salaryVal = out;
-        }
+        if (key === "team") teamVal = out;
+        if (key === "hours") hoursVal = out;
+        if (key === "salary") salaryVal = out;
+
+        var max = parseInt(slider.max);
+        slider.value = Math.min(values[key], max);
+        syncSliderFill(slider);
+
+        // Keep editable recursively
+        makeValEditable(out, slider, key, formatter);
       });
-    }
+    });
   }
 
   // Slider event handlers
@@ -299,7 +314,6 @@ function sleep(ms) {
     values.team = parseInt(teamSlider.value);
     syncSliderFill(teamSlider);
     if (teamVal) teamVal.textContent = values.team;
-    checkMax(teamSlider, teamVal, "team", String);
     calc();
   });
 
@@ -307,7 +321,6 @@ function sleep(ms) {
     values.hours = parseInt(hoursSlider.value);
     syncSliderFill(hoursSlider);
     if (hoursVal) hoursVal.textContent = values.hours;
-    checkMax(hoursSlider, hoursVal, "hours", String);
     calc();
   });
 
@@ -315,9 +328,12 @@ function sleep(ms) {
     values.salary = parseInt(salarySlider.value);
     syncSliderFill(salarySlider);
     if (salaryVal) salaryVal.textContent = fmtSalary(values.salary);
-    checkMax(salarySlider, salaryVal, "salary", fmtSalary);
     calc();
   });
+
+  makeValEditable(teamVal, teamSlider, "team", String);
+  makeValEditable(hoursVal, hoursSlider, "hours", String);
+  makeValEditable(salaryVal, salarySlider, "salary", fmtSalary);
 
   syncAllSliderFills();
   updateDisplays();
@@ -615,18 +631,16 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
       });
     }, 120);
   }
-
   mocks.forEach((mock) => {
     mock.querySelectorAll("[data-slack-channel]").forEach((button) => {
       button.addEventListener("click", () => {
         const channelName = button.dataset.slackChannel;
         if (!channelName) return;
-        renderChannel(mock, channelName);
+        mocks.forEach((m) => renderChannel(m, channelName));
       });
     });
   });
 })();
-
 
 /* ============================================================
    CONNECT ORBIT — staged reveal + optional particle streams
@@ -948,6 +962,7 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
   const showSuccess = () => {
     contactForm.hidden = true;
     cfSuccess.hidden = false;
+    cfSuccess.focus();
   };
 
   contactForm.addEventListener("submit", async (event) => {
