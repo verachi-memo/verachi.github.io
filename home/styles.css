@@ -353,17 +353,40 @@ html.is-programmatic-scroll main {
 
 .hero-glow {
   position: absolute;
-  top: -8%;
-  right: 0;
-  width: min(52vw, 700px);
-  height: min(52vw, 700px);
   border-radius: 50%;
-  background: radial-gradient(circle, var(--warm-soft), transparent 68%);
-  filter: blur(52px);
-  opacity: 0.7;
+  filter: blur(80px);
   pointer-events: none;
   will-change: transform;
-  animation: ambient-drift 14s ease-in-out infinite alternate;
+  opacity: 0.65;
+}
+
+.hero-glow-1 {
+  top: -12%;
+  right: -5%;
+  width: min(55vw, 700px);
+  height: min(55vw, 700px);
+  background: radial-gradient(circle, var(--warm-soft), transparent 68%);
+  animation: ambient-drift-1 20s ease-in-out infinite alternate;
+}
+
+.hero-glow-2 {
+  bottom: 10%;
+  left: -10%;
+  width: min(45vw, 600px);
+  height: min(45vw, 600px);
+  background: radial-gradient(circle, var(--accent-soft), transparent 68%);
+  animation: ambient-drift-2 25s ease-in-out infinite alternate;
+  opacity: 0.45;
+}
+
+@keyframes ambient-drift-1 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(-30px, 40px, 0) scale(1.08); }
+}
+
+@keyframes ambient-drift-2 {
+  0% { transform: translate3d(0, 0, 0) scale(1.05); }
+  100% { transform: translate3d(40px, -30px, 0) scale(0.95); }
 }
 
 .hero::before {
@@ -414,26 +437,29 @@ html.is-programmatic-scroll main {
 
 
 .hero h1 {
-  max-width: 15ch;
-  font-family: var(--font-serif);
+  max-width: 16ch;
   font-size: clamp(3.4rem, 7vw, 6.2rem);
-  font-weight: 400;
   line-height: 0.95;
   letter-spacing: -0.04em;
   text-wrap: balance;
 }
 
-.hero h1 .hero-emphasis,
-.hero h1 .hero-break {
+.hero h1 .hero-sans {
   display: block;
+  font-family: var(--font-sans);
+  font-weight: 750;
+  color: var(--ink-0);
+  letter-spacing: -0.04em;
 }
 
-.hero h1 .hero-emphasis {
+.hero h1 .hero-serif-italic {
+  display: block;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
   color: var(--ink-0);
-}
-
-.hero h1 .hero-break {
-  color: var(--ink-0);
+  letter-spacing: -0.03em;
+  margin-top: 4px;
 }
 
 .hero-sub {
@@ -559,31 +585,57 @@ html.is-programmatic-scroll main {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 6px;
-  margin-inline: 2px;
+  gap: 8px;
+  margin-inline: 4px;
   vertical-align: baseline;
 }
 
 .hero-inline-tool {
   display: inline-flex;
   align-items: center;
-  padding: 1px 7px 2px;
-  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  padding: 2px 9px 3px;
+  border: 1px solid rgba(52, 49, 44, 0.08);
   border-radius: var(--radius-pill);
-  background: rgba(255, 253, 248, 0.52);
-  font-size: 0.94em;
+  background: rgba(255, 253, 248, 0.72);
+  font-size: 0.88em;
   font-weight: 700;
-  line-height: 1.45;
+  line-height: 1.2;
   white-space: nowrap;
   vertical-align: baseline;
+  transition: transform var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+  cursor: pointer;
 }
 
+.hero-inline-tool:hover {
+  transform: translateY(-1.5px);
+}
 
-.hero-tool-name {
-  font-size: 0.94em;
-  font-weight: 700;
-  color: var(--accent-strong);
-  line-height: 1.45;
+.hero-inline-tool.tool-slack:hover {
+  border-color: var(--tool-slack-line);
+  color: var(--tool-slack);
+  background: var(--tool-slack-soft);
+  box-shadow: 0 4px 12px var(--tool-slack-soft);
+}
+
+.hero-inline-tool.tool-github:hover {
+  border-color: var(--tool-github-line);
+  color: var(--tool-github);
+  background: var(--tool-github-soft);
+  box-shadow: 0 4px 12px var(--tool-github-soft);
+}
+
+.hero-inline-tool.tool-teams:hover {
+  border-color: var(--tool-teams-line);
+  color: var(--tool-teams);
+  background: var(--tool-teams-soft);
+  box-shadow: 0 4px 12px var(--tool-teams-soft);
+}
+
+.hero-inline-tool.tool-jira:hover {
+  border-color: var(--tool-jira-line);
+  color: var(--tool-jira);
+  background: var(--tool-jira-soft);
+  box-shadow: 0 4px 12px var(--tool-jira-soft);
 }
 
 .hero-sidebar {
@@ -3163,26 +3215,67 @@ html.js [data-anim].in-view {
   }
 }
 
-/* Overlapping cascading hero sheets */
-.hero-panel-stack {
-  display: flex !important;
-  flex-direction: column !important;
-  padding-bottom: 24px;
+/* Premium Tab Switcher for Before/After Product Preview */
+.hero-panel-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 22px;
+  background: var(--bg-1);
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line-0);
 }
+
+.hero-panel-tab {
+  flex: 1;
+  text-align: center;
+  padding: 8px 12px;
+  border-radius: calc(var(--radius-sm) - 2px);
+  font-size: 0.74rem;
+  font-weight: 750;
+  color: var(--ink-2);
+  border: 1px solid transparent;
+  transition: all var(--dur-fast) var(--ease);
+}
+
+.hero-panel-tab:hover {
+  color: var(--ink-0);
+}
+
+.hero-panel-tab.active {
+  color: var(--ink-0);
+  background: var(--surface-3);
+  border-color: var(--line-0);
+  box-shadow: var(--shadow-sm);
+}
+
+.hero-panel-stack-wrapper {
+  position: relative;
+  min-height: 290px;
+}
+
 .hero-panel-card {
+  position: absolute !important;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), border-color var(--dur) var(--ease) !important;
+  z-index: 1;
+  margin-top: 0 !important;
+}
+
+.hero-panel-card.active {
   position: relative !important;
-  transition: transform var(--dur) var(--ease) !important, z-index 0s, border-color var(--dur) var(--ease) !important;
-  box-shadow: none !important;
-  border-color: rgba(52, 49, 44, 0.08) !important;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  z-index: 2;
 }
-.hero-panel-card:not(:first-child) {
-  margin-top: -38px !important;
-}
+
 .hero-panel-card:hover {
-  transform: translateY(-4px) !important;
-  z-index: 10 !important;
-  border-color: var(--line-2) !important;
-  background: var(--surface-3) !important;
+  border-color: var(--line-1) !important;
+  transform: translateY(-2px) !important;
 }
 
 /* Classic Slider Overhaul (Sharp Square Thumbs) */
@@ -3481,14 +3574,8 @@ html.js [data-anim].in-view {
 }
 
 /* Stagger tabs side-by-side across the deck */
-.hero-panel-stack .hero-panel-card:nth-child(1) .hero-panel-card-label {
+.hero-panel-stack-wrapper .hero-panel-card .hero-panel-card-label {
   left: 18px !important;
-}
-.hero-panel-stack .hero-panel-card:nth-child(2) .hero-panel-card-label {
-  left: 104px !important;
-}
-.hero-panel-stack .hero-panel-card:nth-child(3) .hero-panel-card-label {
-  left: 236px !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

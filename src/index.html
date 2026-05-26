@@ -27,7 +27,7 @@
       <div class="brand-mark">
         <img src="./home/verachi-logo.svg" alt="" aria-hidden="true" />
       </div>
-      <span>VERACHI</span>
+      <span style="letter-spacing: 0.22em; font-weight: 800;">VERACHI</span>
     </a>
     <button class="menu-toggle" id="mobileMenuToggle" type="button" aria-expanded="false" aria-controls="headerNav" aria-label="Open menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -46,7 +46,7 @@
     </nav>
     <div class="header-actions">
       <a class="header-link" href="https://app.verachi.io/login">Sign In</a>
-      <a class="header-cta" href="#contact-form">Book a Demo</a>
+      <a class="header-cta" href="#contact-form">Book a Proof Call</a>
     </div>
   </div>
 </header>
@@ -55,20 +55,24 @@
 
   <!-- ========== HERO ========== -->
   <section class="hero" id="heroSection">
-    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-glow hero-glow-1" aria-hidden="true"></div>
+    <div class="hero-glow hero-glow-2" aria-hidden="true"></div>
     <div class="container hero-layout">
       <div class="hero-copy">
         <div class="hero-kicker" data-anim>Decision and risk memory for delivery teams</div>
-        <h1 data-anim aria-label="Keep your team on the same page."><span class="hero-emphasis">Keep your team</span><span class="hero-break">on the same page.</span></h1>
+        <h1 data-anim aria-label="Keep your team on the same page.">
+          <span class="hero-sans">Keep your team</span>
+          <span class="hero-serif-italic">on the same page.</span>
+        </h1>
         <div class="hero-stance" data-anim data-delay="1">Decide with proof, not memory.</div>
         <p class="hero-sub" data-anim data-delay="1">
           <strong>Verachi connects read-only to the tools you already run</strong>,
           capturing context across
           <span class="hero-inline-tool-list" aria-label="Slack, GitHub, Microsoft Teams, and Jira">
-            <span class="hero-inline-tool hero-tool-name">Slack</span>
-            <span class="hero-inline-tool hero-tool-name">GitHub</span>
-            <span class="hero-inline-tool hero-tool-name">Microsoft Teams</span>
-            <span class="hero-inline-tool hero-tool-name">Jira</span>
+            <span class="hero-inline-tool tool-slack">Slack</span>
+            <span class="hero-inline-tool tool-github">GitHub</span>
+            <span class="hero-inline-tool tool-teams">Microsoft Teams</span>
+            <span class="hero-inline-tool tool-jira">Jira</span>
           </span>
           while it builds an inspectable trail of decisions, risks, and ownership. Automatically.
         </p>
@@ -89,42 +93,46 @@
         <div class="hero-panel">
           <div class="hero-panel-top">
             <div>
-              <span class="hero-panel-eyebrow">What Verachi proves</span>
-              <h2 class="hero-panel-title">Not another status dashboard. <br>A record you can inspect.</h2>
+              <span class="hero-panel-eyebrow">Interactive Product Preview</span>
+              <h2 class="hero-panel-title">Not another status dashboard.<br>A record you can inspect.</h2>
             </div>
           </div>
-          <div class="hero-panel-stack" aria-label="Verachi overview cards">
-            <div class="hero-panel-card hero-panel-card-before">
-              <span class="hero-panel-card-label">Before</span>
+
+          <!-- Tab Switcher -->
+          <div class="hero-panel-tabs">
+            <button class="hero-panel-tab active" data-hero-tab="before" type="button">Scattered Context (Before)</button>
+            <button class="hero-panel-tab" data-hero-tab="after" type="button">Captured Record (With Verachi)</button>
+          </div>
+
+          <!-- Card Wrapper -->
+          <div class="hero-panel-stack-wrapper" aria-label="Verachi overview cards">
+            
+            <!-- Scattered Context (Before) Card -->
+            <div class="hero-panel-card hero-panel-card-before active" id="heroCardBefore">
+              <span class="hero-panel-card-label" style="color: var(--red); font-weight: 800;">Scattered Context</span>
               <div class="hero-panel-list">
-                <p class="hero-panel-list-item">Decision rationale lives across threads, tickets, and pull requests</p>
-                <p class="hero-panel-list-item">Risk owners and mitigations are reconstructed by memory</p>
-                <p class="hero-panel-list-item">Reporting depends on manual summaries that go stale quickly</p>
+                <p class="hero-panel-list-item">Decision rationale lives across scattered Slack threads and tickets</p>
+                <p class="hero-panel-list-item">Risk owners and mitigations are reconstructed from memory</p>
+                <p class="hero-panel-list-item">Sync status depends on manual updates that go stale quickly</p>
               </div>
             </div>
-            <div class="hero-panel-card">
-              <span class="hero-panel-card-label">Captured Record</span>
+
+            <!-- Captured Record (After) Card -->
+            <div class="hero-panel-card" id="heroCardAfter">
+              <span class="hero-panel-card-label" style="color: var(--mint); font-weight: 800;">Captured Record</span>
               <div class="hero-panel-list">
-                <p class="hero-panel-list-item">Decision, rationale, owner, status, and related risk</p>
-                <p class="hero-panel-list-item">Source links back to Slack, Jira, GitHub, or Teams</p>
-                <p class="hero-panel-list-item">User-visible audit history for syncs and optional write-backs</p>
-              </div>
-            </div>
-            <div class="hero-panel-card">
-              <span class="hero-panel-card-label">Buyer Checks</span>
-              <div class="hero-impact-grid">
-                <div class="hero-impact">
-                  <strong>Scopes</strong>
-                  <span class="hero-impact-stat">Read-only</span>
-                  <span>write-backs are optional and logged.</span>
-                </div>
-                <div class="hero-impact">
-                  <strong>ROI model</strong>
-                  <span class="hero-impact-stat">60%</span>
-                  <span>recovery assumption shown below.</span>
+                <p class="hero-panel-list-item" style="color: var(--ink-0); font-weight: 700;"><strong>DEC-104</strong> · Checkout flag remains on for pilot</p>
+                <p class="hero-panel-list-item" style="font-size: 0.88rem; line-height: 1.4;">Rationale: fraud-review coverage is not complete. Retries can delay payment.</p>
+                
+                <!-- Mono Citations -->
+                <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;">
+                  <span style="padding: 2px 6px; background: var(--tool-slack-soft); border: 1px solid var(--tool-slack-line); color: var(--tool-slack); border-radius: 4px;">Slack thread · 10:03 AM</span>
+                  <span style="padding: 2px 6px; background: var(--tool-github-soft); border: 1px solid var(--tool-github-line); color: var(--tool-github); border-radius: 4px;">GitHub PR #812</span>
+                  <span style="padding: 2px 6px; background: var(--tool-jira-soft); border: 1px solid var(--tool-jira-line); color: var(--tool-jira); border-radius: 4px;">Jira PAY-438</span>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </aside>

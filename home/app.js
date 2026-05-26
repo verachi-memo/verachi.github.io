@@ -1142,3 +1142,51 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
     row.appendChild(popover);
   });
 })();
+
+/* ============================================================
+   HERO PANEL INTERACTIVE TABS & AUTO-CYCLER
+   ============================================================ */
+(function initHeroInteractiveTabs() {
+  const tabs = document.querySelectorAll("[data-hero-tab]");
+  const cardBefore = document.getElementById("heroCardBefore");
+  const cardAfter = document.getElementById("heroCardAfter");
+  if (!tabs.length || !cardBefore || !cardAfter) return;
+
+  let cycleTimer = null;
+
+  function switchTab(targetName) {
+    tabs.forEach(tab => {
+      const active = tab.getAttribute("data-hero-tab") === targetName;
+      tab.classList.toggle("active", active);
+    });
+
+    if (targetName === "before") {
+      cardBefore.classList.add("active");
+      cardAfter.classList.remove("active");
+    } else {
+      cardBefore.classList.remove("active");
+      cardAfter.classList.add("active");
+    }
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      const targetName = tab.getAttribute("data-hero-tab");
+      switchTab(targetName);
+      // Clear auto-cycling once the user takes manual control
+      if (cycleTimer) {
+        clearInterval(cycleTimer);
+        cycleTimer = null;
+      }
+    });
+  });
+
+  // Gentle auto-cycling preview (every 7.5 seconds)
+  if (!prefersReducedMotion.matches) {
+    let current = "before";
+    cycleTimer = setInterval(() => {
+      current = current === "before" ? "after" : "before";
+      switchTab(current);
+    }, 7500);
+  }
+})();
