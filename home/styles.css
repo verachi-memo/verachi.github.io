@@ -50,6 +50,7 @@
   --dur-fast: 180ms;
   --dur: 320ms;
   --dur-slow: 760ms;
+  --font-serif: "Instrument Serif", Georgia, serif;
   --font-sans: "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
@@ -414,10 +415,11 @@ html.is-programmatic-scroll main {
 
 .hero h1 {
   max-width: 15ch;
+  font-family: var(--font-serif);
   font-size: clamp(3.4rem, 7vw, 6.2rem);
-  font-weight: 800;
-  line-height: 0.9;
-  letter-spacing: -0.07em;
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
   text-wrap: balance;
 }
 
@@ -622,9 +624,10 @@ html.is-programmatic-scroll main {
 }
 
 .hero-panel-title {
-  font-size: 1.7rem;
-  line-height: 1.08;
-  letter-spacing: -0.05em;
+  font-family: var(--font-serif);
+  font-size: 1.95rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
@@ -831,10 +834,11 @@ html.is-programmatic-scroll main {
 
 .step-title {
   max-width: 12ch;
-  font-size: clamp(2.2rem, 4.4vw, 3.7rem);
-  font-weight: 800;
-  line-height: 0.96;
-  letter-spacing: -0.06em;
+  font-family: var(--font-serif);
+  font-size: clamp(2.35rem, 4.7vw, 4.0rem);
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
   text-wrap: balance;
 }
 
@@ -2460,9 +2464,11 @@ html.is-programmatic-scroll main {
 .cta-section h2 {
   max-width: 16ch;
   margin: 0 auto;
-  font-size: clamp(2.1rem, 4.8vw, 3.8rem);
-  line-height: 0.96;
-  letter-spacing: -0.06em;
+  font-family: var(--font-serif);
+  font-size: clamp(2.35rem, 5.2vw, 4.2rem);
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
 }
 
 .cta-section p {
@@ -3036,7 +3042,7 @@ html.js [data-anim].in-view {
   }
 
   .hero-panel-title {
-    font-size: 1.35rem;
+    font-size: 1.5rem;
   }
 
   .hero-panel-card {
@@ -3096,6 +3102,393 @@ html.js [data-anim].in-view {
   .cta-section h2 {
     font-size: clamp(1.8rem, 6vw, 3.8rem);
   }
+}
+
+/* ============================================================
+   10x DESIGN OVERHAUL — PURE MATTE-PAPER DIRECTION (OPTION 1)
+   ============================================================ */
+
+/* Reusable Shoji Grid Card */
+.glass-card {
+  background: var(--surface-3) !important;
+  border: 1px solid rgba(52, 49, 44, 0.08) !important;
+  box-shadow: none !important;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 253, 248, 0.06) 0%, transparent 100%);
+  border-radius: inherit;
+  z-index: 1;
+}
+
+/* Header Scroll Contraction (Ivory White Shoji Panel) */
+.site-header {
+  transition: padding var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+.site-header.is-scrolled {
+  padding-top: 8px !important;
+}
+.site-header.is-scrolled .header-inner {
+  padding: 8px 14px !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+  border-color: rgba(52, 49, 44, 0.14) !important;
+  background: var(--surface-3) !important;
+}
+
+/* Sliding Nav Underline Indicator */
+.header-nav {
+  position: relative !important;
+}
+.nav-indicator-line {
+  position: absolute;
+  bottom: 0;
+  height: 1.5px;
+  background: var(--accent);
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: left var(--dur) var(--ease), width var(--dur) var(--ease), opacity var(--dur-fast) var(--ease);
+}
+/* Disable default hover highlights */
+@media (min-width: 721px) {
+  .header-nav a:hover {
+    background: transparent !important;
+  }
+}
+
+/* Overlapping cascading hero sheets */
+.hero-panel-stack {
+  display: flex !important;
+  flex-direction: column !important;
+  padding-bottom: 24px;
+}
+.hero-panel-card {
+  position: relative !important;
+  transition: transform var(--dur) var(--ease) !important, z-index 0s, border-color var(--dur) var(--ease) !important;
+  box-shadow: none !important;
+  border-color: rgba(52, 49, 44, 0.08) !important;
+}
+.hero-panel-card:not(:first-child) {
+  margin-top: -38px !important;
+}
+.hero-panel-card:hover {
+  transform: translateY(-4px) !important;
+  z-index: 10 !important;
+  border-color: var(--line-2) !important;
+  background: var(--surface-3) !important;
+}
+
+/* Classic Slider Overhaul (Sharp Square Thumbs) */
+.roi-slider {
+  height: 2px !important;
+  background: var(--line-1) !important;
+  transition: height var(--dur-fast) var(--ease) !important;
+}
+.roi-slider:hover {
+  height: 4px !important;
+}
+.roi-slider::-webkit-slider-thumb {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 0% !important; /* Sharp corners */
+  background: var(--ink-0) !important;
+  border: none !important;
+  box-shadow: none !important;
+  transition: transform var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease) !important;
+}
+.roi-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2) !important;
+  background: var(--accent) !important;
+}
+
+/* Context visualizers (Dashed pathways / Solid connections) */
+.roi-result-card {
+  position: relative;
+  overflow: hidden;
+  box-shadow: none !important;
+  border: 1px solid rgba(52, 49, 44, 0.08) !important;
+}
+.roi-svg-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.22;
+  transition: opacity var(--dur) var(--ease);
+}
+.roi-result-card:hover .roi-svg-bg {
+  opacity: 0.5;
+}
+.roi-svg-bg svg {
+  width: 100%;
+  height: 100%;
+}
+@keyframes leak-flow {
+  0% { stroke-dashoffset: 24; }
+  100% { stroke-dashoffset: 0; }
+}
+.leak-path {
+  animation: leak-flow 10s linear infinite;
+  stroke-dasharray: 4, 4;
+}
+.secure-grid circle {
+  fill: var(--mint) !important;
+  opacity: 0.3;
+}
+.secure-connect {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  transition: stroke-dashoffset 1.4s var(--ease);
+  stroke: var(--mint) !important;
+}
+.roi-result-card:hover .secure-connect {
+  stroke-dashoffset: 0;
+}
+
+/* Rotating Tilted 3D Orbit rings */
+.connect-orbit {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+.orbit-ring {
+  transform-style: preserve-3d;
+}
+.orbit-ring-outer {
+  transform: rotateX(20deg) rotateY(-10deg);
+  animation: orbit-rotate-outer 90s linear infinite !important;
+  border: 1px dashed rgba(52, 49, 44, 0.12) !important;
+}
+.orbit-ring-inner {
+  transform: rotateX(-10deg) rotateY(20deg);
+  animation: orbit-rotate-inner 60s linear infinite !important;
+  border: 1px dotted rgba(52, 49, 44, 0.08) !important;
+}
+@keyframes orbit-rotate-outer {
+  0% { transform: rotateX(20deg) rotateY(-10deg) rotateZ(0deg); }
+  100% { transform: rotateX(20deg) rotateY(-10deg) rotateZ(360deg); }
+}
+@keyframes orbit-rotate-inner {
+  0% { transform: rotateX(-10deg) rotateY(20deg) rotateZ(360deg); }
+  100% { transform: rotateX(-10deg) rotateY(20deg) rotateZ(0deg); }
+}
+
+/* Float active nodes */
+.orbit-node svg,
+.orbit-node img {
+  transition: transform 0.35s var(--ease);
+}
+.orbit-node.active svg,
+.orbit-node.active img {
+  animation: float-inner-flat 5s ease-in-out infinite;
+}
+.orbit-node-0.active svg { animation-delay: 0s; }
+.orbit-node-1.active svg { animation-delay: 1.2s; }
+.orbit-node-2.active svg { animation-delay: 2.4s; }
+.orbit-node-3.active svg { animation-delay: 3.6s; }
+@keyframes float-inner-flat {
+  0%, 100% { transform: translateY(-1px); }
+  50% { transform: translateY(1px); }
+}
+
+/* Particle performance fix: remove transform transitions! */
+.stream-particle {
+  width: 4px !important;
+  height: 4px !important;
+  box-shadow: none !important;
+  background: var(--ink-2) !important; /* Ink particle */
+  pointer-events: none;
+  transition: opacity 0.2s ease-in !important;
+}
+
+/* Capability Card Shoji Separation Background */
+.capability-card {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: none !important;
+  border: 1px solid var(--line-0) !important;
+  background: var(--surface-3) !important;
+}
+.capability-card:hover {
+  background: #fbfaf6 !important; /* Flat cream */
+  border-color: var(--line-2) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Proof verified popover citations */
+.proof-source-row {
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  box-shadow: none !important;
+  background: var(--surface-3) !important;
+}
+.proof-popover {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  width: 280px;
+  max-width: 80vw;
+  padding: 14px 18px;
+  border-radius: 4px !important;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 50;
+  transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+  box-shadow: none !important;
+  background: var(--surface-3) !important;
+  border: 1px solid var(--line-1) !important;
+}
+.proof-popover::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--line-1) !important;
+}
+.proof-source-row:hover .proof-popover,
+.proof-source-row:focus-within .proof-popover {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.proof-popover strong {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--ink-0);
+  margin-bottom: 2px;
+}
+.popover-meta {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--accent);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+.proof-popover p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+/* Featured card flat outline border */
+.pricing-card-featured {
+  border: 2px solid var(--ink-0) !important;
+  box-shadow: none !important;
+  background: var(--surface-3) !important;
+}
+
+/* Onboarding input animations & validation styling */
+.cf-field {
+  transition: transform var(--dur-fast) var(--ease);
+}
+.cf-field:focus-within {
+  transform: translateY(-1px);
+}
+.cf-field:focus-within .cf-label {
+  color: var(--accent) !important;
+}
+.cf.was-validated .cf-input:valid,
+.cf.was-validated .cf-select:valid,
+.cf.was-validated .cf-textarea:valid {
+  border-color: var(--mint) !important;
+  box-shadow: none !important;
+}
+
+/* ============================================================
+   HERO SIDEBAR — FILING TABS & STAMPED LEDGER COVER
+   ============================================================ */
+
+/* Flat ivory Shoji card box wrapper */
+.hero-panel {
+  padding: 34px 28px !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(52, 49, 44, 0.08) !important;
+  background: var(--surface-3) !important;
+  box-shadow: none !important;
+}
+
+/* Redesigned printed ledger header */
+.hero-panel-top {
+  border-left: 2.5px solid var(--accent) !important;
+  padding-left: 16px !important;
+  margin-bottom: 34px !important;
+  display: block !important;
+}
+
+.hero-panel-eyebrow-stamp {
+  display: inline-flex !important;
+  padding: 3px 8px !important;
+  border: 1px solid rgba(52, 49, 44, 0.18) !important;
+  border-radius: 2px !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.64rem !important;
+  font-weight: 800 !important;
+  color: var(--accent) !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 10px !important;
+  line-height: 1 !important;
+}
+
+.hero-panel-title {
+  font-family: var(--font-serif) !important;
+  font-size: 1.6rem !important;
+  line-height: 1.15 !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--ink-1) !important;
+  margin-top: 4px !important;
+}
+
+/* Staggered cascading paper folder tabs */
+.hero-panel-card {
+  position: relative !important;
+  padding-top: 36px !important; /* Space for tabs */
+  box-shadow: none !important;
+  border: 1px solid rgba(52, 49, 44, 0.08) !important;
+}
+
+.hero-panel-card-label {
+  position: absolute !important;
+  top: -12px !important; /* Position tab on the upper rim */
+  height: 24px !important;
+  padding: 3px 12px !important;
+  background: var(--surface-3) !important;
+  border: 1px solid rgba(52, 49, 44, 0.08) !important;
+  border-bottom: none !important; /* Flush overlay on card boundary */
+  border-radius: 4px 4px 0 0 !important;
+  font-size: 0.65rem !important;
+  font-weight: 850 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--ink-3) !important;
+  z-index: 5 !important;
+}
+
+/* Stagger tabs side-by-side across the deck */
+.hero-panel-stack .hero-panel-card:nth-child(1) .hero-panel-card-label {
+  left: 18px !important;
+}
+.hero-panel-stack .hero-panel-card:nth-child(2) .hero-panel-card-label {
+  left: 104px !important;
+}
+.hero-panel-stack .hero-panel-card:nth-child(3) .hero-panel-card-label {
+  left: 236px !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

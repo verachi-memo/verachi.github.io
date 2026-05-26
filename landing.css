@@ -33,6 +33,7 @@
   --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
   --dur-fast: 180ms;
   --dur: 280ms;
+  --font-serif: "Instrument Serif", Georgia, serif;
   --font-sans: "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
@@ -159,10 +160,11 @@ main {
 .display-title {
   max-width: 16ch;
   color: var(--ink-0);
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 800;
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 5.5vw, 4.4rem);
+  font-weight: 400;
   line-height: 1.05;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
 }
 
 .title-emphasis {
@@ -217,10 +219,11 @@ body.legal-page .section::before {
   max-width: 18ch;
   margin-bottom: 16px;
   color: var(--ink-0);
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-  font-weight: 800;
+  font-family: var(--font-serif);
+  font-size: clamp(1.95rem, 3.8vw, 2.8rem);
+  font-weight: 400;
   line-height: 1.1;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 
 .section-subtitle {
@@ -1099,7 +1102,7 @@ body.legal-page .section::before {
   }
 
   .display-title {
-    font-size: clamp(2rem, 8vw, 3rem);
+    font-size: clamp(2.2rem, 8vw, 3.3rem);
   }
 
   .hero,

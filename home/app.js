@@ -225,10 +225,11 @@ function sleep(ms) {
     var rate = values.salary / (WEEKS * 40);
     var lost = values.team * values.hours * WEEKS;
     var costLost = lost * rate;
-    if (elHoursLost) elHoursLost.textContent = fmtH(lost);
-    if (elCostLost) elCostLost.textContent = fmtC(costLost);
-    if (elHoursSaved) elHoursSaved.textContent = fmtH(lost * RECOVERY);
-    if (elSavings) elSavings.textContent = fmtC(costLost * RECOVERY);
+    
+    animateNumberText(elHoursLost, lost, { formatter: fmtH });
+    animateNumberText(elCostLost, costLost, { formatter: fmtC });
+    animateNumberText(elHoursSaved, lost * RECOVERY, { formatter: fmtH });
+    animateNumberText(elSavings, costLost * RECOVERY, { formatter: fmtC });
   }
 
   function updateDisplays() {
@@ -348,10 +349,15 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
   if (!el) return;
 
   const startValue = (() => {
+    if (el.dataset.value) {
+      return Number(el.dataset.value) || 0;
+    }
     const raw = (el.textContent || "").replace(/[^0-9]/g, "");
     const parsed = raw ? Number(raw) : 0;
     return Number.isFinite(parsed) ? parsed : 0;
   })();
+
+  el.dataset.value = targetValue;
 
   if (prefersReducedMotion.matches || duration <= 0) {
     el.textContent = formatter(targetValue);
@@ -1045,5 +1051,94 @@ function animateNumberText(el, targetValue, { duration = 650, formatter = v => `
     showSuccess();
 
     resetButton();
+  });
+})();
+
+/* ============================================================
+   10x DESIGN INTERACTION OVERHAULS — OPTION 1 (MATTE-PAPER)
+   ============================================================ */
+
+/* 1. Dynamic Background Mesh Gradient */
+(function initMeshGradient() {
+  if (prefersReducedMotion.matches) return;
+  let frame = 0;
+  window.addEventListener("mousemove", (e) => {
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      document.body.style.setProperty("--bg-morph-x", x.toFixed(3));
+      document.body.style.setProperty("--bg-morph-y", y.toFixed(3));
+      frame = 0;
+    });
+  });
+})();
+
+/* 2. Scroll Header Contraction */
+(function initHeaderScroll() {
+  const header = document.querySelector(".site-header");
+  if (!header) return;
+
+  function checkScroll() {
+    const isScrolled = window.scrollY > 50;
+    header.classList.toggle("is-scrolled", isScrolled);
+  }
+
+  window.addEventListener("scroll", checkScroll, { passive: true });
+  checkScroll();
+})();
+
+/* 3. Navigation Underline Slide Indicator */
+(function initNavIndicator() {
+  const nav = document.getElementById("headerNav");
+  if (!nav) return;
+
+  const line = document.createElement("div");
+  line.className = "nav-indicator-line";
+  nav.appendChild(line);
+
+  const links = Array.from(nav.querySelectorAll("a"));
+
+  links.forEach(link => {
+    link.addEventListener("mouseenter", () => {
+      if (prefersReducedMotion.matches) return;
+      const rect = link.getBoundingClientRect();
+      const parentRect = nav.getBoundingClientRect();
+      line.style.width = `${rect.width}px`;
+      line.style.left = `${rect.left - parentRect.left}px`;
+      line.style.opacity = "1";
+    });
+  });
+
+  nav.addEventListener("mouseleave", () => {
+    line.style.opacity = "0";
+  });
+})();
+
+/* 4. Proof Source Popover Tooltips (Ivory Outlines) */
+(function initSourcePopovers() {
+  const rows = document.querySelectorAll(".proof-source-row");
+  rows.forEach(row => {
+    const title = row.dataset.popoverTitle;
+    const text = row.dataset.popoverText;
+    const meta = row.dataset.popoverMeta;
+    if (!title || !text) return;
+
+    const popover = document.createElement("div");
+    popover.className = "proof-popover glass-card";
+    popover.setAttribute("role", "tooltip");
+
+    const tEl = document.createElement("strong");
+    tEl.textContent = title;
+    const mEl = document.createElement("span");
+    mEl.className = "popover-meta";
+    mEl.textContent = meta;
+    const pEl = document.createElement("p");
+    pEl.textContent = text;
+
+    popover.appendChild(tEl);
+    popover.appendChild(mEl);
+    popover.appendChild(pEl);
+    row.appendChild(popover);
   });
 })();
