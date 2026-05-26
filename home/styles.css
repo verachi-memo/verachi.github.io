@@ -437,9 +437,9 @@ html.is-programmatic-scroll main {
 
 
 .hero h1 {
-  max-width: 16ch;
+  max-width: 640px;
   font-size: clamp(3.4rem, 7vw, 6.2rem);
-  line-height: 0.95;
+  line-height: 1.06;
   letter-spacing: -0.04em;
   text-wrap: balance;
 }
@@ -582,60 +582,60 @@ html.is-programmatic-scroll main {
 }
 
 .hero-inline-tool-list {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 8px;
-  margin-inline: 4px;
+  display: inline;
+  gap: 0;
+  margin-inline: 0;
   vertical-align: baseline;
 }
 
 .hero-inline-tool {
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 9px 3px;
-  border: 1px solid rgba(52, 49, 44, 0.08);
-  border-radius: var(--radius-pill);
-  background: rgba(255, 253, 248, 0.72);
-  font-size: 0.88em;
-  font-weight: 700;
-  line-height: 1.2;
-  white-space: nowrap;
+  display: inline;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  font-size: inherit;
+  font-weight: 750;
+  color: var(--ink-0);
+  line-height: inherit;
+  white-space: normal;
   vertical-align: baseline;
-  transition: transform var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+  transition: color var(--dur-fast) var(--ease);
   cursor: pointer;
 }
 
 .hero-inline-tool:hover {
-  transform: translateY(-1.5px);
+  transform: none;
 }
 
-.hero-inline-tool.tool-slack:hover {
-  border-color: var(--tool-slack-line);
+.hero-inline-tool.tool-slack {
   color: var(--tool-slack);
-  background: var(--tool-slack-soft);
-  box-shadow: 0 4px 12px var(--tool-slack-soft);
+}
+.hero-inline-tool.tool-slack:hover {
+  color: color-mix(in srgb, var(--tool-slack) 70%, #000);
 }
 
+.hero-inline-tool.tool-github {
+  color: var(--ink-1);
+  text-decoration: underline;
+  text-decoration-color: var(--line-2);
+}
 .hero-inline-tool.tool-github:hover {
-  border-color: var(--tool-github-line);
-  color: var(--tool-github);
-  background: var(--tool-github-soft);
-  box-shadow: 0 4px 12px var(--tool-github-soft);
+  color: var(--accent);
 }
 
-.hero-inline-tool.tool-teams:hover {
-  border-color: var(--tool-teams-line);
+.hero-inline-tool.tool-teams {
   color: var(--tool-teams);
-  background: var(--tool-teams-soft);
-  box-shadow: 0 4px 12px var(--tool-teams-soft);
+}
+.hero-inline-tool.tool-teams:hover {
+  color: color-mix(in srgb, var(--tool-teams) 70%, #000);
 }
 
-.hero-inline-tool.tool-jira:hover {
-  border-color: var(--tool-jira-line);
+.hero-inline-tool.tool-jira {
   color: var(--tool-jira);
-  background: var(--tool-jira-soft);
-  box-shadow: 0 4px 12px var(--tool-jira-soft);
+}
+.hero-inline-tool.tool-jira:hover {
+  color: color-mix(in srgb, var(--tool-jira) 70%, #000);
 }
 
 .hero-sidebar {
@@ -3549,8 +3549,7 @@ html.js [data-anim].in-view {
 }
 
 /* Staggered cascading paper folder tabs */
-.hero-panel-card {
-  position: relative !important;
+.hero-panel-stack-wrapper .hero-panel-card {
   padding-top: 36px !important; /* Space for tabs */
   box-shadow: none !important;
   border: 1px solid rgba(52, 49, 44, 0.08) !important;
