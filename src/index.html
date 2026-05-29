@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://app.verachi.io; form-action 'self' https://app.verachi.io; object-src 'none'; base-uri 'self'; upgrade-insecure-requests" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://app.verachi.io https://www.google-analytics.com https://region1.google-analytics.com https://*.google-analytics.com; form-action 'self' https://app.verachi.io; object-src 'none'; base-uri 'self'; upgrade-insecure-requests" />
 
 <title>Verachi — Cited decisions, owned risks, on top of Slack, Jira & GitHub</title>
 <meta name="description" content="Verachi is a decision workspace for delivery teams. It connects read-only to Slack, Jira, and GitHub and turns scattered context into cited decisions, owned risks, and grounded answers — every claim linked back to its source." />
@@ -32,6 +32,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="./home/styles.css?v=1" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NHXTJ2NZMT"></script>
+<script src="./home/analytics.js"></script>
 
 <script type="application/ld+json">
 {
