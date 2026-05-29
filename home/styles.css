@@ -389,8 +389,10 @@ section[id], #main { scroll-margin-top: 84px; }
   position: relative; padding: 26px 24px; border: 1px solid var(--line); background: var(--surface);
 }
 .step:not(:last-child) { border-right: 0; }
-.step:first-child { border-radius: var(--radius) 0 0 var(--radius); }
-.step:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
+.step:first-child { border-radius: var(--radius) 0 0 var(--radius); z-index: 4; }
+.step:nth-child(2) { z-index: 3; }
+.step:nth-child(3) { z-index: 2; }
+.step:last-child { border-radius: 0 var(--radius) var(--radius) 0; z-index: 1; }
 .step-num {
   display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 10px;
   background: var(--teal-wash); border: 1px solid var(--teal-line); color: var(--teal-2);
