@@ -1,0 +1,222 @@
+/* =============================================================================
+   Verachi — Landing interactions
+   Vanilla JS, no dependencies. Progressive enhancement: everything degrades
+   gracefully without JS, and motion respects prefers-reduced-motion.
+   ========================================================================== */
+(function () {
+  "use strict";
+
+  var reduceMotion = window.matchMedia
+    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    : false;
+
+  function $(sel, ctx) { return (ctx || document).querySelector(sel); }
+  function $all(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+
+  /* ---------------------------- Header on scroll --------------------------- */
+  var header = $("#siteHeader");
+  function onScroll() {
+    if (!header) return;
+    header.classList.toggle("scrolled", window.scrollY > 8);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ------------------------------ Theme toggle ----------------------------- */
+  var themeToggle = $("#themeToggle");
+  if (themeToggle) {
+    themeToggle.addEventListener("click", function () {
+      var current = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+      var next = current === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      try { localStorage.setItem("verachi-theme", next); } catch (e) {}
+    });
+  }
+
+  /* ------------------------------ Mobile menu ------------------------------ */
+  var menuToggle = $("#menuToggle");
+  var mobileMenu = $("#mobileMenu");
+  function setMenu(open) {
+    if (!mobileMenu || !menuToggle) return;
+    mobileMenu.classList.toggle("open", open);
+    menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    document.body.style.overflow = open ? "hidden" : "";
+  }
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener("click", function () {
+      setMenu(!mobileMenu.classList.contains("open"));
+    });
+    $all("a", mobileMenu).forEach(function (a) {
+      a.addEventListener("click", function () { setMenu(false); });
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") setMenu(false);
+    });
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 860) setMenu(false);
+    });
+  }
+
+  /* ---------------------------- Scroll reveal ------------------------------ */
+  var animated = $all("[data-anim]");
+  animated.forEach(function (el) {
+    var d = el.getAttribute("data-d");
+    if (d) el.style.setProperty("--d", d + "ms");
+  });
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    animated.forEach(function (el) { el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    animated.forEach(function (el) { io.observe(el); });
+  }
+
+  /* --------------------------- Ask Verachi demo ---------------------------- */
+  var chatAnswer = $("#chatAnswer");
+  var chatCites = $("#chatCites");
+  var chatDemo = $("#chatDemo");
+  var ANSWER =
+    "For pilot cohorts only. Fraud-review coverage for high-risk payment methods isn't complete, and the retry queue can delay confirmation — so the risk outweighs the rollout speed this sprint. Sarah Chen owns the rollout; the flag comes off once RISK-211 is mitigated.";
+
+  function revealCites() {
+    if (chatCites) chatCites.hidden = false;
+  }
+
+  function runChat() {
+    if (!chatAnswer) return;
+    if (reduceMotion) {
+      chatAnswer.textContent = ANSWER;
+      revealCites();
+      return;
+    }
+    // Brief "thinking", then type out the answer.
+    setTimeout(function () {
+      chatAnswer.textContent = "";
+      var caret = document.createElement("span");
+      caret.className = "cursor";
+      var textNode = document.createTextNode("");
+      chatAnswer.appendChild(textNode);
+      chatAnswer.appendChild(caret);
+      var i = 0;
+      (function type() {
+        if (i <= ANSWER.length) {
+          textNode.nodeValue = ANSWER.slice(0, i);
+          i += 1;
+          setTimeout(type, 16);
+        } else {
+          if (caret.parentNode) caret.parentNode.removeChild(caret);
+          revealCites();
+        }
+      })();
+    }, 850);
+  }
+
+  if (chatDemo && chatAnswer) {
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      runChat();
+    } else {
+      var chatIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            runChat();
+            chatIO.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      chatIO.observe(chatDemo);
+    }
+  }
+
+  /* ----------------------------- Plan selection ---------------------------- */
+  var planInput = $("#cf_plan");
+  var planValue = $("#cfPlanValue");
+  $all("[data-plan]").forEach(function (el) {
+    el.addEventListener("click", function () {
+      var plan = el.getAttribute("data-plan");
+      if (planInput) planInput.value = plan + " pilot";
+      if (planValue) planValue.textContent = plan + " pilot";
+    });
+  });
+
+  /* ------------------------------ Contact form ----------------------------- */
+  var form = $("#contactForm");
+  var loadedAt = $("#cf_loaded_at");
+  if (loadedAt) loadedAt.value = String(Date.now());
+
+  if (form) {
+    var submitBtn = $("#cfSubmit");
+    var btnText = $(".cf-submit-text", form);
+    var btnLoad = $(".cf-submit-loading", form);
+    var errorEl = $("#cfError");
+    var successEl = $("#cfSuccess");
+
+    function showError(msg) {
+      if (!errorEl) return;
+      errorEl.textContent = msg;
+      errorEl.hidden = false;
+    }
+    function clearError() {
+      if (errorEl) { errorEl.hidden = true; errorEl.textContent = ""; }
+    }
+    function setLoading(on) {
+      if (submitBtn) submitBtn.disabled = on;
+      if (btnText) btnText.hidden = on;
+      if (btnLoad) btnLoad.hidden = !on;
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      clearError();
+
+      // Honeypot — bots fill hidden fields. Pretend success, do nothing.
+      var hp = $("#cf_website");
+      if (hp && hp.value) { return; }
+
+      var name = $("#cf_name");
+      var email = $("#cf_email");
+      var company = $("#cf_company");
+      var needs = $("#cf_needs");
+
+      if (!name.value.trim() || !email.value.trim() || !company.value.trim() || !needs.value.trim()) {
+        showError("Please fill in your name, work email, company, and what the pilot should prove.");
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+        showError("That email address doesn't look right — please double-check it.");
+        email.focus();
+        return;
+      }
+
+      setLoading(true);
+
+      var body = new URLSearchParams();
+      $all("input, textarea, select", form).forEach(function (field) {
+        if (field.name) body.append(field.name, field.value);
+      });
+
+      fetch(form.action, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded", "Accept": "application/json" },
+        body: body.toString()
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error("Request failed: " + res.status);
+          if (successEl) {
+            form.hidden = true;
+            successEl.hidden = false;
+            successEl.focus();
+          }
+        })
+        .catch(function () {
+          setLoading(false);
+          showError("Something went wrong sending that. Please email hello@verachi.io and we'll set up your pilot.");
+        });
+    });
+  }
+})();

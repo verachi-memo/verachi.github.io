@@ -5,8 +5,9 @@ Static marketing site served via GitHub Pages.
 ## Source of truth
 
 - `src/*.html` — editable source pages
-- `partials/*.html` — shared head/header/footer snippets (injected at build time)
-- `home/*` + `landing.*` — static CSS/JS assets
+- `partials/*.html` — shared header/footer snippets (injected at build time)
+- `home/*` — static CSS/JS assets (`styles.css`, `app.js`, `site-init.js`, logo)
+- `DESIGN.md` — design system notes for the landing page
 
 ## Local Preview
 

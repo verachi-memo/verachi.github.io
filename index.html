@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js" id="top">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://app.verachi.io; form-action 'self' https://app.verachi.io; object-src 'none'; base-uri 'self'; upgrade-insecure-requests" />
+
+<title>Verachi — Cited decisions, owned risks, on top of Slack, Jira & GitHub</title>
+<meta name="description" content="Verachi is a decision workspace for delivery teams. It connects read-only to Slack, Jira, and GitHub and turns scattered context into cited decisions, owned risks, and grounded answers — every claim linked back to its source." />
+<meta name="theme-color" content="#efe7db" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#1f221d" media="(prefers-color-scheme: dark)" />
+<link rel="canonical" href="https://verachi.io/" />
+<link rel="icon" href="./favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" href="./favicon/favicon-192x192.png" />
+<link rel="apple-touch-icon" href="./favicon/favicon-256x256.png" />
+
+<!-- Open Graph / Twitter -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Verachi" />
+<meta property="og:url" content="https://verachi.io/" />
+<meta property="og:title" content="Verachi — Cited decisions, owned risks, on top of Slack, Jira & GitHub" />
+<meta property="og:description" content="Turn scattered Slack threads, tickets, and pull requests into decision records, owned risks, and grounded answers — every claim linked back to its source." />
+<meta property="og:image" content="https://verachi.io/favicon/favicon-512x512.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Verachi — Cited decisions, owned risks" />
+<meta name="twitter:description" content="A decision workspace that turns scattered context across Slack, Jira, and GitHub into cited decisions and owned risks." />
+<meta name="twitter:image" content="https://verachi.io/favicon/favicon-512x512.png" />
+
+<script src="./home/site-init.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./home/styles.css?v=1" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://verachi.io/#org",
+      "name": "Verachi",
+      "url": "https://verachi.io/",
+      "logo": "https://verachi.io/favicon/favicon-512x512.png",
+      "email": "hello@verachi.io"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Verachi",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "A project-centered decision workspace for delivery teams. Verachi connects read-only to Slack, Jira, and GitHub and turns scattered context into cited decisions, owned risks, and grounded answers.",
+      "url": "https://verachi.io/",
+      "offers": [
+        { "@type": "Offer", "name": "Starter", "price": "5", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": "Pro", "price": "49", "priceCurrency": "USD" }
+      ],
+      "publisher": { "@id": "https://verachi.io/#org" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Does Verachi replace Slack, Jira, or GitHub?", "acceptedAnswer": { "@type": "Answer", "text": "No. Verachi connects read-only and links back to the original source. Your primary tools stay primary; Verachi stores the durable decision record and the links between sources." } },
+        { "@type": "Question", "name": "What does Verachi actually store?", "acceptedAnswer": { "@type": "Answer", "text": "Verachi stores its own decision and risk records plus source links and metadata. Raw Slack threads, issue descriptions, and pull-request bodies are not durable storage unless you explicitly upload or enter them." } },
+        { "@type": "Question", "name": "Is Verachi read-only? Can it write back?", "acceptedAnswer": { "@type": "Answer", "text": "Connectors are read-only by default. Optional write-backs are configured explicitly and every action is recorded in the audit trail." } },
+        { "@type": "Question", "name": "How do citations work?", "acceptedAnswer": { "@type": "Answer", "text": "Every AI summary and answer cites the sources behind its claims with Slack, Jira, GitHub, or document links. If a claim cannot be cited, Verachi says so plainly." } }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a class="brand" href="#top" aria-label="Verachi home">
+      <img src="./home/verachi-logo.svg" alt="" width="26" height="26" />
+      <span class="brand-word">VERACHI</span>
+    </a>
+
+    <nav class="header-nav" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#product">Product</a>
+      <a href="#trust">Trust</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      <a class="signin" href="https://app.verachi.io/login">Sign in</a>
+      <a class="btn btn-primary" href="#demo">Book a pilot</a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+    <a href="#how">How it works</a>
+    <a href="#product">Product</a>
+    <a href="#trust">Trust</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="https://app.verachi.io/login">Sign in</a>
+    <a class="btn btn-primary btn-block" href="#demo">Book a pilot</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- ============================= HERO ============================= -->
+  <section class="hero">
+    <div class="hero-glow hero-glow-1" aria-hidden="true"></div>
+    <div class="hero-glow hero-glow-2" aria-hidden="true"></div>
+    <div class="container hero-layout">
+      <div class="hero-copy">
+        <span class="hero-kicker" data-anim>
+          <span class="pin">Read-only</span>
+          <span>Decision &amp; risk memory for delivery teams</span>
+        </span>
+        <h1 data-anim data-d="60">
+          Turn scattered context into
+          <span class="serif">cited decisions.</span>
+        </h1>
+        <p class="hero-sub" data-anim data-d="120">
+          Verachi connects read-only to
+          <span class="tool">Slack</span>, <span class="tool">Jira</span>, and <span class="tool">GitHub</span>
+          and turns threads, tickets, and pull requests into decision records, owned risks, and grounded
+          answers — every claim linked back to its source.
+        </p>
+        <div class="hero-actions" data-anim data-d="180">
+          <a class="btn btn-primary btn-lg" href="#demo">
+            Book a pilot
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a class="btn btn-outline btn-lg" href="#product">See a decision record</a>
+        </div>
+        <ul class="hero-trust" data-anim data-d="240">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Read-only connectors</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Citations on every answer</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg> Audit trail for every sync</li>
+        </ul>
+      </div>
+
+      <aside class="hero-media" data-anim data-d="200" aria-label="Example Verachi decision record">
+        <div class="record-card">
+          <div class="record-top">
+            <div>
+              <span class="record-id">DEC-104</span>
+              <h3>Keep the checkout flag on for pilot cohorts</h3>
+            </div>
+            <span class="record-badge"><span class="dot dot-good" aria-hidden="true"></span>Inspectable</span>
+          </div>
+          <dl class="record-body">
+            <div class="record-field">
+              <dt>Resolution</dt>
+              <dd>Leave the new checkout behind the flag for pilot cohorts only until fraud-review coverage is complete.</dd>
+            </div>
+            <div class="record-field">
+              <dt>Rationale</dt>
+              <dd>Retry queue can delay payment confirmation for high-risk methods. Risk outweighs the rollout speed gain this sprint.</dd>
+            </div>
+            <div class="record-field">
+              <dt>Owner</dt>
+              <dd><span class="owner"><img src="./avatars/team-sarah.png" alt="" width="22" height="22" /> Sarah Chen · Security lead</span></dd>
+            </div>
+          </dl>
+          <div class="record-evidence">
+            <p class="lbl">Evidence</p>
+            <div class="cite reveal-cite"><span class="src src-slack">Slack</span> #launch-readiness · 10:03 AM <svg class="link-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></div>
+            <div class="cite reveal-cite"><span class="src src-jira">Jira</span> PAY-438 · acceptance note <svg class="link-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></div>
+            <div class="cite reveal-cite"><span class="src src-github">GitHub</span> PR #812 · review comment <svg class="link-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ======================= INTEGRATION BAR ======================= -->
+  <section class="logobar" aria-label="Integrations">
+    <div class="container logobar-inner">
+      <p class="logobar-label">Works on top of the tools<br />your team already lives in</p>
+      <div class="logobar-list">
+        <span class="logobar-item"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg> Slack</span>
+        <span class="logobar-item"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.571 11.513H0a5.218 5.218 0 0 0 5.232 5.215h2.13v2.057A5.215 5.215 0 0 0 12.575 24V12.518a1.005 1.005 0 0 0-1.005-1.005zm5.723-5.756H5.736a5.215 5.215 0 0 0 5.215 5.214h2.129v2.058a5.218 5.218 0 0 0 5.215 5.214V6.758a1.001 1.001 0 0 0-1-1.001zM23.013 0H11.455a5.215 5.215 0 0 0 5.215 5.215h2.129v2.057A5.215 5.215 0 0 0 24 12.483V1.005A1.001 1.001 0 0 0 23.013 0z"/></svg> Jira</span>
+        <span class="logobar-item"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg> GitHub</span>
+        <span class="logobar-item"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.625 8.5h-3.75c-.69 0-1.25.56-1.25 1.25v5c0 .69.56 1.25 1.25 1.25h1.25v2.5l2.5-2.5h.75c.345 0 .625-.28.625-.625v-6.25c0-.345-.28-.625-.625-.625zM21.5 5.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0zm-5.5.5a2.25 2.25 0 1 0-4.5 0 2.25 2.25 0 0 0 4.5 0zM14 8H8c-.55 0-1 .45-1 1v6.5c0 .28.22.5.5.5H8v3l3-3h3c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1z"/></svg> Microsoft Teams</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= THE PROBLEM ========================= -->
+  <section class="section" id="why">
+    <div class="container">
+      <div class="section-head" data-anim>
+        <span class="eyebrow">The problem</span>
+        <h2 class="section-title">Work moves forward.<br /><span class="serif">Context leaks away.</span></h2>
+        <p class="section-sub">Your team is fast and already using the right tools. The failure mode is quieter: the <em>reasons</em> behind decisions never become a shared record — so weeks later, someone rebuilds them from memory.</p>
+      </div>
+      <div class="problem-grid">
+        <article class="leak-card" data-anim data-d="0">
+          <span class="n">01 — Decision archaeology</span>
+          <h3>The why lives in 40 Slack threads</h3>
+          <p>Rationale is scattered across messages, tickets, and DMs. Finding it again means re-reading history nobody saved.</p>
+        </article>
+        <article class="leak-card" data-anim data-d="100">
+          <span class="n">02 — Orphaned risk</span>
+          <h3>Owners and mitigations from memory</h3>
+          <p>Who agreed to watch the retry queue? What was the mitigation? Risk gets reconstructed under launch pressure.</p>
+        </article>
+        <article class="leak-card" data-anim data-d="200">
+          <span class="n">03 — Stale status</span>
+          <h3>Updates that age the moment they ship</h3>
+          <p>Manual status docs drift from reality. New joiners inherit confidence without the evidence behind it.</p>
+        </article>
+      </div>
+      <p class="problem-note" data-anim>
+        <b>Verachi closes the gap</b> by capturing the decision, the risk, the owner, and the source evidence as a durable record — while your primary tools stay exactly where they are.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========================= HOW IT WORKS ========================= -->
+  <section class="section alt" id="how">
+    <div class="container">
+      <div class="section-head center" data-anim>
+        <span class="eyebrow">How it works</span>
+        <h2 class="section-title">From raw activity to an <span class="serif">inspectable record.</span></h2>
+        <p class="section-sub">Four steps, no migration. Verachi reads what's already happening and turns it into something you can act on.</p>
+      </div>
+      <div class="steps">
+        <div class="step" data-anim data-d="0">
+          <span class="step-num">1</span>
+          <h3>Connect</h3>
+          <p>Link Slack, Jira, and GitHub read-only. No data leaves its source until your admin approves the scope.</p>
+          <span class="conn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+        <div class="step" data-anim data-d="100">
+          <span class="step-num">2</span>
+          <h3>Capture</h3>
+          <p>Decisions become records with resolution, rationale, and the source artifacts that prove them.</p>
+          <span class="conn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+        <div class="step" data-anim data-d="200">
+          <span class="step-num">3</span>
+          <h3>Evaluate</h3>
+          <p>Guidelines check decisions and pull requests, opening owned risks with evidence and a next action.</p>
+          <span class="conn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+        <div class="step" data-anim data-d="300">
+          <span class="step-num">4</span>
+          <h3>Ask</h3>
+          <p>Ask Verachi anything about a project and get an answer grounded in citations, not vibes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= PRODUCT / FEATURES ========================= -->
+  <section class="section" id="product">
+    <div class="container">
+      <div class="section-head" data-anim>
+        <span class="eyebrow">The product</span>
+        <h2 class="section-title">The rationale. The risk.<br /><span class="serif">The next owner.</span></h2>
+        <p class="section-sub">Everything points back to a source. Nothing depends on someone remembering.</p>
+      </div>
+
+      <!-- Feature 1: Decisions -->
+      <div class="feature feature-first">
+        <div class="feature-copy" data-anim>
+          <span class="eyebrow">Decisions</span>
+          <h3>A durable record of <span class="serif">what changed and why.</span></h3>
+          <p>Capture the resolution, the rationale, who reviewed it, and the source artifacts behind it — so the decision survives the thread it was made in.</p>
+          <ul class="feature-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Resolution &amp; rationale</b> kept together, in plain language.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Linked evidence</b> from Slack, Jira, and GitHub on every record.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Dependencies</b> show what one decision blocks or unblocks.</span></li>
+          </ul>
+        </div>
+        <div class="feature-media" data-anim data-d="120">
+          <div class="panel">
+            <div class="panel-head"><span class="dots"><span></span><span></span><span></span></span><span class="title">decisions / DEC-104</span></div>
+            <dl class="record-body">
+              <div class="record-field">
+                <dt>Resolution</dt>
+                <dd>Keep the checkout flag on for pilot cohorts until fraud-review coverage is complete.</dd>
+              </div>
+              <div class="record-field">
+                <dt>Reviewed by</dt>
+                <dd><span class="owner"><img src="./avatars/team-marco.png" alt="" width="22" height="22" /> Marco Díaz · Eng lead</span></dd>
+              </div>
+              <div class="record-field">
+                <dt>Dependencies</dt>
+                <dd><span class="id-ref">DEC-101</span> Payment retry policy · <span class="id-ref">RISK-211</span></dd>
+              </div>
+            </dl>
+            <div class="record-evidence">
+              <p class="lbl">Cited from</p>
+              <div class="cite"><span class="src src-slack">Slack</span> #payments-risk · thread</div>
+              <div class="cite"><span class="src src-github">GitHub</span> PR #812 · review comment</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 2: Risks -->
+      <div class="feature reverse">
+        <div class="feature-copy" data-anim>
+          <span class="eyebrow">Risks</span>
+          <h3>Turn blockers into <span class="serif">owned action.</span></h3>
+          <p>A guideline failure, a flagged PR, or a decision concern becomes a risk with an owner, a state, evidence, and one next step — not a sticky note that disappears.</p>
+          <ul class="feature-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Severity, owner, and state</b> visible before launch.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Material vs. noise</b> — risks distinguish commitments from chatter.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>A clean exit</b> — every risk closes with a reason and a record.</span></li>
+          </ul>
+        </div>
+        <div class="feature-media" data-anim data-d="120">
+          <div class="panel">
+            <div class="panel-head"><span class="dots"><span></span><span></span><span></span></span><span class="title">risks / open</span></div>
+            <div class="ledger">
+              <div class="ledger-row">
+                <div class="r-main">
+                  <span class="r-id">RISK-211</span>
+                  <div class="r-title">Retry queue can delay pilot checkout</div>
+                  <div class="r-meta"><span class="owner"><img src="./avatars/team-sarah.png" alt="" /> Sarah Chen</span> · linked to DEC-104</div>
+                </div>
+                <span class="status"><span class="dot dot-danger"></span>High</span>
+              </div>
+              <div class="ledger-row">
+                <div class="r-main">
+                  <span class="r-id">RISK-208</span>
+                  <div class="r-title">Fraud-review coverage incomplete</div>
+                  <div class="r-meta"><span class="owner"><img src="./avatars/slack-priya.png" alt="" /> Priya Nair</span> · mitigation in progress</div>
+                </div>
+                <span class="status"><span class="dot dot-warn"></span>Medium</span>
+              </div>
+              <div class="ledger-row">
+                <div class="r-main">
+                  <span class="r-id">RISK-197</span>
+                  <div class="r-title">Rollback path documented</div>
+                  <div class="r-meta"><span class="owner"><img src="./avatars/team-david.png" alt="" /> David Okafor</span> · resolved</div>
+                </div>
+                <span class="status"><span class="dot dot-good"></span>Closed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 3: Ask Verachi -->
+      <div class="feature">
+        <div class="feature-copy" data-anim>
+          <span class="eyebrow">Ask Verachi</span>
+          <h3>Answers with <span class="serif">receipts.</span></h3>
+          <p>Grounded chat over your projects, decisions, and sources. Every factual claim comes back with a citation — and if Verachi can't cite it, it says so.</p>
+          <ul class="feature-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Grounded</b> in real workspace and project context.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Citations required</b> — Slack permalinks, Jira and GitHub links.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>No hallucinated confidence</b> — uncertainty is stated, not hidden.</span></li>
+          </ul>
+        </div>
+        <div class="feature-media" data-anim data-d="120">
+          <div class="panel">
+            <div class="panel-head"><span class="dots"><span></span><span></span><span></span></span><span class="title">ask verachi · atlas-launch</span></div>
+            <div class="chat" id="chatDemo" aria-live="polite">
+              <div class="chat-q">Why is the checkout flag still on for the pilot?</div>
+              <div class="chat-a">
+                <div class="bubble" id="chatAnswer"><span class="typing" aria-hidden="true"><span></span><span></span><span></span></span></div>
+                <div class="chat-cites" id="chatCites" hidden>
+                  <span class="chat-cite s">Slack · #launch-readiness</span>
+                  <span class="chat-cite j">Jira · PAY-438</span>
+                  <span class="chat-cite g">GitHub · PR #812</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= TRUST & SECURITY ========================= -->
+  <section class="section surface" id="trust">
+    <div class="container">
+      <div class="section-head center" data-anim>
+        <span class="eyebrow">Trust is a feature</span>
+        <h2 class="section-title">Built to pass the <span class="serif">security review.</span></h2>
+        <p class="section-sub">The blocker for tools like this is usually trust. So we made it the product — not a back-office afterthought.</p>
+      </div>
+      <div class="trust-grid">
+        <article class="trust-card" data-anim data-d="0">
+          <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3>Read-only by default</h3>
+          <p>Slack, Jira, and GitHub connect with read access. Optional write-backs are configured explicitly and recorded — nothing happens to your systems by surprise.</p>
+        </article>
+        <article class="trust-card" data-anim data-d="100">
+          <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3 8-8"/><path d="M21 12a9 9 0 1 1-6.2-8.6"/></svg></div>
+          <h3>Citations are mandatory</h3>
+          <p>Summaries and answers cite their sources. If a claim can't be supported, Verachi says so plainly instead of inventing confidence.</p>
+        </article>
+        <article class="trust-card" data-anim data-d="200">
+          <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg></div>
+          <h3>Everything is auditable</h3>
+          <p>Every sync, generated summary, and write-back is visible in the workspace audit trail. Sensitive actions stay traceable.</p>
+        </article>
+        <article class="trust-card" data-anim data-d="0">
+          <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6M9 13h6M9 17h3"/></svg></div>
+          <h3>Pointer-only storage</h3>
+          <p>Raw threads, issue descriptions, and PR bodies aren't durable storage. Verachi keeps its own conclusions plus links and metadata back to the source.</p>
+        </article>
+        <article class="trust-card" data-anim data-d="100">
+          <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 6v6c0 5 8 10 8 10s8-5 8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h3>Data boundaries you set</h3>
+          <p>Your admin approves connector scopes before Verachi reads workspace context. Tenant isolation is enforced at the data layer.</p>
+        </article>
+        <article class="trust-card" data-anim data-d="200">
+          <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6h.09A1.65 1.65 0 0 0 11 3.09V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+          <h3>You stay in control</h3>
+          <p>API keys, notification controls, and a full audit trail are core capabilities. Review the connector scopes and data boundaries before any production use.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ PRICING ============================ -->
+  <section class="section alt" id="pricing">
+    <div class="container">
+      <div class="section-head center" data-anim>
+        <span class="eyebrow">Pricing</span>
+        <h2 class="section-title">Published plans.<br /><span class="serif">Guided rollout.</span></h2>
+        <p class="section-sub">Every plan includes cited decision records, risk workflows, and a user-visible audit trail. Access starts with a short pilot so scopes and success criteria are agreed first.</p>
+      </div>
+      <div class="pricing-grid">
+        <article class="price-card" data-anim data-d="0">
+          <div class="price-name">Starter</div>
+          <p class="price-aud">For small teams that want durable recall with a scoped pilot and light AI usage.</p>
+          <div class="price-amount"><span class="amt">$5</span><span class="per">/ month</span></div>
+          <hr />
+          <ul class="price-feat">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Up to 5 users in one organization</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Decision capture, search &amp; comments</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Risk records with owner &amp; severity</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Grounded chat, 100K monthly AI tokens</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> 5 GB workspace storage</li>
+          </ul>
+          <a class="btn btn-outline btn-block" href="#demo" data-plan="Starter">Request Starter pilot</a>
+        </article>
+
+        <article class="price-card featured" data-anim data-d="100">
+          <span class="price-badge">Most popular</span>
+          <div class="price-name">Pro</div>
+          <p class="price-aud">For growing orgs that need model choice, document context, and more headroom after proof.</p>
+          <div class="price-amount"><span class="amt">$49</span><span class="per">/ seat / month</span></div>
+          <hr />
+          <ul class="price-feat">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Everything in Starter</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> 1M monthly AI tokens + model choice</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Document context &amp; semantic retrieval</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Deeper chat history &amp; linked records</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Priority support</li>
+          </ul>
+          <a class="btn btn-primary btn-block" href="#demo" data-plan="Pro">Book a Pro pilot</a>
+        </article>
+
+        <article class="price-card" data-anim data-d="200">
+          <div class="price-name">Enterprise</div>
+          <p class="price-aud">For tenants that need frontier model access, governance review, and custom rollout controls.</p>
+          <div class="price-amount"><span class="amt">Custom</span></div>
+          <hr />
+          <ul class="price-feat">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Everything in Pro</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Custom token budgets &amp; frontier models</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Security &amp; governance review</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Custom deployment &amp; success plan</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Dedicated rollout support</li>
+          </ul>
+          <a class="btn btn-outline btn-block" href="#demo" data-plan="Enterprise">Talk to us</a>
+        </article>
+      </div>
+      <p class="pricing-note">No self-serve account is created from this page yet. The first step is a pilot request so your admin can approve data boundaries before Verachi reads any workspace context.</p>
+    </div>
+  </section>
+
+  <!-- ============================== FAQ ============================== -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-head center" data-anim>
+        <span class="eyebrow">Questions</span>
+        <h2 class="section-title">The honest <span class="serif">answers.</span></h2>
+      </div>
+      <div class="faq" data-anim>
+        <details class="faq-item">
+          <summary>Does Verachi replace Slack, Jira, or GitHub? <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
+          <div class="faq-body">No. Verachi connects read-only and always links back to the original source. Your primary tools stay primary — Verachi stores the durable decision record and the links between sources, not a copy of your tools.</div>
+        </details>
+        <details class="faq-item">
+          <summary>What does Verachi actually store? <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
+          <div class="faq-body">Verachi stores its own decision and risk records plus source links and metadata. Raw Slack threads, issue descriptions, and pull-request bodies are not durable storage unless you explicitly upload or enter them. External content can be fetched temporarily for analysis, but persisted text is Verachi-authored conclusions.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Is it read-only? Can it write back? <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
+          <div class="faq-body">Connectors are read-only by default. Optional write-backs are configured explicitly, kept conservative, and every action is recorded in the audit trail so nothing happens to your systems without a trace.</div>
+        </details>
+        <details class="faq-item">
+          <summary>How do citations work? <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
+          <div class="faq-body">Every AI summary and chat answer cites the sources behind its claims — Slack permalinks, Jira links, GitHub links, and document references. If a claim cannot be cited, Verachi tells you instead of guessing.</div>
+        </details>
+        <details class="faq-item">
+          <summary>How does the pilot work? <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
+          <div class="faq-body">A short, scoped pilot: we review connector scopes with your admin, walk through data boundaries, show the record shape on your own context, and agree measurable success criteria up front. Nothing reads your workspace until the scope is approved.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== FINAL CTA =========================== -->
+  <section class="section cta" id="demo">
+    <div class="container cta-layout">
+      <div class="cta-copy" data-anim>
+        <span class="eyebrow">Book a pilot</span>
+        <h2>Give your team one place to <span class="serif">recover the why.</span></h2>
+        <p>See Verachi on your own data boundaries first. We'll review connector scopes, show the record shape, and agree how the pilot proves — or rejects — the value for your team.</p>
+        <ul class="cta-benefits">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> A sample decision record with source citations.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> A 2–4 week pilot plan with measurable success criteria.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> A security, governance, and read-only connector review.</li>
+        </ul>
+      </div>
+
+      <div class="form-card" data-anim data-d="120">
+        <form id="contactForm" method="post" action="https://app.verachi.io/api/contact" novalidate>
+          <div class="cf-honeypot" aria-hidden="true">
+            <label for="cf_website">Website</label>
+            <input type="text" id="cf_website" name="website" autocomplete="off" tabindex="-1" />
+          </div>
+          <input type="hidden" id="cf_loaded_at" name="_loaded_at" />
+          <input type="hidden" id="cf_plan" name="plan" value="General pilot" />
+
+          <p class="cf-plan">Requesting <span class="val" id="cfPlanValue">General pilot</span></p>
+
+          <div class="cf-row">
+            <div class="cf-field">
+              <label for="cf_name">Full name</label>
+              <input class="cf-input" type="text" id="cf_name" name="name" placeholder="Jane Doe" autocomplete="name" required />
+            </div>
+            <div class="cf-field">
+              <label for="cf_email">Work email</label>
+              <input class="cf-input" type="email" id="cf_email" name="email" placeholder="jane@company.com" autocomplete="email" autocapitalize="none" spellcheck="false" required />
+            </div>
+          </div>
+          <div class="cf-field">
+            <label for="cf_company">Company</label>
+            <input class="cf-input" type="text" id="cf_company" name="company" placeholder="Acme Corp" autocomplete="organization" required />
+          </div>
+          <div class="cf-field">
+            <label for="cf_needs">What should the pilot prove?</label>
+            <textarea class="cf-textarea" id="cf_needs" name="needs" rows="4" placeholder="e.g. Can Verachi recover our launch decisions from Slack, Jira, and GitHub with usable citations?" required></textarea>
+          </div>
+
+          <p id="cfError" class="cf-error" role="alert" hidden></p>
+
+          <button id="cfSubmit" class="btn btn-primary btn-block btn-lg" type="submit">
+            <span class="cf-submit-text">Send pilot request</span>
+            <span class="cf-submit-loading" hidden>
+              <svg class="cf-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" opacity="0.25"/><path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+              Sending…
+            </span>
+          </button>
+          <p class="cf-fine">No account is created from this form. We'll reply by email to schedule your scoped pilot.</p>
+        </form>
+
+        <div id="cfSuccess" class="cf-success" role="status" aria-live="polite" tabindex="-1" hidden>
+          <div class="ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <h3>Pilot request received</h3>
+          <p>Thanks for reaching out. We'll review your request and follow up by email to agree scopes and success criteria.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top" aria-label="Verachi home">
+          <img src="./home/verachi-logo.svg" alt="" width="26" height="26" />
+          <span class="brand-word">VERACHI</span>
+        </a>
+        <p class="footer-blurb">A project-centered decision workspace for delivery teams. Cited decisions, owned risks, and grounded answers on top of Slack, Jira, and GitHub.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#how">How it works</a>
+        <a href="#product">Decisions &amp; risks</a>
+        <a href="#trust">Trust &amp; security</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#demo">Book a pilot</a>
+        <a href="https://app.verachi.io/login">Sign in</a>
+        <a href="https://app.verachi.io/docs">Documentation</a>
+        <a href="mailto:hello@verachi.io">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Trust</h4>
+        <a href="#trust">Security posture</a>
+        <a href="/.well-known/security.txt">security.txt</a>
+        <a href="mailto:security@verachi.io">Report an issue</a>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p>&copy; 2026 Verachi. All rights reserved.</p>
+      <div class="links">
+        <a href="#trust">Read-only by default</a>
+        <a href="#trust">Citations on every answer</a>
+        <a href="mailto:security@verachi.io">security@verachi.io</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="./home/app.js?v=1" defer></script>
+</body>
+</html>
