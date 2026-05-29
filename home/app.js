@@ -183,12 +183,8 @@
       var name = $("#cf_name");
       var email = $("#cf_email");
       var company = $("#cf_company");
-      var title = $("#cf_title");
-      var companySize = $("#cf_company_size");
-      var industry = $("#cf_industry");
-      var country = $("#cf_country");
       var needs = $("#cf_needs");
-      var requiredFields = [name, email, company, title, companySize, industry, country, needs];
+      var requiredFields = [name, email, company, needs];
 
       var missingField = null;
       var hasMissingField = false;
@@ -200,7 +196,7 @@
         }
       }
       if (hasMissingField) {
-        showError("Please fill in your name, work email, company details, and what the pilot should prove.");
+        showError("Please fill in your name, work email, company, and what the pilot should prove.");
         if (missingField) missingField.focus();
         return;
       }
