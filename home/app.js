@@ -148,6 +148,8 @@
   var form = $("#contactForm");
   var loadedAt = $("#cf_loaded_at");
   if (loadedAt) loadedAt.value = String(Date.now());
+  var sourceUrl = $("#cf_source_url");
+  if (sourceUrl) sourceUrl.value = window.location.href;
 
   if (form) {
     var submitBtn = $("#cfSubmit");
@@ -181,10 +183,25 @@
       var name = $("#cf_name");
       var email = $("#cf_email");
       var company = $("#cf_company");
+      var title = $("#cf_title");
+      var companySize = $("#cf_company_size");
+      var industry = $("#cf_industry");
+      var country = $("#cf_country");
       var needs = $("#cf_needs");
+      var requiredFields = [name, email, company, title, companySize, industry, country, needs];
 
-      if (!name.value.trim() || !email.value.trim() || !company.value.trim() || !needs.value.trim()) {
-        showError("Please fill in your name, work email, company, and what the pilot should prove.");
+      var missingField = null;
+      var hasMissingField = false;
+      for (var i = 0; i < requiredFields.length; i += 1) {
+        if (!requiredFields[i] || !requiredFields[i].value.trim()) {
+          missingField = requiredFields[i];
+          hasMissingField = true;
+          break;
+        }
+      }
+      if (hasMissingField) {
+        showError("Please fill in your name, work email, company details, and what the pilot should prove.");
+        if (missingField) missingField.focus();
         return;
       }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
@@ -206,16 +223,36 @@
         body: body.toString()
       })
         .then(function (res) {
-          if (!res.ok) throw new Error("Request failed: " + res.status);
+          return res.text().then(function (text) {
+            var payload = null;
+            if (text) {
+              try { payload = JSON.parse(text); } catch (err) {}
+            }
+            if (!res.ok) {
+              var message = payload && payload.error && payload.error.message
+                ? payload.error.message
+                : "Request failed: " + res.status;
+              var requestError = new Error(message);
+              requestError.fromServer = true;
+              throw requestError;
+            }
+            return payload;
+          });
+        })
+        .then(function () {
+          form.hidden = true;
           if (successEl) {
-            form.hidden = true;
             successEl.hidden = false;
             successEl.focus();
           }
         })
-        .catch(function () {
+        .catch(function (error) {
           setLoading(false);
-          showError("Something went wrong sending that. Please email hello@verachi.io and we'll set up your pilot.");
+          var fallback = "Something went wrong sending that. Please email hello@verachi.io and we'll set up your pilot.";
+          var message = error && error.fromServer && error.message && !/^Request failed:/.test(error.message)
+            ? error.message
+            : fallback;
+          showError(message);
         });
     });
   }

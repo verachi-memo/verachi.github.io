@@ -543,6 +543,7 @@
             <input type="text" id="cf_website" name="website" autocomplete="off" tabindex="-1" />
           </div>
           <input type="hidden" id="cf_loaded_at" name="_loaded_at" />
+          <input type="hidden" id="cf_source_url" name="sourceUrl" />
           <input type="hidden" id="cf_plan" name="plan" value="General pilot" />
 
           <p class="cf-plan">Requesting <span class="val" id="cfPlanValue">General pilot</span></p>
@@ -560,6 +561,33 @@
           <div class="cf-field">
             <label for="cf_company">Company</label>
             <input class="cf-input" type="text" id="cf_company" name="company" placeholder="Acme Corp" autocomplete="organization" required />
+          </div>
+          <div class="cf-row">
+            <div class="cf-field">
+              <label for="cf_title">Job title</label>
+              <input class="cf-input" type="text" id="cf_title" name="title" placeholder="VP Engineering" autocomplete="organization-title" required />
+            </div>
+            <div class="cf-field">
+              <label for="cf_company_size">Company size</label>
+              <select class="cf-select" id="cf_company_size" name="company_size" required>
+                <option value="">Select size</option>
+                <option value="1-10">1-10</option>
+                <option value="11-50">11-50</option>
+                <option value="51-200">51-200</option>
+                <option value="201-1000">201-1000</option>
+                <option value="1001+">1001+</option>
+              </select>
+            </div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-field">
+              <label for="cf_industry">Industry</label>
+              <input class="cf-input" type="text" id="cf_industry" name="industry" placeholder="Software" required />
+            </div>
+            <div class="cf-field">
+              <label for="cf_country">Country or region</label>
+              <input class="cf-input" type="text" id="cf_country" name="country" placeholder="United States" autocomplete="country-name" required />
+            </div>
           </div>
           <div class="cf-field">
             <label for="cf_needs">What should the pilot prove?</label>
@@ -631,6 +659,6 @@
   </div>
 </footer>
 
-<script src="./home/app.js?v=1" defer></script>
+<script src="./home/app.js?v=2" defer></script>
 </body>
 </html>
