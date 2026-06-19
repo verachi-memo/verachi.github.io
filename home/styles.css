@@ -789,14 +789,14 @@ section[id], #main { scroll-margin-top: 84px; }
   display: inline-block;
   overflow: hidden;
   vertical-align: top;
+  padding-bottom: 0.3em;
+  margin-bottom: -0.3em;
 }
 .split-word > span {
   display: inline-block;
   vertical-align: top;
-  padding-bottom: 0.12em;
-  margin-bottom: -0.12em;
   will-change: transform, opacity;
-  transform: translateY(110%);
+  transform: translateY(140%);
   opacity: 0;
   transition: transform 0.95s var(--ease-out-expo), opacity 0.95s ease;
 }
