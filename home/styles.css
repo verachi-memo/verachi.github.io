@@ -858,3 +858,60 @@ section[id], #main { scroll-margin-top: 84px; }
     box-shadow: 0 0 0 0 rgba(60, 122, 82, 0);
   }
 }
+
+/* ----- Interactive Canvas Graph ----- */
+.hero-canvas {
+  position: absolute;
+  top: -12%;
+  left: -12%;
+  width: 124%;
+  height: 124%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ----- Interactive Step Cards ----- */
+.step {
+  transition: background-color 0.25s var(--ease-out-quint), border-color 0.25s var(--ease-out-quint), box-shadow 0.25s var(--ease-out-quint), transform 0.25s var(--ease-out-quint);
+  will-change: background-color, border-color, box-shadow, transform;
+}
+.step:hover {
+  background: var(--surface-2);
+  border-color: var(--line-strong);
+  z-index: 5;
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+.step .conn svg {
+  transition: transform 0.25s var(--ease-out-quint);
+}
+.step:hover .conn svg {
+  transform: translateX(3px);
+}
+
+/* ----- Integrations Hover ----- */
+.logobar-item {
+  transition: transform 0.25s var(--ease-out-quint), color 0.25s ease;
+  will-change: transform;
+}
+.logobar-item:hover {
+  transform: translateY(-2px);
+  color: var(--teal-2);
+}
+
+/* ----- Chat Citations Staggered Reveal ----- */
+@keyframes chipIn {
+  from { opacity: 0; transform: translateY(6px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+.js .chat-cite {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.js .chat-cites:not([hidden]) .chat-cite {
+  animation: chipIn 0.4s var(--ease-out-quint) both;
+}
+.js .chat-cites:not([hidden]) .chat-cite:nth-child(1) { animation-delay: 0.08s; }
+.js .chat-cites:not([hidden]) .chat-cite:nth-child(2) { animation-delay: 0.18s; }
+.js .chat-cites:not([hidden]) .chat-cite:nth-child(3) { animation-delay: 0.28s; }
+

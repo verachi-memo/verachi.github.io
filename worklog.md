@@ -10,3 +10,7 @@
 
 - Prompt: Fix duplicated information in the pricing cards after reviewing the screenshot.
 - Result: Removed the repeated checkmark feature list and made each pricing card use one compact comparison-style detail list.
+
+- Prompt: Review the landing page, ensure editorial style, and add minimal, tasteful micro-animations (interactive canvas nodes graph, hover steps guides, staggered citations reveal, typewriter polishing).
+- Result: Conducted a customer review, added an interactive HTML5 canvas particle decision graph inside the hero media card representing live telemetry, implemented subtle hover transformations on step cards and integration items, added smooth staggered reveals for typewriter citation chips with fading cursor support, and recompiled the root `index.html`.
+

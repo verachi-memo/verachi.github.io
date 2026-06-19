@@ -224,7 +224,16 @@
           i += 1;
           setTimeout(type, 16);
         } else {
-          if (caret.parentNode) caret.parentNode.removeChild(caret);
+          // Let the cursor blink for a short time (3s) before fading out
+          setTimeout(function () {
+            if (caret.parentNode) {
+              caret.style.transition = "opacity 0.5s ease";
+              caret.style.opacity = "0";
+              setTimeout(function () {
+                if (caret.parentNode) caret.parentNode.removeChild(caret);
+              }, 500);
+            }
+          }, 3000);
           revealCites();
         }
       })();
@@ -422,4 +431,238 @@
       el.addEventListener("mouseleave", handleLeave, { passive: true });
     });
   }
+
+  /* --------------------------- Interactive Canvas Graph --------------------- */
+  (function initCanvas() {
+    var canvas = $("#heroCanvas");
+    var container = $(".hero-media");
+    var card = $(".record-card", container);
+    if (!canvas || !container || !card || reduceMotion) return;
+
+    var ctx = canvas.getContext("2d");
+    var dpr = window.devicePixelRatio || 1;
+    var width = 0, height = 0;
+    var mouse = { x: null, y: null, active: false };
+
+    // Node particles configuration
+    var particles = [];
+    var particleTypes = ['slack', 'jira', 'github'];
+    var colors = {
+      slack: { border: '', fill: '' },
+      jira: { border: '', fill: '' },
+      github: { border: '', fill: '' },
+      line: ''
+    };
+
+    function updateThemeColors() {
+      var rootStyle = getComputedStyle(document.documentElement);
+      colors.slack.border = rootStyle.getPropertyValue('--slack').trim() || '#611f69';
+      colors.slack.fill = rootStyle.getPropertyValue('--slack-wash').trim() || '#efe4f0';
+      colors.jira.border = rootStyle.getPropertyValue('--jira').trim() || '#0c5fd4';
+      colors.jira.fill = rootStyle.getPropertyValue('--jira-wash').trim() || '#e1ebf8';
+      colors.github.border = rootStyle.getPropertyValue('--github').trim() || '#1f2328';
+      colors.github.fill = rootStyle.getPropertyValue('--github-wash').trim() || '#e6e4e2';
+      colors.line = rootStyle.getPropertyValue('--line-strong').trim() || '#b3a48d';
+    }
+
+    updateThemeColors();
+
+    var themeToggle = $("#themeToggle");
+    if (themeToggle) {
+      themeToggle.addEventListener("click", function () {
+        setTimeout(updateThemeColors, 50);
+      });
+    }
+
+    function resize() {
+      width = container.clientWidth;
+      height = container.clientHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+      ctx.scale(dpr, dpr);
+      
+      initParticles();
+    }
+
+    function initParticles() {
+      particles = [];
+      var numParticles = 6;
+      
+      var cardLeft = card.offsetLeft;
+      var cardTop = card.offsetTop;
+      var cardW = card.offsetWidth;
+      var cardH = card.offsetHeight;
+
+      // Define floating zones around the card
+      var zones = [
+        { minX: 10, maxX: cardLeft - 20, minY: 20, maxY: height - 20 },
+        { minX: cardLeft + cardW + 20, maxX: width - 10, minY: 20, maxY: height - 20 },
+        { minX: 20, maxX: width - 20, minY: 10, maxY: cardTop - 20 },
+        { minX: 20, maxX: width - 20, minY: cardTop + cardH + 20, maxY: height - 10 }
+      ];
+
+      for (var i = 0; i < numParticles; i++) {
+        var zone = zones[i % zones.length];
+        if (zone.maxX <= zone.minX) {
+          zone = { minX: 0, maxX: width, minY: 0, maxY: height };
+        }
+        var px = zone.minX + Math.random() * (zone.maxX - zone.minX);
+        var py = zone.minY + Math.random() * (zone.maxY - zone.minY);
+
+        var type = particleTypes[i % particleTypes.length];
+        var label = type.charAt(0).toUpperCase();
+
+        particles.push({
+          x: px,
+          y: py,
+          baseX: px,
+          baseY: py,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          radius: 12 + Math.random() * 4,
+          type: type,
+          label: label,
+          angle: Math.random() * Math.PI * 2,
+          speed: 0.003 + Math.random() * 0.003,
+          orbitRadius: 8 + Math.random() * 12,
+          photonProgress: Math.random()
+        });
+      }
+    }
+
+    container.addEventListener("mousemove", function (e) {
+      var rect = container.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+      mouse.active = true;
+    }, { passive: true });
+
+    container.addEventListener("mouseleave", function () {
+      mouse.x = null;
+      mouse.y = null;
+      mouse.active = false;
+    }, { passive: true });
+
+    var citations = $all(".reveal-cite", card);
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+
+      var cardLeft = card.offsetLeft;
+      var cardTop = card.offsetTop;
+      var cardW = card.offsetWidth;
+      var cardH = card.offsetHeight;
+      var cardRight = cardLeft + cardW;
+      var cardBottom = cardTop + cardH;
+
+      var targetPoints = [];
+      if (citations.length > 0) {
+        var containerRect = container.getBoundingClientRect();
+        citations.forEach(function (el, index) {
+          var elRect = el.getBoundingClientRect();
+          targetPoints.push({
+            x: elRect.left - containerRect.left + 8,
+            y: elRect.top - containerRect.top + elRect.height / 2,
+            type: index === 0 ? 'slack' : (index === 1 ? 'jira' : 'github')
+          });
+        });
+      }
+
+      particles.forEach(function (p) {
+        p.angle += p.speed;
+        var targetX = p.baseX + Math.cos(p.angle) * p.orbitRadius;
+        var targetY = p.baseY + Math.sin(p.angle) * p.orbitRadius;
+
+        if (mouse.active) {
+          var dx = mouse.x - p.x;
+          var dy = mouse.y - p.y;
+          var dist = Math.hypot(dx, dy);
+          var pullRadius = 150;
+          if (dist < pullRadius) {
+            var force = (pullRadius - dist) / pullRadius;
+            targetX += (mouse.x - p.x) * force * 0.4;
+            targetY += (mouse.y - p.y) * force * 0.4;
+          }
+        }
+
+        p.x += (targetX - p.x) * 0.05;
+        p.y += (targetY - p.y) * 0.05;
+
+        var buffer = p.radius + 8;
+        if (p.x > cardLeft - buffer && p.x < cardRight + buffer &&
+            p.y > cardTop - buffer && p.y < cardBottom + buffer) {
+          var distToLeft = Math.abs(p.x - cardLeft);
+          var distToRight = Math.abs(p.x - cardRight);
+          var distToTop = Math.abs(p.y - cardTop);
+          var distToBottom = Math.abs(p.y - cardBottom);
+          var minDist = Math.min(distToLeft, distToRight, distToTop, distToBottom);
+
+          if (minDist === distToLeft) p.x = cardLeft - buffer;
+          else if (minDist === distToRight) p.x = cardRight + buffer;
+          else if (minDist === distToTop) p.y = cardTop - buffer;
+          else p.y = cardBottom + buffer;
+        }
+
+        if (p.x < buffer) p.x = buffer;
+        if (p.x > width - buffer) p.x = width - buffer;
+        if (p.y < buffer) p.y = buffer;
+        if (p.y > height - buffer) p.y = height - buffer;
+
+        var target = targetPoints.find(function (t) { return t.type === p.type; });
+        if (target) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(target.x, target.y);
+          ctx.strokeStyle = colors.line;
+          ctx.lineWidth = 0.75;
+          ctx.setLineDash([3, 4]);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          p.photonProgress += 0.005;
+          if (p.photonProgress > 1) p.photonProgress = 0;
+          
+          var photonX = p.x + (target.x - p.x) * p.photonProgress;
+          var photonY = p.y + (target.y - p.y) * p.photonProgress;
+          ctx.beginPath();
+          ctx.arc(photonX, photonY, 2, 0, Math.PI * 2);
+          ctx.fillStyle = colors[p.type].border;
+          ctx.fill();
+        }
+
+        var c = colors[p.type];
+        
+        ctx.shadowColor = 'rgba(27, 25, 21, 0.06)';
+        ctx.shadowBlur = 6;
+        ctx.shadowOffsetY = 2;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = c.fill;
+        ctx.strokeStyle = c.border;
+        ctx.lineWidth = 1.2;
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.shadowColor = 'transparent';
+        ctx.shadowBlur = 0;
+        ctx.shadowOffsetY = 0;
+
+        ctx.fillStyle = c.border;
+        var rootStyle = getComputedStyle(document.documentElement);
+        ctx.font = "bold 10px " + rootStyle.getPropertyValue('--font-mono');
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(p.label, p.x, p.y + 0.5);
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener("resize", resize, { passive: true });
+    resize();
+    requestAnimationFrame(draw);
+  })();
 })();
