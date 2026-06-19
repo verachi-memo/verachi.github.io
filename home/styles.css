@@ -859,16 +859,7 @@ section[id], #main { scroll-margin-top: 84px; }
   }
 }
 
-/* ----- Interactive Canvas Graph ----- */
-.hero-canvas {
-  position: absolute;
-  top: -12%;
-  left: -12%;
-  width: 124%;
-  height: 124%;
-  z-index: -1;
-  pointer-events: none;
-}
+
 
 /* ----- Interactive Step Cards ----- */
 .step {
