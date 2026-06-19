@@ -117,19 +117,73 @@
     });
   }
 
-  /* ---------------------------- Scroll reveal ------------------------------ */
+  /* ---------------------------- Scroll reveal & split headings ------------- */
+  // Helper to split text nodes into words wrapped in .split-word spans for clipping masks
+  function prepareSplitWords(el) {
+    function process(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        var parent = node.parentNode;
+        var text = node.textContent;
+        var words = text.split(/(\s+)/);
+        var fragment = document.createDocumentFragment();
+
+        words.forEach(function (part) {
+          if (!part) return;
+          if (/\s+/.test(part)) {
+            fragment.appendChild(document.createTextNode(part));
+          } else {
+            var wSpan = document.createElement("span");
+            wSpan.className = "split-word";
+            var inner = document.createElement("span");
+            inner.textContent = part;
+            wSpan.appendChild(inner);
+            fragment.appendChild(wSpan);
+          }
+        });
+        parent.replaceChild(fragment, node);
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        if (node.tagName === "SCRIPT" || node.tagName === "STYLE" || node.classList.contains("split-word")) return;
+        var children = Array.prototype.slice.call(node.childNodes);
+        children.forEach(process);
+      }
+    }
+
+    var originalChildren = Array.prototype.slice.call(el.childNodes);
+    originalChildren.forEach(process);
+  }
+
+  // Pre-split the text elements marked with data-split
+  $all("[data-split]").forEach(function (el) {
+    prepareSplitWords(el);
+  });
+
   var animated = $all("[data-anim]");
   animated.forEach(function (el) {
     var d = el.getAttribute("data-d");
     if (d) el.style.setProperty("--d", d + "ms");
   });
+
   if (reduceMotion || !("IntersectionObserver" in window)) {
-    animated.forEach(function (el) { el.classList.add("in"); });
+    animated.forEach(function (el) {
+      el.classList.add("in");
+      $all(".split-word", el).forEach(function (word) {
+        word.classList.add("in");
+      });
+    });
   } else {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add("in");
+          // If the animated block (or its children) has split words, animate them
+          var splitWords = $all(".split-word", entry.target);
+          if (splitWords.length > 0) {
+            splitWords.forEach(function (word, index) {
+              setTimeout(function () {
+                word.classList.add("in");
+              }, index * 35); // stagger delay
+            });
+          }
           io.unobserve(entry.target);
         }
       });
@@ -310,6 +364,62 @@
             : fallback;
           showError(message);
         });
+    });
+  }
+
+  /* -------------------------- Scroll Progress fallback ---------------------- */
+  var scrollProgress = $("#scroll-progress");
+  if (scrollProgress && !CSS.supports("animation-timeline", "scroll()")) {
+    var tick = false;
+    window.addEventListener("scroll", function () {
+      if (!tick) {
+        window.requestAnimationFrame(function () {
+          var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+          var scrolled = window.scrollY;
+          var progressPercentage = scrollable > 0 ? (scrolled / scrollable) : 0;
+          scrollProgress.style.transform = "scaleX(" + progressPercentage + ")";
+          tick = false;
+        });
+        tick = true;
+      }
+    }, { passive: true });
+  }
+
+  /* --------------------------- 3D Card Hover Tilt --------------------------- */
+  if (window.innerWidth > 768 && !reduceMotion) {
+    $all("[data-tilt]").forEach(function (el) {
+      var max = 5; // max degrees of tilt
+      var handleMove = function (e) {
+        var r = el.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        el.style.transform = "perspective(1000px) rotateY(" + (px * max) + "deg) rotateX(" + (-py * max) + "deg) scale3d(1.02, 1.02, 1.02) translateY(-2px)";
+        el.style.boxShadow = "var(--shadow-float)";
+      };
+      var handleLeave = function () {
+        el.style.transform = "";
+        el.style.boxShadow = "";
+      };
+      el.addEventListener("mousemove", handleMove, { passive: true });
+      el.addEventListener("mouseleave", handleLeave, { passive: true });
+    });
+  }
+
+  /* --------------------------- Magnetic Buttons ----------------------------- */
+  if (window.innerWidth > 768 && !reduceMotion) {
+    $all("[data-magnetic]").forEach(function (el) {
+      var strength = parseFloat(el.getAttribute("data-magnetic-strength")) || 0.3;
+      var handleMove = function (e) {
+        var r = el.getBoundingClientRect();
+        var x = (e.clientX - (r.left + r.width / 2)) * strength;
+        var y = (e.clientY - (r.top + r.height / 2)) * strength;
+        el.style.transform = "translate3d(" + x + "px, " + y + "px, 0)";
+      };
+      var handleLeave = function () {
+        el.style.transform = "";
+      };
+      el.addEventListener("mousemove", handleMove, { passive: true });
+      el.addEventListener("mouseleave", handleLeave, { passive: true });
     });
   }
 })();

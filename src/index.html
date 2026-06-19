@@ -92,6 +92,8 @@
 </head>
 
 <body>
+<div id="scroll-progress" aria-hidden="true"></div>
+<div class="grain-overlay" aria-hidden="true"></div>
 <a class="skip-link" href="#main">Skip to content</a>
 
 <!-- partial:header.html -->
@@ -108,7 +110,7 @@
           <span class="pin">Read-only</span>
           <span>Decision records &amp; risk tracking for engineering teams</span>
         </span>
-        <h1 data-anim data-d="60">
+        <h1 data-anim data-d="60" data-split>
           Your team's decisions,
           <span class="serif">finally written down.</span>
         </h1>
@@ -118,7 +120,7 @@
           and writes living decision records and owned risks — every claim cited back to its source.
         </p>
         <div class="hero-actions" data-anim data-d="180">
-          <a class="btn btn-primary btn-lg" href="#demo">
+          <a class="btn btn-primary btn-lg" href="#demo" data-magnetic>
             Book a pilot
             <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
@@ -132,7 +134,7 @@
       </div>
 
       <aside class="hero-media" data-anim data-d="200" aria-label="Example Verachi decision record">
-        <div class="record-card">
+        <div class="record-card" data-tilt>
           <div class="record-top">
             <div>
               <span class="record-id">DEC-104</span>
@@ -183,21 +185,21 @@
     <div class="container">
       <div class="section-head" data-anim>
         <span class="eyebrow">The problem</span>
-        <h2 class="section-title">Work moves forward.<br />Context leaks away.</h2>
+        <h2 class="section-title" data-split>Work moves forward.<br />Context leaks away.</h2>
         <p class="section-sub">Your team is fast and already using the right tools. The failure mode is quieter: the <em>reasons</em> behind decisions never become a shared record — so weeks later, someone rebuilds them from memory.</p>
       </div>
       <div class="problem-grid">
-        <article class="leak-card" data-anim data-d="0">
+        <article class="leak-card" data-anim data-d="0" data-tilt>
           <span class="n">01 — Lost rationale</span>
           <h3>The why lives in 40 Slack threads</h3>
           <p>Rationale is scattered across messages, tickets, and DMs. Finding it again means re-reading history nobody saved.</p>
         </article>
-        <article class="leak-card" data-anim data-d="100">
+        <article class="leak-card" data-anim data-d="100" data-tilt>
           <span class="n">02 — Risk without an owner</span>
           <h3>Owners and mitigations from memory</h3>
           <p>Who agreed to watch the retry queue? What was the mitigation? Risk gets reconstructed under launch pressure.</p>
         </article>
-        <article class="leak-card" data-anim data-d="200">
+        <article class="leak-card" data-anim data-d="200" data-tilt>
           <span class="n">03 — Confidence without evidence</span>
           <h3>Updates that age the moment they ship</h3>
           <p>Manual status docs drift from reality. New joiners inherit confidence without the evidence behind it.</p>
@@ -214,7 +216,7 @@
     <div class="container">
       <div class="section-head center" data-anim>
         <span class="eyebrow">How it works</span>
-        <h2 class="section-title">From raw activity to an inspectable record.</h2>
+        <h2 class="section-title" data-split>From raw activity to an inspectable record.</h2>
         <p class="section-sub">Four steps, no migration. Verachi reads what's already happening and turns it into something you can act on.</p>
       </div>
       <div class="steps">
@@ -250,7 +252,7 @@
     <div class="container">
       <div class="section-head" data-anim>
         <span class="eyebrow">The product</span>
-        <h2 class="section-title">The rationale. The risk.<br />The next owner.</h2>
+        <h2 class="section-title" data-split>The rationale. The risk.<br />The next owner.</h2>
         <p class="section-sub">Everything points back to a source. Nothing depends on someone remembering.</p>
       </div>
 
@@ -374,36 +376,36 @@
     <div class="container">
       <div class="section-head center" data-anim>
         <span class="eyebrow">Trust is a feature</span>
-        <h2 class="section-title">Built to pass the security review.</h2>
+        <h2 class="section-title" data-split>Built to pass the security review.</h2>
         <p class="section-sub">The blocker for tools like this is usually trust. So we made it the product — not a back-office afterthought.</p>
       </div>
       <div class="trust-grid">
-        <article class="trust-card" data-anim data-d="0">
+        <article class="trust-card" data-anim data-d="0" data-tilt>
           <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
           <h3>Read-only by default</h3>
           <p>Slack, Jira, and GitHub connect with read access. Optional write-backs are configured explicitly and recorded — nothing happens to your systems by surprise.</p>
         </article>
-        <article class="trust-card" data-anim data-d="100">
+        <article class="trust-card" data-anim data-d="100" data-tilt>
           <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3 8-8"/><path d="M21 12a9 9 0 1 1-6.2-8.6"/></svg></div>
           <h3>Citations are mandatory</h3>
           <p>Summaries and answers cite their sources. If a claim can't be supported, Verachi says so plainly instead of inventing confidence.</p>
         </article>
-        <article class="trust-card" data-anim data-d="200">
+        <article class="trust-card" data-anim data-d="200" data-tilt>
           <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg></div>
           <h3>Everything is auditable</h3>
           <p>Every sync, generated summary, and write-back is visible in the workspace activity log. Sensitive actions stay traceable.</p>
         </article>
-        <article class="trust-card" data-anim data-d="0">
+        <article class="trust-card" data-anim data-d="0" data-tilt>
           <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6M9 13h6M9 17h3"/></svg></div>
           <h3>Pointer-only storage</h3>
           <p>Raw threads, issue descriptions, and PR bodies aren't kept long-term. Verachi stores its own conclusions plus links and metadata back to the source.</p>
         </article>
-        <article class="trust-card" data-anim data-d="100">
+        <article class="trust-card" data-anim data-d="100" data-tilt>
           <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 6v6c0 5 8 10 8 10s8-5 8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
           <h3>Data boundaries you set</h3>
           <p>Your admin approves connector scopes before Verachi reads workspace context. Tenant isolation is enforced at the data layer.</p>
         </article>
-        <article class="trust-card" data-anim data-d="200">
+        <article class="trust-card" data-anim data-d="200" data-tilt>
           <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6h.09A1.65 1.65 0 0 0 11 3.09V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
           <h3>You stay in control</h3>
           <p>API keys, notification controls, and a full activity log are core capabilities. Review the connector scopes and data boundaries before any production use.</p>
@@ -425,11 +427,11 @@
     <div class="container">
       <div class="section-head center" data-anim>
         <span class="eyebrow">Pricing</span>
-        <h2 class="section-title">Published plans.<br /><span class="serif">Guided rollout.</span></h2>
+        <h2 class="section-title" data-split>Published plans.<br /><span class="serif">Guided rollout.</span></h2>
         <p class="section-sub">Every plan includes cited decision records, risk workflows, and a user-visible audit trail. Access starts with a short pilot so scopes and success criteria are agreed first.</p>
       </div>
       <div class="pricing-grid">
-        <article class="price-card" data-anim data-d="0">
+        <article class="price-card" data-anim data-d="0" data-tilt>
           <div class="price-name">Starter</div>
           <p class="price-aud">For small teams that want durable recall with a scoped pilot and light AI usage.</p>
           <div class="price-amount"><span class="amt">$5</span><span class="per">/ month</span></div>
@@ -441,10 +443,10 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Grounded chat, 100K monthly AI tokens</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> 5 GB workspace storage</li>
           </ul>
-          <a class="btn btn-outline btn-block" href="#demo" data-plan="Starter">Request Starter pilot</a>
+          <a class="btn btn-outline btn-block" href="#demo" data-plan="Starter" data-magnetic>Request Starter pilot</a>
         </article>
 
-        <article class="price-card featured" data-anim data-d="100">
+        <article class="price-card featured" data-anim data-d="100" data-tilt>
           <span class="price-badge">Most popular</span>
           <div class="price-name">Pro</div>
           <p class="price-aud">For growing orgs that need model choice, document context, and more headroom after proof.</p>
@@ -457,10 +459,10 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Deeper chat history &amp; linked records</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Priority support</li>
           </ul>
-          <a class="btn btn-primary btn-block" href="#demo" data-plan="Pro">Book a Pro pilot</a>
+          <a class="btn btn-primary btn-block" href="#demo" data-plan="Pro" data-magnetic>Book a Pro pilot</a>
         </article>
 
-        <article class="price-card" data-anim data-d="200">
+        <article class="price-card" data-anim data-d="200" data-tilt>
           <div class="price-name">Enterprise</div>
           <p class="price-aud">For tenants that need frontier model access, governance review, and custom rollout controls.</p>
           <div class="price-amount"><span class="amt">Custom</span></div>
@@ -472,7 +474,7 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Custom deployment &amp; success plan</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Dedicated rollout support</li>
           </ul>
-          <a class="btn btn-outline btn-block" href="#demo" data-plan="Enterprise">Talk to us</a>
+          <a class="btn btn-outline btn-block" href="#demo" data-plan="Enterprise" data-magnetic>Talk to us</a>
         </article>
       </div>
       <div class="plan-table-wrap" data-anim>
@@ -559,7 +561,7 @@
     <div class="container">
       <div class="section-head center" data-anim>
         <span class="eyebrow">Questions</span>
-        <h2 class="section-title">The honest answers.</h2>
+        <h2 class="section-title" data-split>The honest answers.</h2>
       </div>
       <div class="faq" data-anim>
         <details class="faq-item">

@@ -760,3 +760,116 @@ section[id], #main { scroll-margin-top: 84px; }
 @media (prefers-reduced-motion: reduce) {
   .consent { transition: none; }
 }
+
+/* =========================================================================
+   Aesthetic & Interaction Enhancements (inspired by Midflight)
+   ========================================================================= */
+
+/* ----- Scroll Progress Tracker ----- */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  z-index: 999;
+  background: linear-gradient(90deg, var(--teal-3), var(--teal-2));
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  pointer-events: none;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: scroll())) {
+    @keyframes grow-progress {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+    #scroll-progress {
+      animation: grow-progress auto linear;
+      animation-timeline: scroll();
+    }
+  }
+}
+
+/* ----- Film Grain Overlay ----- */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035; /* Subtle texture layer */
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ----- Split Headings word clip reveal ----- */
+.split-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+.split-word > span {
+  display: inline-block;
+  vertical-align: top;
+  will-change: transform, opacity;
+  transform: translateY(110%);
+  opacity: 0;
+  transition: transform 0.95s var(--ease-out-expo), opacity 0.95s ease;
+}
+.split-word.in > span {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ----- Magnetic buttons transition helper ----- */
+[data-magnetic] {
+  will-change: transform;
+  transition: transform 0.25s var(--ease-out-expo);
+}
+
+/* ----- Refined pseudo border hover glows ----- */
+.leak-card, .trust-card, .price-card, .record-card {
+  transform-style: preserve-3d;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
+}
+.leak-card::after, .trust-card::after, .price-card::after, .record-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(140deg, transparent 40%, var(--glow, var(--teal-3)) 140%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.leak-card:hover::after, .trust-card:hover::after, .price-card:hover::after, .record-card:hover::after {
+  opacity: 0.8;
+}
+
+/* Accent variables matching severity/principles */
+.leak-card { --glow: var(--warn); }
+.record-card { --glow: var(--teal-3); }
+.trust-card { --glow: var(--info); }
+.price-card { --glow: var(--teal-3); }
+.price-card.featured { --glow: var(--teal-2); }
+
+/* ----- Pulse animation for active dot ----- */
+.dot-good {
+  box-shadow: 0 0 0 0 rgba(60, 122, 82, 0.4);
+  animation: dot-pulse 2s infinite;
+}
+@keyframes dot-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(60, 122, 82, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(60, 122, 82, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(60, 122, 82, 0);
+  }
+}
