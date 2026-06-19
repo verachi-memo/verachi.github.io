@@ -5,6 +5,8 @@
    ========================================================================== */
 (function () {
   "use strict";
+  // Signals to the inline head failsafe that app.js loaded successfully.
+  window.__verachiApp = true;
 
   var reduceMotion = window.matchMedia
     ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -31,6 +33,64 @@
       document.documentElement.setAttribute("data-theme", next);
       try { localStorage.setItem("verachi-theme", next); } catch (e) {}
     });
+  }
+
+  /* ------------------------- Analytics (consent-gated) ------------------------ */
+  // GA only loads after explicit consent (or a saved accept). Honors Do Not Track.
+  // No inline scripts are used, so the strict CSP still applies.
+  var GA_ID = 'G-NHXTJ2NZMT';
+  var CONSENT_KEY = 'verachi-consent';
+  var dnt = (navigator.doNotTrack === '1' || window.doNotTrack === '1' ||
+    navigator.msDoNotTrack === '1' || navigator.doNotTrack === 'yes');
+
+  function loadAnalytics() {
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', GA_ID, { anonymize_ip: true });
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+  }
+
+  var consentBanner = $('#consentBanner');
+  function setConsent(choice) {
+    try { localStorage.setItem(CONSENT_KEY, choice); } catch (e) {}
+    if (consentBanner) {
+      consentBanner.hidden = true;
+      consentBanner.setAttribute('aria-hidden', 'true');
+      consentBanner.classList.remove('show');
+    }
+    if (choice === 'accepted') loadAnalytics();
+  }
+
+  if (consentBanner) {
+    var storedConsent = null;
+    try { storedConsent = localStorage.getItem(CONSENT_KEY); } catch (e) {}
+
+    if (storedConsent === 'accepted') {
+      loadAnalytics();
+    } else if (storedConsent === 'declined' || dnt) {
+      // No analytics, no banner.
+    } else {
+      // Reveal the banner shortly after load so it doesn't fight first paint.
+      setTimeout(function () {
+        consentBanner.hidden = false;
+        consentBanner.setAttribute('aria-hidden', 'false');
+        if (window.requestAnimationFrame) {
+          window.requestAnimationFrame(function () { consentBanner.classList.add('show'); });
+        } else {
+          consentBanner.classList.add('show');
+        }
+      }, 600);
+    }
+
+    var acceptBtn = $('#consentAccept');
+    var declineBtn = $('#consentDecline');
+    if (acceptBtn) acceptBtn.addEventListener('click', function () { setConsent('accepted'); });
+    if (declineBtn) declineBtn.addEventListener('click', function () { setConsent('declined'); });
   }
 
   /* ------------------------------ Mobile menu ------------------------------ */

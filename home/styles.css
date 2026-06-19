@@ -513,6 +513,33 @@ section[id], #main { scroll-margin-top: 84px; }
 .price-feat li { display: flex; gap: 10px; font-size: 14px; line-height: 1.45; color: var(--ink-2); }
 .price-feat svg { width: 17px; height: 17px; color: var(--teal-3); flex: none; margin-top: 2px; }
 .price-card .btn { margin-top: 26px; }
+.plan-table-wrap {
+  margin-top: 22px; overflow-x: auto;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--surface); box-shadow: var(--shadow-sm);
+}
+.plan-table-head {
+  padding: 16px 18px; border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal-2);
+}
+.plan-table {
+  width: 100%; min-width: 760px; border-collapse: collapse;
+  font-size: 14px; line-height: 1.45;
+}
+.plan-table th,
+.plan-table td {
+  padding: 14px 18px; text-align: left; vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+.plan-table thead th {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.11em;
+  text-transform: uppercase; color: var(--ink-3); background: var(--surface-2);
+}
+.plan-table tbody th { width: 30%; color: var(--ink); font-weight: 650; }
+.plan-table tbody td { color: var(--ink-2); }
+.plan-table tr:last-child th,
+.plan-table tr:last-child td { border-bottom: 0; }
 .pricing-note { margin-top: 26px; text-align: center; font-size: 13.5px; color: var(--ink-4); }
 
 /* FAQ */
@@ -669,4 +696,67 @@ section[id], #main { scroll-margin-top: 84px; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-legal { justify-content: flex-start; }
   .container { padding: 0 18px; }
+}
+
+/* ============================ small button variant ============================ */
+.btn-sm { padding: 9px 16px; font-size: 14px; }
+
+/* ============================ "Example" tag on mockups ============================ */
+.example-chip {
+  display: inline-flex; align-items: center;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--ink-3);
+  padding: 3px 8px; border: 1px solid var(--line-2); border-radius: 999px;
+  background: var(--surface-2); white-space: nowrap; flex: none;
+}
+.record-top .example-chip { margin-left: auto; }
+.panel-head .example-chip { margin-left: auto; }
+
+/* ============================ trust: hosting strip ============================ */
+.trust-hosting {
+  margin-top: 36px; padding: 22px 24px;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--surface);
+}
+.trust-hosting-row { display: flex; align-items: center; gap: 14px; }
+.trust-hosting-ico {
+  flex: none; width: 42px; height: 42px; border-radius: 11px;
+  display: grid; place-items: center; color: var(--ink-2);
+  background: var(--surface-2); border: 1px solid var(--line);
+}
+.trust-hosting-ico svg { width: 21px; height: 21px; }
+.trust-hosting-row p { margin: 0; color: var(--ink-2); font-size: 1.02rem; line-height: 1.5; }
+.trust-hosting-row b { color: var(--ink); }
+.trust-posture {
+  margin: 14px 0 0; padding-top: 14px; border-top: 1px dashed var(--line-2);
+  font-size: 0.92rem; color: var(--ink-3); line-height: 1.6;
+}
+.trust-posture a { color: var(--ink-2); }
+
+/* ============================ consent banner ============================ */
+.consent {
+  position: fixed; bottom: 18px; left: 50%;
+  transform: translate(-50%, 16px);
+  z-index: 200; width: min(680px, calc(100vw - 28px));
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s var(--ease-out-quint), transform 0.35s var(--ease-out-quint);
+}
+.consent.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.consent-inner {
+  display: flex; align-items: center; gap: 18px; justify-content: space-between;
+  background: var(--surface); border: 1px solid var(--line-2); border-radius: var(--radius);
+  box-shadow: 0 12px 34px rgba(20, 18, 14, 0.16); padding: 14px 16px;
+}
+.consent-text { margin: 0; font-size: 0.9rem; color: var(--ink-2); line-height: 1.5; }
+.consent-link { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+.consent-link:hover { color: var(--ink); opacity: 0.8; }
+.consent-actions { flex: none; display: flex; gap: 8px; }
+
+@media (max-width: 560px) {
+  .consent-inner { flex-direction: column; align-items: stretch; gap: 12px; }
+  .consent-actions { justify-content: flex-end; }
+  .trust-hosting { padding: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .consent { transition: none; }
 }

@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-CeSiiM2bTphYGEbk1gHhUkAWbtfZvykRnQqhRIw/sgA=' 'sha256-9tC6yxPn19zbn2rBaQ/oSKNtCsKzHPYZoMJqfcxJfOQ=' https://www.googletagmanager.com; style-src 'self'; font-src 'self' data:; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://app.verachi.io https://www.google-analytics.com https://region1.google-analytics.com https://*.google-analytics.com; form-action 'self' https://app.verachi.io; object-src 'none'; base-uri 'self'; upgrade-insecure-requests" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-FfsaGbKvAFx/FdcvOFUs2pp0NRUuRyMo1xsUkg7ki+I=' https://www.googletagmanager.com; style-src 'self'; font-src 'self' data:; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://app.verachi.io https://www.google-analytics.com https://region1.google-analytics.com https://*.google-analytics.com; form-action 'self' https://app.verachi.io; object-src 'none'; base-uri 'self'; upgrade-insecure-requests" />
 
-<title>Verachi — Cited decisions, owned risks, on top of Slack, Jira & GitHub</title>
-<meta name="description" content="Verachi is a decision workspace for delivery teams. It connects read-only to Slack, Jira, and GitHub and turns scattered context into cited decisions, owned risks, and grounded answers — every claim linked back to its source." />
+<title>Verachi — Decision records & owned risks for engineering teams</title>
+<meta name="description" content="Verachi reads Slack, Jira, and GitHub and writes living decision records and owned risks for engineering teams — every claim cited back to its source." />
 <meta name="theme-color" content="#efe7db" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#1f221d" media="(prefers-color-scheme: dark)" />
 <link rel="canonical" href="https://verachi.io/" />
@@ -18,13 +18,13 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Verachi" />
 <meta property="og:url" content="https://verachi.io/" />
-<meta property="og:title" content="Verachi — Cited decisions, owned risks, on top of Slack, Jira & GitHub" />
-<meta property="og:description" content="Turn scattered Slack threads, tickets, and pull requests into decision records, owned risks, and grounded answers — every claim linked back to its source." />
-<meta property="og:image" content="https://verachi.io/favicon/favicon-512x512.png" />
+<meta property="og:title" content="Verachi — Your team's decisions, finally written down." />
+<meta property="og:description" content="Verachi reads Slack, Jira, and GitHub and writes living decision records and owned risks — every claim cited back to its source." />
+<meta property="og:image" content="https://verachi.io/og-cover.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Verachi — Cited decisions, owned risks" />
-<meta name="twitter:description" content="A decision workspace that turns scattered context across Slack, Jira, and GitHub into cited decisions and owned risks." />
-<meta name="twitter:image" content="https://verachi.io/favicon/favicon-512x512.png" />
+<meta name="twitter:title" content="Verachi — Decision records for engineering teams" />
+<meta name="twitter:description" content="Living decision records and owned risks on top of Slack, Jira, and GitHub — every claim cited to its source." />
+<meta name="twitter:image" content="https://verachi.io/og-cover.png" />
 
 <script>
 (function () {
@@ -40,21 +40,17 @@
   } catch (e) {
     document.documentElement.setAttribute('data-theme', 'light');
   }
+  // Failsafe: if the deferred app.js never runs (blocked or errored), reveal
+  // scroll-animated content so the page is never blank under the .js class.
+  window.setTimeout(function () {
+    if (window.__verachiApp) return;
+    var els = document.querySelectorAll('[data-anim]');
+    for (var i = 0; i < els.length; i++) els[i].classList.add('in');
+  }, 3500);
 })();
 </script>
 
-<link rel="stylesheet" href="./home/styles.css?v=3" />
-<!-- Google tag (gtag.js) -->
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag() {
-  window.dataLayer.push(arguments);
-}
-window.gtag = gtag;
-gtag('js', new Date());
-gtag('config', 'G-NHXTJ2NZMT');
-</script>
-<script defer src="https://www.googletagmanager.com/gtag/js?id=G-NHXTJ2NZMT"></script>
+<link rel="stylesheet" href="./home/styles.css?v=4" />
 
 <script type="application/ld+json">
 {
@@ -73,7 +69,7 @@ gtag('config', 'G-NHXTJ2NZMT');
       "name": "Verachi",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",
-      "description": "A project-centered decision workspace for delivery teams. Verachi connects read-only to Slack, Jira, and GitHub and turns scattered context into cited decisions, owned risks, and grounded answers.",
+      "description": "A decision-records tool for engineering teams. Verachi reads Slack, Jira, and GitHub read-only and turns scattered context into cited decision records, owned risks, and grounded answers.",
       "url": "https://verachi.io/",
       "offers": [
         { "@type": "Offer", "name": "Starter", "price": "5", "priceCurrency": "USD" },
@@ -110,17 +106,16 @@ gtag('config', 'G-NHXTJ2NZMT');
       <div class="hero-copy">
         <span class="hero-kicker" data-anim>
           <span class="pin">Read-only</span>
-          <span>Decision &amp; risk memory for delivery teams</span>
+          <span>Decision records &amp; risk tracking for engineering teams</span>
         </span>
         <h1 data-anim data-d="60">
-          Turn scattered context into
-          <span class="serif">cited decisions.</span>
+          Your team's decisions,
+          <span class="serif">finally written down.</span>
         </h1>
         <p class="hero-sub" data-anim data-d="120">
-          Verachi connects read-only to
+          Verachi reads
           <span class="tool">Slack</span>, <span class="tool">Jira</span>, and <span class="tool">GitHub</span>
-          and turns threads, tickets, and pull requests into decision records, owned risks, and grounded
-          answers — every claim linked back to its source.
+          and writes living decision records and owned risks — every claim cited back to its source.
         </p>
         <div class="hero-actions" data-anim data-d="180">
           <a class="btn btn-primary btn-lg" href="#demo">
@@ -130,9 +125,9 @@ gtag('config', 'G-NHXTJ2NZMT');
           <a class="btn btn-outline btn-lg" href="#product">See a decision record</a>
         </div>
         <ul class="hero-trust" data-anim data-d="240">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Read-only connectors</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Citations on every answer</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg> Audit trail for every sync</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Connectors that never write unattended</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Every claim links to a source</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg> Every sync logged and traceable</li>
         </ul>
       </div>
 
@@ -143,6 +138,7 @@ gtag('config', 'G-NHXTJ2NZMT');
               <span class="record-id">DEC-104</span>
               <h3>Keep the checkout flag on for pilot cohorts</h3>
             </div>
+            <span class="example-chip">Example</span>
             <span class="record-badge"><span class="dot dot-good" aria-hidden="true"></span>Inspectable</span>
           </div>
           <dl class="record-body">
@@ -178,7 +174,6 @@ gtag('config', 'G-NHXTJ2NZMT');
         <span class="logobar-item"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg> Slack</span>
         <span class="logobar-item"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.571 11.513H0a5.218 5.218 0 0 0 5.232 5.215h2.13v2.057A5.215 5.215 0 0 0 12.575 24V12.518a1.005 1.005 0 0 0-1.005-1.005zm5.723-5.756H5.736a5.215 5.215 0 0 0 5.215 5.214h2.129v2.058a5.218 5.218 0 0 0 5.215 5.214V6.758a1.001 1.001 0 0 0-1-1.001zM23.013 0H11.455a5.215 5.215 0 0 0 5.215 5.215h2.129v2.057A5.215 5.215 0 0 0 24 12.483V1.005A1.001 1.001 0 0 0 23.013 0z"/></svg> Jira</span>
         <span class="logobar-item"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg> GitHub</span>
-        <span class="logobar-item"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.625 8.5h-3.75c-.69 0-1.25.56-1.25 1.25v5c0 .69.56 1.25 1.25 1.25h1.25v2.5l2.5-2.5h.75c.345 0 .625-.28.625-.625v-6.25c0-.345-.28-.625-.625-.625zM21.5 5.75a1.75 1.75 0 1 0-3.5 0 1.75 1.75 0 0 0 3.5 0zm-5.5.5a2.25 2.25 0 1 0-4.5 0 2.25 2.25 0 0 0 4.5 0zM14 8H8c-.55 0-1 .45-1 1v6.5c0 .28.22.5.5.5H8v3l3-3h3c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1z"/></svg> Microsoft Teams</span>
       </div>
     </div>
   </section>
@@ -188,28 +183,28 @@ gtag('config', 'G-NHXTJ2NZMT');
     <div class="container">
       <div class="section-head" data-anim>
         <span class="eyebrow">The problem</span>
-        <h2 class="section-title">Work moves forward.<br /><span class="serif">Context leaks away.</span></h2>
+        <h2 class="section-title">Work moves forward.<br />Context leaks away.</h2>
         <p class="section-sub">Your team is fast and already using the right tools. The failure mode is quieter: the <em>reasons</em> behind decisions never become a shared record — so weeks later, someone rebuilds them from memory.</p>
       </div>
       <div class="problem-grid">
         <article class="leak-card" data-anim data-d="0">
-          <span class="n">01 — Decision archaeology</span>
+          <span class="n">01 — Lost rationale</span>
           <h3>The why lives in 40 Slack threads</h3>
           <p>Rationale is scattered across messages, tickets, and DMs. Finding it again means re-reading history nobody saved.</p>
         </article>
         <article class="leak-card" data-anim data-d="100">
-          <span class="n">02 — Orphaned risk</span>
+          <span class="n">02 — Risk without an owner</span>
           <h3>Owners and mitigations from memory</h3>
           <p>Who agreed to watch the retry queue? What was the mitigation? Risk gets reconstructed under launch pressure.</p>
         </article>
         <article class="leak-card" data-anim data-d="200">
-          <span class="n">03 — Stale status</span>
+          <span class="n">03 — Confidence without evidence</span>
           <h3>Updates that age the moment they ship</h3>
           <p>Manual status docs drift from reality. New joiners inherit confidence without the evidence behind it.</p>
         </article>
       </div>
       <p class="problem-note" data-anim>
-        <b>Verachi closes the gap</b> by capturing the decision, the risk, the owner, and the source evidence as a durable record — while your primary tools stay exactly where they are.
+        <b>Verachi closes the gap</b> by capturing the decision, the risk, the owner, and the source evidence as a record that lasts — while your primary tools stay exactly where they are.
       </p>
     </div>
   </section>
@@ -219,7 +214,7 @@ gtag('config', 'G-NHXTJ2NZMT');
     <div class="container">
       <div class="section-head center" data-anim>
         <span class="eyebrow">How it works</span>
-        <h2 class="section-title">From raw activity to an <span class="serif">inspectable record.</span></h2>
+        <h2 class="section-title">From raw activity to an inspectable record.</h2>
         <p class="section-sub">Four steps, no migration. Verachi reads what's already happening and turns it into something you can act on.</p>
       </div>
       <div class="steps">
@@ -255,7 +250,7 @@ gtag('config', 'G-NHXTJ2NZMT');
     <div class="container">
       <div class="section-head" data-anim>
         <span class="eyebrow">The product</span>
-        <h2 class="section-title">The rationale. The risk.<br /><span class="serif">The next owner.</span></h2>
+        <h2 class="section-title">The rationale. The risk.<br />The next owner.</h2>
         <p class="section-sub">Everything points back to a source. Nothing depends on someone remembering.</p>
       </div>
 
@@ -263,7 +258,7 @@ gtag('config', 'G-NHXTJ2NZMT');
       <div class="feature feature-first">
         <div class="feature-copy" data-anim>
           <span class="eyebrow">Decisions</span>
-          <h3>A durable record of <span class="serif">what changed and why.</span></h3>
+          <h3>A durable record of what changed and why.</h3>
           <p>Capture the resolution, the rationale, who reviewed it, and the source artifacts behind it — so the decision survives the thread it was made in.</p>
           <ul class="feature-list">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Resolution &amp; rationale</b> kept together, in plain language.</span></li>
@@ -301,7 +296,7 @@ gtag('config', 'G-NHXTJ2NZMT');
       <div class="feature reverse">
         <div class="feature-copy" data-anim>
           <span class="eyebrow">Risks</span>
-          <h3>Turn blockers into <span class="serif">owned action.</span></h3>
+          <h3>Turn blockers into owned action.</h3>
           <p>A guideline failure, a flagged PR, or a decision concern becomes a risk with an owner, a state, evidence, and one next step — not a sticky note that disappears.</p>
           <ul class="feature-list">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Severity, owner, and state</b> visible before launch.</span></li>
@@ -346,7 +341,7 @@ gtag('config', 'G-NHXTJ2NZMT');
       <div class="feature">
         <div class="feature-copy" data-anim>
           <span class="eyebrow">Ask Verachi</span>
-          <h3>Answers with <span class="serif">receipts.</span></h3>
+          <h3>Answers with receipts.</h3>
           <p>Grounded chat over your projects, decisions, and sources. Every factual claim comes back with a citation — and if Verachi can't cite it, it says so.</p>
           <ul class="feature-list">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Grounded</b> in real workspace and project context.</span></li>
@@ -356,7 +351,7 @@ gtag('config', 'G-NHXTJ2NZMT');
         </div>
         <div class="feature-media" data-anim data-d="120">
           <div class="panel">
-            <div class="panel-head"><span class="dots"><span></span><span></span><span></span></span><span class="title">ask verachi · atlas-launch</span></div>
+            <div class="panel-head"><span class="dots"><span></span><span></span><span></span></span><span class="title">ask verachi · atlas-launch</span><span class="example-chip">Example</span></div>
             <div class="chat" id="chatDemo" aria-live="polite">
               <div class="chat-q">Why is the checkout flag still on for the pilot?</div>
               <div class="chat-a">
@@ -379,7 +374,7 @@ gtag('config', 'G-NHXTJ2NZMT');
     <div class="container">
       <div class="section-head center" data-anim>
         <span class="eyebrow">Trust is a feature</span>
-        <h2 class="section-title">Built to pass the <span class="serif">security review.</span></h2>
+        <h2 class="section-title">Built to pass the security review.</h2>
         <p class="section-sub">The blocker for tools like this is usually trust. So we made it the product — not a back-office afterthought.</p>
       </div>
       <div class="trust-grid">
@@ -396,12 +391,12 @@ gtag('config', 'G-NHXTJ2NZMT');
         <article class="trust-card" data-anim data-d="200">
           <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg></div>
           <h3>Everything is auditable</h3>
-          <p>Every sync, generated summary, and write-back is visible in the workspace audit trail. Sensitive actions stay traceable.</p>
+          <p>Every sync, generated summary, and write-back is visible in the workspace activity log. Sensitive actions stay traceable.</p>
         </article>
         <article class="trust-card" data-anim data-d="0">
           <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6M9 13h6M9 17h3"/></svg></div>
           <h3>Pointer-only storage</h3>
-          <p>Raw threads, issue descriptions, and PR bodies aren't durable storage. Verachi keeps its own conclusions plus links and metadata back to the source.</p>
+          <p>Raw threads, issue descriptions, and PR bodies aren't kept long-term. Verachi stores its own conclusions plus links and metadata back to the source.</p>
         </article>
         <article class="trust-card" data-anim data-d="100">
           <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 6v6c0 5 8 10 8 10s8-5 8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
@@ -411,8 +406,16 @@ gtag('config', 'G-NHXTJ2NZMT');
         <article class="trust-card" data-anim data-d="200">
           <div class="trust-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6h.09A1.65 1.65 0 0 0 11 3.09V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
           <h3>You stay in control</h3>
-          <p>API keys, notification controls, and a full audit trail are core capabilities. Review the connector scopes and data boundaries before any production use.</p>
+          <p>API keys, notification controls, and a full activity log are core capabilities. Review the connector scopes and data boundaries before any production use.</p>
         </article>
+      </div>
+
+      <div class="trust-hosting" data-anim>
+        <div class="trust-hosting-row">
+          <span class="trust-hosting-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span>
+          <p>Hosted in <b>Japan, the EU, the US, and Mexico</b> — and deployable in the region your team needs.</p>
+        </div>
+        <p class="trust-posture">Independent security assessments are in progress. For a DPA, sub-processor list, or to scope a review, email <a href="mailto:security@verachi.io">security@verachi.io</a>.</p>
       </div>
     </div>
   </section>
@@ -472,7 +475,82 @@ gtag('config', 'G-NHXTJ2NZMT');
           <a class="btn btn-outline btn-block" href="#demo" data-plan="Enterprise">Talk to us</a>
         </article>
       </div>
-      <p class="pricing-note">No self-serve account is created from this page yet. The first step is a pilot request so your admin can approve data boundaries before Verachi reads any workspace context.</p>
+      <div class="plan-table-wrap" data-anim>
+        <div class="plan-table-head">Feature comparison</div>
+        <table class="plan-table" aria-label="Feature comparison by plan">
+          <thead>
+            <tr>
+              <th scope="col">Feature</th>
+              <th scope="col">Starter</th>
+              <th scope="col">Pro</th>
+              <th scope="col">Enterprise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Users</th>
+              <td>Up to 5 users</td>
+              <td>Scoped in pilot</td>
+              <td>Custom seats and tenants</td>
+            </tr>
+            <tr>
+              <th scope="row">Decision records, search, and comments</th>
+              <td>Included</td>
+              <td>Included</td>
+              <td>Included</td>
+            </tr>
+            <tr>
+              <th scope="row">Risk records with owner and severity</th>
+              <td>Included</td>
+              <td>Included</td>
+              <td>Included</td>
+            </tr>
+            <tr>
+              <th scope="row">Grounded chat and AI tokens</th>
+              <td>100K monthly tokens</td>
+              <td>1M monthly tokens + model choice</td>
+              <td>Custom budgets + frontier models</td>
+            </tr>
+            <tr>
+              <th scope="row">Workspace storage</th>
+              <td>5 GB</td>
+              <td>5 GB+ scoped in pilot</td>
+              <td>Custom</td>
+            </tr>
+            <tr>
+              <th scope="row">Document context and semantic retrieval</th>
+              <td>Not included</td>
+              <td>Included</td>
+              <td>Included</td>
+            </tr>
+            <tr>
+              <th scope="row">Chat history and linked records</th>
+              <td>Standard</td>
+              <td>Deeper history</td>
+              <td>Custom controls</td>
+            </tr>
+            <tr>
+              <th scope="row">Security and governance review</th>
+              <td>Pilot scope review</td>
+              <td>Pilot scope review</td>
+              <td>Included</td>
+            </tr>
+            <tr>
+              <th scope="row">Deployment and success plan</th>
+              <td>Guided pilot</td>
+              <td>Guided pilot</td>
+              <td>Custom deployment</td>
+            </tr>
+            <tr>
+              <th scope="row">Support</th>
+              <td>Pilot support</td>
+              <td>Priority support</td>
+              <td>Dedicated rollout support</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="pricing-note">Access starts with a short pilot so data scopes and success criteria are agreed first. Self-serve sign-up is on the roadmap — a pilot gets you in fastest today.</p>
     </div>
   </section>
 
@@ -481,7 +559,7 @@ gtag('config', 'G-NHXTJ2NZMT');
     <div class="container">
       <div class="section-head center" data-anim>
         <span class="eyebrow">Questions</span>
-        <h2 class="section-title">The honest <span class="serif">answers.</span></h2>
+        <h2 class="section-title">The honest answers.</h2>
       </div>
       <div class="faq" data-anim>
         <details class="faq-item">
@@ -513,7 +591,7 @@ gtag('config', 'G-NHXTJ2NZMT');
     <div class="container cta-layout">
       <div class="cta-copy" data-anim>
         <span class="eyebrow">Book a pilot</span>
-        <h2>Give your team one place to <span class="serif">recover the why.</span></h2>
+        <h2>Give your engineering team one place to <span class="serif">recover the why.</span></h2>
         <p>See Verachi on your own data boundaries first. We'll review connector scopes, show the record shape, and agree how the pilot proves — or rejects — the value for your team.</p>
         <ul class="cta-benefits">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> A sample decision record with source citations.</li>
@@ -531,10 +609,10 @@ gtag('config', 'G-NHXTJ2NZMT');
           <input type="hidden" id="cf_loaded_at" name="_loaded_at" />
           <input type="hidden" id="cf_source_url" name="sourceUrl" />
           <input type="hidden" id="cf_plan" name="plan" value="General pilot" />
-          <input type="hidden" name="title" value="dummy" />
-          <input type="hidden" name="company_size" value="0" />
-          <input type="hidden" name="industry" value="dummy" />
-          <input type="hidden" name="country" value="dummy" />
+          <input type="hidden" name="title" value="Not provided" />
+          <input type="hidden" name="company_size" value="Not provided" />
+          <input type="hidden" name="industry" value="Not provided" />
+          <input type="hidden" name="country" value="Not provided" />
 
           <p class="cf-plan">Requesting <span class="val" id="cfPlanValue">General pilot</span></p>
 
@@ -582,6 +660,16 @@ gtag('config', 'G-NHXTJ2NZMT');
 
 <!-- partial:footer.html -->
 
-<script src="./home/app.js?v=3" defer></script>
+<aside class="consent" id="consentBanner" role="dialog" aria-label="Analytics consent" aria-live="polite" hidden>
+  <div class="consent-inner">
+    <p class="consent-text">We use analytics to see what's useful — it stays off until you accept. <a class="consent-link" href="mailto:hello@verachi.io">Ask us anything</a>.</p>
+    <div class="consent-actions">
+      <button type="button" class="btn btn-outline btn-sm" id="consentDecline">Decline</button>
+      <button type="button" class="btn btn-primary btn-sm" id="consentAccept">Accept</button>
+    </div>
+  </div>
+</aside>
+
+<script src="./home/app.js?v=4" defer></script>
 </body>
 </html>
