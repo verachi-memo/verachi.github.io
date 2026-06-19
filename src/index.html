@@ -72,7 +72,7 @@
       "description": "A decision-records tool for engineering teams. Verachi reads Slack, Jira, and GitHub read-only and turns scattered context into cited decision records, owned risks, and grounded answers.",
       "url": "https://verachi.io/",
       "offers": [
-        { "@type": "Offer", "name": "Starter", "price": "5", "priceCurrency": "USD" },
+        { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
         { "@type": "Offer", "name": "Pro", "price": "49", "priceCurrency": "USD" }
       ],
       "publisher": { "@id": "https://verachi.io/#org" }
@@ -428,20 +428,21 @@
     <div class="container">
       <div class="section-head center" data-anim>
         <span class="eyebrow">Pricing</span>
-        <h2 class="section-title" data-split>Published plans.<br /><span class="serif">Clear next step.</span></h2>
-        <p class="section-sub">Every plan includes cited decision records, risk workflows, and a user-visible audit trail. Starter and Pro can start with account creation; Enterprise starts with a custom rollout conversation.</p>
+        <h2 class="section-title" data-split>Choose by workflow.<br /><span class="serif">Not by seat math.</span></h2>
+        <p class="section-sub">Free covers the core decision workspace without AI. Pro adds Verachi Intelligence for chat, retrieval, and source help. Enterprise is for custom limits, security review, and procurement.</p>
       </div>
       <div class="pricing-grid">
         <article class="price-card" data-anim data-d="0" data-tilt>
-          <div class="price-name">Starter</div>
-          <p class="price-aud">For small teams that want durable recall with light AI usage.</p>
-          <div class="price-amount"><span class="amt">$5</span><span class="per">/ month</span></div>
+          <div class="price-name">Free</div>
+          <p class="price-aud">For teams trying durable project memory before adding AI.</p>
+          <div class="price-amount"><span class="amt">$0</span><span class="per">/ month</span></div>
           <hr />
-          <dl class="plan-details" aria-label="Starter plan details">
-            <div class="plan-detail"><dt>Team</dt><dd>Up to 5 users in one organization</dd></div>
-            <div class="plan-detail"><dt>Records</dt><dd>Decision capture, search, comments, and risk ownership</dd></div>
-            <div class="plan-detail"><dt>AI + context</dt><dd>Grounded chat, 100K monthly tokens, and 5 GB storage</dd></div>
-            <div class="plan-detail"><dt>Rollout</dt><dd>Guided setup</dd></div>
+          <dl class="plan-details" aria-label="Free plan details">
+            <div class="plan-detail"><dt>Best for</dt><dd>Trying the non-AI decision workspace</dd></div>
+            <div class="plan-detail"><dt>Records</dt><dd>Projects, decisions, comments, relationships, risks, and guidelines</dd></div>
+            <div class="plan-detail"><dt>Sources</dt><dd>Slack, Teams, Jira, and GitHub connections with audit trail</dd></div>
+            <div class="plan-detail"><dt>AI</dt><dd>Not included</dd></div>
+            <div class="plan-detail"><dt>Limits</dt><dd>5 users, 1 organization, 5 GiB storage</dd></div>
           </dl>
           <a class="btn btn-outline btn-block" href="https://app.verachi.io/signup" data-magnetic>Create account</a>
         </article>
@@ -449,33 +450,35 @@
         <article class="price-card featured" data-anim data-d="100" data-tilt>
           <span class="price-badge">Most popular</span>
           <div class="price-name">Pro</div>
-          <p class="price-aud">For growing orgs that need model choice, document context, and more headroom after proof.</p>
-          <div class="price-amount"><span class="amt">$49</span><span class="per">/ seat / month</span></div>
+          <p class="price-aud">For teams that need AI chat, retrieval, and source help on top of the workspace.</p>
+          <div class="price-amount"><span class="amt">$49</span><span class="per">/ workspace / month</span></div>
           <hr />
           <dl class="plan-details" aria-label="Pro plan details">
-            <div class="plan-detail"><dt>Team</dt><dd>Seats added as your workspace grows</dd></div>
-            <div class="plan-detail"><dt>Records</dt><dd>Starter records plus deeper chat history and linked records</dd></div>
-            <div class="plan-detail"><dt>AI + context</dt><dd>1M monthly tokens, model choice, documents, and semantic retrieval</dd></div>
-            <div class="plan-detail"><dt>Rollout</dt><dd>Priority support</dd></div>
+            <div class="plan-detail"><dt>Best for</dt><dd>Verachi Intelligence</dd></div>
+            <div class="plan-detail"><dt>Records</dt><dd>Everything in Free</dd></div>
+            <div class="plan-detail"><dt>AI</dt><dd>Grounded chat and agents, document context, semantic RAG, and File Search</dd></div>
+            <div class="plan-detail"><dt>Models</dt><dd>Gemini Flash-Lite, Flash, and Pro</dd></div>
+            <div class="plan-detail"><dt>Limits</dt><dd>5 users for MVP, 1M monthly AI tokens, 5 GiB storage</dd></div>
           </dl>
-          <a class="btn btn-primary btn-block" href="https://app.verachi.io/signup" data-magnetic>Create account</a>
+          <a class="btn btn-primary btn-block" href="https://app.verachi.io/signup" data-magnetic>Start free trial</a>
         </article>
 
         <article class="price-card" data-anim data-d="200" data-tilt>
           <div class="price-name">Enterprise</div>
-          <p class="price-aud">For tenants that need frontier model access, governance review, and custom rollout controls.</p>
+          <p class="price-aud">For larger, regulated, or procurement-heavy workspaces.</p>
           <div class="price-amount"><span class="amt">Custom</span></div>
           <hr />
           <dl class="plan-details" aria-label="Enterprise plan details">
-            <div class="plan-detail"><dt>Team</dt><dd>Custom seats and organization tenants</dd></div>
-            <div class="plan-detail"><dt>Records</dt><dd>Pro records plus governance review</dd></div>
-            <div class="plan-detail"><dt>AI + context</dt><dd>Custom budgets, frontier models, integrations, and retrieval</dd></div>
-            <div class="plan-detail"><dt>Rollout</dt><dd>Custom deployment, success plan, and dedicated support</dd></div>
+            <div class="plan-detail"><dt>Best for</dt><dd>Custom limits, security review, and procurement</dd></div>
+            <div class="plan-detail"><dt>Records</dt><dd>Free and Pro workspace capabilities</dd></div>
+            <div class="plan-detail"><dt>AI</dt><dd>Custom budgets, approved models, retrieval, and source enrichment</dd></div>
+            <div class="plan-detail"><dt>Review</dt><dd>Security, legal, deployment, and rollout planning</dd></div>
+            <div class="plan-detail"><dt>Limits</dt><dd>Custom users, organizations, storage, and token budget</dd></div>
           </dl>
           <a class="btn btn-outline btn-block" href="#demo" data-plan="Enterprise" data-magnetic>Talk to us</a>
         </article>
       </div>
-      <p class="pricing-note">Starter and Pro accounts are self-serve. Use Enterprise when data scopes, governance, or deployment need a custom review.</p>
+      <p class="pricing-note">Free and Pro are self-serve. Use Enterprise when limits, data scopes, security review, or procurement need a custom conversation.</p>
     </div>
   </section>
 
@@ -505,7 +508,7 @@
         </details>
         <details class="faq-item">
           <summary>Can I create an account now? <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
-          <div class="faq-body">Yes. Starter and Pro accounts start at app.verachi.io/signup. For Enterprise, contact us first so we can review connector scopes, governance needs, and deployment requirements before anything reads your workspace.</div>
+          <div class="faq-body">Yes. Free and Pro workspaces start at app.verachi.io/signup. For Enterprise, contact us first so we can review connector scopes, governance needs, and deployment requirements before anything reads your workspace.</div>
         </details>
       </div>
     </div>
