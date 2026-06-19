@@ -253,8 +253,8 @@
   $all("[data-plan]").forEach(function (el) {
     el.addEventListener("click", function () {
       var plan = el.getAttribute("data-plan");
-      if (planInput) planInput.value = plan + " pilot";
-      if (planValue) planValue.textContent = plan + " pilot";
+      if (planInput) planInput.value = plan + " inquiry";
+      if (planValue) planValue.textContent = plan + " inquiry";
     });
   });
 
@@ -310,7 +310,7 @@
         }
       }
       if (hasMissingField) {
-        showError("Please fill in your name, work email, company, and what the pilot should prove.");
+        showError("Please fill in your name, work email, company, and what you need help with.");
         if (missingField) missingField.focus();
         return;
       }
@@ -358,7 +358,7 @@
         })
         .catch(function (error) {
           setLoading(false);
-          var fallback = "Something went wrong sending that. Please email hello@verachi.io and we'll set up your pilot.";
+          var fallback = "Something went wrong sending that. Please email hello@verachi.io and we'll follow up.";
           var message = error && error.fromServer && error.message && !/^Request failed:/.test(error.message)
             ? error.message
             : fallback;

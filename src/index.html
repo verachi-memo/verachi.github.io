@@ -120,8 +120,8 @@
           and writes living decision records and owned risks — every claim cited back to its source.
         </p>
         <div class="hero-actions" data-anim data-d="180">
-          <a class="btn btn-primary btn-lg" href="#demo" data-magnetic>
-            Book a pilot
+          <a class="btn btn-primary btn-lg" href="https://app.verachi.io/signup" data-magnetic>
+            Create account
             <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
           <a class="btn btn-outline btn-lg" href="#product">See a decision record</a>
@@ -427,13 +427,13 @@
     <div class="container">
       <div class="section-head center" data-anim>
         <span class="eyebrow">Pricing</span>
-        <h2 class="section-title" data-split>Published plans.<br /><span class="serif">Guided rollout.</span></h2>
-        <p class="section-sub">Every plan includes cited decision records, risk workflows, and a user-visible audit trail. Access starts with a short pilot so scopes and success criteria are agreed first.</p>
+        <h2 class="section-title" data-split>Published plans.<br /><span class="serif">Clear next step.</span></h2>
+        <p class="section-sub">Every plan includes cited decision records, risk workflows, and a user-visible audit trail. Starter and Pro can start with account creation; Enterprise starts with a custom rollout conversation.</p>
       </div>
       <div class="pricing-grid">
         <article class="price-card" data-anim data-d="0" data-tilt>
           <div class="price-name">Starter</div>
-          <p class="price-aud">For small teams that want durable recall with a scoped pilot and light AI usage.</p>
+          <p class="price-aud">For small teams that want durable recall with light AI usage.</p>
           <div class="price-amount"><span class="amt">$5</span><span class="per">/ month</span></div>
           <hr />
           <ul class="price-feat">
@@ -443,7 +443,13 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Grounded chat, 100K monthly AI tokens</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> 5 GB workspace storage</li>
           </ul>
-          <a class="btn btn-outline btn-block" href="#demo" data-plan="Starter" data-magnetic>Request Starter pilot</a>
+          <dl class="plan-details" aria-label="Starter plan details">
+            <div class="plan-detail"><dt>Seats</dt><dd>Up to 5 users</dd></div>
+            <div class="plan-detail"><dt>AI budget</dt><dd>100K monthly tokens</dd></div>
+            <div class="plan-detail"><dt>Retrieval</dt><dd>Workspace search</dd></div>
+            <div class="plan-detail"><dt>Support</dt><dd>Guided setup</dd></div>
+          </dl>
+          <a class="btn btn-outline btn-block" href="https://app.verachi.io/signup" data-magnetic>Create account</a>
         </article>
 
         <article class="price-card featured" data-anim data-d="100" data-tilt>
@@ -459,7 +465,13 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Deeper chat history &amp; linked records</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Priority support</li>
           </ul>
-          <a class="btn btn-primary btn-block" href="#demo" data-plan="Pro" data-magnetic>Book a Pro pilot</a>
+          <dl class="plan-details" aria-label="Pro plan details">
+            <div class="plan-detail"><dt>Seats</dt><dd>Scoped at signup</dd></div>
+            <div class="plan-detail"><dt>AI budget</dt><dd>1M monthly tokens + model choice</dd></div>
+            <div class="plan-detail"><dt>Retrieval</dt><dd>Documents + semantic search</dd></div>
+            <div class="plan-detail"><dt>Support</dt><dd>Priority support</dd></div>
+          </dl>
+          <a class="btn btn-primary btn-block" href="https://app.verachi.io/signup" data-magnetic>Create account</a>
         </article>
 
         <article class="price-card" data-anim data-d="200" data-tilt>
@@ -474,55 +486,16 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Custom deployment &amp; success plan</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Dedicated rollout support</li>
           </ul>
+          <dl class="plan-details" aria-label="Enterprise plan details">
+            <div class="plan-detail"><dt>Seats</dt><dd>Custom seats and tenants</dd></div>
+            <div class="plan-detail"><dt>AI budget</dt><dd>Custom budgets + frontier models</dd></div>
+            <div class="plan-detail"><dt>Retrieval</dt><dd>Custom integrations</dd></div>
+            <div class="plan-detail"><dt>Support</dt><dd>Dedicated deployment</dd></div>
+          </dl>
           <a class="btn btn-outline btn-block" href="#demo" data-plan="Enterprise" data-magnetic>Talk to us</a>
         </article>
       </div>
-      <div class="plan-table-wrap" data-anim>
-        <div class="plan-table-head">Feature comparison</div>
-        <table class="plan-table" aria-label="Feature comparison by plan">
-          <thead>
-            <tr>
-              <th scope="col">Feature</th>
-              <th scope="col">Starter</th>
-              <th scope="col">Pro</th>
-              <th scope="col">Enterprise</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Seats &amp; tenants</th>
-              <td>Up to 5 users</td>
-              <td>Scoped in pilot</td>
-              <td>Custom seats &amp; organization tenants</td>
-            </tr>
-            <tr>
-              <th scope="row">Core decision &amp; risk records</th>
-              <td>Included</td>
-              <td>Included</td>
-              <td>Included</td>
-            </tr>
-            <tr>
-              <th scope="row">Grounded chat &amp; tokens</th>
-              <td>100K monthly tokens</td>
-              <td>1M monthly tokens + model choice</td>
-              <td>Custom budgets &amp; frontier models</td>
-            </tr>
-            <tr>
-              <th scope="row">Workspace retrieval</th>
-              <td>Not included</td>
-              <td>Document context &amp; semantic search</td>
-              <td>Custom integrations &amp; retrieval</td>
-            </tr>
-            <tr>
-              <th scope="row">Support &amp; security review</th>
-              <td>Guided pilot support</td>
-              <td>Priority pilot support</td>
-              <td>Dedicated deployment &amp; custom review</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="pricing-note">Access starts with a short pilot so data scopes and success criteria are agreed first. Self-serve sign-up is on the roadmap — a pilot gets you in fastest today.</p>
+      <p class="pricing-note">Starter and Pro accounts are self-serve. Use Enterprise when data scopes, governance, or deployment need a custom review.</p>
     </div>
   </section>
 
@@ -551,8 +524,8 @@
           <div class="faq-body">Every AI summary and chat answer cites the sources behind its claims — Slack permalinks, Jira links, GitHub links, and document references. If a claim cannot be cited, Verachi tells you instead of guessing.</div>
         </details>
         <details class="faq-item">
-          <summary>How does the pilot work? <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
-          <div class="faq-body">A short, scoped pilot: we review connector scopes with your admin, walk through data boundaries, show the record shape on your own context, and agree measurable success criteria up front. Nothing reads your workspace until the scope is approved.</div>
+          <summary>Can I create an account now? <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
+          <div class="faq-body">Yes. Starter and Pro accounts start at app.verachi.io/signup. For Enterprise, contact us first so we can review connector scopes, governance needs, and deployment requirements before anything reads your workspace.</div>
         </details>
       </div>
     </div>
@@ -562,14 +535,15 @@
   <section class="section cta" id="demo">
     <div class="container cta-layout">
       <div class="cta-copy" data-anim>
-        <span class="eyebrow">Book a pilot</span>
+        <span class="eyebrow">Talk to us</span>
         <h2>Give your engineering team one place to <span class="serif">recover the why.</span></h2>
-        <p>See Verachi on your own data boundaries first. We'll review connector scopes, show the record shape, and agree how the pilot proves — or rejects — the value for your team.</p>
+        <p>Create an account to start self-serve, or contact us when your rollout needs connector scoping, governance review, or custom deployment support.</p>
         <ul class="cta-benefits">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> A sample decision record with source citations.</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> A 2–4 week pilot plan with measurable success criteria.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> A rollout plan with measurable success criteria.</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> A security, governance, and read-only connector review.</li>
         </ul>
+        <p class="cta-account"><a class="btn btn-outline" href="https://app.verachi.io/signup" data-magnetic>Create account</a></p>
       </div>
 
       <div class="form-card" data-anim data-d="120">
@@ -580,13 +554,13 @@
           </div>
           <input type="hidden" id="cf_loaded_at" name="_loaded_at" />
           <input type="hidden" id="cf_source_url" name="sourceUrl" />
-          <input type="hidden" id="cf_plan" name="plan" value="General pilot" />
+          <input type="hidden" id="cf_plan" name="plan" value="General inquiry" />
           <input type="hidden" name="title" value="Not provided" />
           <input type="hidden" name="company_size" value="Not provided" />
           <input type="hidden" name="industry" value="Not provided" />
           <input type="hidden" name="country" value="Not provided" />
 
-          <p class="cf-plan">Requesting <span class="val" id="cfPlanValue">General pilot</span></p>
+          <p class="cf-plan">Requesting <span class="val" id="cfPlanValue">General inquiry</span></p>
 
           <div class="cf-row">
             <div class="cf-field">
@@ -603,26 +577,26 @@
             <input class="cf-input" type="text" id="cf_company" name="company" placeholder="Acme Corp" autocomplete="organization" required />
           </div>
           <div class="cf-field">
-            <label for="cf_needs">What should the pilot prove?</label>
-            <textarea class="cf-textarea" id="cf_needs" name="needs" rows="4" placeholder="e.g. Can Verachi recover our launch decisions from Slack, Jira, and GitHub with usable citations?" required></textarea>
+            <label for="cf_needs">What do you need help with?</label>
+            <textarea class="cf-textarea" id="cf_needs" name="needs" rows="4" placeholder="e.g. We need a governance review before connecting Slack, Jira, and GitHub." required></textarea>
           </div>
 
           <p id="cfError" class="cf-error" role="alert" hidden></p>
 
           <button id="cfSubmit" class="btn btn-primary btn-block btn-lg" type="submit">
-            <span class="cf-submit-text">Send pilot request</span>
+            <span class="cf-submit-text">Send request</span>
             <span class="cf-submit-loading" hidden>
               <svg class="cf-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" opacity="0.25"/><path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
               Sending…
             </span>
           </button>
-          <p class="cf-fine">No account is created from this form. We'll reply by email to schedule your scoped pilot.</p>
+          <p class="cf-fine">No account is created from this form. Use Create account to start self-serve.</p>
         </form>
 
         <div id="cfSuccess" class="cf-success" role="status" aria-live="polite" tabindex="-1" hidden>
           <div class="ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
-          <h3>Pilot request received</h3>
-          <p>Thanks for reaching out. We'll review your request and follow up by email to agree scopes and success criteria.</p>
+          <h3>Request received</h3>
+          <p>Thanks for reaching out. We'll review your request and follow up by email to agree scope and next steps.</p>
         </div>
       </div>
     </div>
