@@ -810,6 +810,8 @@ section[id], #main { scroll-margin-top: 84px; }
 .split-word > span {
   display: inline-block;
   vertical-align: top;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
   will-change: transform, opacity;
   transform: translateY(110%);
   opacity: 0;
