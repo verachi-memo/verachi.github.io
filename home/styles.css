@@ -509,22 +509,18 @@ section[id], #main { scroll-margin-top: 84px; }
 .price-amount .amt { font-size: 2.6rem; font-weight: 700; color: var(--ink); letter-spacing: -0.04em; }
 .price-amount .per { font-size: 13.5px; color: var(--ink-3); }
 .price-card hr { border: 0; border-top: 1px solid var(--line); margin: 22px 0; }
-.price-feat { display: grid; gap: 11px; flex: 1; }
-.price-feat li { display: flex; gap: 10px; font-size: 14px; line-height: 1.45; color: var(--ink-2); }
-.price-feat svg { width: 17px; height: 17px; color: var(--teal-3); flex: none; margin-top: 2px; }
 .plan-details {
-  margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line);
-  display: grid; gap: 0;
+  display: grid; gap: 0; flex: 1; align-content: start;
 }
 .plan-detail {
-  display: grid; grid-template-columns: minmax(86px, 0.7fr) 1fr; gap: 12px;
-  padding: 9px 0; border-bottom: 1px solid var(--line);
+  display: grid; grid-template-columns: minmax(74px, 0.58fr) 1fr; gap: 16px;
+  padding: 12px 0; border-bottom: 1px solid var(--line);
 }
 .plan-detail dt {
   font-family: var(--font-mono); font-size: 10.5px; font-weight: 700;
   letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal-2);
 }
-.plan-detail dd { margin: 0; font-size: 13px; line-height: 1.4; color: var(--ink-2); }
+.plan-detail dd { margin: 0; font-size: 13.5px; line-height: 1.45; color: var(--ink-2); }
 .price-card .btn { margin-top: 26px; }
 .pricing-note { margin-top: 26px; text-align: center; font-size: 13.5px; color: var(--ink-4); }
 

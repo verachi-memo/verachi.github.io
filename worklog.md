@@ -7,3 +7,6 @@
 
 - Prompt: Add and push the landing-page changes.
 - Result: Staged, committed, and pushed the account-creation CTA and integrated pricing-card update to `main`.
+
+- Prompt: Fix duplicated information in the pricing cards after reviewing the screenshot.
+- Result: Removed the repeated checkmark feature list and made each pricing card use one compact comparison-style detail list.
