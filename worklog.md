@@ -19,3 +19,14 @@
 
 - Prompt: Review the landing page, ensure editorial style, and add minimal, tasteful micro-animations (interactive canvas nodes graph, hover steps guides, staggered citations reveal, typewriter polishing).
 - Result: Conducted a customer review, added an interactive HTML5 canvas particle decision graph inside the hero media card representing live telemetry, implemented subtle hover transformations on step cards and integration items, added smooth staggered reveals for typewriter citation chips with fading cursor support, and recompiled the root `index.html`.
+
+## 2026-06-20
+
+- Prompt: Analyze the landing-page text for AI-like linguistic patterns: contrastive parallelism, filler rule-of-three, faux-vulnerable openers, and neutral waiting-room/buzzword tone.
+- Result: Reviewed the landing-page source copy and found moderate reliance on triadic/list structures, limited contrastive phrasing, no faux-vulnerable openers, and a mostly concrete product tone with some generic SaaS phrases.
+
+- Prompt: Improve the landing-page headline wording: "Your team's decisions, finally written down."
+- Result: Replaced the headline and matching social-preview copy with "Your team's decisions, cited and traceable." to make the promise more concrete and source-backed.
+
+- Prompt: Critique the landing-page plan section.
+- Result: Reviewed the pricing/plan section in source and browser, ran the Impeccable detector, and found the main issues are dense plan-comparison cards, weak plan differentiation, mobile comparison memory burden, and cookie-banner overlap with the pricing note.

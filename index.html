@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-FfsaGbKvAFx/FdcvOFUs2pp0NRUuRyMo1xsUkg7ki+I=' https://www.googletagmanager.com; style-src 'self'; font-src 'self' data:; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://app.verachi.io https://www.google-analytics.com https://region1.google-analytics.com https://*.google-analytics.com; form-action 'self' https://app.verachi.io; object-src 'none'; base-uri 'self'; upgrade-insecure-requests" />
 
-<title>Verachi — Decision records & owned risks for engineering teams</title>
-<meta name="description" content="Verachi reads Slack, Jira, and GitHub and writes living decision records and owned risks for engineering teams — every claim cited back to its source." />
+<title>Verachi — Decision records for engineering teams</title>
+<meta name="description" content="Verachi reads Slack, Jira, and GitHub read-only, then keeps engineering decisions tied to source evidence and responsible owners." />
 <meta name="theme-color" content="#efe7db" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#1f221d" media="(prefers-color-scheme: dark)" />
 <link rel="canonical" href="https://verachi.io/" />
@@ -18,12 +18,12 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Verachi" />
 <meta property="og:url" content="https://verachi.io/" />
-<meta property="og:title" content="Verachi — Your team's decisions, finally written down." />
-<meta property="og:description" content="Verachi reads Slack, Jira, and GitHub and writes living decision records and owned risks — every claim cited back to its source." />
+<meta property="og:title" content="Verachi — Your team's decisions, cited and traceable." />
+<meta property="og:description" content="Verachi reads Slack, Jira, and GitHub read-only, then keeps engineering decisions tied to source evidence and responsible owners." />
 <meta property="og:image" content="https://verachi.io/og-cover.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Verachi — Decision records for engineering teams" />
-<meta name="twitter:description" content="Living decision records and owned risks on top of Slack, Jira, and GitHub — every claim cited to its source." />
+<meta name="twitter:description" content="Decision records with owners and cited sources on top of Slack, Jira, and GitHub." />
 <meta name="twitter:image" content="https://verachi.io/og-cover.png" />
 
 <script>
@@ -69,7 +69,7 @@
       "name": "Verachi",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",
-      "description": "A decision-records tool for engineering teams. Verachi reads Slack, Jira, and GitHub read-only and turns scattered context into cited decision records, owned risks, and grounded answers.",
+      "description": "A decision-records tool for engineering teams. Verachi reads Slack, Jira, and GitHub read-only, then keeps decisions tied to source evidence and responsible owners.",
       "url": "https://verachi.io/",
       "offers": [
         { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
@@ -80,7 +80,7 @@
     {
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "Does Verachi replace Slack, Jira, or GitHub?", "acceptedAnswer": { "@type": "Answer", "text": "No. Verachi connects read-only and links back to the original source. Your primary tools stay primary; Verachi stores the durable decision record and the links between sources." } },
+        { "@type": "Question", "name": "Does Verachi replace Slack, Jira, or GitHub?", "acceptedAnswer": { "@type": "Answer", "text": "No. Verachi connects read-only and links back to the original source. Your primary tools stay primary while Verachi stores the durable decision record and source links." } },
         { "@type": "Question", "name": "What does Verachi actually store?", "acceptedAnswer": { "@type": "Answer", "text": "Verachi stores its own decision and risk records plus source links and metadata. Raw Slack threads, issue descriptions, and pull-request bodies are not durable storage unless you explicitly upload or enter them." } },
         { "@type": "Question", "name": "Is Verachi read-only? Can it write back?", "acceptedAnswer": { "@type": "Answer", "text": "Connectors are read-only by default. Optional write-backs are configured explicitly and every action is recorded in the audit trail." } },
         { "@type": "Question", "name": "How do citations work?", "acceptedAnswer": { "@type": "Answer", "text": "Every AI summary and answer cites the sources behind its claims with Slack, Jira, GitHub, or document links. If a claim cannot be cited, Verachi says so plainly." } }
@@ -149,12 +149,12 @@
         </span>
         <h1 data-anim data-d="60" data-split>
           Your team's decisions,
-          <span class="serif">finally written down.</span>
+          <span class="serif">cited and traceable.</span>
         </h1>
         <p class="hero-sub" data-anim data-d="120">
           Verachi reads
           <span class="tool">Slack</span>, <span class="tool">Jira</span>, and <span class="tool">GitHub</span>
-          and writes living decision records and owned risks — every claim cited back to its source.
+          read-only, then keeps engineering decisions tied to source evidence and responsible owners.
         </p>
         <div class="hero-actions" data-anim data-d="180">
           <a class="btn btn-primary btn-lg" href="https://app.verachi.io/signup" data-magnetic>
@@ -164,9 +164,8 @@
           <a class="btn btn-outline btn-lg" href="#product">See a decision record</a>
         </div>
         <ul class="hero-trust" data-anim data-d="240">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Connectors that never write unattended</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Every claim links to a source</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg> Every sync logged and traceable</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Read-only connectors stay under admin control</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Claims and sync history stay tied to sources</li>
         </ul>
       </div>
 
@@ -232,18 +231,18 @@
           <p>Rationale is scattered across messages, tickets, and DMs. Finding it again means re-reading history nobody saved.</p>
         </article>
         <article class="leak-card" data-anim data-d="100" data-tilt>
-          <span class="n">02 — Risk without an owner</span>
-          <h3>Owners and mitigations from memory</h3>
+          <span class="n">02 — Unowned risk</span>
+          <h3>Launch risks lose their owner</h3>
           <p>Who agreed to watch the retry queue? What was the mitigation? Risk gets reconstructed under launch pressure.</p>
         </article>
         <article class="leak-card" data-anim data-d="200" data-tilt>
-          <span class="n">03 — Confidence without evidence</span>
-          <h3>Updates that age the moment they ship</h3>
+          <span class="n">03 — Missing evidence</span>
+          <h3>Status docs drift fast</h3>
           <p>Manual status docs drift from reality. New joiners inherit confidence without the evidence behind it.</p>
         </article>
       </div>
       <p class="problem-note" data-anim>
-        <b>Verachi closes the gap</b> by capturing the decision, the risk, the owner, and the source evidence as a record that lasts — while your primary tools stay exactly where they are.
+        <b>Verachi closes the gap</b> by keeping each decision tied to its risk owner and source evidence while your primary tools stay exactly where they are.
       </p>
     </div>
   </section>
@@ -278,7 +277,7 @@
         <div class="step" data-anim data-d="300">
           <span class="step-num">4</span>
           <h3>Ask</h3>
-          <p>Ask Verachi anything about a project and get an answer grounded in citations, not vibes.</p>
+          <p>Ask Verachi about a project and get an answer drawn from cited workspace sources.</p>
         </div>
       </div>
     </div>
@@ -289,7 +288,7 @@
     <div class="container">
       <div class="section-head" data-anim>
         <span class="eyebrow">The product</span>
-        <h2 class="section-title" data-split>The rationale. The risk.<br />The next owner.</h2>
+        <h2 class="section-title" data-split>Rationale and risk ownership.</h2>
         <p class="section-sub">Everything points back to a source. Nothing depends on someone remembering.</p>
       </div>
 
@@ -336,11 +335,11 @@
         <div class="feature-copy" data-anim>
           <span class="eyebrow">Risks</span>
           <h3>Turn blockers into owned action.</h3>
-          <p>A guideline failure, a flagged PR, or a decision concern becomes a risk with an owner, a state, evidence, and one next step — not a sticky note that disappears.</p>
+          <p>When a guideline fails or a PR raises concern, Verachi opens a risk with an owner, current state, evidence, and next step.</p>
           <ul class="feature-list">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Severity, owner, and state</b> visible before launch.</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Material vs. noise</b> — risks distinguish commitments from chatter.</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>A clean exit</b> — every risk closes with a reason and a record.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Severity and owner</b> visible before launch.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Real commitments</b> separated from chatter.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Closure reasons</b> kept with the record.</span></li>
           </ul>
         </div>
         <div class="feature-media" data-anim data-d="120">
@@ -381,11 +380,11 @@
         <div class="feature-copy" data-anim>
           <span class="eyebrow">Ask Verachi</span>
           <h3>Answers with receipts.</h3>
-          <p>Grounded chat over your projects, decisions, and sources. Every factual claim comes back with a citation — and if Verachi can't cite it, it says so.</p>
+          <p>Ask about your projects and decisions. Every factual claim comes back with a citation, and Verachi flags missing support directly.</p>
           <ul class="feature-list">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Grounded</b> in real workspace and project context.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Workspace context</b> behind each answer.</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Citations required</b> — Slack permalinks, Jira and GitHub links.</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>No hallucinated confidence</b> — uncertainty is stated, not hidden.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Clear uncertainty</b> when sources are missing.</span></li>
           </ul>
         </div>
         <div class="feature-media" data-anim data-d="120">
@@ -414,7 +413,7 @@
       <div class="section-head center" data-anim>
         <span class="eyebrow">Trust is a feature</span>
         <h2 class="section-title" data-split>Built to pass the security review.</h2>
-        <p class="section-sub">The blocker for tools like this is usually trust. So we made it the product — not a back-office afterthought.</p>
+        <p class="section-sub">The blocker for tools like this is usually trust. Verachi puts trust controls in the main workflow.</p>
       </div>
       <div class="trust-grid">
         <article class="trust-card" data-anim data-d="0" data-tilt>
@@ -464,8 +463,8 @@
     <div class="container">
       <div class="section-head center" data-anim>
         <span class="eyebrow">Pricing</span>
-        <h2 class="section-title" data-split>Choose by workflow.<br /><span class="serif">Not by seat math.</span></h2>
-        <p class="section-sub">Free covers the core decision workspace without AI. Pro adds Verachi Intelligence for chat, retrieval, and source help. Enterprise is for custom limits, security review, and procurement.</p>
+        <h2 class="section-title" data-split>Choose the workflow your team needs.</h2>
+        <p class="section-sub">Free covers the core decision workspace without AI. Pro adds Verachi Intelligence for cited answers and source retrieval. Enterprise handles custom limits, security review, and procurement.</p>
       </div>
       <div class="pricing-grid">
         <article class="price-card" data-anim data-d="0" data-tilt>
@@ -486,13 +485,13 @@
         <article class="price-card featured" data-anim data-d="100" data-tilt>
           <span class="price-badge">Most popular</span>
           <div class="price-name">Pro</div>
-          <p class="price-aud">For teams that need AI chat, retrieval, and source help on top of the workspace.</p>
+          <p class="price-aud">For teams that need cited AI answers on top of the workspace.</p>
           <div class="price-amount"><span class="amt">$49</span><span class="per">/ workspace / month</span></div>
           <hr />
           <dl class="plan-details" aria-label="Pro plan details">
             <div class="plan-detail"><dt>Best for</dt><dd>Verachi Intelligence</dd></div>
             <div class="plan-detail"><dt>Records</dt><dd>Everything in Free</dd></div>
-            <div class="plan-detail"><dt>AI</dt><dd>Grounded chat and agents, document context, semantic RAG, and File Search</dd></div>
+            <div class="plan-detail"><dt>AI</dt><dd>Cited chat, agents, document context, semantic RAG, and File Search</dd></div>
             <div class="plan-detail"><dt>Models</dt><dd>Gemini Flash-Lite, Flash, and Pro</dd></div>
             <div class="plan-detail"><dt>Limits</dt><dd>5 users for MVP, 1M monthly AI tokens, 5 GiB storage</dd></div>
           </dl>
@@ -508,7 +507,7 @@
             <div class="plan-detail"><dt>Best for</dt><dd>Custom limits, security review, and procurement</dd></div>
             <div class="plan-detail"><dt>Records</dt><dd>Free and Pro workspace capabilities</dd></div>
             <div class="plan-detail"><dt>AI</dt><dd>Custom budgets, approved models, retrieval, and source enrichment</dd></div>
-            <div class="plan-detail"><dt>Review</dt><dd>Security, legal, deployment, and rollout planning</dd></div>
+            <div class="plan-detail"><dt>Review</dt><dd>Security review, deployment planning, and rollout support</dd></div>
             <div class="plan-detail"><dt>Limits</dt><dd>Custom users, organizations, storage, and token budget</dd></div>
           </dl>
           <a class="btn btn-outline btn-block" href="#demo" data-plan="Enterprise" data-magnetic>Talk to us</a>
@@ -528,7 +527,7 @@
       <div class="faq" data-anim>
         <details class="faq-item">
           <summary>Does Verachi replace Slack, Jira, or GitHub? <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
-          <div class="faq-body">No. Verachi connects read-only and always links back to the original source. Your primary tools stay primary — Verachi stores the durable decision record and the links between sources, not a copy of your tools.</div>
+          <div class="faq-body">No. Verachi connects read-only and always links back to the original source. Your primary tools stay primary while Verachi stores the durable decision record and source links.</div>
         </details>
         <details class="faq-item">
           <summary>What does Verachi actually store? <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
@@ -560,7 +559,7 @@
         <ul class="cta-benefits">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> A sample decision record with source citations.</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> A rollout plan with measurable success criteria.</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> A security, governance, and read-only connector review.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> A connector review covering security and governance.</li>
         </ul>
         <p class="cta-account"><a class="btn btn-outline" href="https://app.verachi.io/signup" data-magnetic>Create account</a></p>
       </div>
@@ -631,7 +630,7 @@
           <img src="./home/verachi-logo.svg" alt="" width="26" height="26" />
           <span class="brand-word">VERACHI</span>
         </a>
-        <p class="footer-blurb">A project-centered decision workspace for delivery teams. Cited decisions, owned risks, and grounded answers on top of Slack, Jira, and GitHub.</p>
+        <p class="footer-blurb">A project-centered decision workspace for delivery teams. Decision records with ownership and cited sources on top of Slack, Jira, and GitHub.</p>
       </div>
       <div class="footer-col">
         <h4>Product</h4>
