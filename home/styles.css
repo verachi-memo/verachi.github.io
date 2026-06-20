@@ -108,6 +108,8 @@
   --shadow-card: 0 18px 48px -28px rgba(0, 0, 0, 0.6);
   --shadow-float: 0 28px 70px -30px rgba(0, 0, 0, 0.7);
 
+  --texture: repeating-linear-gradient(90deg, transparent, transparent 2px, color-mix(in srgb, var(--ink) 2%, transparent) 2px, color-mix(in srgb, var(--ink) 2%, transparent) 4px), url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+
   color-scheme: dark;
 }
 
@@ -122,7 +124,9 @@ body {
   font-size: 17px;
   line-height: 1.6;
   color: var(--ink-2);
-  background: var(--paper);
+  background-color: var(--paper);
+  background-image: var(--texture);
+  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -362,7 +366,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 /* --------------------------------- Sections ------------------------------- */
 .section { padding: 92px 0; }
-.section.alt { background: var(--paper-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.section.alt { background-color: var(--paper-2); background-image: var(--texture); background-attachment: fixed; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .section.surface { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 section[id], #main { scroll-margin-top: 84px; }
 .id-ref { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); }
@@ -594,7 +598,7 @@ section[id], #main { scroll-margin-top: 84px; }
 .cf-success p { margin-top: 10px; font-size: 15px; color: var(--ink-3); }
 
 /* ---------------------------------- Footer -------------------------------- */
-.site-footer { background: var(--paper-2); border-top: 1px solid var(--line); padding: 64px 0 36px; }
+.site-footer { background-color: var(--paper-2); background-image: var(--texture); background-attachment: fixed; border-top: 1px solid var(--line); padding: 64px 0 36px; }
 .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; }
 .footer-brand .brand { margin-bottom: 16px; }
 .footer-blurb { font-size: 14px; line-height: 1.6; color: var(--ink-3); max-width: 320px; }
