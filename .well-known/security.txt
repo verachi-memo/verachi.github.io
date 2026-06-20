@@ -1,4 +1,4 @@
-Contact: mailto:security@verachi.io
+Contact: https://verachi.github.io/#demo
 Expires: 2027-05-23T00:00:00Z
 Preferred-Languages: en
 Canonical: https://verachi.io/.well-known/security.txt

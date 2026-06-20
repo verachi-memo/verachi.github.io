@@ -119,7 +119,7 @@
           read-only, then creates cited decision records with owners, risks, and review history attached.
         </p>
         <div class="hero-actions" data-anim data-d="180">
-          <a class="btn btn-primary btn-lg" href="https://app.verachi.io/signup" data-magnetic>
+          <a class="btn btn-primary btn-lg" href="https://app.verachi.io/signup">
             Create account
             <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
@@ -138,8 +138,10 @@
               <span class="record-id">DEC-104</span>
               <h3>Keep the checkout flag on for pilot cohorts</h3>
             </div>
-            <span class="example-chip">Example</span>
-            <span class="record-badge"><span class="dot dot-good" aria-hidden="true"></span>Inspectable</span>
+            <div class="record-pills">
+              <span class="example-chip">Example</span>
+              <span class="record-badge"><span class="dot dot-good" aria-hidden="true"></span>Inspectable</span>
+            </div>
           </div>
           <dl class="record-body">
             <div class="record-field">
@@ -418,7 +420,7 @@
           <span class="trust-hosting-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span>
           <p>Hosted in <b>Japan, the EU, the US, and Mexico</b> — and deployable in the region your team needs.</p>
         </div>
-        <p class="trust-posture">Independent security assessments are in progress. For a DPA, sub-processor list, or to scope a review, email <a href="mailto:security@verachi.io">security@verachi.io</a>.</p>
+        <p class="trust-posture">For a DPA, sub-processor list, or to scope a review, email <a href="#demo" data-plan="Security review">security@verachi.io</a>.</p>
       </div>
     </div>
   </section>
@@ -443,7 +445,7 @@
             <div class="plan-detail"><dt>Sources</dt><dd>Slack, Teams, Jira, and GitHub with audit trail</dd></div>
             <div class="plan-detail"><dt>Limits</dt><dd>5 users, 1 organization, 5 GiB storage</dd></div>
           </dl>
-          <a class="btn btn-outline btn-block" href="https://app.verachi.io/signup" data-magnetic>Create account</a>
+          <a class="btn btn-outline btn-block" href="https://app.verachi.io/signup">Create account</a>
         </article>
 
         <article class="price-card featured" data-anim data-d="100" data-tilt>
@@ -457,7 +459,7 @@
             <div class="plan-detail"><dt>AI</dt><dd>Cited chat, agents, document context, and retrieval help</dd></div>
             <div class="plan-detail"><dt>Limits</dt><dd>5 users, 1M monthly AI tokens, 5 GiB storage</dd></div>
           </dl>
-          <a class="btn btn-primary btn-block" href="https://app.verachi.io/signup" data-magnetic>Create account</a>
+          <a class="btn btn-primary btn-block" href="https://app.verachi.io/signup">Create account</a>
         </article>
 
         <article class="price-card" data-anim data-d="200" data-tilt>
@@ -468,9 +470,10 @@
           <dl class="plan-details" aria-label="Enterprise plan details">
             <div class="plan-detail"><dt>Includes</dt><dd>Free and Pro workspace capabilities</dd></div>
             <div class="plan-detail"><dt>Review</dt><dd>Security review, deployment planning, and rollout support</dd></div>
+            <div class="plan-detail"><dt>Deployment</dt><dd>Support for self-hosted deployment</dd></div>
             <div class="plan-detail"><dt>Limits</dt><dd>Custom users, organizations, storage, and AI budget</dd></div>
           </dl>
-          <a class="btn btn-outline btn-block" href="#demo" data-plan="Enterprise" data-magnetic>Request enterprise review</a>
+          <a class="btn btn-outline btn-block" href="#demo" data-plan="Enterprise">Contact us</a>
         </article>
       </div>
     </div>
@@ -481,7 +484,7 @@
     <div class="container">
       <div class="section-head center" data-anim>
         <span class="eyebrow">Questions</span>
-        <h2 class="section-title" data-split>The honest answers.</h2>
+        <h2 class="section-title" data-split>Frequently asked questions.</h2>
       </div>
       <div class="faq" data-anim>
         <details class="faq-item">
@@ -520,7 +523,7 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> A rollout plan with measurable success criteria.</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> A connector review covering security and governance.</li>
         </ul>
-        <p class="cta-account"><a class="btn btn-outline" href="https://app.verachi.io/signup" data-magnetic>Create account</a></p>
+        <p class="cta-account"><a class="btn btn-outline" href="https://app.verachi.io/signup">Create account</a></p>
       </div>
 
       <div class="form-card" data-anim data-d="120">
@@ -537,7 +540,7 @@
           <input type="hidden" name="industry" value="Not provided" />
           <input type="hidden" name="country" value="Not provided" />
 
-          <p class="cf-plan">Requesting <span class="val" id="cfPlanValue">Enterprise review</span></p>
+
 
           <div class="cf-row">
             <div class="cf-field">
@@ -561,7 +564,7 @@
           <p id="cfError" class="cf-error" role="alert" hidden></p>
 
           <button id="cfSubmit" class="btn btn-primary btn-block btn-lg" type="submit">
-            <span class="cf-submit-text">Request enterprise review</span>
+            <span class="cf-submit-text">Submit request</span>
             <span class="cf-submit-loading" hidden>
               <svg class="cf-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" opacity="0.25"/><path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
               Sending…
