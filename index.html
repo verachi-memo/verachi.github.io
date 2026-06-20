@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-FfsaGbKvAFx/FdcvOFUs2pp0NRUuRyMo1xsUkg7ki+I=' https://www.googletagmanager.com; style-src 'self'; font-src 'self' data:; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://app.verachi.io https://www.google-analytics.com https://region1.google-analytics.com https://*.google-analytics.com; form-action 'self' https://app.verachi.io; object-src 'none'; base-uri 'self'; upgrade-insecure-requests" />
 
 <title>Verachi — Decision records for engineering teams</title>
-<meta name="description" content="Verachi reads Slack, Jira, and GitHub read-only, then keeps engineering decisions tied to source evidence and responsible owners." />
+<meta name="description" content="Verachi reads Slack, Jira, and GitHub read-only, then creates cited decision records with owners, risks, and review history attached." />
 <meta name="theme-color" content="#efe7db" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#1f221d" media="(prefers-color-scheme: dark)" />
 <link rel="canonical" href="https://verachi.io/" />
@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Verachi" />
 <meta property="og:url" content="https://verachi.io/" />
 <meta property="og:title" content="Verachi — Your team's decisions, cited and traceable." />
-<meta property="og:description" content="Verachi reads Slack, Jira, and GitHub read-only, then keeps engineering decisions tied to source evidence and responsible owners." />
+<meta property="og:description" content="Verachi reads Slack, Jira, and GitHub read-only, then creates cited decision records with owners, risks, and review history attached." />
 <meta property="og:image" content="https://verachi.io/og-cover.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Verachi — Decision records for engineering teams" />
-<meta name="twitter:description" content="Decision records with owners and cited sources on top of Slack, Jira, and GitHub." />
+<meta name="twitter:description" content="Cited decision records with owners, risks, and review history from Slack, Jira, and GitHub." />
 <meta name="twitter:image" content="https://verachi.io/og-cover.png" />
 
 <script>
@@ -69,7 +69,7 @@
       "name": "Verachi",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",
-      "description": "A decision-records tool for engineering teams. Verachi reads Slack, Jira, and GitHub read-only, then keeps decisions tied to source evidence and responsible owners.",
+      "description": "A decision-records tool for engineering teams. Verachi reads Slack, Jira, and GitHub read-only, then creates cited decision records with owners, risks, and review history attached.",
       "url": "https://verachi.io/",
       "offers": [
         { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
@@ -145,16 +145,15 @@
       <div class="hero-copy">
         <span class="hero-kicker" data-anim>
           <span class="pin">Read-only</span>
-          <span>Decision records &amp; risk tracking for engineering teams</span>
+          <span>Decision records from Slack, Jira, and GitHub</span>
         </span>
         <h1 data-anim data-d="60" data-split>
           Your team's decisions,
           <span class="serif">cited and traceable.</span>
         </h1>
         <p class="hero-sub" data-anim data-d="120">
-          Verachi reads
-          <span class="tool">Slack</span>, <span class="tool">Jira</span>, and <span class="tool">GitHub</span>
-          read-only, then keeps engineering decisions tied to source evidence and responsible owners.
+          Verachi reads <span class="tool">Slack</span>, <span class="tool">Jira</span>, and <span class="tool">GitHub</span>
+          read-only, then creates cited decision records with owners, risks, and review history attached.
         </p>
         <div class="hero-actions" data-anim data-d="180">
           <a class="btn btn-primary btn-lg" href="https://app.verachi.io/signup" data-magnetic>
@@ -221,14 +220,14 @@
     <div class="container">
       <div class="section-head" data-anim>
         <span class="eyebrow">The problem</span>
-        <h2 class="section-title" data-split>Work moves forward.<br />Context leaks away.</h2>
-        <p class="section-sub">Your team is fast and already using the right tools. The failure mode is quieter: the <em>reasons</em> behind decisions never become a shared record — so weeks later, someone rebuilds them from memory.</p>
+        <h2 class="section-title" data-split>Launch decisions move fast.<br />The audit trail does not.</h2>
+        <p class="section-sub">By the time security, incident review, or a new lead asks why, the rationale is split across Slack threads, tickets, and PR comments. Teams lose hours reconstructing decisions when risk is already live.</p>
       </div>
       <div class="problem-grid">
         <article class="leak-card" data-anim data-d="0" data-tilt>
           <span class="n">01 — Lost rationale</span>
           <h3>The why lives in 40 Slack threads</h3>
-          <p>Rationale is scattered across messages, tickets, and DMs. Finding it again means re-reading history nobody saved.</p>
+          <p>Finding it again burns review time and turns leadership updates into thread archaeology.</p>
         </article>
         <article class="leak-card" data-anim data-d="100" data-tilt>
           <span class="n">02 — Unowned risk</span>
@@ -237,12 +236,12 @@
         </article>
         <article class="leak-card" data-anim data-d="200" data-tilt>
           <span class="n">03 — Missing evidence</span>
-          <h3>Status docs drift fast</h3>
-          <p>Manual status docs drift from reality. New joiners inherit confidence without the evidence behind it.</p>
+          <h3>Security review asks for proof</h3>
+          <p>Manual status docs drift from source. Approvers get the conclusion without the evidence behind it.</p>
         </article>
       </div>
       <p class="problem-note" data-anim>
-        <b>Verachi closes the gap</b> by keeping each decision tied to its risk owner and source evidence while your primary tools stay exactly where they are.
+        <b>Verachi closes the gap</b> by creating a decision record from the source material, then keeping owners, risks, and evidence attached as the project changes.
       </p>
     </div>
   </section>
@@ -255,6 +254,9 @@
         <h2 class="section-title" data-split>From raw activity to an inspectable record.</h2>
         <p class="section-sub">Four steps, no migration. Verachi reads what's already happening and turns it into something you can act on.</p>
       </div>
+      <p class="problem-note how-trust" data-anim>
+        <b>Before Verachi reads a workspace:</b> admins approve connector scopes, generated claims require citations, and sync or write-back history stays auditable.
+      </p>
       <div class="steps">
         <div class="step" data-anim data-d="0">
           <span class="step-num">1</span>
@@ -271,13 +273,13 @@
         <div class="step" data-anim data-d="200">
           <span class="step-num">3</span>
           <h3>Evaluate</h3>
-          <p>Guidelines check decisions and pull requests, opening owned risks with evidence and a next action.</p>
+          <p>Guidelines check decisions and pull requests, opening risks that keep owner and evidence visible.</p>
           <span class="conn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
         </div>
         <div class="step" data-anim data-d="300">
           <span class="step-num">4</span>
           <h3>Ask</h3>
-          <p>Ask Verachi about a project and get an answer drawn from cited workspace sources.</p>
+          <p>On Pro, ask Verachi about a project and get an answer drawn from cited workspace sources.</p>
         </div>
       </div>
     </div>
@@ -288,8 +290,8 @@
     <div class="container">
       <div class="section-head" data-anim>
         <span class="eyebrow">The product</span>
-        <h2 class="section-title" data-split>Rationale and risk ownership.</h2>
-        <p class="section-sub">Everything points back to a source. Nothing depends on someone remembering.</p>
+        <h2 class="section-title" data-split>Decision records from the work your team already did.</h2>
+        <p class="section-sub">Risks, dependencies, and AI answers attach to the record instead of becoming another place to check.</p>
       </div>
 
       <!-- Feature 1: Decisions -->
@@ -334,8 +336,8 @@
       <div class="feature reverse">
         <div class="feature-copy" data-anim>
           <span class="eyebrow">Risks</span>
-          <h3>Turn blockers into owned action.</h3>
-          <p>When a guideline fails or a PR raises concern, Verachi opens a risk with an owner, current state, evidence, and next step.</p>
+          <h3>Risks attach to the decision.</h3>
+          <p>When a guideline fails or a PR raises concern, Verachi opens a risk tied to the decision, owner, evidence, and next step.</p>
           <ul class="feature-list">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Severity and owner</b> visible before launch.</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Real commitments</b> separated from chatter.</span></li>
@@ -378,9 +380,9 @@
       <!-- Feature 3: Ask Verachi -->
       <div class="feature">
         <div class="feature-copy" data-anim>
-          <span class="eyebrow">Ask Verachi</span>
-          <h3>Answers with receipts.</h3>
-          <p>Ask about your projects and decisions. Every factual claim comes back with a citation, and Verachi flags missing support directly.</p>
+          <span class="eyebrow">Pro AI answers</span>
+          <h3>Ask questions against the record.</h3>
+          <p>Pro adds AI answers over your connected sources. Every factual claim comes back with a citation, and Verachi flags missing support directly.</p>
           <ul class="feature-list">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Workspace context</b> behind each answer.</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> <span><b>Citations required</b> — Slack permalinks, Jira and GitHub links.</span></li>
@@ -389,7 +391,7 @@
         </div>
         <div class="feature-media" data-anim data-d="120">
           <div class="panel">
-            <div class="panel-head"><span class="dots"><span></span><span></span><span></span></span><span class="title">ask verachi · atlas-launch</span><span class="example-chip">Example</span></div>
+            <div class="panel-head"><span class="dots"><span></span><span></span><span></span></span><span class="title">pro / ask verachi · atlas-launch</span><span class="example-chip">Example</span></div>
             <div class="chat" id="chatDemo" aria-live="polite">
               <div class="chat-q">Why is the checkout flag still on for the pilot?</div>
               <div class="chat-a">
@@ -464,56 +466,50 @@
       <div class="section-head center" data-anim>
         <span class="eyebrow">Pricing</span>
         <h2 class="section-title" data-split>Choose the workflow your team needs.</h2>
-        <p class="section-sub">Free covers the core decision workspace without AI. Pro adds Verachi Intelligence for cited answers and source retrieval. Enterprise handles custom limits, security review, and procurement.</p>
+        <p class="section-sub">Start with the workspace. Add AI when answers need citations. Use Enterprise when governance, limits, or procurement need review.</p>
+        <p class="pricing-note">Free and Pro are self-serve. Enterprise starts with a custom conversation before connectors read your workspace.</p>
       </div>
       <div class="pricing-grid">
         <article class="price-card" data-anim data-d="0" data-tilt>
           <div class="price-name">Free</div>
-          <p class="price-aud">For teams trying durable project memory before adding AI.</p>
+          <p class="price-rule">Choose Free for cited records and risk ownership without AI.</p>
           <div class="price-amount"><span class="amt">$0</span><span class="per">/ month</span></div>
           <hr />
           <dl class="plan-details" aria-label="Free plan details">
-            <div class="plan-detail"><dt>Best for</dt><dd>Trying the non-AI decision workspace</dd></div>
-            <div class="plan-detail"><dt>Records</dt><dd>Projects, decisions, comments, relationships, risks, and guidelines</dd></div>
-            <div class="plan-detail"><dt>Sources</dt><dd>Slack, Teams, Jira, and GitHub connections with audit trail</dd></div>
-            <div class="plan-detail"><dt>AI</dt><dd>Not included</dd></div>
+            <div class="plan-detail"><dt>Records</dt><dd>Projects, decisions, risks, guidelines, and comments</dd></div>
+            <div class="plan-detail"><dt>Sources</dt><dd>Slack, Teams, Jira, and GitHub with audit trail</dd></div>
             <div class="plan-detail"><dt>Limits</dt><dd>5 users, 1 organization, 5 GiB storage</dd></div>
           </dl>
           <a class="btn btn-outline btn-block" href="https://app.verachi.io/signup" data-magnetic>Create account</a>
         </article>
 
         <article class="price-card featured" data-anim data-d="100" data-tilt>
-          <span class="price-badge">Most popular</span>
+          <span class="price-badge">Recommended for AI</span>
           <div class="price-name">Pro</div>
-          <p class="price-aud">For teams that need cited AI answers on top of the workspace.</p>
+          <p class="price-rule">Choose Pro for cited AI answers over connected sources.</p>
           <div class="price-amount"><span class="amt">$49</span><span class="per">/ workspace / month</span></div>
           <hr />
           <dl class="plan-details" aria-label="Pro plan details">
-            <div class="plan-detail"><dt>Best for</dt><dd>Verachi Intelligence</dd></div>
             <div class="plan-detail"><dt>Records</dt><dd>Everything in Free</dd></div>
-            <div class="plan-detail"><dt>AI</dt><dd>Cited chat, agents, document context, semantic RAG, and File Search</dd></div>
-            <div class="plan-detail"><dt>Models</dt><dd>Gemini Flash-Lite, Flash, and Pro</dd></div>
-            <div class="plan-detail"><dt>Limits</dt><dd>5 users for MVP, 1M monthly AI tokens, 5 GiB storage</dd></div>
+            <div class="plan-detail"><dt>AI</dt><dd>Cited chat, agents, document context, and retrieval help</dd></div>
+            <div class="plan-detail"><dt>Limits</dt><dd>5 users, 1M monthly AI tokens, 5 GiB storage</dd></div>
           </dl>
-          <a class="btn btn-primary btn-block" href="https://app.verachi.io/signup" data-magnetic>Start free trial</a>
+          <a class="btn btn-primary btn-block" href="https://app.verachi.io/signup" data-magnetic>Create account</a>
         </article>
 
         <article class="price-card" data-anim data-d="200" data-tilt>
           <div class="price-name">Enterprise</div>
-          <p class="price-aud">For larger, regulated, or procurement-heavy workspaces.</p>
+          <p class="price-rule">Choose Enterprise when security review or custom limits come first.</p>
           <div class="price-amount"><span class="amt">Custom</span></div>
           <hr />
           <dl class="plan-details" aria-label="Enterprise plan details">
-            <div class="plan-detail"><dt>Best for</dt><dd>Custom limits, security review, and procurement</dd></div>
-            <div class="plan-detail"><dt>Records</dt><dd>Free and Pro workspace capabilities</dd></div>
-            <div class="plan-detail"><dt>AI</dt><dd>Custom budgets, approved models, retrieval, and source enrichment</dd></div>
+            <div class="plan-detail"><dt>Includes</dt><dd>Free and Pro workspace capabilities</dd></div>
             <div class="plan-detail"><dt>Review</dt><dd>Security review, deployment planning, and rollout support</dd></div>
-            <div class="plan-detail"><dt>Limits</dt><dd>Custom users, organizations, storage, and token budget</dd></div>
+            <div class="plan-detail"><dt>Limits</dt><dd>Custom users, organizations, storage, and AI budget</dd></div>
           </dl>
-          <a class="btn btn-outline btn-block" href="#demo" data-plan="Enterprise" data-magnetic>Talk to us</a>
+          <a class="btn btn-outline btn-block" href="#demo" data-plan="Enterprise" data-magnetic>Request enterprise review</a>
         </article>
       </div>
-      <p class="pricing-note">Free and Pro are self-serve. Use Enterprise when limits, data scopes, security review, or procurement need a custom conversation.</p>
     </div>
   </section>
 
@@ -553,9 +549,9 @@
   <section class="section cta" id="demo">
     <div class="container cta-layout">
       <div class="cta-copy" data-anim>
-        <span class="eyebrow">Talk to us</span>
-        <h2>Give your engineering team one place to <span class="serif">recover the why.</span></h2>
-        <p>Create an account to start self-serve, or contact us when your rollout needs connector scoping, governance review, or custom deployment support.</p>
+        <span class="eyebrow">Start or review</span>
+        <h2>Start self-serve, or request an <span class="serif">enterprise review.</span></h2>
+        <p>Create a Free or Pro workspace now. Use the form when security, data-region, or deployment review should happen before connectors read your workspace.</p>
         <ul class="cta-benefits">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> A sample decision record with source citations.</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> A rollout plan with measurable success criteria.</li>
@@ -572,13 +568,13 @@
           </div>
           <input type="hidden" id="cf_loaded_at" name="_loaded_at" />
           <input type="hidden" id="cf_source_url" name="sourceUrl" />
-          <input type="hidden" id="cf_plan" name="plan" value="General inquiry" />
+          <input type="hidden" id="cf_plan" name="plan" value="Enterprise review" />
           <input type="hidden" name="title" value="Not provided" />
           <input type="hidden" name="company_size" value="Not provided" />
           <input type="hidden" name="industry" value="Not provided" />
           <input type="hidden" name="country" value="Not provided" />
 
-          <p class="cf-plan">Requesting <span class="val" id="cfPlanValue">General inquiry</span></p>
+          <p class="cf-plan">Requesting <span class="val" id="cfPlanValue">Enterprise review</span></p>
 
           <div class="cf-row">
             <div class="cf-field">
@@ -596,19 +592,19 @@
           </div>
           <div class="cf-field">
             <label for="cf_needs">What do you need help with?</label>
-            <textarea class="cf-textarea" id="cf_needs" name="needs" rows="4" placeholder="e.g. We need a governance review before connecting Slack, Jira, and GitHub." required></textarea>
+            <textarea class="cf-textarea" id="cf_needs" name="needs" rows="4" placeholder="e.g. We need a security review before connecting Slack, Jira, and GitHub." required></textarea>
           </div>
 
           <p id="cfError" class="cf-error" role="alert" hidden></p>
 
           <button id="cfSubmit" class="btn btn-primary btn-block btn-lg" type="submit">
-            <span class="cf-submit-text">Send request</span>
+            <span class="cf-submit-text">Request enterprise review</span>
             <span class="cf-submit-loading" hidden>
               <svg class="cf-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" opacity="0.25"/><path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
               Sending…
             </span>
           </button>
-          <p class="cf-fine">No account is created from this form. Use Create account to start self-serve.</p>
+          <p class="cf-fine">This form does not create an account. Use Create account to start Free or Pro.</p>
         </form>
 
         <div id="cfSuccess" class="cf-success" role="status" aria-live="polite" tabindex="-1" hidden>
@@ -630,7 +626,7 @@
           <img src="./home/verachi-logo.svg" alt="" width="26" height="26" />
           <span class="brand-word">VERACHI</span>
         </a>
-        <p class="footer-blurb">A project-centered decision workspace for delivery teams. Decision records with ownership and cited sources on top of Slack, Jira, and GitHub.</p>
+        <p class="footer-blurb">A project-centered decision workspace for delivery teams. Cited decision records with owners, risks, and review history from Slack, Jira, and GitHub.</p>
       </div>
       <div class="footer-col">
         <h4>Product</h4>

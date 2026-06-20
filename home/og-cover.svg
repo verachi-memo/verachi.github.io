@@ -38,7 +38,7 @@
   <text x="80" y="360" font-family="Georgia" font-style="italic" font-size="82" font-weight="600" fill="#16443d">cited and traceable.</text>
 
   <!-- sub -->
-  <text x="80" y="432" font-family="Arial" font-size="31" font-weight="500" fill="#423d35">Decision records &amp; owned risks &#8212; cited to source.</text>
+  <text x="80" y="432" font-family="Arial" font-size="31" font-weight="500" fill="#423d35">Decision records with owners and cited sources.</text>
 
   <!-- integration chips -->
   <g font-family="Arial" font-size="20" font-weight="600" fill="#1b1915">

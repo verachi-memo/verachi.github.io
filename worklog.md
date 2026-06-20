@@ -22,6 +22,12 @@
 
 ## 2026-06-20
 
+- Prompt: Review the selling narrative of the landing page.
+- Result: Reviewed the landing-page source copy and found a clear evidence-first product story, with main sales-narrative gaps around urgency, the primary product wedge, AI/pricing expectations, trust proof placement, and final CTA clarity.
+
+- Prompt: Implement the fixes from the landing-page selling narrative review.
+- Result: Sharpened the problem stakes around launch/security review, made decision records the primary product wedge, labeled Ask Verachi as the Pro AI workflow, promoted trust proof before the workflow steps, split self-serve account creation from enterprise review, and rebuilt the served page.
+
 - Prompt: Analyze the landing-page text for AI-like linguistic patterns: contrastive parallelism, filler rule-of-three, faux-vulnerable openers, and neutral waiting-room/buzzword tone.
 - Result: Reviewed the landing-page source copy and found moderate reliance on triadic/list structures, limited contrastive phrasing, no faux-vulnerable openers, and a mostly concrete product tone with some generic SaaS phrases.
 
@@ -30,3 +36,9 @@
 
 - Prompt: Critique the landing-page plan section.
 - Result: Reviewed the pricing/plan section in source and browser, ran the Impeccable detector, and found the main issues are dense plan-comparison cards, weak plan differentiation, mobile comparison memory burden, and cookie-banner overlap with the pricing note.
+
+- Prompt: Fix the landing-page plan section after critique.
+- Result: Simplified the pricing cards into decision-focused chooser copy, reduced each plan to three comparable rows, removed implementation/internal pricing details, moved the self-serve reassurance above the cards, tightened pricing spacing, and rebuilt the served `index.html`.
+
+- Prompt: Reword the landing page's contrastive parallelism and rule-of-three filler.
+- Result: Replaced the obvious contrast lines, reduced the hero trust list to two stronger claims, tightened padded product/pricing/CTA phrasing, updated SEO/social copy and OG image text, rebuilt `index.html`, and regenerated `og-cover.png`.
